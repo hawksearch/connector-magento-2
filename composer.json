@@ -1,0 +1,23 @@
+{
+  "name": "hawksearch/connector",
+  "type": "magento2-module",
+  "description": "Hawksearch Connector module for Magento 2",
+  "version": "1.0.0",
+  "license": [
+    "OSL-3.0",
+    "AFL-3.0"
+  ],
+  "require": {
+    "php": "^7.2|^7.3",
+    "magento/magento2-base": "2.3.*",
+    "magento/magento-composer-installer": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "HawkSearch\\Connector\\": ""
+    },
+    "files": [
+      "registration.php"
+    ]
+  }
+}
