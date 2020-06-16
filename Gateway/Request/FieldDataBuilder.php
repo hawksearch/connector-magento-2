@@ -40,8 +40,7 @@ class FieldDataBuilder implements BuilderInterface
     {
         /** @var HawkSearchField $hawkSearchField */
         $hawkSearchField = $this->hawkSearchFieldFactory->create();
-        $hawkSearchField->setName('h_test');
-        $hawkSearchField->setLabel('H Test');
+        $hawkSearchField->addData($buildSubject);
 
         return $hawkSearchField->getData();
     }
