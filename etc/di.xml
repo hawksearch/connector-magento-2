@@ -28,9 +28,7 @@
             <argument name="requestBuilder" xsi:type="object">HawkSearch\Connector\Gateway\Request\BuilderComposite</argument>
             <argument name="transferFactory" xsi:type="object">HawkSearchGetFieldsTransferFactory</argument>
             <argument name="client" xsi:type="object">HawkSearch\Connector\Gateway\Http\Client</argument>
-<!--            <argument name="handler" xsi:type="object"></argument>-->
-<!--            <argument name="validator" xsi:type="object"></argument>-->
-<!--            <argument name="errorMessageMapper" xsi:type="object"></argument>-->
+            <argument name="handler" xsi:type="object">HawkSearchGetFieldsHandler</argument>
         </arguments>
     </virtualType>
     <virtualType name="HawkSearchPostFieldInstruction" type="HawkSearch\Connector\Gateway\Instruction\GatewayInstruction">
@@ -38,9 +36,7 @@
             <argument name="requestBuilder" xsi:type="object">HawkSearchPostFieldRequestBuilder</argument>
             <argument name="transferFactory" xsi:type="object">HawkSearchPostFieldTransferFactory</argument>
             <argument name="client" xsi:type="object">HawkSearch\Connector\Gateway\Http\Client</argument>
-            <!--            <argument name="handler" xsi:type="object"></argument>-->
-            <!--            <argument name="validator" xsi:type="object"></argument>-->
-            <!--            <argument name="errorMessageMapper" xsi:type="object"></argument>-->
+            <argument name="handler" xsi:type="object">HawkSearchPostFieldHandler</argument>
         </arguments>
     </virtualType>
 
@@ -75,6 +71,23 @@
         </arguments>
     </virtualType>
     <!-- END Instructions -->
+
+    <!-- Value handlers infrastructure -->
+    <virtualType name="HawkSearchGetFieldsHandler" type="HawkSearch\Connector\Gateway\Response\HandlerChain">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="fields_list" xsi:type="string">HawkSearch\Connector\Gateway\Response\FieldsListHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="HawkSearchPostFieldHandler" type="HawkSearch\Connector\Gateway\Response\HandlerChain">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="field_data" xsi:type="string">HawkSearch\Connector\Gateway\Response\FieldHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <!-- END Value handlers infrastructure -->
 
     <!-- Command managers section for Vault -->
     <virtualType name="HawkSearchInstructionManager" type="HawkSearch\Connector\Gateway\Instruction\InstructionManager">

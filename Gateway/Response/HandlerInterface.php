@@ -25,7 +25,7 @@ interface HandlerInterface
      *
      * @param array $handlingSubject
      * @param array $response
-     * @return void
+     * @return array
      */
     public function handle(array $handlingSubject, array $response);
 }

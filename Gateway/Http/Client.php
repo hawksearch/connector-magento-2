@@ -15,7 +15,6 @@ declare(strict_types=1);
 namespace HawkSearch\Connector\Gateway\Http;
 
 use InvalidArgumentException;
-use Magento\Framework\HTTP\ZendClient;
 use Magento\Framework\HTTP\ZendClientFactory;
 use Magento\Framework\Serialize\Serializer\Json;
 use Psr\Log\LoggerInterface;
@@ -53,17 +52,24 @@ class Client implements ClientInterface
     }
 
     /**
-     * @inheritDoc
+     * @param TransferInterface $transferObject
+     * @return array
      */
     public function placeRequest(TransferInterface $transferObject)
     {
         $request = $transferObject->getBody();
-        $log = [
-            'request' => $request,
-            'request_uri' => $transferObject->getUri()
+        //TODO implement connector logger
+//        $log = [
+//            'request' => $request,
+//            'request_uri' => $transferObject->getUri()
+//        ];
+
+        $responseData = [
+            self::RESPONSE_CODE => 0,
+            self::RESPONSE_MESSAGE => 'API request wasn\'t processed.' ,
+            self::RESPONSE_DATA => ''
         ];
 
-        /** @var ZendClient $client */
         $client = $this->httpClientFactory->create();
 
         try {
@@ -76,19 +82,23 @@ class Client implements ClientInterface
                 $client->setRawData($this->json->serialize($request), 'application/json');
             }
 
-            $responseBody = $client->request()->getBody();
+            $response = $client->request();
 
-            $log['response'] = $responseBody;
+            $responseData[self::RESPONSE_CODE] = $response->getStatus();
+            $responseData[self::RESPONSE_MESSAGE] = $response->getMessage();
+            $responseData[self::RESPONSE_DATA] = $this->json->unserialize($response->getBody());
 
-            return $this->json->unserialize($responseBody);
         } catch (InvalidArgumentException $e) {
             $this->logger->critical($e);
+            $responseData[self::RESPONSE_MESSAGE] = $e->getMessage();
         } catch (\Zend_Http_Client_Exception $e) {
             $this->logger->critical($e);
+            $responseData[self::RESPONSE_MESSAGE] = $e->getMessage();
         }
+        //TODO implement connector logger
 //        finally {
 //            $this->hawkLogger->debug($log);
 //        }
-        return [];
+        return $responseData;
     }
 }

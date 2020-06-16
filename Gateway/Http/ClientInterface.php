@@ -21,13 +21,19 @@ namespace HawkSearch\Connector\Gateway\Http;
  */
 interface ClientInterface
 {
+    /**#@+
+     * Constants
+     */
+    const RESPONSE_CODE = 'code';
+    const RESPONSE_MESSAGE = 'message';
+    const RESPONSE_DATA = 'response';
+    /**#@-*/
+
     /**
      * Places request to gateway. Returns result as ENV array
      *
      * @param TransferInterface $transferObject
      * @return array
-     * @throws ClientException
-     * @throws ConverterException
      */
     public function placeRequest(TransferInterface $transferObject);
 }

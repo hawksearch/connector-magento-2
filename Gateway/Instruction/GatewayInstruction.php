@@ -119,7 +119,7 @@ class GatewayInstruction implements InstructionInterface
         }
 
         if ($this->handler) {
-            $this->handler->handle(
+            $response = $this->handler->handle(
                 $requestSubject,
                 $response
             );
