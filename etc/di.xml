@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<!--
+  ~  Copyright (c) 2020 Hawksearch (www.hawksearch.com) - All Rights Reserved
+  ~
+  ~  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  ~  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  ~  IN THE SOFTWARE.
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- Instructions infrastructure -->
+    <virtualType name="HawkSearchInstructionsPool" type="HawkSearch\Connector\Gateway\Instruction\InstructionPool">
+        <arguments>
+            <argument name="instructions" xsi:type="array">
+                <item name="getFields" xsi:type="string">HawkSearchGetFieldsInstruction</item>
+                <item name="postField" xsi:type="string">HawkSearchPostFieldInstruction</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <!-- END Instructions infrastructure -->
+
+    <!-- Instructions  -->
+    <virtualType name="HawkSearchGetFieldsInstruction" type="HawkSearch\Connector\Gateway\Instruction\GatewayInstruction">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">HawkSearch\Connector\Gateway\Request\BuilderComposite</argument>
+            <argument name="transferFactory" xsi:type="object">HawkSearchGetFieldsTransferFactory</argument>
+            <argument name="client" xsi:type="object">HawkSearch\Connector\Gateway\Http\Client</argument>
+            <argument name="handler" xsi:type="object">HawkSearchGetFieldsHandler</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="HawkSearchPostFieldInstruction" type="HawkSearch\Connector\Gateway\Instruction\GatewayInstruction">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">HawkSearchPostFieldRequestBuilder</argument>
+            <argument name="transferFactory" xsi:type="object">HawkSearchPostFieldTransferFactory</argument>
+            <argument name="client" xsi:type="object">HawkSearch\Connector\Gateway\Http\Client</argument>
+            <argument name="handler" xsi:type="object">HawkSearchPostFieldHandler</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="HawkSearchGetFieldsTransferFactory" type="HawkSearch\Connector\Gateway\Http\TransferFactory">
+        <arguments>
+            <argument name="uri" xsi:type="string">api/v9/Field</argument>
+            <argument name="method" xsi:type="string">GET</argument>
+            <argument name="headers" xsi:type="object">HawkSearchGetFieldsHeaders</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="HawkSearchPostFieldTransferFactory" type="HawkSearch\Connector\Gateway\Http\TransferFactory">
+        <arguments>
+            <argument name="uri" xsi:type="string">api/v9/Field</argument>
+            <argument name="method" xsi:type="string">POST</argument>
+            <argument name="headers" xsi:type="object">HawkSearchGetFieldsHeaders</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="HawkSearchGetFieldsHeaders" type="HawkSearch\Connector\Gateway\Request\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="hawk_headers" xsi:type="string">HawkSearch\Connector\Gateway\Request\HawkGetApiHeaders</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="HawkSearchPostFieldRequestBuilder" type="HawkSearch\Connector\Gateway\Request\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="field_object" xsi:type="string">HawkSearch\Connector\Gateway\Request\FieldDataBuilder</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <!-- END Instructions -->
+
+    <!-- Value handlers infrastructure -->
+    <virtualType name="HawkSearchGetFieldsHandler" type="HawkSearch\Connector\Gateway\Response\HandlerChain">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="fields_list" xsi:type="string">HawkSearch\Connector\Gateway\Response\FieldsListHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="HawkSearchPostFieldHandler" type="HawkSearch\Connector\Gateway\Response\HandlerChain">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="field_data" xsi:type="string">HawkSearch\Connector\Gateway\Response\FieldHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <!-- END Value handlers infrastructure -->
+
+    <!-- Command managers section for Vault -->
+    <virtualType name="HawkSearchInstructionManager" type="HawkSearch\Connector\Gateway\Instruction\InstructionManager">
+        <arguments>
+            <argument name="instructionPool" xsi:type="object">HawkSearchInstructionsPool</argument>
+        </arguments>
+    </virtualType>
+    <type name="HawkSearch\Connector\Gateway\Instruction\InstructionManagerPool">
+        <arguments>
+            <argument name="executors" xsi:type="array">
+                <item name="hawksearch" xsi:type="string">HawkSearchInstructionManager</item>
+            </argument>
+        </arguments>
+    </type>
+    <!-- END command managers section for Vault -->
+
+</config>
