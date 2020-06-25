@@ -17,6 +17,7 @@
             <argument name="instructions" xsi:type="array">
                 <item name="getFields" xsi:type="string">HawkSearchGetFieldsInstruction</item>
                 <item name="postField" xsi:type="string">HawkSearchPostFieldInstruction</item>
+                <item name="triggerHawkReindex" xsi:type="string">HawkSearchTriggerReindexInstruction</item>
             </argument>
         </arguments>
     </virtualType>
@@ -39,6 +40,13 @@
             <argument name="handler" xsi:type="object">HawkSearchPostFieldHandler</argument>
         </arguments>
     </virtualType>
+    <virtualType name="HawkSearchTriggerReindexInstruction" type="HawkSearch\Connector\Gateway\Instruction\GatewayInstruction">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">HawkSearch\Connector\Gateway\Request\BuilderComposite</argument>
+            <argument name="transferFactory" xsi:type="object">HawkSearchTriggerReindexTransferFactory</argument>
+            <argument name="client" xsi:type="object">HawkSearch\Connector\Gateway\Http\Client</argument>
+        </arguments>
+    </virtualType>
 
     <virtualType name="HawkSearchGetFieldsTransferFactory" type="HawkSearch\Connector\Gateway\Http\TransferFactory">
         <arguments>
@@ -50,6 +58,13 @@
     <virtualType name="HawkSearchPostFieldTransferFactory" type="HawkSearch\Connector\Gateway\Http\TransferFactory">
         <arguments>
             <argument name="uri" xsi:type="string">api/v9/Field</argument>
+            <argument name="method" xsi:type="string">POST</argument>
+            <argument name="headers" xsi:type="object">HawkSearchGetFieldsHeaders</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="HawkSearchTriggerReindexTransferFactory" type="HawkSearch\Connector\Gateway\Http\TransferFactory">
+        <arguments>
+            <argument name="uri" xsi:type="string">api/v9/index</argument>
             <argument name="method" xsi:type="string">POST</argument>
             <argument name="headers" xsi:type="object">HawkSearchGetFieldsHeaders</argument>
         </arguments>
