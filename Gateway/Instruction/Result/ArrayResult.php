@@ -21,14 +21,14 @@ class ArrayResult implements ResultInterface
     /**
      * @var array
      */
-    private $array;
+    private $result;
 
     /**
-     * @param array $array
+     * @param array $result
      */
-    public function __construct(array $array = [])
+    public function __construct(array $result = [])
     {
-        $this->array = $array;
+        $this->result = $result;
     }
 
     /**
@@ -38,6 +38,6 @@ class ArrayResult implements ResultInterface
      */
     public function get()
     {
-        return $this->array;
+        return $this->result;
     }
 }

@@ -1,16 +1,34 @@
 <?xml version="1.0"?>
 <!--
-  ~  Copyright (c) 2020 Hawksearch (www.hawksearch.com) - All Rights Reserved
-  ~
-  ~  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-  ~  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-  ~  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-  ~  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-  ~  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-  ~  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
-  ~  IN THE SOFTWARE.
+  /**
+   * Copyright (c) 2020 Hawksearch (www.hawksearch.com) - All Rights Reserved
+   *
+   * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+   * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+   * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+   * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+   * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+   * IN THE SOFTWARE.
+   */
   -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="HawkSearch\Connector\Gateway\ApiConfigInterface"
+                type="HawkSearch\Connector\Model\Config\ApiConfigDefault"/>
+    <preference for="HawkSearch\Connector\Gateway\Validator\ResultInterface"
+                type="HawkSearch\Connector\Gateway\Validator\Result"/>
+
+    <type name="HawkSearch\Connector\Gateway\Http\Client">
+        <arguments>
+            <argument name="converter" xsi:type="object">HawkSearch\Connector\Gateway\Http\Converter\JsonToArray</argument>
+        </arguments>
+    </type>
+    <type name="HawkSearch\Connector\Gateway\Http\TransferFactory">
+        <arguments>
+            <argument name="httpRequest" xsi:type="object">Magento\Framework\App\Request\Http\Proxy</argument>
+        </arguments>
+    </type>
+
     <!-- Instructions infrastructure -->
     <virtualType name="HawkSearchInstructionsPool" type="HawkSearch\Connector\Gateway\Instruction\InstructionPool">
         <arguments>
@@ -50,21 +68,21 @@
 
     <virtualType name="HawkSearchGetFieldsTransferFactory" type="HawkSearch\Connector\Gateway\Http\TransferFactory">
         <arguments>
-            <argument name="uri" xsi:type="string">api/v9/Field</argument>
+            <argument name="path" xsi:type="string">api/v9/Field</argument>
             <argument name="method" xsi:type="string">GET</argument>
             <argument name="headers" xsi:type="object">HawkSearchGetFieldsHeaders</argument>
         </arguments>
     </virtualType>
     <virtualType name="HawkSearchPostFieldTransferFactory" type="HawkSearch\Connector\Gateway\Http\TransferFactory">
         <arguments>
-            <argument name="uri" xsi:type="string">api/v9/Field</argument>
+            <argument name="path" xsi:type="string">api/v9/Field</argument>
             <argument name="method" xsi:type="string">POST</argument>
             <argument name="headers" xsi:type="object">HawkSearchGetFieldsHeaders</argument>
         </arguments>
     </virtualType>
     <virtualType name="HawkSearchTriggerReindexTransferFactory" type="HawkSearch\Connector\Gateway\Http\TransferFactory">
         <arguments>
-            <argument name="uri" xsi:type="string">api/v9/index</argument>
+            <argument name="path" xsi:type="string">api/v9/index</argument>
             <argument name="method" xsi:type="string">POST</argument>
             <argument name="headers" xsi:type="object">HawkSearchGetFieldsHeaders</argument>
         </arguments>
@@ -104,7 +122,7 @@
     </virtualType>
     <!-- END Value handlers infrastructure -->
 
-    <!-- Command managers section for Vault -->
+    <!-- Instruction managers section -->
     <virtualType name="HawkSearchInstructionManager" type="HawkSearch\Connector\Gateway\Instruction\InstructionManager">
         <arguments>
             <argument name="instructionPool" xsi:type="object">HawkSearchInstructionsPool</argument>
@@ -117,6 +135,32 @@
             </argument>
         </arguments>
     </type>
-    <!-- END command managers section for Vault -->
+    <!-- END Instruction managers section -->
+
+    <!-- Instruction global validators   -->
+    <type name="HawkSearch\Connector\Gateway\Validator\ValidatorComposite">
+        <arguments>
+            <argument name="validators" xsi:type="array">
+                <item name="httpCodeValidator" xsi:type="string">HawkSearch\Connector\Gateway\Validator\HttpCodeValidator</item>
+            </argument>
+            <argument name="chainBreakingValidators" xsi:type="array">
+                <item name="httpCodeValidator" xsi:type="string">httpCodeValidator</item>
+            </argument>
+        </arguments>
+    </type>
+    <!-- END Instruction global validators   -->
+
+    <type name="HawkSearch\Connector\Gateway\Instruction\GatewayInstruction">
+        <arguments>
+            <argument name="validator" xsi:type="object">HawkSearch\Connector\Gateway\Validator\ValidatorComposite</argument>
+            <argument name="resultFactory" xsi:type="object">arrayResultFactory</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="arrayResultFactory" type="HawkSearch\Connector\Gateway\Instruction\ResultInterfaceFactory">
+        <arguments>
+            <argument xsi:type="string" name="instanceName">HawkSearch\Connector\Gateway\Instruction\Result\ArrayResult</argument>
+        </arguments>
+    </virtualType>
 
 </config>

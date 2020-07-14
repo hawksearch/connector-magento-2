@@ -14,8 +14,11 @@ declare(strict_types=1);
 
 namespace HawkSearch\Connector\Gateway\Http;
 
+use HawkSearch\Connector\Gateway\ApiConfigInterface;
+use HawkSearch\Connector\Gateway\Http\Uri\UriBuilderInterface;
 use HawkSearch\Connector\Gateway\Request\BuilderInterface;
-use HawkSearch\Connector\Model\ConfigProvider;
+use Magento\Framework\App\RequestInterface;
+use Magento\Framework\HTTP\Adapter\Curl;
 
 class TransferFactory implements TransferFactoryInterface
 {
@@ -25,9 +28,9 @@ class TransferFactory implements TransferFactoryInterface
     private $transferBuilder;
 
     /**
-     * @var ConfigProvider
+     * @var ApiConfigInterface
      */
-    private $configProvider;
+    private $apiConfig;
 
     /**
      * @var BuilderInterface
@@ -37,7 +40,7 @@ class TransferFactory implements TransferFactoryInterface
     /**
      * @var string
      */
-    private $uri;
+    private $path;
 
     /**
      * @var string
@@ -45,24 +48,40 @@ class TransferFactory implements TransferFactoryInterface
     private $method;
 
     /**
+     * @var UriBuilderInterface|null
+     */
+    private $uriBuilder;
+
+    /**
+     * @var RequestInterface
+     */
+    private $httpRequest;
+
+    /**
      * @param TransferBuilder $transferBuilder
-     * @param ConfigProvider $configProvider
+     * @param ApiConfigInterface $apiConfig
      * @param BuilderInterface $headers
-     * @param string $uri
+     * @param RequestInterface $httpRequest
+     * @param string $path
      * @param string $method
+     * @param UriBuilderInterface|null $uriBuilder
      */
     public function __construct(
         TransferBuilder $transferBuilder,
-        ConfigProvider $configProvider,
+        ApiConfigInterface $apiConfig,
         BuilderInterface $headers,
-        $uri,
-        $method
+        RequestInterface $httpRequest,
+        $path = '',
+        $method = 'GET',
+        UriBuilderInterface $uriBuilder = null
     ) {
         $this->transferBuilder = $transferBuilder;
-        $this->configProvider = $configProvider;
+        $this->apiConfig = $apiConfig;
         $this->headers = $headers;
-        $this->uri = $uri;
+        $this->httpRequest = $httpRequest;
+        $this->path = $path;
         $this->method = $method;
+        $this->uriBuilder = $uriBuilder;
     }
 
     /**
@@ -75,9 +94,26 @@ class TransferFactory implements TransferFactoryInterface
     {
         return $this->transferBuilder
             ->setMethod($this->method)
-            ->setUri($this->configProvider->getApiUrl() . $this->uri)
+            ->setUri($this->buildFullApiUrl())
             ->setHeaders($this->headers->build([]))
             ->setBody($request)
+            ->setClientConfig([
+                'adapter' => new Curl(),
+                'useragent' => $this->httpRequest->getHeader('UserAgent'),
+            ])
             ->build();
+    }
+
+    /**
+     * Get Full URL based on relative URL.
+     *
+     * @return string
+     */
+    private function buildFullApiUrl()
+    {
+        if ($this->uriBuilder) {
+            return $this->uriBuilder->build($this->apiConfig->getApiUrl(), $this->path);
+        }
+        return rtrim($this->apiConfig->getApiUrl(), '/') . '/' . ltrim($this->path, '/');
     }
 }

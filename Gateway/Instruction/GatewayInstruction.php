@@ -18,6 +18,7 @@ use HawkSearch\Connector\Gateway\ErrorMapper\ErrorMessageMapperInterface;
 use HawkSearch\Connector\Gateway\Http\ClientInterface;
 use HawkSearch\Connector\Gateway\Http\TransferFactoryInterface;
 use HawkSearch\Connector\Gateway\Instruction\Result\ArrayResultFactory;
+use HawkSearch\Connector\Gateway\Instruction\ResultInterfaceFactory;
 use HawkSearch\Connector\Gateway\InstructionException;
 use HawkSearch\Connector\Gateway\InstructionInterface;
 use HawkSearch\Connector\Gateway\Request\BuilderInterface;
@@ -64,15 +65,15 @@ class GatewayInstruction implements InstructionInterface
     private $errorMessageMapper;
 
     /**
-     * @var ArrayResultFactory
+     * @var ResultInterfaceFactory
      */
-    private $arrayResultFactory;
+    private $resultFactory;
 
     /**
      * @param BuilderInterface $requestBuilder
      * @param TransferFactoryInterface $transferFactory
      * @param ClientInterface $client
-     * @param ArrayResultFactory $arrayResultFactory
+     * @param ResultInterfaceFactory $resultFactory
      * @param LoggerInterface $logger
      * @param HandlerInterface $handler
      * @param ValidatorInterface $validator
@@ -82,7 +83,7 @@ class GatewayInstruction implements InstructionInterface
         BuilderInterface $requestBuilder,
         TransferFactoryInterface $transferFactory,
         ClientInterface $client,
-        ArrayResultFactory $arrayResultFactory,
+        ResultInterfaceFactory $resultFactory,
         LoggerInterface $logger,
         HandlerInterface $handler = null,
         ValidatorInterface $validator = null,
@@ -94,7 +95,7 @@ class GatewayInstruction implements InstructionInterface
         $this->handler = $handler;
         $this->validator = $validator;
         $this->logger = $logger;
-        $this->arrayResultFactory = $arrayResultFactory;
+        $this->resultFactory = $resultFactory;
         $this->errorMessageMapper = $errorMessageMapper;
     }
 
@@ -104,11 +105,11 @@ class GatewayInstruction implements InstructionInterface
     public function execute(array $requestSubject)
     {
         // @TODO implement exceptions catching
-        $transferO = $this->transferFactory->create(
+        $transfer = $this->transferFactory->create(
             $this->requestBuilder->build($requestSubject)
         );
 
-        $response = $this->client->placeRequest($transferO);
+        $response = $this->client->placeRequest($transfer);
         if ($this->validator !== null) {
             $result = $this->validator->validate(
                 array_merge($requestSubject, ['response' => $response])
@@ -125,7 +126,7 @@ class GatewayInstruction implements InstructionInterface
             );
         }
 
-        return $this->arrayResultFactory->create(['array' => $response]);
+        return $this->resultFactory->create(['result' => $response]);
     }
 
     /**
