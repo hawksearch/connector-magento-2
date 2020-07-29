@@ -1,14 +1,16 @@
 <?xml version="1.0"?>
 <!--
-  ~  Copyright (c) 2020 Hawksearch (www.hawksearch.com) - All Rights Reserved
-  ~
-  ~  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-  ~  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-  ~  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-  ~  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-  ~  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-  ~  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
-  ~  IN THE SOFTWARE.
+  /**
+   * Copyright (c) 2020 Hawksearch (www.hawksearch.com) - All Rights Reserved
+   *
+   * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+   * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+   * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+   * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+   * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+   * IN THE SOFTWARE.
+   */
   -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
@@ -29,16 +31,20 @@
                     <label>Hawksearch API Key</label>
                     <comment>Contact your Hawksearch sales rep for this value.</comment>
                 </field>
-                <field id="order_tracking_key" translate="label comment" type="text" showInDefault="0" showInWebsite="0" showInStore="1" sortOrder="20">
+                <field id="engine_name" translate="label comment" type="text" showInDefault="0" showInWebsite="0" showInStore="1" sortOrder="20">
+                    <label>Engine Name</label>
+                    <comment>Contact your Hawksearch sales rep for this value.</comment>
+                </field>
+                <field id="order_tracking_key" translate="label comment" type="text" showInDefault="0" showInWebsite="0" showInStore="1" sortOrder="30">
                     <label>Order Tracking key</label>
                     <comment>Contact your Hawksearch sales rep for this value.</comment>
                 </field>
-                <field id="mode" translate="label comment" type="select" showInDefault="0" showInWebsite="0" showInStore="1" sortOrder="30">
+                <field id="mode" translate="label comment" type="select" showInDefault="0" showInWebsite="0" showInStore="1" sortOrder="40">
                     <label>Run Mode</label>
                     <source_model>HawkSearch\Connector\Model\Config\Source\Api\Mode</source_model>
                 </field>
 
-                <group id="hawk_url" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+                <group id="hawk_url" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Hawksearch URL Settings</label>
 
                     <field id="develop" translate="label comment" type="text" showInDefault="1" showInWebsite="0" showInStore="0" sortOrder="10">
@@ -52,7 +58,7 @@
                     </field>
                 </group>
 
-                <group id="tracking_url" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="0" showInStore="0">
+                <group id="tracking_url" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Hawksearch Tracking URL Settings</label>
 
                     <field id="develop" translate="label comment" type="text" showInDefault="1" showInWebsite="0" showInStore="0" sortOrder="10">
@@ -66,7 +72,7 @@
                     </field>
                 </group>
 
-                <group id="rec_url" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="0" showInStore="0">
+                <group id="rec_url" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Hawksearch Recommendation URL Settings</label>
 
                     <field id="develop" translate="label comment" type="text" showInDefault="1" showInWebsite="0" showInStore="0" sortOrder="10">

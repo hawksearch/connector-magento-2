@@ -31,6 +31,7 @@ class ConfigProvider
      * Configuration paths
      */
     const API_KEY = 'hawksearch_connector/api_settings/api_key';
+    const ENGINE_NAME = 'hawksearch_connector/api_settings/engine_name';
     const API_MODE = 'hawksearch_connector/api_settings/mode';
     const API_URL = 'hawksearch_connector/api_settings/hawk_url/';
     /**#@-*/
@@ -81,6 +82,15 @@ class ConfigProvider
     public function getApiKey($store = null) : ?string
     {
         return $this->getConfig(self::API_KEY, $store);
+    }
+
+    /**
+     * @param null $store
+     * @return string | null
+     */
+    public function getEngineName($store = null) : ?string
+    {
+        return $this->getConfig(self::ENGINE_NAME, $store);
     }
 
     /**
