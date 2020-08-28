@@ -24,65 +24,109 @@
             <tab>hawksearch</tab>
             <resource>HawkSearch_Connector::config</resource>
 
-            <group id="api_settings" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <group id="api_settings" translate="label" type="text" sortOrder="10"
+                   showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>API Settings</label>
 
-                <field id="api_key" translate="label comment" type="text" showInDefault="0" showInWebsite="0" showInStore="1" sortOrder="10">
+                <field id="api_key" translate="label comment" type="text"
+                       showInDefault="1" showInWebsite="0" showInStore="1" sortOrder="10">
                     <label>Hawksearch API Key</label>
                     <comment>Contact your Hawksearch sales rep for this value.</comment>
                 </field>
-                <field id="engine_name" translate="label comment" type="text" showInDefault="0" showInWebsite="0" showInStore="1" sortOrder="20">
+                <field id="engine_name" translate="label comment" type="text"
+                       showInDefault="1" showInWebsite="0" showInStore="1" sortOrder="20">
                     <label>Engine Name</label>
                     <comment>Contact your Hawksearch sales rep for this value.</comment>
                 </field>
-                <field id="order_tracking_key" translate="label comment" type="text" showInDefault="0" showInWebsite="0" showInStore="1" sortOrder="30">
+                <field id="order_tracking_key" translate="label comment" type="text"
+                       showInDefault="1" showInWebsite="0" showInStore="1" sortOrder="30">
                     <label>Order Tracking key</label>
                     <comment>Contact your Hawksearch sales rep for this value.</comment>
                 </field>
-                <field id="mode" translate="label comment" type="select" showInDefault="0" showInWebsite="0" showInStore="1" sortOrder="40">
+                <field id="mode" translate="label" type="select"
+                       showInDefault="1" showInWebsite="0" showInStore="0" sortOrder="40">
                     <label>Run Mode</label>
                     <source_model>HawkSearch\Connector\Model\Config\Source\Api\Mode</source_model>
                 </field>
 
-                <group id="hawk_url" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="0" showInStore="0">
+                <group id="hawk_url" translate="label" type="text" sortOrder="50"
+                       showInDefault="1" showInWebsite="0" showInStore="1" canRestore="1">
                     <label>Hawksearch URL Settings</label>
 
-                    <field id="develop" translate="label comment" type="text" showInDefault="1" showInWebsite="0" showInStore="0" sortOrder="10">
+                    <field id="develop" translate="label" type="text"
+                           showInDefault="1" showInWebsite="0" showInStore="0" sortOrder="10" canRestore="1">
                         <label>Hawksearch URL (Development)</label>
+                        <depends>
+                            <field id="hawksearch_connector/api_settings/mode">develop</field>
+                        </depends>
                     </field>
-                    <field id="staging" translate="label comment" type="text" showInDefault="1" showInWebsite="0" showInStore="0" sortOrder="20">
+                    <field id="staging" translate="label" type="text"
+                           showInDefault="1" showInWebsite="0" showInStore="0" sortOrder="20" canRestore="1">
                         <label>Hawksearch URL (Staging)</label>
+                        <depends>
+                            <field id="hawksearch_connector/api_settings/mode">staging</field>
+                        </depends>
                     </field>
-                    <field id="production" translate="label comment" type="text" showInDefault="1" showInWebsite="0" showInStore="0" sortOrder="20">
+                    <field id="production" translate="label" type="text"
+                           showInDefault="1" showInWebsite="0" showInStore="1" sortOrder="20" canRestore="1">
                         <label>Hawksearch URL (Production)</label>
+                        <depends>
+                            <field id="hawksearch_connector/api_settings/mode">production</field>
+                        </depends>
                     </field>
                 </group>
 
-                <group id="tracking_url" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="0" showInStore="0">
+                <group id="tracking_url" translate="label" type="text" sortOrder="60"
+                       showInDefault="1" showInWebsite="0" showInStore="1" canRestore="1">
                     <label>Hawksearch Tracking URL Settings</label>
 
-                    <field id="develop" translate="label comment" type="text" showInDefault="1" showInWebsite="0" showInStore="0" sortOrder="10">
+                    <field id="develop" translate="label" type="text"
+                           showInDefault="1" showInWebsite="0" showInStore="0" sortOrder="10" canRestore="1">
                         <label>Hawksearch tracking URL (Development)</label>
+                        <depends>
+                            <field id="hawksearch_connector/api_settings/mode">develop</field>
+                        </depends>
                     </field>
-                    <field id="staging" translate="label comment" type="text" showInDefault="1" showInWebsite="0" showInStore="0" sortOrder="20">
+                    <field id="staging" translate="label" type="text"
+                           showInDefault="1" showInWebsite="0" showInStore="0" sortOrder="20" canRestore="1">
                         <label>Hawksearch tracking URL (Staging)</label>
+                        <depends>
+                            <field id="hawksearch_connector/api_settings/mode">staging</field>
+                        </depends>
                     </field>
-                    <field id="production" translate="label comment" type="text" showInDefault="1" showInWebsite="0" showInStore="0" sortOrder="30">
+                    <field id="production" translate="label" type="text"
+                           showInDefault="1" showInWebsite="0" showInStore="0" sortOrder="30" canRestore="1">
                         <label>Hawksearch tracking URL (Production)</label>
+                        <depends>
+                            <field id="hawksearch_connector/api_settings/mode">production</field>
+                        </depends>
                     </field>
                 </group>
 
-                <group id="rec_url" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="0" showInStore="0">
+                <group id="rec_url" translate="label" type="text" sortOrder="70"
+                       showInDefault="1" showInWebsite="0" showInStore="1" canRestore="1">
                     <label>Hawksearch Recommendation URL Settings</label>
 
-                    <field id="develop" translate="label comment" type="text" showInDefault="1" showInWebsite="0" showInStore="0" sortOrder="10">
+                    <field id="develop" translate="label" type="text"
+                           showInDefault="1" showInWebsite="0" showInStore="0" sortOrder="10" canRestore="1">
                         <label>Hawksearch recommendation URL (Development)</label>
+                        <depends>
+                            <field id="hawksearch_connector/api_settings/mode">develop</field>
+                        </depends>
                     </field>
-                    <field id="staging" translate="label comment" type="text" showInDefault="1" showInWebsite="0" showInStore="0" sortOrder="20">
+                    <field id="staging" translate="label" type="text"
+                           showInDefault="1" showInWebsite="0" showInStore="0" sortOrder="20" canRestore="1">
                         <label>Hawksearch recommendation URL (Staging)</label>
+                        <depends>
+                            <field id="hawksearch_connector/api_settings/mode">staging</field>
+                        </depends>
                     </field>
-                    <field id="production" translate="label comment" type="text" showInDefault="1" showInWebsite="0" showInStore="0" sortOrder="30">
+                    <field id="production" translate="label" type="text"
+                           showInDefault="1" showInWebsite="0" showInStore="0" sortOrder="30" canRestore="1">
                         <label>Hawksearch recommendation URL (Production)</label>
+                        <depends>
+                            <field id="hawksearch_connector/api_settings/mode">production</field>
+                        </depends>
                     </field>
                 </group>
             </group>

@@ -13,10 +13,18 @@
    */
   -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-    <preference for="HawkSearch\Connector\Gateway\ApiConfigInterface"
-                type="HawkSearch\Connector\Model\Config\ApiConfigDefault"/>
+    <preference for="HawkSearch\Connector\Gateway\Config\ApiConfigInterface"
+                type="HawkSearch\Connector\Gateway\Config\ApiConfigDefault"/>
     <preference for="HawkSearch\Connector\Gateway\Validator\ResultInterface"
                 type="HawkSearch\Connector\Gateway\Validator\Result"/>
+
+    <!-- Configs -->
+    <type name="HawkSearch\Connector\Model\Config\ApiSettings">
+        <arguments>
+            <argument name="configGroup" xsi:type="string">api_settings</argument>
+        </arguments>
+    </type>
+    <!-- END Configs -->
 
     <type name="HawkSearch\Connector\Gateway\Http\Client">
         <arguments>

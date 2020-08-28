@@ -13,27 +13,26 @@
 
 declare(strict_types=1);
 
-namespace HawkSearch\Connector\Model\Config;
+namespace HawkSearch\Connector\Gateway\Config;
 
-use HawkSearch\Connector\Gateway\ApiConfigInterface;
-use HawkSearch\Connector\Model\ConfigProvider;
+use HawkSearch\Connector\Model\Config\ApiSettings as ApiSettingsProvider;
 
 class ApiConfigDefault implements ApiConfigInterface
 {
     /**
-     * @var ConfigProvider
+     * @var ApiSettingsProvider
      */
-    private $configProvider;
+    private $apiSettingsProvider;
 
     /**
      * ApiConfigDefault constructor.
-     * @param ConfigProvider $configProvider
+     * @param ApiSettingsProvider $apiSettingsProvider
      */
     public function __construct(
-        ConfigProvider $configProvider
+        ApiSettingsProvider $apiSettingsProvider
     ) {
 
-        $this->configProvider = $configProvider;
+        $this->apiSettingsProvider = $apiSettingsProvider;
     }
 
     /**
@@ -41,7 +40,7 @@ class ApiConfigDefault implements ApiConfigInterface
      */
     public function getApiUrl(): string
     {
-        return $this->configProvider->getApiUrl();
+        return $this->apiSettingsProvider->getApiUrl();
     }
 
     /**
@@ -49,6 +48,6 @@ class ApiConfigDefault implements ApiConfigInterface
      */
     public function getApiKey(): string
     {
-        return $this->configProvider->getApiKey();
+        return $this->apiSettingsProvider->getApiKey();
     }
 }

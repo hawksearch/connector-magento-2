@@ -13,7 +13,7 @@
 
 declare(strict_types=1);
 
-namespace HawkSearch\Connector\Gateway;
+namespace HawkSearch\Connector\Gateway\Config;
 
 interface ApiConfigInterface
 {
