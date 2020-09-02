@@ -15,18 +15,25 @@ declare(strict_types=1);
 namespace HawkSearch\Connector\Model;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
-use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Store\Api\Data\StoreInterface;
 use Magento\Store\Model\ScopeInterface;
-use Magento\Store\Model\StoreManagerInterface;
-use Psr\Log\LoggerInterface;
 
 /**
  * Class ConfigProvider
  * System config provider
  */
-class ConfigProvider
+class ConfigProvider implements ConfigProviderInterface
 {
+    /**
+     * XML configuration root paths
+     */
+    const XML_ROOT_PATH = 'hawksearch_connector';
+
+    /**
+     * XML configuration general group
+     */
+    const XML_GENERAL_GROUP = 'general';
+
     /**#@+
      * Configuration paths
      */
@@ -42,16 +49,14 @@ class ConfigProvider
     private $scopeConfig;
 
     /**
-     * Core store manager interface
-     *
-     * @var StoreManagerInterface
+     * @var string
      */
-    private $storeManager;
+    private $configGroup;
 
     /**
-     * @var LoggerInterface
+     * @var string
      */
-    private $logger;
+    private $configRootPath;
 
     /**
      * Current store instance
@@ -62,102 +67,39 @@ class ConfigProvider
 
     /**
      * @param ScopeConfigInterface $scopeConfig
-     * @param StoreManagerInterface $storeManager
-     * @param LoggerInterface $logger
+     * @param string|null $configRootPath
+     * @param string|null $configGroup
      */
     public function __construct(
         ScopeConfigInterface $scopeConfig,
-        StoreManagerInterface $storeManager,
-        LoggerInterface $logger
+        $configRootPath = null,
+        $configGroup = null
     ) {
         $this->scopeConfig = $scopeConfig;
-        $this->storeManager = $storeManager;
-        $this->logger = $logger;
+        $this->configRootPath = $configRootPath ?? static::XML_ROOT_PATH;
+        $this->configGroup = $configGroup ?? static::XML_GENERAL_GROUP;
     }
 
     /**
-     * @param null $store
-     * @return string | null
-     */
-    public function getApiKey($store = null) : ?string
-    {
-        return $this->getConfig(self::API_KEY, $store);
-    }
-
-    /**
-     * @param null $store
-     * @return string | null
-     */
-    public function getEngineName($store = null) : ?string
-    {
-        return $this->getConfig(self::ENGINE_NAME, $store);
-    }
-
-    /**
-     * @param null $store
-     * @return string | null
-     */
-    public function getApiMode($store = null) : ?string
-    {
-        return $this->getConfig(self::API_MODE, $store);
-    }
-
-    /**
-     * @param null $store
-     * @return string | null
-     */
-    public function getApiUrl($store = null) : ?string
-    {
-        return $this->getConfig(self::API_URL . $this->getApiMode(), $store);
-    }
-
-    /**
-     * Retrieve store object
+     * Get absolute path for $path parameter
      *
-     * @param StoreInterface|int|null $store
-     * @return StoreInterface
-     * @throws NoSuchEntityException
+     * @param string $path Absolute path
+     * @return string
      */
-    public function getStore($store = null) : StoreInterface
+    private function getPath($path)
     {
-        if ($store) {
-            if ($store instanceof StoreInterface) {
-                $this->store = $store;
-            } elseif (is_int($store)) {
-                $this->store = $this->storeManager->getStore($store);
-            }
-        } else {
-            $this->store = $this->storeManager->getStore();
-        }
-
-        return $this->store;
+        return $this->configRootPath . '/' . $this->configGroup . '/' . $path;
     }
 
     /**
-     * Get Store Config value for path
-     *
-     * @param string $path Path to config value. Absolute from root or Relative from initialized root
-     * @param int|StoreInterface|null $store
-     * @return mixed
+     * @inheritDoc
      */
-    private function getConfig($path, $store)
+    public function getConfig(string $path, $store = null)
     {
-        $value = null;
-
-        if ($store === null) {
-            $store = $this->store;
-        }
-
-        try {
-            $value = $this->scopeConfig->getValue(
-                $path,
-                ScopeInterface::SCOPE_STORE,
-                $this->getStore($store)
-            );
-        } catch (NoSuchEntityException $e) {
-            $this->logger->error($e->getMessage());
-        }
-
-        return $value;
+        return $this->scopeConfig->getValue(
+            $this->getPath($path),
+            ScopeInterface::SCOPE_STORE,
+            $store
+        );
     }
 }
