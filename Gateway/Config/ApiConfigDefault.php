@@ -31,7 +31,6 @@ class ApiConfigDefault implements ApiConfigInterface
     public function __construct(
         ApiSettingsProvider $apiSettingsProvider
     ) {
-
         $this->apiSettingsProvider = $apiSettingsProvider;
     }
 

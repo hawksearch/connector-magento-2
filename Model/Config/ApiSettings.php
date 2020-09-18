@@ -25,7 +25,10 @@ class ApiSettings extends ConfigProvider
     const API_KEY = 'api_key';
     const ENGINE_NAME = 'engine_name';
     const API_MODE = 'mode';
+    const ORDER_TRACKING_KEY = 'order_tracking_key';
     const API_URL = 'hawk_url';
+    const TRACKING_URL = 'tracking_url';
+    const REC_URL = 'rec_url';
     /**#@-*/
 
     /**
@@ -59,8 +62,35 @@ class ApiSettings extends ConfigProvider
      * @param null|int|string $store
      * @return string | null
      */
+    public function getOrderTrackingKey($store = null) : ?string
+    {
+        return $this->getConfig(self::ORDER_TRACKING_KEY, $store);
+    }
+
+    /**
+     * @param null|int|string $store
+     * @return string | null
+     */
     public function getApiUrl($store = null) : ?string
     {
         return $this->getConfig(self::API_URL . '/' . $this->getApiMode(), $store);
+    }
+
+    /**
+     * @param null|int|string $store
+     * @return string | null
+     */
+    public function getTrackingUrl($store = null) : ?string
+    {
+        return $this->getConfig(self::TRACKING_URL . '/' . $this->getApiMode(), $store);
+    }
+
+    /**
+     * @param null|int|string $store
+     * @return string | null
+     */
+    public function getRecommendationUrl($store = null) : ?string
+    {
+        return $this->getConfig(self::REC_URL . '/' . $this->getApiMode(), $store);
     }
 }
