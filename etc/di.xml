@@ -78,29 +78,21 @@
         <arguments>
             <argument name="path" xsi:type="string">api/v9/Field</argument>
             <argument name="method" xsi:type="string">GET</argument>
-            <argument name="headers" xsi:type="object">HawkSearchGetFieldsHeaders</argument>
+            <argument name="headers" xsi:type="object">HawkSearchApiHeaders</argument>
         </arguments>
     </virtualType>
     <virtualType name="HawkSearchPostFieldTransferFactory" type="HawkSearch\Connector\Gateway\Http\TransferFactory">
         <arguments>
             <argument name="path" xsi:type="string">api/v9/Field</argument>
             <argument name="method" xsi:type="string">POST</argument>
-            <argument name="headers" xsi:type="object">HawkSearchGetFieldsHeaders</argument>
+            <argument name="headers" xsi:type="object">HawkSearchApiHeaders</argument>
         </arguments>
     </virtualType>
     <virtualType name="HawkSearchTriggerReindexTransferFactory" type="HawkSearch\Connector\Gateway\Http\TransferFactory">
         <arguments>
             <argument name="path" xsi:type="string">api/v9/index</argument>
             <argument name="method" xsi:type="string">POST</argument>
-            <argument name="headers" xsi:type="object">HawkSearchGetFieldsHeaders</argument>
-        </arguments>
-    </virtualType>
-
-    <virtualType name="HawkSearchGetFieldsHeaders" type="HawkSearch\Connector\Gateway\Request\BuilderComposite">
-        <arguments>
-            <argument name="builders" xsi:type="array">
-                <item name="hawk_headers" xsi:type="string">HawkSearch\Connector\Gateway\Request\HawkGetApiHeaders</item>
-            </argument>
+            <argument name="headers" xsi:type="object">HawkSearchApiHeaders</argument>
         </arguments>
     </virtualType>
 
@@ -112,6 +104,17 @@
         </arguments>
     </virtualType>
     <!-- END Instructions -->
+
+    <!-- Headers -->
+    <virtualType name="HawkSearchApiHeaders" type="HawkSearch\Connector\Gateway\Request\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="hawk_headers" xsi:type="string">HawkSearch\Connector\Gateway\Request\HawkGetApiHeaders</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <!-- END Headers -->
+
 
     <!-- Value handlers infrastructure -->
     <virtualType name="HawkSearchGetFieldsHandler" type="HawkSearch\Connector\Gateway\Response\HandlerChain">

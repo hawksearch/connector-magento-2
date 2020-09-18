@@ -46,6 +46,10 @@ class JsonToArray implements ConverterInterface
             throw new ConverterException(__('The response type is incorrect. Verify the type and try again.'));
         }
 
+        if ($response === '') {
+            $response = '{}';
+        }
+
         return $this->json->unserialize($response);
     }
 }
