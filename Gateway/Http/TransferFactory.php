@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 namespace HawkSearch\Connector\Gateway\Http;
 
-use HawkSearch\Connector\Gateway\ApiConfigInterface;
+use HawkSearch\Connector\Gateway\Config\ApiConfigInterface;
 use HawkSearch\Connector\Gateway\Http\Uri\UriBuilderInterface;
 use HawkSearch\Connector\Gateway\Request\BuilderInterface;
 use Magento\Framework\App\RequestInterface;

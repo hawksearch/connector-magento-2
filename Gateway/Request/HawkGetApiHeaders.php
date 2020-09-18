@@ -14,23 +14,23 @@ declare(strict_types=1);
 
 namespace HawkSearch\Connector\Gateway\Request;
 
-use HawkSearch\Connector\Model\ConfigProvider;
+use HawkSearch\Connector\Gateway\Config\ApiConfigInterface;
 
 class HawkGetApiHeaders implements BuilderInterface
 {
     /**
-     * @var ConfigProvider
+     * @var ApiConfigInterface
      */
-    private $configProvider;
+    private $apiConfig;
 
     /**
      * HawkGetHeaders constructor.
-     * @param ConfigProvider $configProvider
+     * @param ApiConfigInterface $apiConfig
      */
     public function __construct(
-        ConfigProvider $configProvider
+        ApiConfigInterface $apiConfig
     ) {
-        $this->configProvider = $configProvider;
+        $this->apiConfig = $apiConfig;
     }
 
     /**
@@ -40,7 +40,7 @@ class HawkGetApiHeaders implements BuilderInterface
     public function build(array $buildSubject)
     {
         return [
-            'X-HawkSearch-ApiKey' => $this->configProvider->getApiKey()
+            'X-HawkSearch-ApiKey' => $this->apiConfig->getApiKey()
         ];
     }
 }
