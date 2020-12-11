@@ -20,7 +20,7 @@
         </tab>
 
         <section id="hawksearch_connector" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
-            <label>Connector Settings</label>
+            <label>Connection Settings</label>
             <tab>hawksearch</tab>
             <resource>HawkSearch_Connector::config</resource>
 
