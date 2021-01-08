@@ -37,7 +37,7 @@ class ApiConfigDefault implements ApiConfigInterface
     /**
      * @inheritDoc
      */
-    public function getApiUrl(): string
+    public function getApiUrl(): ?string
     {
         return $this->apiSettingsProvider->getApiUrl();
     }
@@ -45,7 +45,7 @@ class ApiConfigDefault implements ApiConfigInterface
     /**
      * @inheritDoc
      */
-    public function getApiKey(): string
+    public function getApiKey(): ?string
     {
         return $this->apiSettingsProvider->getApiKey();
     }
