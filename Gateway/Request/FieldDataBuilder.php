@@ -14,8 +14,8 @@ declare(strict_types=1);
 
 namespace HawkSearch\Connector\Gateway\Request;
 
-use HawkSearch\Datafeed\Api\Data\HawkSearchFieldInterfaceFactory;
-use HawkSearch\Datafeed\Model\HawkSearchField;
+use HawkSearch\Connector\Api\Data\HawkSearchFieldInterfaceFactory;
+use HawkSearch\Connector\Model\HawkSearchField;
 
 class FieldDataBuilder implements BuilderInterface
 {
