@@ -100,6 +100,7 @@ class TransferFactory implements TransferFactoryInterface
             ->setClientConfig([
                 'adapter' => new Curl(),
                 'useragent' => $this->httpRequest->getHeader('UserAgent'),
+                'timeout' => 45
             ])
             ->build();
     }

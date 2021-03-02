@@ -101,20 +101,19 @@ class Client implements ClientInterface
             }
 
             $clientConfig = $transferObject->getClientConfig();
-            if ($request) {
-                if ($transferObject->getMethod() === HttpClient::GET) {
-                    $client->setParameterGet($request);
-                } else {
-                    $client->setRawData($this->json->serialize($request));
-                    $client->setHeaders(HttpClient::CONTENT_TYPE, 'application/json');
 
-                    /**
-                     * Fix support of PATCH request for \Magento\Framework\HTTP\Adapter\Curl
-                     */
-                    $clientConfig[CURLOPT_CUSTOMREQUEST] = $transferObject->getMethod();
-                    if ($transferObject->getMethod() === HttpClient::PATCH) {
-                        $clientConfig[CURLOPT_POSTFIELDS] = $this->json->serialize($request);
-                    }
+            if ($transferObject->getMethod() === HttpClient::GET) {
+                $client->setParameterGet($request);
+            } else {
+                $client->setRawData($this->json->serialize($request));
+                $client->setHeaders(HttpClient::CONTENT_TYPE, 'application/json');
+
+                /**
+                 * Fix support of PATCH request for \Magento\Framework\HTTP\Adapter\Curl
+                 */
+                $clientConfig[CURLOPT_CUSTOMREQUEST] = $transferObject->getMethod();
+                if ($transferObject->getMethod() === HttpClient::PATCH) {
+                    $clientConfig[CURLOPT_POSTFIELDS] = $this->json->serialize($request);
                 }
             }
             $client->setConfig($clientConfig);
