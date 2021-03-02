@@ -1,14 +1,14 @@
 <?php
 /**
- *  Copyright (c) 2020 Hawksearch (www.hawksearch.com) - All Rights Reserved
+ * Copyright (c) 2021 Hawksearch (www.hawksearch.com) - All Rights Reserved
  *
- *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- *  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
- *  IN THE SOFTWARE.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+ * IN THE SOFTWARE.
  */
 declare(strict_types=1);
 
@@ -101,20 +101,19 @@ class Client implements ClientInterface
             }
 
             $clientConfig = $transferObject->getClientConfig();
-            if ($request) {
-                if ($transferObject->getMethod() === HttpClient::GET) {
-                    $client->setParameterGet($request);
-                } else {
-                    $client->setRawData($this->json->serialize($request));
-                    $client->setHeaders(HttpClient::CONTENT_TYPE, 'application/json');
 
-                    /**
-                     * Fix support of PATCH request for \Magento\Framework\HTTP\Adapter\Curl
-                     */
-                    $clientConfig[CURLOPT_CUSTOMREQUEST] = $transferObject->getMethod();
-                    if ($transferObject->getMethod() === HttpClient::PATCH) {
-                        $clientConfig[CURLOPT_POSTFIELDS] = $this->json->serialize($request);
-                    }
+            if ($transferObject->getMethod() === HttpClient::GET) {
+                $client->setParameterGet($request);
+            } else {
+                $client->setRawData($this->json->serialize($request));
+                $client->setHeaders(HttpClient::CONTENT_TYPE, 'application/json');
+
+                /**
+                 * Fix support of PATCH request for \Magento\Framework\HTTP\Adapter\Curl
+                 */
+                $clientConfig[CURLOPT_CUSTOMREQUEST] = $transferObject->getMethod();
+                if ($transferObject->getMethod() === HttpClient::PATCH) {
+                    $clientConfig[CURLOPT_POSTFIELDS] = $this->json->serialize($request);
                 }
             }
             $client->setConfig($clientConfig);

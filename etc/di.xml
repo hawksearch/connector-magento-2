@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
   /**
-   * Copyright (c) 2020 Hawksearch (www.hawksearch.com) - All Rights Reserved
+   * Copyright (c) 2021 Hawksearch (www.hawksearch.com) - All Rights Reserved
    *
    * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
    * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -13,6 +13,8 @@
    */
   -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="HawkSearch\Connector\Api\Data\HawkSearchFieldInterface"
+                type="HawkSearch\Connector\Model\HawkSearchField" />
     <preference for="HawkSearch\Connector\Gateway\Config\ApiConfigInterface"
                 type="HawkSearch\Connector\Gateway\Config\ApiConfigDefault"/>
     <preference for="HawkSearch\Connector\Gateway\Validator\ResultInterface"
@@ -50,6 +52,7 @@
     <!-- END Instructions infrastructure -->
 
     <!-- Instructions  -->
+    <!-- getFields Instruction  -->
     <virtualType name="HawkSearchGetFieldsInstruction" type="HawkSearch\Connector\Gateway\Instruction\GatewayInstruction">
         <arguments>
             <argument name="requestBuilder" xsi:type="object">HawkSearch\Connector\Gateway\Request\BuilderComposite</argument>
@@ -58,6 +61,23 @@
             <argument name="handler" xsi:type="object">HawkSearchGetFieldsHandler</argument>
         </arguments>
     </virtualType>
+    <virtualType name="HawkSearchGetFieldsTransferFactory" type="HawkSearch\Connector\Gateway\Http\TransferFactory">
+        <arguments>
+            <argument name="path" xsi:type="string">api/v9/Field</argument>
+            <argument name="method" xsi:type="string">GET</argument>
+            <argument name="headers" xsi:type="object">HawkSearchApiHeaders</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="HawkSearchGetFieldsHandler" type="HawkSearch\Connector\Gateway\Response\HandlerChain">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="fields_list" xsi:type="string">HawkSearch\Connector\Gateway\Response\FieldsListHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <!-- END getFields Instruction  -->
+
+    <!-- postFields Instruction  -->
     <virtualType name="HawkSearchPostFieldInstruction" type="HawkSearch\Connector\Gateway\Instruction\GatewayInstruction">
         <arguments>
             <argument name="requestBuilder" xsi:type="object">HawkSearchPostFieldRequestBuilder</argument>
@@ -66,19 +86,11 @@
             <argument name="handler" xsi:type="object">HawkSearchPostFieldHandler</argument>
         </arguments>
     </virtualType>
-    <virtualType name="HawkSearchTriggerReindexInstruction" type="HawkSearch\Connector\Gateway\Instruction\GatewayInstruction">
+    <virtualType name="HawkSearchPostFieldRequestBuilder" type="HawkSearch\Connector\Gateway\Request\BuilderComposite">
         <arguments>
-            <argument name="requestBuilder" xsi:type="object">HawkSearch\Connector\Gateway\Request\BuilderComposite</argument>
-            <argument name="transferFactory" xsi:type="object">HawkSearchTriggerReindexTransferFactory</argument>
-            <argument name="client" xsi:type="object">HawkSearch\Connector\Gateway\Http\Client</argument>
-        </arguments>
-    </virtualType>
-
-    <virtualType name="HawkSearchGetFieldsTransferFactory" type="HawkSearch\Connector\Gateway\Http\TransferFactory">
-        <arguments>
-            <argument name="path" xsi:type="string">api/v9/Field</argument>
-            <argument name="method" xsi:type="string">GET</argument>
-            <argument name="headers" xsi:type="object">HawkSearchApiHeaders</argument>
+            <argument name="builders" xsi:type="array">
+                <item name="field_object" xsi:type="string">HawkSearch\Connector\Gateway\Request\FieldDataBuilder</item>
+            </argument>
         </arguments>
     </virtualType>
     <virtualType name="HawkSearchPostFieldTransferFactory" type="HawkSearch\Connector\Gateway\Http\TransferFactory">
@@ -88,6 +100,24 @@
             <argument name="headers" xsi:type="object">HawkSearchApiHeaders</argument>
         </arguments>
     </virtualType>
+    <virtualType name="HawkSearchPostFieldHandler" type="HawkSearch\Connector\Gateway\Response\HandlerChain">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="field_data" xsi:type="string">HawkSearch\Connector\Gateway\Response\FieldHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <!-- END postFields Instruction  -->
+
+
+    <!-- triggerReindex Instruction  -->
+    <virtualType name="HawkSearchTriggerReindexInstruction" type="HawkSearch\Connector\Gateway\Instruction\GatewayInstruction">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">HawkSearch\Connector\Gateway\Request\BuilderComposite</argument>
+            <argument name="transferFactory" xsi:type="object">HawkSearchTriggerReindexTransferFactory</argument>
+            <argument name="client" xsi:type="object">HawkSearch\Connector\Gateway\Http\Client</argument>
+        </arguments>
+    </virtualType>
     <virtualType name="HawkSearchTriggerReindexTransferFactory" type="HawkSearch\Connector\Gateway\Http\TransferFactory">
         <arguments>
             <argument name="path" xsi:type="string">api/v9/index</argument>
@@ -95,14 +125,7 @@
             <argument name="headers" xsi:type="object">HawkSearchApiHeaders</argument>
         </arguments>
     </virtualType>
-
-    <virtualType name="HawkSearchPostFieldRequestBuilder" type="HawkSearch\Connector\Gateway\Request\BuilderComposite">
-        <arguments>
-            <argument name="builders" xsi:type="array">
-                <item name="field_object" xsi:type="string">HawkSearch\Connector\Gateway\Request\FieldDataBuilder</item>
-            </argument>
-        </arguments>
-    </virtualType>
+    <!-- END triggerReindex Instruction  -->
     <!-- END Instructions -->
 
     <!-- Headers -->
@@ -114,24 +137,6 @@
         </arguments>
     </virtualType>
     <!-- END Headers -->
-
-
-    <!-- Value handlers infrastructure -->
-    <virtualType name="HawkSearchGetFieldsHandler" type="HawkSearch\Connector\Gateway\Response\HandlerChain">
-        <arguments>
-            <argument name="handlers" xsi:type="array">
-                <item name="fields_list" xsi:type="string">HawkSearch\Connector\Gateway\Response\FieldsListHandler</item>
-            </argument>
-        </arguments>
-    </virtualType>
-    <virtualType name="HawkSearchPostFieldHandler" type="HawkSearch\Connector\Gateway\Response\HandlerChain">
-        <arguments>
-            <argument name="handlers" xsi:type="array">
-                <item name="field_data" xsi:type="string">HawkSearch\Connector\Gateway\Response\FieldHandler</item>
-            </argument>
-        </arguments>
-    </virtualType>
-    <!-- END Value handlers infrastructure -->
 
     <!-- Instruction managers section -->
     <virtualType name="HawkSearchInstructionManager" type="HawkSearch\Connector\Gateway\Instruction\InstructionManager">
