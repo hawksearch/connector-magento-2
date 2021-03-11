@@ -105,7 +105,7 @@ class Client implements ClientInterface
             if ($transferObject->getMethod() === HttpClient::GET) {
                 $client->setParameterGet($request);
             } else {
-                $client->setRawData($this->json->serialize($request));
+                $client->setRawData(!empty($request) ? $this->json->serialize($request) : '');
                 $client->setHeaders(HttpClient::CONTENT_TYPE, 'application/json');
 
                 /**
