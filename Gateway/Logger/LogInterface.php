@@ -10,18 +10,21 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
-declare(strict_types=1);
 
-namespace HawkSearch\Connector\Gateway\Http;
+namespace HawkSearch\Connector\Gateway\Logger;
 
-use Magento\Framework\Exception\LocalizedException;
+use Exception;
 
 /**
- * Class ConverterException
- * Http converter exception
- * @api
+ * Interface for debugging messages in array
  */
-class ConverterException extends LocalizedException
+interface LogInterface
 {
-
+    /**
+     * Logs API gateway debug message
+     *
+     * @param array $data
+     * @return void
+     */
+    public function debug(array $data);
 }

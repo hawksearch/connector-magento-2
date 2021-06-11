@@ -28,6 +28,7 @@
     </type>
     <!-- END Configs -->
 
+    <!-- Types -->
     <type name="HawkSearch\Connector\Gateway\Http\Client">
         <arguments>
             <argument name="converter" xsi:type="object">HawkSearch\Connector\Gateway\Http\Converter\JsonToArray</argument>
@@ -38,6 +39,25 @@
             <argument name="httpRequest" xsi:type="object">Magento\Framework\App\Request\Http\Proxy</argument>
         </arguments>
     </type>
+
+    <virtualType name="HawkSearch\Connector\Gateway\Logger\Handler\Base" type="Magento\Framework\Logger\Handler\Base">
+        <arguments>
+            <argument name="fileName" xsi:type="string">/var/log/hawksearch_gateway.log</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="HawkSearch\Connector\Gateway\Logger\HawksearchGateway" type="Magento\Framework\Logger\Monolog">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="debug" xsi:type="object">HawkSearch\Connector\Gateway\Logger\Handler\Base</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="HawkSearch\Connector\Gateway\Logger\Log">
+        <arguments>
+            <argument name="logger" xsi:type="object">HawkSearch\Connector\Gateway\Logger\HawksearchGateway</argument>
+        </arguments>
+    </type>
+    <!-- Types -->
 
     <!-- Instructions infrastructure -->
     <virtualType name="HawkSearchInstructionsPool" type="HawkSearch\Connector\Gateway\Instruction\InstructionPool">

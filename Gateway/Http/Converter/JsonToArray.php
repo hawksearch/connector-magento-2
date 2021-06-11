@@ -13,7 +13,6 @@
 
 namespace HawkSearch\Connector\Gateway\Http\Converter;
 
-use HawkSearch\Connector\Gateway\Http\ConverterException;
 use HawkSearch\Connector\Gateway\Http\ConverterInterface;
 use Magento\Framework\Serialize\Serializer\Json;
 
@@ -43,7 +42,7 @@ class JsonToArray implements ConverterInterface
     public function convert($response)
     {
         if (!is_string($response)) {
-            throw new ConverterException(__('The response type is incorrect. Verify the type and try again.'));
+            throw new \InvalidArgumentException(__('The response type is incorrect. Verify the type and try again.'));
         }
 
         if ($response === '') {

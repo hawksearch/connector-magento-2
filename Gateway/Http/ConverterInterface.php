@@ -22,7 +22,7 @@ interface ConverterInterface
      *
      * @param mixed $response
      * @return array
-     * @throws ConverterException
+     * @throws \InvalidArgumentException
      */
     public function convert($response);
 }

@@ -14,7 +14,8 @@ declare(strict_types=1);
 
 namespace HawkSearch\Connector\Gateway\Http;
 
-use InvalidArgumentException;
+use HawkSearch\Connector\Gateway\Logger\LoggerFactory;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\HTTP\Adapter\Curl;
 use Magento\Framework\HTTP\ZendClientFactory;
 use Magento\Framework\Serialize\Serializer\Json;
@@ -44,21 +45,30 @@ class Client implements ClientInterface
     private $converter;
 
     /**
+     * @var \HawkSearch\Connector\Gateway\Logger\LogInterface
+     */
+    private $gatewayLogger;
+
+    /**
      * @param LoggerInterface $logger
      * @param ZendClientFactory $httpClientFactory
-     * @param ConverterInterface $converter
      * @param Json $json
+     * @param ConverterInterface $converter
+     * @param LoggerFactory $loggerFactory
+     * @throws NoSuchEntityException
      */
     public function __construct(
         LoggerInterface $logger,
         ZendClientFactory $httpClientFactory,
         Json $json,
-        ConverterInterface $converter
+        ConverterInterface $converter,
+        LoggerFactory $loggerFactory
     ) {
         $this->httpClientFactory = $httpClientFactory;
         $this->logger = $logger;
         $this->json = $json;
         $this->converter = $converter;
+        $this->gatewayLogger = $loggerFactory->create();
     }
 
     /**
@@ -68,17 +78,19 @@ class Client implements ClientInterface
      */
     public function placeRequest(TransferInterface $transferObject)
     {
-        $request = $transferObject->getBody();
-        //TODO implement connector logger
-        $log = [
-            'request' => $request,
-            'request_uri' => $transferObject->getUri()
-        ];
-
+        $requestBody = $transferObject->getBody();
         $responseData = [
             self::RESPONSE_CODE => 0,
             self::RESPONSE_MESSAGE => 'API request wasn\'t processed.' ,
             self::RESPONSE_DATA => ''
+        ];
+
+        $log = [
+            'request' => [
+                'uri' => $transferObject->getUri(),
+                'body' => $requestBody,
+                'method' => $transferObject->getMethod(),
+            ],
         ];
 
         $client = $this->httpClientFactory->create([
@@ -103,9 +115,9 @@ class Client implements ClientInterface
             $clientConfig = $transferObject->getClientConfig();
 
             if ($transferObject->getMethod() === HttpClient::GET) {
-                $client->setParameterGet($request);
+                $client->setParameterGet($requestBody);
             } else {
-                $client->setRawData(!empty($request) ? $this->json->serialize($request) : '');
+                $client->setRawData(!empty($requestBody) ? $this->json->serialize($requestBody) : '');
                 $client->setHeaders(HttpClient::CONTENT_TYPE, 'application/json');
 
                 /**
@@ -113,7 +125,7 @@ class Client implements ClientInterface
                  */
                 $clientConfig[CURLOPT_CUSTOMREQUEST] = $transferObject->getMethod();
                 if ($transferObject->getMethod() === HttpClient::PATCH) {
-                    $clientConfig[CURLOPT_POSTFIELDS] = $this->json->serialize($request);
+                    $clientConfig[CURLOPT_POSTFIELDS] = $this->json->serialize($requestBody);
                 }
             }
             $client->setConfig($clientConfig);
@@ -125,25 +137,23 @@ class Client implements ClientInterface
             }
 
             $response = $client->request();
+            $responseBody = $response->getBody();
+            $log['response'] = [
+                'body' => $responseBody,
+                'status' => $response->getStatus() . ' ' . $response->getMessage(),
+            ];
 
-            $log['response'] = $response;
-
+            $responseData[self::RESPONSE_DATA] = $this->converter->convert($responseBody);
             $responseData[self::RESPONSE_CODE] = $response->getStatus();
             $responseData[self::RESPONSE_MESSAGE] = $response->getMessage();
-            try {
-                $responseData[self::RESPONSE_DATA] = $this->converter->convert($response->getBody());
-            } catch (ConverterException $e) {
-                throw new \Exception('Invalid JSON was returned by the gateway');
-            }
-
         } catch (\Exception $e) {
             $this->logger->critical($e);
+            $log['error'] = $e->getMessage();
             $responseData[self::RESPONSE_MESSAGE] = $e->getMessage();
         }
-        //TODO implement connector logger
-//        finally {
-//            $this->hawkLogger->debug($log);
-//        }
+        finally {
+            $this->gatewayLogger->debug($log);
+        }
         return $responseData;
     }
 
