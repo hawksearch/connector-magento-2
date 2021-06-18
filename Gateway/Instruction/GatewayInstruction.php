@@ -17,7 +17,6 @@ namespace HawkSearch\Connector\Gateway\Instruction;
 use HawkSearch\Connector\Gateway\ErrorMapper\ErrorMessageMapperInterface;
 use HawkSearch\Connector\Gateway\Http\ClientInterface;
 use HawkSearch\Connector\Gateway\Http\TransferFactoryInterface;
-use HawkSearch\Connector\Gateway\Instruction\Result\ArrayResultFactory;
 use HawkSearch\Connector\Gateway\InstructionException;
 use HawkSearch\Connector\Gateway\InstructionInterface;
 use HawkSearch\Connector\Gateway\Request\BuilderInterface;

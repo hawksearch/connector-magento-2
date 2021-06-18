@@ -189,13 +189,18 @@
     <type name="HawkSearch\Connector\Gateway\Instruction\GatewayInstruction">
         <arguments>
             <argument name="validator" xsi:type="object">HawkSearch\Connector\Gateway\Validator\ValidatorComposite</argument>
-            <argument name="resultFactory" xsi:type="object">arrayResultFactory</argument>
+            <argument name="resultFactory" xsi:type="object">HawkSearchDefaultResultFactory</argument>
         </arguments>
     </type>
 
-    <virtualType name="arrayResultFactory" type="HawkSearch\Connector\Gateway\Instruction\ResultInterfaceFactory">
+    <virtualType name="HawkSearchArrayResultFactory" type="HawkSearch\Connector\Gateway\Instruction\ResultInterfaceFactory">
         <arguments>
             <argument xsi:type="string" name="instanceName">HawkSearch\Connector\Gateway\Instruction\Result\ArrayResult</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="HawkSearchDefaultResultFactory" type="HawkSearch\Connector\Gateway\Instruction\ResultInterfaceFactory">
+        <arguments>
+            <argument xsi:type="string" name="instanceName">HawkSearch\Connector\Gateway\Instruction\Result\DefaultResult</argument>
         </arguments>
     </virtualType>
 
