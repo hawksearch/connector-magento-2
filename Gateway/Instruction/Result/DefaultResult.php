@@ -14,32 +14,21 @@ declare(strict_types=1);
 
 namespace HawkSearch\Connector\Gateway\Instruction\Result;
 
-use HawkSearch\Connector\Gateway\Helper\HttpResponseReader;
 use HawkSearch\Connector\Gateway\Instruction\ResultInterface;
 
-class ArrayResult implements ResultInterface
+class DefaultResult implements ResultInterface
 {
     /**
-     * @var array
+     * @var mixed
      */
     private $result;
 
     /**
-     * @var HttpResponseReader
+     * @param mixed $result
      */
-    private $httpResponseReader;
-
-    /**
-     * @param HttpResponseReader $httpResponseReader
-     * @param array $result
-     */
-    public function __construct(
-        HttpResponseReader $httpResponseReader,
-        array $result = []
-    )
+    public function __construct(array $result = [])
     {
         $this->result = $result;
-        $this->httpResponseReader = $httpResponseReader;
     }
 
     /**
@@ -49,7 +38,6 @@ class ArrayResult implements ResultInterface
      */
     public function get()
     {
-        $responseData = $this->httpResponseReader->readResponseData($this->result);
-        return (array)$responseData;
+        return $this->result;
     }
 }
