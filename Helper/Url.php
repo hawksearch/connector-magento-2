@@ -42,8 +42,7 @@ class Url
      */
     public function getUriWithPath(string $url, string $path)
     {
-        /** @var UriInterface $uri */
-        $uri = $this->uriFactory->create(['uri' => $url]);
+        $uri = $this->getUriInstance($url);
 
         return $uri->withPath($path);
     }
@@ -55,8 +54,7 @@ class Url
      */
     public function getUriWithQuery(string $url, array $query)
     {
-        /** @var UriInterface $uri */
-        $uri = $this->uriFactory->create(['uri' => $url]);
+        $uri = $this->getUriInstance($url);
 
         return $uri->withQuery(http_build_query($query));
     }
@@ -69,12 +67,7 @@ class Url
      */
     public function addToUriPath(UriInterface $uri, array $addToPath, $fromStart = true)
     {
-        $path = $uri->getPath();
-        $pathParts = isset($path) ? explode('/', $path) : [];
-
-        $pathParts = array_values(array_filter($pathParts, function ($value) {
-            return !in_array($value, ['/', '']);
-        }));
+        $pathParts = $this->parseUriPath($uri->getPath());
 
         if ($fromStart) {
             $addToPath = array_reverse($addToPath);
@@ -89,5 +82,45 @@ class Url
         }
 
         return $uri->withPath(implode('/', $pathParts));
+    }
+
+    /**
+     * @param UriInterface $uri
+     * @param array $removeParts
+     * @return UriInterface
+     */
+    public function removeFromUriPath(UriInterface $uri, array $removeParts)
+    {
+        $pathParts = $this->parseUriPath($uri->getPath());
+
+        $pathParts = array_values(array_filter($pathParts, function ($value) use ($removeParts) {
+            return !in_array($value, $removeParts);
+        }));
+
+        return $uri->withPath(implode('/', $pathParts));
+    }
+
+    /**
+     * @param string $path
+     * @return array
+     */
+    protected function parseUriPath(string $path)
+    {
+        $pathParts = isset($path) ? explode('/', $path) : [];
+
+        $pathParts = array_values(array_filter($pathParts, function ($value) {
+            return !in_array($value, ['/', '']);
+        }));
+
+        return $pathParts;
+    }
+
+    /**
+     * @param string $uri
+     * @return UriInterface
+     */
+    public function getUriInstance(string $uri)
+    {
+        return $this->uriFactory->create(['uri' => $uri]);
     }
 }
