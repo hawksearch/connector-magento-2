@@ -32,6 +32,7 @@
     <type name="HawkSearch\Connector\Gateway\Http\Client">
         <arguments>
             <argument name="converter" xsi:type="object">HawkSearch\Connector\Gateway\Http\Converter\JsonToArray</argument>
+            <argument name="httpClientFactory" xsi:type="object">HawkSearch\Connector\Gateway\Http\ZendClientFactory</argument>
         </arguments>
     </type>
     <type name="HawkSearch\Connector\Gateway\Http\TransferFactory">
@@ -39,6 +40,12 @@
             <argument name="httpRequest" xsi:type="object">Magento\Framework\App\Request\Http\Proxy</argument>
         </arguments>
     </type>
+
+    <virtualType name="HawkSearch\Connector\Gateway\Http\ZendClientFactory" type="Magento\Framework\HTTP\ZendClientFactory">
+        <arguments>
+            <argument name="instanceName" xsi:type="string">HawkSearch\Connector\Gateway\Http\Client\ZendClient</argument>
+        </arguments>
+    </virtualType>
 
     <virtualType name="HawkSearch\Connector\Gateway\Logger\Handler\Base" type="Magento\Framework\Logger\Handler\Base">
         <arguments>
