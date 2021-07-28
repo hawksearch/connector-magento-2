@@ -112,8 +112,7 @@ class Client implements ClientInterface
                 $client->setHeaders($transferObject->getHeaders());
             }
 
-            $clientConfig = $transferObject->getClientConfig();
-
+            $clientOptions = [];
             if ($transferObject->getMethod() === HttpClient::GET) {
                 $client->setParameterGet($requestBody);
             } else {
@@ -121,19 +120,18 @@ class Client implements ClientInterface
                 $client->setHeaders(HttpClient::CONTENT_TYPE, 'application/json');
 
                 /**
-                 * Fix support of PATCH request for \Magento\Framework\HTTP\Adapter\Curl
+                 * Fix support of PATCH and DELETE requests for @see \Magento\Framework\HTTP\Adapter\Curl
                  */
-                $clientConfig[CURLOPT_CUSTOMREQUEST] = $transferObject->getMethod();
-                if ($transferObject->getMethod() === HttpClient::PATCH) {
-                    $clientConfig[CURLOPT_POSTFIELDS] = $this->json->serialize($requestBody);
+                $clientOptions[CURLOPT_CUSTOMREQUEST] = $transferObject->getMethod();
+                if ($transferObject->getMethod() === HttpClient::PATCH
+                    || $transferObject->getMethod() === HttpClient::DELETE
+                ) {
+                    $clientOptions[CURLOPT_POSTFIELDS] = $this->json->serialize($requestBody);
                 }
             }
-            $client->setConfig($clientConfig);
-
+            $client->setConfig($transferObject->getClientConfig());
             if ($client->getAdapter() instanceof Curl) {
-                $client->getAdapter()->setOptions($this->filterAdapterOptions(
-                    $clientConfig
-                ));
+                $client->getAdapter()->setOptions($clientOptions);
             }
 
             $response = $client->request();
@@ -155,15 +153,5 @@ class Client implements ClientInterface
             $this->gatewayLogger->debug($log);
         }
         return $responseData;
-    }
-
-    /**
-     * @param array $options
-     * @return array
-     */
-    private function filterAdapterOptions($options)
-    {
-        unset($options['adapter']);
-        return $options;
     }
 }
