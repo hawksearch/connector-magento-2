@@ -121,6 +121,6 @@ class Url
      */
     public function getUriInstance(string $uri)
     {
-        return $this->uriFactory->create(['uri' => $uri]);
+        return $this->uriFactory->createUri($uri);
     }
 }
