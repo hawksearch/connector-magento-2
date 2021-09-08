@@ -25,7 +25,7 @@
             <resource>HawkSearch_Connector::config</resource>
 
             <group id="api_settings" translate="label" type="text" sortOrder="10"
-                   showInDefault="1" showInWebsite="1" showInStore="1">
+                   showInDefault="1" showInWebsite="0" showInStore="1">
                 <label>API Settings</label>
 
                 <field id="api_key" translate="label comment" type="text"
