@@ -16,14 +16,16 @@ declare(strict_types=1);
 namespace HawkSearch\Connector\Model;
 
 use Magento\Store\Api\Data\StoreInterface;
+use Magento\Store\Model\ScopeInterface;
 
 interface ConfigProviderInterface
 {
     /**
      * Get config value
      * @param string $path
-     * @param int|StoreInterface|null $store $store
+     * @param int|StoreInterface|null $scopeId
+     * @param string $scope
      * @return mixed
      */
-    public function getConfig(string $path, $store = null);
+    public function getConfig(string $path, $scopeId = null, $scope = ScopeInterface::SCOPE_STORE);
 }

@@ -94,12 +94,12 @@ class ConfigProvider implements ConfigProviderInterface
     /**
      * @inheritDoc
      */
-    public function getConfig(string $path, $store = null)
+    public function getConfig(string $path, $scopeId = null, $scope = ScopeInterface::SCOPE_STORE)
     {
         return $this->scopeConfig->getValue(
             $this->getPath($path),
-            ScopeInterface::SCOPE_STORE,
-            $store
+            $scope,
+            $scopeId
         );
     }
 }
