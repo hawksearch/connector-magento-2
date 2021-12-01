@@ -15,22 +15,22 @@ declare(strict_types=1);
 
 namespace HawkSearch\Connector\Helper;
 
-use Laminas\Diactoros\UriFactory as LaminasUriFactory;
+use GuzzleHttp\Psr7\UriFactory;
 use Psr\Http\Message\UriInterface;
 
 class Url
 {
     /**
-     * @var LaminasUriFactory
+     * @var UriFactory
      */
     private $uriFactory;
 
     /**
      * Url constructor.
-     * @param LaminasUriFactory $uriFactory
+     * @param UriFactory $uriFactory
      */
     public function __construct(
-        LaminasUriFactory $uriFactory
+        UriFactory $uriFactory
     ) {
         $this->uriFactory = $uriFactory;
     }
