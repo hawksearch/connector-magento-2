@@ -25,7 +25,7 @@ class ApiSettings extends ConfigProvider
     const API_KEY = 'api_key';
     const ENGINE_NAME = 'engine_name';
     const API_MODE = 'mode';
-    const ORDER_TRACKING_KEY = 'order_tracking_key';
+    const TRACKING_KEY = 'order_tracking_key';
     const API_URL = 'hawk_url';
     const TRACKING_URL = 'tracking_url';
     const REC_URL = 'rec_url';
@@ -61,13 +61,25 @@ class ApiSettings extends ConfigProvider
     /**
      * @param null|int|string $store
      * @return string | null
+     * @deprecated since 2.5.1
+     * @see \HawkSearch\Connector\Model\Config\ApiSettings::getTrackingKey
      */
     public function getOrderTrackingKey($store = null) : ?string
     {
-        return $this->getConfig(self::ORDER_TRACKING_KEY, $store);
+        return $this->getTrackingKey($store);
     }
 
     /**
+     * @param null|int|string $store
+     * @return string | null
+     */
+    public function getTrackingKey($store = null) : ?string
+    {
+        return $this->getConfig(self::TRACKING_KEY, $store);
+    }
+
+    /**
+     * Dashboard API URL
      * @param null|int|string $store
      * @return string | null
      */

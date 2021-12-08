@@ -130,6 +130,16 @@
                     </field>
                 </group>
             </group>
+
+            <group id="logger" translate="label" type="text" sortOrder="20"
+                   showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Logger Settings</label>
+                <field id="enable_debug" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Logging</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enable it for debugging purposes only</comment>
+                </field>
+            </group>
         </section>
     </system>
 </config>
