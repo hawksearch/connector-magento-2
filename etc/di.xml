@@ -26,6 +26,11 @@
             <argument name="configGroup" xsi:type="string">api_settings</argument>
         </arguments>
     </type>
+    <type name="HawkSearch\Connector\Model\Config\Logger">
+        <arguments>
+            <argument name="configGroup" xsi:type="string">logger</argument>
+        </arguments>
+    </type>
     <!-- END Configs -->
 
     <!-- Types -->

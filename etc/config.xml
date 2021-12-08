@@ -35,6 +35,9 @@
                     <production>https://recs.hawksearch.com/</production>
                 </rec_url>
             </api_settings>
+            <logger>
+                <enabled>0</enabled>
+            </logger>
         </hawksearch_connector>
     </default>
 </config>
