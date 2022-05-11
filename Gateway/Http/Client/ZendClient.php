@@ -14,18 +14,17 @@ declare(strict_types=1);
 
 namespace HawkSearch\Connector\Gateway\Http\Client;
 
-use Magento\Framework\HTTP\Adapter\Curl;
-
 class ZendClient extends \Magento\Framework\HTTP\ZendClient
 {
     /**
-     * @inheritdoc
+     * Avoid setting @see \Magento\Framework\HTTP\Adapter\Curl as an adapter.
+     * If adapter is not defined yet set it from configuration parameters
+     *
+     * @return $this
      */
     protected function _trySetCurlAdapter()
     {
-        if (!$this->adapter instanceof Curl) {
-            return parent::_trySetCurlAdapter();
-        }
+        $this->getAdapter();
         return $this;
     }
 }

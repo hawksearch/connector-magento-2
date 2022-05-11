@@ -18,7 +18,7 @@ use HawkSearch\Connector\Gateway\Config\ApiConfigInterface;
 use HawkSearch\Connector\Gateway\Http\Uri\UriBuilderInterface;
 use HawkSearch\Connector\Gateway\Request\BuilderInterface;
 use Magento\Framework\App\RequestInterface;
-use Magento\Framework\HTTP\Adapter\Curl;
+use HawkSearch\Connector\Gateway\Http\Adapter\Curl;
 
 class TransferFactory implements TransferFactoryInterface
 {

@@ -144,6 +144,14 @@ class Client implements ClientInterface
             $responseData[self::RESPONSE_DATA] = $this->converter->convert($responseBody);
             $responseData[self::RESPONSE_CODE] = $response->getStatus();
             $responseData[self::RESPONSE_MESSAGE] = $response->getMessage();
+        } catch (\Zend_Http_Client_Exception $e) {
+            $message = $e->getMessage();
+            if ($e->getCode()) {
+                $message .= '; Adapter: ' . get_class($client->getAdapter()) . '; Error Code: ' . $e->getCode();
+            }
+            $this->logger->critical($e);
+            $log['error'] = $message;
+            $responseData[self::RESPONSE_MESSAGE] = $message;
         } catch (\Exception $e) {
             $this->logger->critical($e);
             $log['error'] = $e->getMessage();
