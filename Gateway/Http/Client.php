@@ -85,14 +85,6 @@ class Client implements ClientInterface
             self::RESPONSE_DATA => ''
         ];
 
-        $log = [
-            'request' => [
-                'uri' => $transferObject->getUri(),
-                'body' => $requestBody,
-                'method' => $transferObject->getMethod(),
-            ],
-        ];
-
         $client = $this->httpClientFactory->create([
             'uri' => $transferObject->getUri(),
             'config' => $transferObject->getClientConfig()
@@ -116,7 +108,8 @@ class Client implements ClientInterface
             if ($transferObject->getMethod() === HttpClient::GET) {
                 $client->setParameterGet($requestBody);
             } else {
-                $client->setRawData(!empty($requestBody) ? $this->json->serialize($requestBody) : '');
+                $requestBody = !empty($requestBody) ? $this->json->serialize($requestBody) : '';
+                $client->setRawData($requestBody);
                 $client->setHeaders(HttpClient::CONTENT_TYPE, 'application/json');
 
                 /**
@@ -136,9 +129,16 @@ class Client implements ClientInterface
 
             $response = $client->request();
             $responseBody = $response->getBody();
-            $log['response'] = [
-                'body' => $responseBody,
-                'status' => $response->getStatus() . ' ' . $response->getMessage(),
+            $log = [
+                'request' => [
+                    'uri' => $transferObject->getUri(),
+                    'body' => $requestBody,
+                    'method' => $transferObject->getMethod(),
+                ],
+                'response' => [
+                    'body' => $responseBody,
+                    'status' => $response->getStatus() . ' ' . $response->getMessage(),
+                ]
             ];
 
             $responseData[self::RESPONSE_DATA] = $this->converter->convert($responseBody);
