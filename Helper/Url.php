@@ -44,7 +44,7 @@ class Url
     {
         $uri = $this->getUriInstance($url);
 
-        return $uri->withPath($path);
+        return $uri->withPath($this->implodeUriPath($this->explodeUriPath($path)));
     }
 
     /**
@@ -67,7 +67,7 @@ class Url
      */
     public function addToUriPath(UriInterface $uri, array $addToPath, $fromStart = true)
     {
-        $pathParts = $this->parseUriPath($uri->getPath());
+        $pathParts = $this->explodeUriPath($uri->getPath());
 
         if ($fromStart) {
             $addToPath = array_reverse($addToPath);
@@ -81,7 +81,7 @@ class Url
             $pathParts = array_merge($pathParts, $addToPath);
         }
 
-        return $uri->withPath(implode('/', $pathParts));
+        return $uri->withPath($this->implodeUriPath($pathParts));
     }
 
     /**
@@ -91,28 +91,37 @@ class Url
      */
     public function removeFromUriPath(UriInterface $uri, array $removeParts)
     {
-        $pathParts = $this->parseUriPath($uri->getPath());
+        $pathParts = $this->explodeUriPath($uri->getPath());
 
         $pathParts = array_values(array_filter($pathParts, function ($value) use ($removeParts) {
             return !in_array($value, $removeParts);
         }));
 
-        return $uri->withPath(implode('/', $pathParts));
+        return $uri->withPath($this->implodeUriPath($pathParts));
     }
 
     /**
+     * Explodes path parts from an uri string
      * @param string $path
      * @return array
      */
-    protected function parseUriPath(string $path)
+    protected function explodeUriPath(string $path)
     {
-        $pathParts = isset($path) ? explode('/', $path) : [];
+        $pathParts = explode('/', $path);
 
-        $pathParts = array_values(array_filter($pathParts, function ($value) {
+        return array_values(array_filter($pathParts, function ($value) {
             return !in_array($value, ['/', '']);
         }));
+    }
 
-        return $pathParts;
+    /**
+     * Implode path parts into a well-formed uri path
+     * @param array $pathParts
+     * @return string
+     */
+    protected function implodeUriPath(array $pathParts)
+    {
+        return '/' . ltrim(implode('/', $pathParts), '/');
     }
 
     /**
