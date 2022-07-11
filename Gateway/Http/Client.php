@@ -135,6 +135,7 @@ class Client implements ClientInterface
                     'body' => $requestBody,
                     'method' => $transferObject->getMethod(),
                 ],
+                'headers' => $transferObject->getHeaders(),
                 'response' => [
                     'body' => $responseBody,
                     'status' => $response->getStatus() . ' ' . $response->getMessage(),
