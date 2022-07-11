@@ -28,7 +28,7 @@ class DataObjectHelper
     public function convertArrayToSnakeCase(array $data)
     {
         foreach ($data as $name => $value) {
-            $snakeCaseName = $this->camelCaseToSnakeCase($name);
+            $snakeCaseName = is_string($name) ? $this->camelCaseToSnakeCase($name) : $name;
             if (is_array($value)) {
                 $value = $this->convertArrayToSnakeCase($value);
             }
