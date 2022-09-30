@@ -13,6 +13,7 @@
 
 namespace HawkSearch\Connector\Gateway\Logger;
 
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\ObjectManagerInterface;
 
 /**
@@ -42,7 +43,7 @@ class LoggerFactory
      * Create debugger instance
      *
      * @return LogInterface
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws NoSuchEntityException
      */
     public function create()
     {

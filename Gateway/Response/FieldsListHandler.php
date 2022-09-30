@@ -24,6 +24,9 @@ class FieldsListHandler implements HandlerInterface
      */
     private $fieldFactory;
 
+    /**
+     * @param HawkSearchFieldInterfaceFactory $fieldFactory
+     */
     public function __construct(
         HawkSearchFieldInterfaceFactory $fieldFactory
     ) {

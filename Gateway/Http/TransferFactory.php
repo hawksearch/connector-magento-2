@@ -115,6 +115,6 @@ class TransferFactory implements TransferFactoryInterface
         if ($this->uriBuilder) {
             return $this->uriBuilder->build($this->apiConfig->getApiUrl(), $this->path);
         }
-        return rtrim($this->apiConfig->getApiUrl(), '/') . '/' . ltrim($this->path, '/');
+        return rtrim($this->apiConfig->getApiUrl(), '/') . '/' . ltrim((string)$this->path, '/');
     }
 }
