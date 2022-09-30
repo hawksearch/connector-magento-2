@@ -22,16 +22,18 @@ class ApiSettings extends ConfigProvider
     /**#@+
      * Configuration paths
      */
-    const API_KEY = 'api_key';
-    const ENGINE_NAME = 'engine_name';
-    const API_MODE = 'mode';
-    const TRACKING_KEY = 'order_tracking_key';
-    const API_URL = 'hawk_url';
-    const TRACKING_URL = 'tracking_url';
-    const REC_URL = 'rec_url';
+    public const API_KEY = 'api_key';
+    public const ENGINE_NAME = 'engine_name';
+    public const API_MODE = 'mode';
+    public const TRACKING_KEY = 'order_tracking_key';
+    public const API_URL = 'hawk_url';
+    public const TRACKING_URL = 'tracking_url';
+    public const REC_URL = 'rec_url';
     /**#@-*/
 
     /**
+     * Get Api key
+     *
      * @param null|int|string $store
      * @return string | null
      */
@@ -41,6 +43,8 @@ class ApiSettings extends ConfigProvider
     }
 
     /**
+     * Get Engine Name
+     *
      * @param null|int|string $store
      * @return string | null
      */
@@ -50,6 +54,8 @@ class ApiSettings extends ConfigProvider
     }
 
     /**
+     * Get Api Mode
+     *
      * @param null|int|string $store
      * @return string | null
      */
@@ -59,6 +65,8 @@ class ApiSettings extends ConfigProvider
     }
 
     /**
+     * Get Order Tracking Key
+     *
      * @param null|int|string $store
      * @return string | null
      * @deprecated since 2.5.1
@@ -70,6 +78,8 @@ class ApiSettings extends ConfigProvider
     }
 
     /**
+     * Get Client Guid / Tracking Key
+     *
      * @param null|int|string $store
      * @return string | null
      */

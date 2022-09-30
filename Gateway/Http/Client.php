@@ -15,12 +15,13 @@ declare(strict_types=1);
 namespace HawkSearch\Connector\Gateway\Http;
 
 use HawkSearch\Connector\Gateway\Logger\LoggerFactory;
+use HawkSearch\Connector\Gateway\Logger\LogInterface;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\HTTP\Adapter\Curl;
 use Magento\Framework\HTTP\ZendClientFactory;
 use Magento\Framework\Serialize\Serializer\Json;
 use Psr\Log\LoggerInterface;
-use Magento\Framework\HTTP\ZendClient as HttpClient;
+use Zend_Http_Client;
 
 class Client implements ClientInterface
 {
@@ -45,7 +46,7 @@ class Client implements ClientInterface
     private $converter;
 
     /**
-     * @var \HawkSearch\Connector\Gateway\Logger\LogInterface
+     * @var LogInterface
      */
     private $gatewayLogger;
 
@@ -105,19 +106,19 @@ class Client implements ClientInterface
             }
 
             $clientOptions = [];
-            if ($transferObject->getMethod() === HttpClient::GET) {
+            if ($transferObject->getMethod() === Zend_Http_Client::GET) {
                 $client->setParameterGet($requestBody);
             } else {
                 $requestBody = !empty($requestBody) ? $this->json->serialize($requestBody) : '';
                 $client->setRawData($requestBody);
-                $client->setHeaders(HttpClient::CONTENT_TYPE, 'application/json');
+                $client->setHeaders(Zend_Http_Client::CONTENT_TYPE, 'application/json');
 
                 /**
                  * Fix support of PATCH and DELETE requests for @see \Magento\Framework\HTTP\Adapter\Curl
                  */
                 $clientOptions[CURLOPT_CUSTOMREQUEST] = $transferObject->getMethod();
-                if ($transferObject->getMethod() === HttpClient::PATCH
-                    || $transferObject->getMethod() === HttpClient::DELETE
+                if ($transferObject->getMethod() === Zend_Http_Client::PATCH
+                    || $transferObject->getMethod() === Zend_Http_Client::DELETE
                 ) {
                     $clientOptions[CURLOPT_POSTFIELDS] = $this->json->serialize($requestBody);
                 }

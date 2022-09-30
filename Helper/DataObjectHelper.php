@@ -42,10 +42,10 @@ class DataObjectHelper
      * Convert a CamelCase string read from method into field key in snake_case
      * @see https://github.com/magento/magento2/issues/35457
      *
-     * @param $value
+     * @param string $value
      * @return string
      */
-    protected function camelCaseToSnakeCase($value)
+    protected function camelCaseToSnakeCase(string $value)
     {
         [$pattern, $replacement] = $this->getPatternAndReplacement();
 
@@ -55,7 +55,7 @@ class DataObjectHelper
     }
 
     /**
-     * @return \string[][]
+     * @return string[][]
      */
     protected function getPatternAndReplacement(): array
     {

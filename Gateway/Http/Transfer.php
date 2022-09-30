@@ -100,7 +100,7 @@ class Transfer implements TransferInterface
     /**
      * Returns method used to place request
      *
-     * @return string|int
+     * @return string
      */
     public function getMethod()
     {
