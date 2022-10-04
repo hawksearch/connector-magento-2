@@ -43,8 +43,12 @@ class Url
     public function getUriWithPath(string $url, string $path)
     {
         $uri = $this->getUriInstance($url);
+        $isTrailingSlash = $this->isTrailingSlashInPath($path);
 
-        return $uri->withPath($this->implodeUriPath($this->explodeUriPath($path)));
+        $path = $this->implodeUriPath($this->explodeUriPath($path));
+        $path = $isTrailingSlash ? $this->addTrailingSlash($path): $path;
+
+        return $uri->withPath($path);
     }
 
     /**
@@ -60,6 +64,8 @@ class Url
     }
 
     /**
+     * Concatenate extra parts to the start or the end of the URI path
+     *
      * @param UriInterface $uri
      * @param array $addToPath
      * @param bool $fromStart
@@ -67,6 +73,11 @@ class Url
      */
     public function addToUriPath(UriInterface $uri, array $addToPath, $fromStart = true)
     {
+        $isTrailingSlash = $this->isTrailingSlashInPath($uri->getPath());
+        $isTrailingSlash = $isTrailingSlash || (!$fromStart && end($addToPath) == '/');
+        reset($addToPath);
+
+        $addToPath = $this->filterPathParts($addToPath);
         $pathParts = $this->explodeUriPath($uri->getPath());
 
         if ($fromStart) {
@@ -81,7 +92,10 @@ class Url
             $pathParts = array_merge($pathParts, $addToPath);
         }
 
-        return $uri->withPath($this->implodeUriPath($pathParts));
+        $path = $this->implodeUriPath($pathParts);
+        $path = $isTrailingSlash ? $this->addTrailingSlash($path): $path;
+
+        return $uri->withPath($path);
     }
 
     /**
@@ -92,12 +106,17 @@ class Url
     public function removeFromUriPath(UriInterface $uri, array $removeParts)
     {
         $pathParts = $this->explodeUriPath($uri->getPath());
+        $removeParts = $this->filterPathParts($removeParts);
+        $isTrailingSlash = $this->isTrailingSlashInPath($uri->getPath());
 
         $pathParts = array_values(array_filter($pathParts, function ($value) use ($removeParts) {
             return !in_array($value, $removeParts);
         }));
 
-        return $uri->withPath($this->implodeUriPath($pathParts));
+        $path = $this->implodeUriPath($pathParts);
+        $path = $isTrailingSlash ? $this->addTrailingSlash($path): $path;
+
+        return $uri->withPath($path);
     }
 
     /**
@@ -109,9 +128,42 @@ class Url
     {
         $pathParts = explode('/', $path);
 
+        return $this->filterPathParts($pathParts);
+    }
+
+    /**
+     * Clean empty parts in the path
+     *
+     * @param array $pathParts
+     * @return array
+     */
+    protected function filterPathParts(array $pathParts)
+    {
         return array_values(array_filter($pathParts, function ($value) {
             return !in_array($value, ['/', '']);
         }));
+    }
+
+    /**
+     * Add trailing slash to URI path
+     *
+     * @param string $path
+     * @return string
+     */
+    protected function addTrailingSlash(string $path)
+    {
+        return rtrim($path, '/') . '/';
+    }
+
+    /**
+     * Check if URI path has a trailing slash
+     *
+     * @param string $path
+     * @return bool
+     */
+    protected function isTrailingSlashInPath(string $path)
+    {
+        return substr($path, -1)  == '/';
     }
 
     /**

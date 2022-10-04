@@ -19,6 +19,7 @@ use HawkSearch\Connector\Gateway\Http\Uri\UriBuilderInterface;
 use HawkSearch\Connector\Gateway\Request\BuilderInterface;
 use Magento\Framework\App\RequestInterface;
 use HawkSearch\Connector\Gateway\Http\Adapter\Curl;
+use HawkSearch\Connector\Gateway\Http\Uri\UriBuilderFactory;
 
 class TransferFactory implements TransferFactoryInterface
 {
@@ -71,6 +72,7 @@ class TransferFactory implements TransferFactoryInterface
         ApiConfigInterface $apiConfig,
         BuilderInterface $headers,
         RequestInterface $httpRequest,
+        UriBuilderFactory $uriBuilderFactory,
         $path = '',
         $method = 'GET',
         UriBuilderInterface $uriBuilder = null
@@ -81,7 +83,7 @@ class TransferFactory implements TransferFactoryInterface
         $this->httpRequest = $httpRequest;
         $this->path = $path;
         $this->method = $method;
-        $this->uriBuilder = $uriBuilder;
+        $this->uriBuilder = $uriBuilder ?? $uriBuilderFactory->create();
     }
 
     /**
@@ -112,9 +114,6 @@ class TransferFactory implements TransferFactoryInterface
      */
     private function buildFullApiUrl()
     {
-        if ($this->uriBuilder) {
-            return $this->uriBuilder->build($this->apiConfig->getApiUrl(), $this->path);
-        }
-        return rtrim($this->apiConfig->getApiUrl(), '/') . '/' . ltrim((string)$this->path, '/');
+        return $this->uriBuilder->build($this->apiConfig->getApiUrl(), $this->path);
     }
 }
