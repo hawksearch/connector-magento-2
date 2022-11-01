@@ -49,7 +49,7 @@ class TransferFactory implements TransferFactoryInterface
     private $method;
 
     /**
-     * @var UriBuilderInterface|null
+     * @var UriBuilderInterface
      */
     private $uriBuilder;
 
