@@ -17,12 +17,12 @@ namespace HawkSearch\Connector\Gateway\Config;
 
 use HawkSearch\Connector\Model\Config\ApiSettings as ApiSettingsProvider;
 
-class ApiConfigDefault implements ApiConfigInterface
+class SharedApiKeyConfig implements ApiConfigInterface
 {
     /**
      * @var ApiSettingsProvider
      */
-    private $apiSettingsProvider;
+    protected $apiSettingsProvider;
 
     /**
      * ApiConfigDefault constructor.
@@ -37,15 +37,15 @@ class ApiConfigDefault implements ApiConfigInterface
     /**
      * @inheritDoc
      */
-    public function getApiUrl(): ?string
+    public function getApiUrl(): string
     {
-        return $this->apiSettingsProvider->getApiUrl();
+        return '';
     }
 
     /**
      * @inheritDoc
      */
-    public function getApiKey(): ?string
+    public function getApiKey(): string
     {
         return $this->apiSettingsProvider->getApiKey();
     }

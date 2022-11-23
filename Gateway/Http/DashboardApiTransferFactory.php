@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2021 Hawksearch (www.hawksearch.com) - All Rights Reserved
+ * Copyright (c) 2022 Hawksearch (www.hawksearch.com) - All Rights Reserved
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -12,19 +12,9 @@
  */
 declare(strict_types=1);
 
-namespace HawkSearch\Connector\Gateway\Request;
+namespace HawkSearch\Connector\Gateway\Http;
 
-/**
- * Interface BuilderInterface
- * @api
- */
-interface BuilderInterface
+class DashboardApiTransferFactory extends TransferFactory
 {
-    /**
-     * Builds request
-     *
-     * @param array $buildSubject
-     * @return array
-     */
-    public function build(array $buildSubject);
+
 }

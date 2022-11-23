@@ -41,7 +41,7 @@ class Curl extends \Magento\Framework\HTTP\Adapter\Curl
             $response = trim($response[1]);
         }
 
-        // CUrl will handle chunked data but leave the header.
+        // Curl will handle chunked data but leave the header.
         return preg_replace('/Transfer-Encoding:\s+chunked\r?\n/i', '', $response);
     }
 }

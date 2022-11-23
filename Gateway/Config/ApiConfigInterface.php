@@ -22,12 +22,12 @@ interface ApiConfigInterface
      *
      * @return string
      */
-    public function getApiUrl(): ?string;
+    public function getApiUrl(): string;
 
     /**
      * Returns API Bearer connection token
      *
      * @return string
      */
-    public function getApiKey(): ?string;
+    public function getApiKey(): string;
 }
