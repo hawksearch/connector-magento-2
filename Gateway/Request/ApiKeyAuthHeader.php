@@ -12,34 +12,35 @@
  */
 declare(strict_types=1);
 
-namespace HawkSearch\Connector\Model\Config\Source\Api;
+namespace HawkSearch\Connector\Gateway\Request;
 
-use Magento\Framework\Data\OptionSourceInterface;
+use HawkSearch\Connector\Gateway\Config\ApiConfigInterface;
 
-/**
- * Class Mode
- * Source provider for system config field hawksearch_connector/api_settings/mode
- */
-class Mode implements OptionSourceInterface
+class ApiKeyAuthHeader implements BuilderInterface
 {
     /**
-     * @inheritDoc
+     * @var ApiConfigInterface
      */
-    public function toOptionArray() : array
+    private $apiConfig;
+
+    /**
+     * HawkGetHeaders constructor.
+     * @param ApiConfigInterface $apiConfig
+     */
+    public function __construct(
+        ApiConfigInterface $apiConfig
+    ) {
+        $this->apiConfig = $apiConfig;
+    }
+
+    /**
+     * @param array $buildSubject
+     * @return array
+     */
+    public function build(array $buildSubject)
     {
         return [
-            [
-                'value' => 'develop',
-                'label' => __('Development')
-            ],
-            [
-                'value' => 'staging',
-                'label' => __('Staging')
-            ],
-            [
-                'value' => 'production',
-                'label' => __('Production')
-            ]
+            'X-HawkSearch-ApiKey' => $this->apiConfig->getApiKey()
         ];
     }
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2021 Hawksearch (www.hawksearch.com) - All Rights Reserved
+ * Copyright (c) 2022 Hawksearch (www.hawksearch.com) - All Rights Reserved
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -24,95 +24,165 @@ class ApiSettings extends ConfigProvider
      */
     public const API_KEY = 'api_key';
     public const ENGINE_NAME = 'engine_name';
-    public const API_MODE = 'mode';
-    public const TRACKING_KEY = 'order_tracking_key';
-    public const API_URL = 'hawk_url';
+    public const CLIENT_GUID = 'client_guid';
+    public const ENVIRONMENT = 'environment';
+    public const HAWK_URL = 'hawk_url';
     public const TRACKING_URL = 'tracking_url';
-    public const REC_URL = 'rec_url';
+    public const RECOMMENDATIONS_URL = 'recommendations_url';
+    public const DASHBOARD_API_URL = 'dashboard_api_url';
+    public const HAWKSEARCH_WORKBENCH_URL = 'hawksearch_workbench_url';
+    public const INDEXING_API_URL = 'indexing_api_url';
+    public const SEARCH_API_URL = 'search_api_url';
     /**#@-*/
 
     /**
      * Get Api key
      *
      * @param null|int|string $store
-     * @return string | null
+     * @return string
      */
-    public function getApiKey($store = null) : ?string
+    public function getApiKey($store = null) : string
     {
-        return $this->getConfig(self::API_KEY, $store);
+        return (string)$this->getConfig(self::API_KEY, $store);
     }
 
     /**
      * Get Engine Name
      *
      * @param null|int|string $store
-     * @return string | null
+     * @return string
      */
-    public function getEngineName($store = null) : ?string
+    public function getEngineName($store = null) : string
     {
-        return $this->getConfig(self::ENGINE_NAME, $store);
+        return (string)$this->getConfig(self::ENGINE_NAME, $store);
     }
 
     /**
-     * Get Api Mode
+     * Get Hawksearch Environment
      *
      * @param null|int|string $store
-     * @return string | null
+     * @return string
      */
-    public function getApiMode($store = null) : ?string
+    public function getEnvironment($store = null) : string
     {
-        return $this->getConfig(self::API_MODE, $store);
+        return (string)$this->getConfig(self::ENVIRONMENT, $store);
     }
 
     /**
-     * Get Order Tracking Key
-     *
-     * @param null|int|string $store
-     * @return string | null
-     * @deprecated since 2.5.1
-     * @see \HawkSearch\Connector\Model\Config\ApiSettings::getTrackingKey
+     * @deprecated 2.5.1
+     * @see \HawkSearch\Connector\Model\Config\ApiSettings::getClientGuid
      */
-    public function getOrderTrackingKey($store = null) : ?string
+    public function getOrderTrackingKey($store = null) : string
     {
-        return $this->getTrackingKey($store);
+        return $this->getClientGuid($store);
+    }
+
+    /**
+     * @deprecated 2.6.0
+     * @see \HawkSearch\Connector\Model\Config\ApiSettings::getClientGuid
+     */
+    public function getTrackingKey($store = null) : string
+    {
+        return $this->getClientGuid($store);
     }
 
     /**
      * Get Client Guid / Tracking Key
      *
      * @param null|int|string $store
-     * @return string | null
+     * @return string
      */
-    public function getTrackingKey($store = null) : ?string
+    public function getClientGuid($store = null) : string
     {
-        return $this->getConfig(self::TRACKING_KEY, $store);
+        return (string)$this->getConfig(self::CLIENT_GUID, $store);
     }
 
     /**
-     * Dashboard API URL
+     * Get Hawksearch Lucene Engine Reference URL
+     *
      * @param null|int|string $store
-     * @return string | null
+     * @return string
      */
-    public function getApiUrl($store = null) : ?string
+    public function getHawkUrl($store = null) : string
     {
-        return $this->getConfig(self::API_URL . '/' . $this->getApiMode(), $store);
+        return $this->getEnvironmentConfig(self::HAWK_URL, $store);
     }
 
     /**
+     * Get Hawksearch Tracking URL
+     *
      * @param null|int|string $store
-     * @return string | null
+     * @return string
      */
-    public function getTrackingUrl($store = null) : ?string
+    public function getTrackingUrl($store = null) : string
     {
-        return $this->getConfig(self::TRACKING_URL . '/' . $this->getApiMode(), $store);
+        return $this->getEnvironmentConfig(self::TRACKING_URL, $store);
     }
 
     /**
+     * Get Hawksearch Recommendations URL
+     *
      * @param null|int|string $store
-     * @return string | null
+     * @return string
      */
-    public function getRecommendationUrl($store = null) : ?string
+    public function getRecommendationsUrl($store = null) : string
     {
-        return $this->getConfig(self::REC_URL . '/' . $this->getApiMode(), $store);
+        return $this->getEnvironmentConfig(self::RECOMMENDATIONS_URL, $store);
+    }
+
+    /**
+     * Get Hawksearch Dashboard API URL
+     *
+     * @param null|int|string $store
+     * @return string
+     */
+    public function getDashboardApiUrl($store = null) : string
+    {
+        return $this->getEnvironmentConfig(self::DASHBOARD_API_URL, $store);
+    }
+
+    /**
+     * Get Hawksearch Workbench URL
+     *
+     * @param null|int|string $store
+     * @return string
+     */
+    public function getHawksearchWorkbenchUrl($store = null) : string
+    {
+        return $this->getEnvironmentConfig(self::HAWKSEARCH_WORKBENCH_URL, $store);
+    }
+
+    /**
+     * Get Hawksearch Indexing API URL
+     *
+     * @param null|int|string $store
+     * @return string
+     */
+    public function getIndexingApiUrl($store = null) : string
+    {
+        return $this->getEnvironmentConfig(self::INDEXING_API_URL, $store);
+    }
+
+    /**
+     * Get Hawksearch Search API URL
+     *
+     * @param null|int|string $store
+     * @return string
+     */
+    public function getSearchApiUrl($store = null) : string
+    {
+        return $this->getEnvironmentConfig(self::SEARCH_API_URL, $store);
+    }
+
+    /**
+     * Get config depending on selected Hawksearch environment
+     *
+     * @param string $path Config path part
+     * @param null|int|string $store
+     * @return string
+     */
+    private function getEnvironmentConfig(string $path, $store = null) : string
+    {
+        return (string)$this->getConfig($path . '/' . $this->getEnvironment(), $store);
     }
 }

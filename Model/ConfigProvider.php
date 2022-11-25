@@ -15,7 +15,6 @@ declare(strict_types=1);
 namespace HawkSearch\Connector\Model;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
-use Magento\Store\Api\Data\StoreInterface;
 use Magento\Store\Model\ScopeInterface;
 
 /**
@@ -34,15 +33,6 @@ class ConfigProvider implements ConfigProviderInterface
      */
     const XML_GENERAL_GROUP = 'general';
 
-    /**#@+
-     * Configuration paths
-     */
-    const API_KEY = 'hawksearch_connector/api_settings/api_key';
-    const ENGINE_NAME = 'hawksearch_connector/api_settings/engine_name';
-    const API_MODE = 'hawksearch_connector/api_settings/mode';
-    const API_URL = 'hawksearch_connector/api_settings/hawk_url/';
-    /**#@-*/
-
     /**
      * @var ScopeConfigInterface
      */
@@ -57,13 +47,6 @@ class ConfigProvider implements ConfigProviderInterface
      * @var string
      */
     private $configRootPath;
-
-    /**
-     * Current store instance
-     *
-     * @var StoreInterface
-     */
-    private $store = null;
 
     /**
      * @param ScopeConfigInterface $scopeConfig

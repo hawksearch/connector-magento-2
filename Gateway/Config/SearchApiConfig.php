@@ -10,21 +10,18 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 declare(strict_types=1);
 
-namespace HawkSearch\Connector\Gateway\Request;
+namespace HawkSearch\Connector\Gateway\Config;
 
-/**
- * Interface BuilderInterface
- * @api
- */
-interface BuilderInterface
+class SearchApiConfig extends SharedApiKeyConfig
 {
     /**
-     * Builds request
-     *
-     * @param array $buildSubject
-     * @return array
+     * @inheritDoc
      */
-    public function build(array $buildSubject);
+    public function getApiUrl(): string
+    {
+        return $this->apiSettingsProvider->getSearchApiUrl();
+    }
 }
