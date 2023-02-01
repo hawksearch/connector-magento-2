@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2022 Hawksearch (www.hawksearch.com) - All Rights Reserved
+ * Copyright (c) 2023 Hawksearch (www.hawksearch.com) - All Rights Reserved
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -20,6 +20,7 @@ use HawkSearch\Connector\Gateway\Http\Uri\UriBuilderFactory;
 use HawkSearch\Connector\Gateway\Http\Uri\UriBuilderInterface;
 use HawkSearch\Connector\Gateway\Request\BuilderInterface;
 use HawkSearch\Connector\Gateway\Request\BuilderInterfaceFactory;
+use HawkSearch\Connector\Model\ConnectionScopeResolver;
 use Magento\Framework\App\RequestInterface;
 
 class TransferFactory implements TransferFactoryInterface
@@ -60,6 +61,11 @@ class TransferFactory implements TransferFactoryInterface
     private $httpRequest;
 
     /**
+     * @var ConnectionScopeResolver
+     */
+    private ConnectionScopeResolver $connectionScopeResolver;
+
+    /**
      * @param TransferBuilder $transferBuilder
      * @param ApiConfigInterface $apiConfig
      * @param RequestInterface $httpRequest
@@ -75,6 +81,7 @@ class TransferFactory implements TransferFactoryInterface
         RequestInterface $httpRequest,
         UriBuilderFactory $uriBuilderFactory,
         BuilderInterfaceFactory $builderInterfaceFactory,
+        ConnectionScopeResolver $connectionScopeResolver,
         $path = '',
         $method = 'GET',
         BuilderInterface $headersBuilder = null,
@@ -87,6 +94,7 @@ class TransferFactory implements TransferFactoryInterface
         $this->method = $method;
         $this->headersBuilder = $headersBuilder ?? $builderInterfaceFactory->create();
         $this->uriBuilder = $uriBuilder ?? $uriBuilderFactory->create();
+        $this->connectionScopeResolver = $connectionScopeResolver;
     }
 
     /**
@@ -117,6 +125,9 @@ class TransferFactory implements TransferFactoryInterface
      */
     private function buildFullApiUrl()
     {
-        return $this->uriBuilder->build($this->apiConfig->getApiUrl(), $this->path);
+        return $this->uriBuilder->build(
+            $this->apiConfig->getApiUrl($this->connectionScopeResolver->resolve()->getId()),
+            $this->path
+        );
     }
 }

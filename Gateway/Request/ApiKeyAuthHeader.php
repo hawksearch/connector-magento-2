@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2022 Hawksearch (www.hawksearch.com) - All Rights Reserved
+ * Copyright (c) 2023 Hawksearch (www.hawksearch.com) - All Rights Reserved
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace HawkSearch\Connector\Gateway\Request;
 
 use HawkSearch\Connector\Gateway\Config\ApiConfigInterface;
+use HawkSearch\Connector\Model\ConnectionScopeResolver;
 
 class ApiKeyAuthHeader implements BuilderInterface
 {
@@ -24,13 +25,22 @@ class ApiKeyAuthHeader implements BuilderInterface
     private $apiConfig;
 
     /**
+     * @var ConnectionScopeResolver
+     */
+    private ConnectionScopeResolver $connectionScopeResolver;
+
+    /**
      * HawkGetHeaders constructor.
+     *
      * @param ApiConfigInterface $apiConfig
+     * @param ConnectionScopeResolver $connectionScopeResolver
      */
     public function __construct(
-        ApiConfigInterface $apiConfig
+        ApiConfigInterface $apiConfig,
+        ConnectionScopeResolver $connectionScopeResolver
     ) {
         $this->apiConfig = $apiConfig;
+        $this->connectionScopeResolver = $connectionScopeResolver;
     }
 
     /**
@@ -40,7 +50,7 @@ class ApiKeyAuthHeader implements BuilderInterface
     public function build(array $buildSubject)
     {
         return [
-            'X-HawkSearch-ApiKey' => $this->apiConfig->getApiKey()
+            'X-HawkSearch-ApiKey' => $this->apiConfig->getApiKey($this->connectionScopeResolver->resolve()->getId())
         ];
     }
 }

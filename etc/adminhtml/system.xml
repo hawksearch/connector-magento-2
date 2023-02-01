@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
   /**
-   * Copyright (c) 2022 Hawksearch (www.hawksearch.com) - All Rights Reserved
+   * Copyright (c) 2023 Hawksearch (www.hawksearch.com) - All Rights Reserved
    *
    * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
    * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -49,29 +49,20 @@
                 </field>
 
                 <group id="hawk_url" translate="label" type="text" sortOrder="50"
-                       showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                       showInDefault="1" showInWebsite="0" showInStore="1" canRestore="1">
                     <label>Engine Reference URL</label>
                     <comment>Used for referencing Lucene Search Engine.</comment>
                     <field id="develop" translate="label" type="text"
                            showInDefault="1" showInWebsite="0" showInStore="1" sortOrder="10" canRestore="1">
                         <label>Development Environment</label>
-                        <depends>
-                            <field id="hawksearch_connector/api_settings/environment">develop</field>
-                        </depends>
                     </field>
                     <field id="staging" translate="label" type="text"
                            showInDefault="1" showInWebsite="0" showInStore="1" sortOrder="20" canRestore="1">
                         <label>Staging Environment</label>
-                        <depends>
-                            <field id="hawksearch_connector/api_settings/environment">staging</field>
-                        </depends>
                     </field>
                     <field id="production" translate="label" type="text"
                            showInDefault="1" showInWebsite="0" showInStore="1" sortOrder="30" canRestore="1">
                         <label>Production Environment</label>
-                        <depends>
-                            <field id="hawksearch_connector/api_settings/environment">production</field>
-                        </depends>
                     </field>
                 </group>
 
@@ -82,23 +73,14 @@
                     <field id="develop" translate="label" type="text"
                            showInDefault="1" showInWebsite="0" showInStore="1" sortOrder="10" canRestore="1">
                         <label>Development Environment</label>
-                        <depends>
-                            <field id="hawksearch_connector/api_settings/environment">develop</field>
-                        </depends>
                     </field>
                     <field id="staging" translate="label" type="text"
                            showInDefault="1" showInWebsite="0" showInStore="1" sortOrder="20" canRestore="1">
                         <label>Staging Environment</label>
-                        <depends>
-                            <field id="hawksearch_connector/api_settings/environment">staging</field>
-                        </depends>
                     </field>
                     <field id="production" translate="label" type="text"
                            showInDefault="1" showInWebsite="0" showInStore="1" sortOrder="30" canRestore="1">
                         <label>Production Environment</label>
-                        <depends>
-                            <field id="hawksearch_connector/api_settings/environment">production</field>
-                        </depends>
                     </field>
                 </group>
 
@@ -109,23 +91,14 @@
                     <field id="develop" translate="label" type="text"
                            showInDefault="1" showInWebsite="0" showInStore="1" sortOrder="10" canRestore="1">
                         <label>Development Environment</label>
-                        <depends>
-                            <field id="hawksearch_connector/api_settings/environment">develop</field>
-                        </depends>
                     </field>
                     <field id="staging" translate="label" type="text"
                            showInDefault="1" showInWebsite="0" showInStore="1" sortOrder="20" canRestore="1">
                         <label>Staging Environment</label>
-                        <depends>
-                            <field id="hawksearch_connector/api_settings/environment">staging</field>
-                        </depends>
                     </field>
                     <field id="production" translate="label" type="text"
                            showInDefault="1" showInWebsite="0" showInStore="1" sortOrder="30" canRestore="1">
                         <label>Production Environment</label>
-                        <depends>
-                            <field id="hawksearch_connector/api_settings/environment">production</field>
-                        </depends>
                     </field>
                 </group>
 
@@ -136,23 +109,14 @@
                     <field id="develop" translate="label" type="text"
                            showInDefault="1" showInWebsite="0" showInStore="1" sortOrder="10" canRestore="1">
                         <label>Development Environment</label>
-                        <depends>
-                            <field id="hawksearch_connector/api_settings/environment">develop</field>
-                        </depends>
                     </field>
                     <field id="staging" translate="label" type="text"
                            showInDefault="1" showInWebsite="0" showInStore="1" sortOrder="20" canRestore="1">
                         <label>Staging Environment</label>
-                        <depends>
-                            <field id="hawksearch_connector/api_settings/environment">staging</field>
-                        </depends>
                     </field>
                     <field id="production" translate="label" type="text"
                            showInDefault="1" showInWebsite="0" showInStore="1" sortOrder="30" canRestore="1">
                         <label>Production Environment</label>
-                        <depends>
-                            <field id="hawksearch_connector/api_settings/environment">production</field>
-                        </depends>
                     </field>
                 </group>
 
@@ -164,23 +128,14 @@
                     <field id="develop" translate="label" type="text"
                            showInDefault="1" showInWebsite="0" showInStore="1" sortOrder="10" canRestore="1">
                         <label>Development Environment</label>
-                        <depends>
-                            <field id="hawksearch_connector/api_settings/environment">develop</field>
-                        </depends>
                     </field>
                     <field id="staging" translate="label" type="text"
                            showInDefault="1" showInWebsite="0" showInStore="1" sortOrder="20" canRestore="1">
                         <label>Staging Environment</label>
-                        <depends>
-                            <field id="hawksearch_connector/api_settings/environment">staging</field>
-                        </depends>
                     </field>
                     <field id="production" translate="label" type="text"
                            showInDefault="1" showInWebsite="0" showInStore="1" sortOrder="30" canRestore="1">
                         <label>Production Environment</label>
-                        <depends>
-                            <field id="hawksearch_connector/api_settings/environment">production</field>
-                        </depends>
                     </field>
                 </group>
 
@@ -191,23 +146,14 @@
                     <field id="develop" translate="label" type="text"
                            showInDefault="1" showInWebsite="0" showInStore="1" sortOrder="10" canRestore="1">
                         <label>Development Environment</label>
-                        <depends>
-                            <field id="hawksearch_connector/api_settings/environment">develop</field>
-                        </depends>
                     </field>
                     <field id="staging" translate="label" type="text"
                            showInDefault="1" showInWebsite="0" showInStore="1" sortOrder="20" canRestore="1">
                         <label>Staging Environment</label>
-                        <depends>
-                            <field id="hawksearch_connector/api_settings/environment">staging</field>
-                        </depends>
                     </field>
                     <field id="production" translate="label" type="text"
                            showInDefault="1" showInWebsite="0" showInStore="1" sortOrder="30" canRestore="1">
                         <label>Production Environment</label>
-                        <depends>
-                            <field id="hawksearch_connector/api_settings/environment">production</field>
-                        </depends>
                     </field>
                 </group>
 
@@ -218,23 +164,14 @@
                     <field id="develop" translate="label" type="text"
                            showInDefault="1" showInWebsite="0" showInStore="1" sortOrder="10" canRestore="1">
                         <label>Development Environment</label>
-                        <depends>
-                            <field id="hawksearch_connector/api_settings/environment">develop</field>
-                        </depends>
                     </field>
                     <field id="staging" translate="label" type="text"
                            showInDefault="1" showInWebsite="0" showInStore="1" sortOrder="20" canRestore="1">
                         <label>Staging Environment</label>
-                        <depends>
-                            <field id="hawksearch_connector/api_settings/environment">staging</field>
-                        </depends>
                     </field>
                     <field id="production" translate="label" type="text"
                            showInDefault="1" showInWebsite="0" showInStore="1" sortOrder="30" canRestore="1">
                         <label>Production Environment</label>
-                        <depends>
-                            <field id="hawksearch_connector/api_settings/environment">production</field>
-                        </depends>
                     </field>
                 </group>
             </group>

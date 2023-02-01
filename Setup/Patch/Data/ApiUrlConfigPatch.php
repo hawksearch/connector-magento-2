@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2022 Hawksearch (www.hawksearch.com) - All Rights Reserved
+ * Copyright (c) 2023 Hawksearch (www.hawksearch.com) - All Rights Reserved
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -14,8 +14,8 @@ declare(strict_types=1);
 
 namespace HawkSearch\Connector\Setup\Patch\Data;
 
-use Magento\Config\Model\ResourceModel\Config as ConfigResource;
-use Magento\Framework\DB\Adapter\DuplicateException;
+use HawkSearch\Connector\Setup\Patch\SystemConfigPatcher;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Setup\Patch\DataPatchInterface;
 
 class ApiUrlConfigPatch implements DataPatchInterface
@@ -35,17 +35,17 @@ class ApiUrlConfigPatch implements DataPatchInterface
     // phpcs:enable
 
     /**
-     * @var ConfigResource
+     * @var SystemConfigPatcher
      */
-    private $config;
+    private $patcher;
 
     /**
-     * @param ConfigResource $config
+     * @param SystemConfigPatcher $patcher
      */
     public function __construct(
-        ConfigResource $config
+        SystemConfigPatcher $patcher
     ) {
-        $this->config = $config;
+        $this->patcher = $patcher;
     }
 
     /**
@@ -66,17 +66,10 @@ class ApiUrlConfigPatch implements DataPatchInterface
 
     /**
      * @inheritDoc
+     * @throws LocalizedException
      */
     public function apply()
     {
-        foreach ($this->directivesToRename as $pathFrom => $pathTo) {
-            try {
-                $bind = ['path' => $pathTo];
-                $where = ['path = ?' => $pathFrom];
-                $this->config->getConnection()->update($this->config->getMainTable(), $bind, $where);
-            } catch (DuplicateException $e) {
-                // Skip
-            }
-        }
+        $this->patcher->renamePath($this->directivesToRename);
     }
 }
