@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2022 Hawksearch (www.hawksearch.com) - All Rights Reserved
+ * Copyright (c) 2023 Hawksearch (www.hawksearch.com) - All Rights Reserved
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -20,14 +20,16 @@ interface ApiConfigInterface
     /**
      * Returns API url
      *
+     * @param null|int|string $store
      * @return string
      */
-    public function getApiUrl(): string;
+    public function getApiUrl($store = null): string;
 
     /**
      * Returns API Bearer connection token
      *
+     * @param null|int|string $store
      * @return string
      */
-    public function getApiKey(): string;
+    public function getApiKey($store = null): string;
 }
