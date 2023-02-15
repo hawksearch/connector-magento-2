@@ -45,7 +45,7 @@ class DataObjectHelper
      * @param string $value
      * @return string
      */
-    protected function camelCaseToSnakeCase(string $value)
+    public function camelCaseToSnakeCase(string $value)
     {
         [$pattern, $replacement] = $this->getPatternAndReplacement();
 
