@@ -131,6 +131,15 @@ class ApiSettings extends ConfigProvider
     }
 
     /**
+     * @deprecated 2.6.0
+     * @see \HawkSearch\Connector\Model\Config\ApiSettings::getDashboardApiUrl()
+     */
+    public function getApiUrl($store = null) : string
+    {
+        return $this->getDashboardApiUrl($store);
+    }
+
+    /**
      * Get Hawksearch Dashboard API URL
      *
      * @param null|int|string $store
