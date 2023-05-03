@@ -15,12 +15,12 @@ declare(strict_types=1);
 namespace HawkSearch\Connector\Gateway\Http;
 
 use HawkSearch\Connector\Gateway\Config\ApiConfigInterface;
-use HawkSearch\Connector\Gateway\Http\Adapter\Curl;
 use HawkSearch\Connector\Gateway\Http\Uri\UriBuilderFactory;
 use HawkSearch\Connector\Gateway\Http\Uri\UriBuilderInterface;
 use HawkSearch\Connector\Gateway\Request\BuilderInterface;
 use HawkSearch\Connector\Gateway\Request\BuilderInterfaceFactory;
 use HawkSearch\Connector\Model\ConnectionScopeResolver;
+use Laminas\Http\Client\Adapter\Curl;
 use Magento\Framework\App\RequestInterface;
 
 class TransferFactory implements TransferFactoryInterface
@@ -111,8 +111,7 @@ class TransferFactory implements TransferFactoryInterface
             ->setHeaders($this->headersBuilder->build([]))
             ->setBody($request)
             ->setClientConfig([
-                'adapter' => new Curl(),
-                'useragent' => $this->httpRequest->getHeader('UserAgent'),
+                'adapter' => Curl::class,
                 'timeout' => 45
             ])
             ->build();

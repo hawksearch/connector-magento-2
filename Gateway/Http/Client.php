@@ -16,12 +16,13 @@ namespace HawkSearch\Connector\Gateway\Http;
 
 use HawkSearch\Connector\Gateway\Logger\LoggerFactory;
 use HawkSearch\Connector\Gateway\Logger\LogInterface;
+use Laminas\Http\Exception\RuntimeException;
+use Laminas\Http\Request as HttpRequest;
 use Magento\Framework\Exception\NoSuchEntityException;
-use Magento\Framework\HTTP\Adapter\Curl;
-use Magento\Framework\HTTP\ZendClientFactory;
+use Magento\Framework\HTTP\LaminasClient;
+use Magento\Framework\HTTP\LaminasClientFactory;
 use Magento\Framework\Serialize\Serializer\Json;
 use Psr\Log\LoggerInterface;
-use Zend_Http_Client;
 
 class Client implements ClientInterface
 {
@@ -31,7 +32,7 @@ class Client implements ClientInterface
     private $logger;
 
     /**
-     * @var ZendClientFactory
+     * @var LaminasClientFactory
      */
     private $httpClientFactory;
 
@@ -52,7 +53,7 @@ class Client implements ClientInterface
 
     /**
      * @param LoggerInterface $logger
-     * @param ZendClientFactory $httpClientFactory
+     * @param LaminasClientFactory $httpClientFactory
      * @param Json $json
      * @param ConverterInterface $converter
      * @param LoggerFactory $loggerFactory
@@ -60,7 +61,7 @@ class Client implements ClientInterface
      */
     public function __construct(
         LoggerInterface $logger,
-        ZendClientFactory $httpClientFactory,
+        LaminasClientFactory $httpClientFactory,
         Json $json,
         ConverterInterface $converter,
         LoggerFactory $loggerFactory
@@ -86,10 +87,13 @@ class Client implements ClientInterface
             self::RESPONSE_DATA => ''
         ];
 
-        $client = $this->httpClientFactory->create([
-            'uri' => $transferObject->getUri(),
-            'config' => $transferObject->getClientConfig()
-        ]);
+        /** @var LaminasClient $client */
+        $client = $this->httpClientFactory->create(
+            [
+                'uri' => $transferObject->getUri(),
+                'options' => $transferObject->getClientConfig()
+            ]
+        );
 
         try {
             $client->setMethod($transferObject->getMethod());
@@ -105,30 +109,16 @@ class Client implements ClientInterface
                 $client->setHeaders($transferObject->getHeaders());
             }
 
-            $clientOptions = [];
-            if ($transferObject->getMethod() === Zend_Http_Client::GET) {
+            if ($transferObject->getMethod() === HttpRequest::METHOD_GET) {
                 $client->setParameterGet($requestBody);
             } else {
                 $requestBody = !empty($requestBody) ? $this->json->serialize($requestBody) : '';
-                $client->setRawData($requestBody);
-                $client->setHeaders(Zend_Http_Client::CONTENT_TYPE, 'application/json');
-
-                /**
-                 * Fix support of PATCH and DELETE requests for @see \Magento\Framework\HTTP\Adapter\Curl
-                 */
-                $clientOptions[CURLOPT_CUSTOMREQUEST] = $transferObject->getMethod();
-                if ($transferObject->getMethod() === Zend_Http_Client::PATCH
-                    || $transferObject->getMethod() === Zend_Http_Client::DELETE
-                ) {
-                    $clientOptions[CURLOPT_POSTFIELDS] = $this->json->serialize($requestBody);
-                }
+                $client->setRawBody($requestBody);
+                $client->setEncType('application/json');
             }
-            $client->setConfig($transferObject->getClientConfig());
-            if ($client->getAdapter() instanceof Curl) {
-                $client->getAdapter()->setOptions($clientOptions);
-            }
+            $client->setUrlEncodeBody(false);
 
-            $response = $client->request();
+            $response = $client->send();
             $responseBody = $response->getBody();
             $log = [
                 'request' => [
@@ -139,14 +129,14 @@ class Client implements ClientInterface
                 'headers' => $transferObject->getHeaders(),
                 'response' => [
                     'body' => $responseBody,
-                    'status' => $response->getStatus() . ' ' . $response->getMessage(),
+                    'status' => $response->getStatusCode() . ' ' . $response->getReasonPhrase(),
                 ]
             ];
 
             $responseData[self::RESPONSE_DATA] = $this->converter->convert($responseBody);
-            $responseData[self::RESPONSE_CODE] = $response->getStatus();
-            $responseData[self::RESPONSE_MESSAGE] = $response->getMessage();
-        } catch (\Zend_Http_Client_Exception $e) {
+            $responseData[self::RESPONSE_CODE] = $response->getStatusCode();
+            $responseData[self::RESPONSE_MESSAGE] = $response->getReasonPhrase();
+        } catch (RuntimeException $e) {
             $message = $e->getMessage();
             if ($e->getCode()) {
                 $message .= '; Adapter: ' . get_class($client->getAdapter()) . '; Error Code: ' . $e->getCode();
@@ -158,8 +148,7 @@ class Client implements ClientInterface
             $this->logger->critical($e);
             $log['error'] = $e->getMessage();
             $responseData[self::RESPONSE_MESSAGE] = $e->getMessage();
-        }
-        finally {
+        } finally {
             $this->gatewayLogger->debug($log);
         }
         return $responseData;
