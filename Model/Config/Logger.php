@@ -22,6 +22,7 @@ class Logger extends ConfigProvider
      * Configuration paths
      */
     const ENABLE_DEBUG = 'enable_debug';
+    const LOG_LEVEL = 'log_level';
     /**#@-*/
 
     /**
@@ -32,5 +33,16 @@ class Logger extends ConfigProvider
     public function isEnabled($store = null): bool
     {
         return !!$this->getConfig(self::ENABLE_DEBUG, $store);
+    }
+
+    /**
+     * Get log level
+     *
+     * @param null|int|string $store
+     * @return int
+     */
+    public function getLogLevel($store = null): int
+    {
+        return (int)$this->getConfig(self::LOG_LEVEL, $store);
     }
 }

@@ -184,6 +184,13 @@
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <comment>Enable it for debugging purposes only</comment>
                 </field>
+                <field id="log_level" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Log Level</label>
+                    <source_model>HawkSearch\Connector\Block\System\Config\Logger\LogeLevels</source_model>
+                    <depends>
+                        <field id="enable_debug">1</field>
+                    </depends>
+                </field>
             </group>
         </section>
     </system>

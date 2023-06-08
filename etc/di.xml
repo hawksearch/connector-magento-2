@@ -19,6 +19,13 @@
                 type="HawkSearch\Connector\Gateway\Config\SharedApiKeyConfig"/>
     <preference for="HawkSearch\Connector\Gateway\Validator\ResultInterface"
                 type="HawkSearch\Connector\Gateway\Validator\Result"/>
+    <preference for="HawkSearch\Connector\Gateway\Http\ClientInterface"
+                type="HawkSearch\Connector\Gateway\Http\Client"/>
+    <preference for="HawkSearch\Connector\Logger\LoggerConfigInterface"
+                type="HawkSearch\Connector\Logger\LoggerConfig"/>
+    <preference for="HawkSearch\Connector\Logger\LoggerFactoryInterface"
+                type="HawkSearch\Connector\Logger\LoggerFactory"/>
+
 
     <!-- Configs -->
     <type name="HawkSearch\Connector\Model\Config\ApiSettings">
@@ -81,6 +88,20 @@
     <type name="HawkSearch\Connector\Gateway\Logger\Log">
         <arguments>
             <argument name="logger" xsi:type="object">HawkSearch\Connector\Gateway\Logger\HawksearchGateway</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="HawkSearch\Connector\Logger\Logger" type="Magento\Framework\Logger\Monolog">
+        <arguments>
+            <argument name="name" xsi:type="string">hawksearch</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="debug" xsi:type="object">HawkSearch\Connector\Logger\Handler\Debug</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="HawkSearch\Connector\Logger\LoggerFactory">
+        <arguments>
+            <argument name="instanceName" xsi:type="string">HawkSearch\Connector\Logger\Logger</argument>
         </arguments>
     </type>
     <!-- Types -->
