@@ -14,8 +14,7 @@ declare(strict_types=1);
 
 namespace HawkSearch\Connector\Gateway\Http;
 
-use HawkSearch\Connector\Gateway\Logger\LoggerFactory;
-use HawkSearch\Connector\Gateway\Logger\LogInterface;
+use HawkSearch\Connector\Logger\LoggerFactory;
 use Laminas\Http\Exception\RuntimeException;
 use Laminas\Http\Request as HttpRequest;
 use Magento\Framework\Exception\NoSuchEntityException;
@@ -47,12 +46,6 @@ class Client implements ClientInterface
     private $converter;
 
     /**
-     * @var LogInterface
-     */
-    private $gatewayLogger;
-
-    /**
-     * @param LoggerInterface $logger
      * @param LaminasClientFactory $httpClientFactory
      * @param Json $json
      * @param ConverterInterface $converter
@@ -60,17 +53,15 @@ class Client implements ClientInterface
      * @throws NoSuchEntityException
      */
     public function __construct(
-        LoggerInterface $logger,
         LaminasClientFactory $httpClientFactory,
         Json $json,
         ConverterInterface $converter,
         LoggerFactory $loggerFactory
     ) {
         $this->httpClientFactory = $httpClientFactory;
-        $this->logger = $logger;
         $this->json = $json;
         $this->converter = $converter;
-        $this->gatewayLogger = $loggerFactory->create();
+        $this->logger = $loggerFactory->create();
     }
 
     /**
@@ -119,21 +110,8 @@ class Client implements ClientInterface
             $client->setUrlEncodeBody(false);
 
             $response = $client->send();
-            $responseBody = $response->getBody();
-            $log = [
-                'request' => [
-                    'uri' => $transferObject->getUri(),
-                    'body' => $requestBody,
-                    'method' => $transferObject->getMethod(),
-                ],
-                'headers' => $transferObject->getHeaders(),
-                'response' => [
-                    'body' => $responseBody,
-                    'status' => $response->getStatusCode() . ' ' . $response->getReasonPhrase(),
-                ]
-            ];
 
-            $responseData[self::RESPONSE_DATA] = $this->converter->convert($responseBody);
+            $responseData[self::RESPONSE_DATA] = $this->converter->convert($response->getBody());
             $responseData[self::RESPONSE_CODE] = $response->getStatusCode();
             $responseData[self::RESPONSE_MESSAGE] = $response->getReasonPhrase();
         } catch (RuntimeException $e) {
@@ -142,15 +120,31 @@ class Client implements ClientInterface
                 $message .= '; Adapter: ' . get_class($client->getAdapter()) . '; Error Code: ' . $e->getCode();
             }
             $this->logger->critical($e);
-            $log['error'] = $message;
             $responseData[self::RESPONSE_MESSAGE] = $message;
         } catch (\Exception $e) {
             $this->logger->critical($e);
-            $log['error'] = $e->getMessage();
             $responseData[self::RESPONSE_MESSAGE] = $e->getMessage();
         } finally {
-            $this->gatewayLogger->debug($log);
+            $this->logger->info(
+                'Api Client Request:',
+                array(
+                    'method'    => $transferObject->getMethod(),
+                    'uri'       => $transferObject->getUri(),
+                    'headers'   => $transferObject->getHeaders(),
+                )
+            );
+            $this->logger->debug('Request Body:', [$requestBody]);
+
+            $this->logger->info(
+                'Api Client Response:',
+                array(
+                    'status'    => $responseData[self::RESPONSE_CODE],
+                    'message'    => $responseData[self::RESPONSE_MESSAGE],
+                )
+            );
+            $this->logger->debug('Response Body:', $responseData[self::RESPONSE_DATA]);
         }
+
         return $responseData;
     }
 }

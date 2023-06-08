@@ -10,21 +10,14 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+declare(strict_types=1);
 
-namespace HawkSearch\Connector\Gateway\Logger;
+namespace HawkSearch\Connector\Logger\Handler;
 
-use Exception;
-
-/**
- * Interface for debugging messages in array
- */
-interface LogInterface
+class Debug extends \Magento\Framework\Logger\Handler\Debug
 {
     /**
-     * Logs API gateway debug message
-     *
-     * @param array $data
-     * @return void
+     * @var string
      */
-    public function debug(array $data);
+    protected $fileName = '/var/log/hawksearch_debug.log';
 }
