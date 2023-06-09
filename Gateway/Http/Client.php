@@ -18,8 +18,8 @@ use HawkSearch\Connector\Logger\LoggerFactory;
 use Laminas\Http\Exception\RuntimeException;
 use Laminas\Http\Request as HttpRequest;
 use Magento\Framework\Exception\NoSuchEntityException;
-use Magento\Framework\HTTP\LaminasClient;
-use Magento\Framework\HTTP\LaminasClientFactory;
+use Laminas\Http\Client as LaminasClient;
+use Laminas\Http\ClientFactory as LaminasClientFactory;
 use Magento\Framework\Serialize\Serializer\Json;
 use Psr\Log\LoggerInterface;
 
@@ -107,7 +107,6 @@ class Client implements ClientInterface
                 $client->setRawBody($requestBody);
                 $client->setEncType('application/json');
             }
-            $client->setUrlEncodeBody(false);
 
             $response = $client->send();
 
