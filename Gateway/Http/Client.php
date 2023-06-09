@@ -132,7 +132,7 @@ class Client implements ClientInterface
                     'headers'   => $transferObject->getHeaders(),
                 )
             );
-            $this->logger->debug('Request Body:', [$requestBody]);
+            $this->logger->debug('Request Body:', (array)$requestBody);
 
             $this->logger->info(
                 'Api Client Response:',
@@ -141,7 +141,7 @@ class Client implements ClientInterface
                     'message'    => $responseData[self::RESPONSE_MESSAGE],
                 )
             );
-            $this->logger->debug('Response Body:', $responseData[self::RESPONSE_DATA]);
+            $this->logger->debug('Response Body:', (array)$responseData[self::RESPONSE_DATA]);
         }
 
         return $responseData;
