@@ -14,8 +14,7 @@ declare(strict_types=1);
 
 namespace HawkSearch\Connector\Gateway\Http;
 
-use HawkSearch\Connector\Gateway\Logger\LoggerFactory;
-use HawkSearch\Connector\Gateway\Logger\LogInterface;
+use HawkSearch\Connector\Logger\LoggerFactory;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\HTTP\Adapter\Curl;
 use Magento\Framework\HTTP\ZendClientFactory;
@@ -46,12 +45,6 @@ class Client implements ClientInterface
     private $converter;
 
     /**
-     * @var LogInterface
-     */
-    private $gatewayLogger;
-
-    /**
-     * @param LoggerInterface $logger
      * @param ZendClientFactory $httpClientFactory
      * @param Json $json
      * @param ConverterInterface $converter
@@ -59,17 +52,15 @@ class Client implements ClientInterface
      * @throws NoSuchEntityException
      */
     public function __construct(
-        LoggerInterface $logger,
         ZendClientFactory $httpClientFactory,
         Json $json,
         ConverterInterface $converter,
         LoggerFactory $loggerFactory
     ) {
         $this->httpClientFactory = $httpClientFactory;
-        $this->logger = $logger;
         $this->json = $json;
         $this->converter = $converter;
-        $this->gatewayLogger = $loggerFactory->create();
+        $this->logger = $loggerFactory->create();
     }
 
     /**
@@ -129,21 +120,8 @@ class Client implements ClientInterface
             }
 
             $response = $client->request();
-            $responseBody = $response->getBody();
-            $log = [
-                'request' => [
-                    'uri' => $transferObject->getUri(),
-                    'body' => $requestBody,
-                    'method' => $transferObject->getMethod(),
-                ],
-                'headers' => $transferObject->getHeaders(),
-                'response' => [
-                    'body' => $responseBody,
-                    'status' => $response->getStatus() . ' ' . $response->getMessage(),
-                ]
-            ];
 
-            $responseData[self::RESPONSE_DATA] = $this->converter->convert($responseBody);
+            $responseData[self::RESPONSE_DATA] = $this->converter->convert($response->getBody());
             $responseData[self::RESPONSE_CODE] = $response->getStatus();
             $responseData[self::RESPONSE_MESSAGE] = $response->getMessage();
         } catch (\Zend_Http_Client_Exception $e) {
@@ -152,16 +130,31 @@ class Client implements ClientInterface
                 $message .= '; Adapter: ' . get_class($client->getAdapter()) . '; Error Code: ' . $e->getCode();
             }
             $this->logger->critical($e);
-            $log['error'] = $message;
             $responseData[self::RESPONSE_MESSAGE] = $message;
         } catch (\Exception $e) {
             $this->logger->critical($e);
-            $log['error'] = $e->getMessage();
             $responseData[self::RESPONSE_MESSAGE] = $e->getMessage();
+        } finally {
+            $this->logger->info(
+                'Api Client Request:',
+                array(
+                    'method'    => $transferObject->getMethod(),
+                    'uri'       => $transferObject->getUri(),
+                    'headers'   => $transferObject->getHeaders(),
+                )
+            );
+            $this->logger->debug('Request Body:', (array)$requestBody);
+
+            $this->logger->info(
+                'Api Client Response:',
+                array(
+                    'status'    => $responseData[self::RESPONSE_CODE],
+                    'message'    => $responseData[self::RESPONSE_MESSAGE],
+                )
+            );
+            $this->logger->debug('Response Body:', (array)$responseData[self::RESPONSE_DATA]);
         }
-        finally {
-            $this->gatewayLogger->debug($log);
-        }
+
         return $responseData;
     }
 }
