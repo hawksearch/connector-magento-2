@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.6.2] - 2023-06-16
+### FEATURES
+- feat: improve log handling ([8e58fa1](https://github.com/hawksearch/connector/commit/8e58fa1ecc69773dd7b74d7d4c64f10d5a52ec0a))
+  - Combine all Hawksearch log records into single file
+    /var/log/hawksearch_debug.log
+  - Add Log Level configuration setting to control an amount of data
+    is written to log files
+  - Use StreamHandler to avoid memory limit issues
+  - cherry-pick commit ([33dd922](https://github.com/hawksearch/connector/commit/33dd9227f90097e8c6e5a0f09dbd99cdadce8fed))
+  - Refs: [#HC-1437](https://bridgeline.atlassian.net/browse/HC-1437)
+
+### FIXES
+- fix: type error when logging response ([d35e67b](https://github.com/hawksearch/connector/commit/d35e67b93ac52dad93516914386289926c1f93d5))
+  - cherry-pick commit ([1ed363a](https://github.com/hawksearch/connector/commit/1ed363aa39d401bee301c9e420cea4a53f121bf8))
+  - Refs:[#HC-1437](https://bridgeline.atlassian.net/browse/HC-1437)
+
 ## [2.6.1] - 2023-05-05
 ### ADDED
 - Add ConnectionScopeResolver interface to resolver current configuration scope on admin system configuration pages ([#8](https://github.com/hawksearch/connector-magento-2/pull/8))
@@ -33,5 +49,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix traling slash issue in builcding API urls (#HC-1279)
 
 
-[Unreleased]: https://github.com/hawksearch/connector-magento-2/compare/v2.6.1...HEAD
+[Unreleased]: https://github.com/hawksearch/connector-magento-2/compare/v2.7.0...HEAD
 [2.6.1]: https://github.com/hawksearch/esindexing-magento-2/compare/v2.6.0...v2.6.1
+[2.6.2]: https://github.com/hawksearch/esindexing-magento-2/compare/v2.6.1...v2.6.2
