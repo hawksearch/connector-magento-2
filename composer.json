@@ -1,23 +1,23 @@
 {
-  "name": "hawksearch/connector",
-  "type": "magento2-module",
-  "description": "Hawksearch Connector module for Magento 2",
-  "version": "2.6.2",
-  "license": [
-    "OSL-3.0",
-    "AFL-3.0"
-  ],
-  "require": {
-    "php": "^7.2|^7.3|^7.4|^8.0",
-    "magento/magento2-base": "^2.3.5|2.4.*",
-    "magento/magento-composer-installer": "*"
-  },
-  "autoload": {
-    "psr-4": {
-      "HawkSearch\\Connector\\": ""
+    "name": "hawksearch/connector",
+    "type": "magento2-module",
+    "description": "Hawksearch Connector module for Magento 2",
+    "version": "2.6.2",
+    "license": [
+        "OSL-3.0",
+        "AFL-3.0"
+    ],
+    "require": {
+        "php": "^7.2|~8.0.0|~8.1.0|~8.2.0",
+        "magento/framework": "^102.0.5|^103.0",
+        "magento/magento-composer-installer": "*"
     },
-    "files": [
-      "registration.php"
-    ]
-  }
+    "autoload": {
+        "psr-4": {
+            "HawkSearch\\Connector\\": ""
+        },
+        "files": [
+            "registration.php"
+        ]
+    }
 }
