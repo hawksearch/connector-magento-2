@@ -44,7 +44,6 @@
     <type name="HawkSearch\Connector\Gateway\Http\Client">
         <arguments>
             <argument name="converter" xsi:type="object">HawkSearch\Connector\Gateway\Http\Converter\JsonToArray</argument>
-            <argument name="httpClientFactory" xsi:type="object">HawkSearch\Connector\Gateway\Http\ZendClientFactory</argument>
         </arguments>
     </type>
 
@@ -66,12 +65,6 @@
             <argument name="apiConfig" xsi:type="object">HawkSearch\Connector\Gateway\Config\DashboardApiConfig</argument>
         </arguments>
     </type>
-
-    <virtualType name="HawkSearch\Connector\Gateway\Http\ZendClientFactory" type="Magento\Framework\HTTP\ZendClientFactory">
-        <arguments>
-            <argument name="instanceName" xsi:type="string">HawkSearch\Connector\Gateway\Http\Client\ZendClient</argument>
-        </arguments>
-    </virtualType>
 
     <virtualType name="HawkSearch\Connector\Gateway\Logger\Handler\Base" type="Magento\Framework\Logger\Handler\Base">
         <arguments>
@@ -124,7 +117,6 @@
         <arguments>
             <argument name="requestBuilder" xsi:type="object">HawkSearch\Connector\Gateway\Request\BuilderComposite</argument>
             <argument name="transferFactory" xsi:type="object">HawkSearchGetFieldsTransferFactory</argument>
-            <argument name="client" xsi:type="object">HawkSearch\Connector\Gateway\Http\Client</argument>
             <argument name="handler" xsi:type="object">HawkSearchGetFieldsHandler</argument>
         </arguments>
     </virtualType>
@@ -148,7 +140,6 @@
         <arguments>
             <argument name="requestBuilder" xsi:type="object">HawkSearchPostFieldRequestBuilder</argument>
             <argument name="transferFactory" xsi:type="object">HawkSearchPostFieldTransferFactory</argument>
-            <argument name="client" xsi:type="object">HawkSearch\Connector\Gateway\Http\Client</argument>
             <argument name="handler" xsi:type="object">HawkSearchPostFieldHandler</argument>
         </arguments>
     </virtualType>
@@ -180,7 +171,6 @@
         <arguments>
             <argument name="requestBuilder" xsi:type="object">HawkSearch\Connector\Gateway\Request\BuilderComposite</argument>
             <argument name="transferFactory" xsi:type="object">HawkSearchTriggerReindexTransferFactory</argument>
-            <argument name="client" xsi:type="object">HawkSearch\Connector\Gateway\Http\Client</argument>
         </arguments>
     </virtualType>
     <virtualType name="HawkSearchTriggerReindexTransferFactory" type="HawkSearch\Connector\Gateway\Http\DashboardApiTransferFactory">
