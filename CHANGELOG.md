@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.7.0] - 2023-07-07
+
+### FEATURES
+
+- update version constraints in composer.json to support PHP 8.2 and Magento 2.4.6 ([6e49905](https://github.com/hawksearch/connector-magento-2/commit/6e49905a5cc64a24810ee425913e5c8fbe34f1ac))
+
+### FIXES
+
+- use Laminas\Http\Client to support Magento < 2.4.6 ([5c7a451](https://github.com/hawksearch/connector-magento-2/commit/5c7a451f0f0b8d4b9e036bb68832585874264774))
+  Replace Magento\Framework\HTTP\LaminasClient with Laminas\Http\Client
+- replace Zend_HTTP with laminas-http ([5bf4d7d](https://github.com/hawksearch/connector-magento-2/commit/5bf4d7d14ee563e9bf329bed5dd287c26a73d406))
+  Zend framework (ZF1) components that have reached end of life have been removed from the codebase
+
 ## [2.6.2] - 2023-06-16
 ### FEATURES
 - feat: improve log handling ([8e58fa1](https://github.com/hawksearch/connector/commit/8e58fa1ecc69773dd7b74d7d4c64f10d5a52ec0a))
@@ -50,5 +63,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 [Unreleased]: https://github.com/hawksearch/connector-magento-2/compare/v2.7.0...HEAD
-[2.6.1]: https://github.com/hawksearch/esindexing-magento-2/compare/v2.6.0...v2.6.1
-[2.6.2]: https://github.com/hawksearch/esindexing-magento-2/compare/v2.6.1...v2.6.2
+[2.7.0]: https://github.com/hawksearch/connector-magento-2/compare/v2.6.2...v2.7.0
+[2.6.2]: https://github.com/hawksearch/connector-magento-2/compare/v2.6.1...v2.6.2
+[2.6.1]: https://github.com/hawksearch/connector-magento-2/compare/v2.6.0...v2.6.1
