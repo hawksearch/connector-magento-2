@@ -1,2 +1,1 @@
-# HawkSearch 
-## Connector module for Magento 2
+# HawkSearch API Connector module for Magento Open Source and Adobe Commerce
