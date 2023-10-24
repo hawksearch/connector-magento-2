@@ -69,7 +69,7 @@ class ConfigProvider implements ConfigProviderInterface
      * @param string $path Absolute path
      * @return string
      */
-    private function getPath($path)
+    public function getPath($path)
     {
         return $this->configRootPath . '/' . $this->configGroup . '/' . $path;
     }
@@ -77,7 +77,7 @@ class ConfigProvider implements ConfigProviderInterface
     /**
      * @inheritDoc
      */
-    public function getConfig(string $path, $scopeId = null, $scope = ScopeInterface::SCOPE_STORE)
+    public function getConfig(string $path, $scopeId = null, $scope = ScopeInterface::SCOPE_STORES)
     {
         return $this->scopeConfig->getValue(
             $this->getPath($path),
