@@ -5,7 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [2.8.0] - 2024-01-18
+
+### FEATURES
+
+* __feat: update ConfigProvider default params and method visibility__ ([#20](https://github.com/hawksearch/connector-magento-2/pull/20))
+
+  Refs: HC-1449
+### FIXES
+
+* __fix: add missing ACL for Connection Settings section__ ([#19](https://github.com/hawksearch/connector-magento-2/pull/19))
+
+  Refs: HC-1357 
 
 ## [2.7.0] - 2023-07-07
 
@@ -62,7 +73,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix traling slash issue in builcding API urls (#HC-1279)
 
 
-[Unreleased]: https://github.com/hawksearch/connector-magento-2/compare/v2.7.0...HEAD
+[Unreleased]: https://github.com/hawksearch/connector-magento-2/compare/v2.8.0...HEAD
+[2.8.0]: https://github.com/hawksearch/connector-magento-2/compare/v2.7.0...v2.8.0
 [2.7.0]: https://github.com/hawksearch/connector-magento-2/compare/v2.6.2...v2.7.0
 [2.6.2]: https://github.com/hawksearch/connector-magento-2/compare/v2.6.1...v2.6.2
 [2.6.1]: https://github.com/hawksearch/connector-magento-2/compare/v2.6.0...v2.6.1

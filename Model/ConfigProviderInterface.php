@@ -27,5 +27,5 @@ interface ConfigProviderInterface
      * @param string $scope
      * @return mixed
      */
-    public function getConfig(string $path, $scopeId = null, $scope = ScopeInterface::SCOPE_STORE);
+    public function getConfig(string $path, $scopeId = null, $scope = ScopeInterface::SCOPE_STORES);
 }
