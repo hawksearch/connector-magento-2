@@ -108,22 +108,6 @@ class Client implements ClientInterface
                 $client->setEncType('application/json');
             }
 
-            $response = $client->send();
-
-            $responseData[self::RESPONSE_DATA] = $this->converter->convert($response->getBody());
-            $responseData[self::RESPONSE_CODE] = $response->getStatusCode();
-            $responseData[self::RESPONSE_MESSAGE] = $response->getReasonPhrase();
-        } catch (RuntimeException $e) {
-            $message = $e->getMessage();
-            if ($e->getCode()) {
-                $message .= '; Adapter: ' . get_class($client->getAdapter()) . '; Error Code: ' . $e->getCode();
-            }
-            $this->logger->critical($e);
-            $responseData[self::RESPONSE_MESSAGE] = $message;
-        } catch (\Exception $e) {
-            $this->logger->critical($e);
-            $responseData[self::RESPONSE_MESSAGE] = $e->getMessage();
-        } finally {
             $this->logger->info(
                 'Api Client Request:',
                 array(
@@ -134,6 +118,12 @@ class Client implements ClientInterface
             );
             $this->logger->debug('Request Body:', (array)$requestBody);
 
+            $response = $client->send();
+
+            $responseData[self::RESPONSE_DATA] = $this->converter->convert($response->getBody());
+            $responseData[self::RESPONSE_CODE] = $response->getStatusCode();
+            $responseData[self::RESPONSE_MESSAGE] = $response->getReasonPhrase();
+
             $this->logger->info(
                 'Api Client Response:',
                 array(
@@ -142,6 +132,16 @@ class Client implements ClientInterface
                 )
             );
             $this->logger->debug('Response Body:', (array)$responseData[self::RESPONSE_DATA]);
+        } catch (RuntimeException $e) {
+            $message = $e->getMessage();
+            if ($e->getCode()) {
+                $message .= '; Adapter: ' . get_class($client->getAdapter()) . '; Error Code: ' . $e->getCode();
+            }
+            $this->logger->critical($e);
+            $responseData[self::RESPONSE_MESSAGE] = $message;
+        } catch (\Exception $e) {
+            $this->logger->critical($e);
+            $responseData[self::RESPONSE_MESSAGE] = $e->getMessage();
         }
 
         return $responseData;

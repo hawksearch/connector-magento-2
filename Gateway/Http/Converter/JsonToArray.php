@@ -42,7 +42,7 @@ class JsonToArray implements ConverterInterface
     public function convert($response)
     {
         if (!is_string($response)) {
-            throw new \InvalidArgumentException(__('The response type is incorrect. Verify the type and try again.'));
+            throw new \InvalidArgumentException(__('The response type is incorrect. Verify the type and try again.')->render());
         }
 
         if ($response === '') {
