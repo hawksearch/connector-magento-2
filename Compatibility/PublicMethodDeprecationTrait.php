@@ -14,10 +14,11 @@ declare(strict_types=1);
 
 namespace HawkSearch\Connector\Compatibility;
 
-use Magento\Framework\App\ObjectManager;
+use ReflectionException;
 
 /**
  * Trait helps to trigger a deprecation error for public methods of classes.
+ * Starting PHP 8.1 it also works for deprecating protected methods as well.
  *
  * Usage:
  * - Use this treat for classes which require one or more public methods to be deprecated because of changing method
@@ -98,20 +99,106 @@ trait PublicMethodDeprecationTrait
     }
 
     /**
-     * Trigger a deprecation message.
+     * Trigger a deprecation message for a deprecated method.
      * This method can be triggered from a class public methods which are a part of public contracts
      *
      * @param string $methodName
      * @return void
      */
-    protected function triggerPublicMethodDeprecationMessage(string $methodName)
+    private function triggerPublicMethodDeprecationMessage(string $methodName)
+    {
+        $message = $this->buildMethodDeprecationMessage(
+            $methodName,
+            [
+                DeprecatedMessageInterface::TEMPLATE_PUBLIC_METHOD_MAIN_PART,
+                [__CLASS__ . '::' . $methodName . '()']
+            ]
+        );
+
+        DeprecationUtility::getMessageTrigger()->execute($message);
+    }
+
+    /**
+     * Trigger a deprecation message for a derived method when the base class method is deprecated.
+     * Usually it is called from inside a base class in the point where base method is called.
+     * Base method should be added to $deprecatedMethods class property.
+     *
+     * Example:
+     * public function main()
+     * {
+     *      if ($this->isMethodOverwritten('deprecatedMethodName')) {
+     *          $this->triggerDerivedMethodDeprecationMessage('deprecatedMethodName');
+     *          $value = $this->deprecatedMethodName();
+     *      } else {
+     *          $value = $this->newMethodName();
+     *      }
+     * }
+     *
+     * protected function deprecatedMethodName()
+     * {
+     *      $this->triggerPublicMethodDeprecationMessage(__FUNCTION__);
+     *      return $this->newMethodName();
+     * }
+     *
+     * @param string $methodName
+     * @return void
+     */
+    private function triggerDerivedMethodDeprecationMessage(string $methodName)
+    {
+        $message = $this->buildMethodDeprecationMessage(
+            $methodName,
+            [
+                DeprecatedMessageInterface::TEMPLATE_DERIVED_METHOD_MAIN_PART,
+                [get_class($this) . '::' . $methodName . '()']
+            ]
+        );
+
+        DeprecationUtility::getMessageTrigger()->execute($message);
+    }
+
+    /**
+     * Trigger a deprecation message for a new method and propagate  method usage.
+     * Usually it is called from a caller method where new method is called.
+     * New method should be added to $deprecatedMethods class property.
+     *
+     *  Example:
+     *  public function main()
+     *  {
+     *       if (method_exists($this, 'newMethodName')) {
+     *           $this->newMethodName();
+     *       } else {
+     *           $this->triggerNewMethodPropagationDeprecationMessage('newMethodName');
+     *       }
+     *  }
+     *
+     * @param string $methodName
+     * @return void
+     */
+    private function triggerNewMethodPropagationDeprecationMessage(string $methodName)
+    {
+        $message = $this->buildMethodDeprecationMessage(
+            $methodName,
+            [
+                DeprecatedMessageInterface::TEMPLATE_NEW_METHOD_MAIN_PART,
+                [__CLASS__, $methodName]
+            ]
+        );
+
+        DeprecationUtility::getMessageTrigger()->execute($message);
+    }
+
+    /**
+     * Build method deprecation message
+     *
+     * @param string $methodName
+     * @param array $mainPartArgs
+     * @return string
+     */
+    private function buildMethodDeprecationMessage(string $methodName, array $mainPartArgs): string
     {
         $messageBuilder = DeprecationUtility::getMessageBuilder();
         if (isset($this->deprecatedMethods[$methodName])) {
-            $messageBuilder->setMainPart(
-                DeprecatedMessageInterface::TEMPLATE_PUBLIC_METHOD_MAIN_PART,
-                [__CLASS__ . '::' . $methodName . '()']
-            );
+            $messageBuilder->setMainPart(...$mainPartArgs);
         }
 
         if (isset($this->deprecatedMethods[$methodName]['since'])) {
@@ -134,6 +221,17 @@ trait PublicMethodDeprecationTrait
             );
         }
 
-        DeprecationUtility::getMessageTrigger()->execute($messageBuilder->build());
+        return $messageBuilder->build();
+    }
+
+    /**
+     * @param string $methodName
+     * @return bool
+     * @throws ReflectionException
+     */
+    private function isMethodOverwritten(string $methodName): bool
+    {
+        $reflector = new \ReflectionMethod($this, $methodName);
+        return $reflector->getDeclaringClass()->getName() !== self::class;
     }
 }
