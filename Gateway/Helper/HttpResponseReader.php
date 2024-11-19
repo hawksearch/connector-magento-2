@@ -17,6 +17,10 @@ namespace HawkSearch\Connector\Gateway\Helper;
 
 use HawkSearch\Connector\Gateway\Http\ClientInterface;
 
+/**
+ * @api
+ * @since 2.11
+ */
 class HttpResponseReader
 {
     /**

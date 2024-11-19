@@ -5,6 +5,35 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### API CHANGES
+#### Interfaces
+The following interfaces in `\HawkSearch\Connector` namespace are defined as `@api`:
+- Gateway\Config\ApiConfigInterface
+- Gateway\Http\ConverterInterface
+- Gateway\Http\Uri\UriBuilderInterface
+- Gateway\Http\Instruction\InstructionManagerInterface
+- Gateway\Http\Instruction\InstructionManagerPoolInterface
+
+#### Classes
+The following classes in `\HawkSearch\Connector` namespace are defined as `@api`:
+- Block\System\Config\Logger\LogeLevels
+- Gateway\Helper\HttpResponseReader
+- Gateway\Helper\SubjectReader
+- Gateway\Http\JsonToArray
+- Gateway\Http\Instruction\InstructionManager
+- Gateway\Http\Instruction\InstructionManagerPool
+- Gateway\Instruction\Result\ArrayResult
+- Gateway\Instruction\Result\DefaultResult
+- Gateway\Request\BuilderComposite
+- Gateway\Request\StrictDataBuilder
+- Gateway\Response\HandlerChain
+- Gateway\Validator\ValidatorComposite
+- Helper\Url
+
+
+
 ## [2.10.0] - 2024-07-02
 ## FEATURES
 * feat: add deprecation message utility classes  ([#22](https://github.com/hawksearch/connector-magento-2/pull/22), [#23](https://github.com/hawksearch/connector-magento-2/pull/23))

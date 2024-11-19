@@ -14,6 +14,8 @@ namespace HawkSearch\Connector\Gateway\Http;
 
 /**
  * Interface ConverterInterface
+ * @api
+ * @since 2.11
  */
 interface ConverterInterface
 {

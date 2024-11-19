@@ -17,6 +17,10 @@ namespace HawkSearch\Connector\Gateway\Instruction\Result;
 use HawkSearch\Connector\Gateway\Helper\HttpResponseReader;
 use HawkSearch\Connector\Gateway\Instruction\ResultInterface;
 
+/**
+ * @api
+ * @since 2.11
+ */
 class ArrayResult implements ResultInterface
 {
     /**

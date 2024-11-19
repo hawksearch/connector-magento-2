@@ -15,6 +15,10 @@ declare(strict_types=1);
 
 namespace HawkSearch\Connector\Gateway\Helper;
 
+/**
+ * @api
+ * @since 2.11
+ */
 class SubjectReader
 {
     /**

@@ -16,6 +16,10 @@ namespace HawkSearch\Connector\Logger;
 
 use Psr\Log\LoggerInterface;
 
+/**
+ * @api
+ * @since 2.11
+ */
 interface LoggerFactoryInterface
 {
     /**

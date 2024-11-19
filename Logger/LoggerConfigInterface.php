@@ -16,6 +16,10 @@ namespace HawkSearch\Connector\Logger;
 
 use Monolog\Logger;
 
+/**
+ * @api
+ * @since 2.11
+ */
 interface LoggerConfigInterface
 {
     const DEFAULT_LOG_LEVEL = Logger::DEBUG;

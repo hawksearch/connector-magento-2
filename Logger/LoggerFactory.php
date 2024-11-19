@@ -21,9 +21,9 @@ use Monolog\Logger as MonologLogger;
 use Psr\Log\NullLogger;
 
 /**
- * Factory produces logger based on runtime configuration.
- *
- * phpcs:disable MEQP2.Classes.ObjectManager
+ * Factory produces logger based on configuration.
+ * @api
+ * @since 2.11
  */
 class LoggerFactory implements LoggerFactoryInterface
 {
