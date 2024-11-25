@@ -16,6 +16,9 @@ namespace HawkSearch\Connector\Logger;
 
 use HawkSearch\Connector\Model\Config\Logger as LoggerXmlConfig;
 
+/**
+ * @phpstan-import-type Level from \Monolog\Logger as MonologLoggerLevel
+ */
 class LoggerConfig implements LoggerConfigInterface
 {
     /**
@@ -24,7 +27,7 @@ class LoggerConfig implements LoggerConfigInterface
     private $loggerXmlConfig;
 
     /**
-     * @var string
+     * @var MonologLoggerLevel
      */
     private $logLevel;
 
@@ -61,7 +64,7 @@ class LoggerConfig implements LoggerConfigInterface
     /**
      * @inheritdoc
      */
-    public function setLogLevel($level)
+    public function setLogLevel(int $level)
     {
         $this->logLevel = $level;
         return $this;

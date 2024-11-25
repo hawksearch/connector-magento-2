@@ -71,7 +71,11 @@ use ReflectionException;
  *      }
  * }
  *
- * @property array $deprecatedMethods List of deprecated public methods
+ * @property array<string, array{
+ *          since: string,
+ *          replacement: string,
+ *          description: string
+ * }> $deprecatedMethods List of deprecated public methods
  * @internal
  */
 trait PublicMethodDeprecationTrait
@@ -81,7 +85,7 @@ trait PublicMethodDeprecationTrait
      * If method isn't callable it throws a fatal error.
      *
      * @param string $methodName
-     * @param array $arguments
+     * @param mixed[] $arguments
      * @return mixed
      */
     public function __call(string $methodName, array $arguments)
@@ -191,7 +195,7 @@ trait PublicMethodDeprecationTrait
      * Build method deprecation message
      *
      * @param string $methodName
-     * @param array $mainPartArgs
+     * @param mixed[] $mainPartArgs
      * @return string
      */
     private function buildMethodDeprecationMessage(string $methodName, array $mainPartArgs): string

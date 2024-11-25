@@ -22,7 +22,7 @@ class DataObjectHelper
 {
     /**
      * Recursively converts associative array's key names from camelCase to snake_case.
-     * @param array $data
+     * @param array<array-key, mixed> $data
      * @return array
      */
     public function convertArrayToSnakeCase(array $data)

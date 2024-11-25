@@ -53,7 +53,7 @@ class LoggerFactory implements LoggerFactoryInterface
     public function __construct(
         ObjectManagerInterface $objectManager,
         LoggerConfigInterface $loggerConfig,
-        $instanceName = '\\Psr\\Log\\LoggerInterface'
+        string $instanceName = '\\Psr\\Log\\LoggerInterface'
     ) {
         $this->objectManager = $objectManager;
         $this->loggerConfig = $loggerConfig;

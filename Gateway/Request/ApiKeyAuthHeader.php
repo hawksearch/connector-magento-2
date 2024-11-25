@@ -43,10 +43,6 @@ class ApiKeyAuthHeader implements BuilderInterface
         $this->connectionScopeResolver = $connectionScopeResolver;
     }
 
-    /**
-     * @param array $buildSubject
-     * @return array
-     */
     public function build(array $buildSubject)
     {
         return [

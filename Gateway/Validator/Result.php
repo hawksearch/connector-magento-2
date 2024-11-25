@@ -22,26 +22,26 @@ class Result implements ResultInterface
     private $isValid;
 
     /**
-     * @var Phrase[]
+     * @var list<string|\Stringable>
      */
     private $failsDescription;
 
     /**
-     * @var string[]
+     * @var list<int>
      */
     private $errorCodes;
 
     /**
      * @param bool $isValid
-     * @param array $failsDescription
-     * @param array $errorCodes
+     * @param list<string|\Stringable> $failsDescription
+     * @param list<int> $errorCodes
      */
     public function __construct(
-        $isValid,
+        bool $isValid,
         array $failsDescription = [],
         array $errorCodes = []
     ) {
-        $this->isValid = (bool)$isValid;
+        $this->isValid = $isValid;
         $this->failsDescription = $failsDescription;
         $this->errorCodes = $errorCodes;
     }

@@ -21,7 +21,7 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
 {
     /**
      * HawkSearchField constructor.
-     * @param array $data
+     * @param array<string, mixed> $data
      */
     public function __construct(
         array $data = [
@@ -670,10 +670,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
         return $this->getData(static::ITERATIONS);
     }
 
-    /**
-     * @param array $value
-     * @return $this
-     */
     public function setIterations(array $value)
     {
         return $this->setData(static::ITERATIONS, $value);

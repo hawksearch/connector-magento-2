@@ -71,5 +71,6 @@ class ApiUrlConfigPatch implements DataPatchInterface
     public function apply()
     {
         $this->patcher->renamePath($this->directivesToRename);
+        return $this;
     }
 }
