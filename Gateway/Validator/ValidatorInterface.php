@@ -17,14 +17,19 @@ namespace HawkSearch\Connector\Gateway\Validator;
 /**
  * Interface ValidatorInterface
  * @api
+ *
+ * @phpstan-type ValidationSubject array<string, mixed>
  */
 interface ValidatorInterface
 {
     /**
      * Performs domain-related validation for business object
      *
-     * @param array $validationSubject
+     * @param ValidationSubject $validationSubject
      * @return ResultInterface
+     * @todo change signature to validate(\HawkSearch\Connector\Gateway\Http\TransferInterface $transfer, HttpResultInterface $result)
+     * @see \HawkSearch\Connector\Gateway\Instruction\ResultInterface
+     * @see \HawkSearch\Connector\Gateway\Http\TransferInterface
      */
     public function validate(array $validationSubject);
 }

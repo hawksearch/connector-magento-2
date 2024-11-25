@@ -19,16 +19,18 @@ use HawkSearch\Connector\Gateway\Instruction\ResultInterface;
 /**
  * @api
  * @since 2.11
+ *
+ * @phpstan-import-type HttpResult from ResultInterface
  */
 class DefaultResult implements ResultInterface
 {
     /**
-     * @var mixed
+     * @var HttpResult
      */
     private $result;
 
     /**
-     * @param mixed $result
+     * @param HttpResult $result
      */
     public function __construct(array $result = [])
     {
@@ -36,9 +38,7 @@ class DefaultResult implements ResultInterface
     }
 
     /**
-     * Returns result interpretation
-     *
-     * @return array
+     * @inheriDoc
      */
     public function get()
     {

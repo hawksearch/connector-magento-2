@@ -688,10 +688,9 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
     }
 
     /**
-     * @param mixed $value
      * @return $this
      */
-    public function setAnalyzerLanguage($value)
+    public function setAnalyzerLanguage(string $value)
     {
         return $this->setData(static::ANALYZER_LANGUAGE, $value);
     }
@@ -705,10 +704,9 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
     }
 
     /**
-     * @param mixed $value
      * @return $this
      */
-    public function setPreviewMapping($value)
+    public function setPreviewMapping(string $value)
     {
         return $this->setData(static::PREVIEW_MAPPING, $value);
     }

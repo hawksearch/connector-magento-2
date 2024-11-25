@@ -57,7 +57,7 @@ class Url
 
     /**
      * @param string $url
-     * @param array $query
+     * @param array<mixed> $query
      * @return UriInterface
      */
     public function getUriWithQuery(string $url, array $query)
@@ -71,11 +71,11 @@ class Url
      * Concatenate extra parts to the start or the end of the URI path
      *
      * @param UriInterface $uri
-     * @param array $addToPath
+     * @param string[] $addToPath
      * @param bool $fromStart
      * @return UriInterface
      */
-    public function addToUriPath(UriInterface $uri, array $addToPath, $fromStart = true)
+    public function addToUriPath(UriInterface $uri, array $addToPath, bool $fromStart = true)
     {
         $isTrailingSlash = $this->isTrailingSlashInPath($uri->getPath());
         $isTrailingSlash = $isTrailingSlash || (!$fromStart && end($addToPath) == '/');
@@ -104,7 +104,7 @@ class Url
 
     /**
      * @param UriInterface $uri
-     * @param array $removeParts
+     * @param string[] $removeParts
      * @return UriInterface
      */
     public function removeFromUriPath(UriInterface $uri, array $removeParts)
@@ -138,7 +138,7 @@ class Url
     /**
      * Clean empty parts in the path
      *
-     * @param array $pathParts
+     * @param string[] $pathParts
      * @return array
      */
     protected function filterPathParts(array $pathParts)
@@ -172,7 +172,7 @@ class Url
 
     /**
      * Implode path parts into a well-formed uri path
-     * @param array $pathParts
+     * @param string[] $pathParts
      * @return string
      */
     protected function implodeUriPath(array $pathParts)

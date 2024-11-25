@@ -16,16 +16,19 @@ namespace HawkSearch\Connector\Gateway\Http;
 
 /**
  * @api
+ *
+ * @phpstan-import-type RequestSubject from \HawkSearch\Connector\Gateway\InstructionInterface
+ * @todo replace RequestSubject pseudo type by RequestInterface
  */
 class TransferBuilder
 {
     /**
-     * @var array
+     * @var array<string, mixed>
      */
     private $clientConfig = [];
 
     /**
-     * @var array
+     * @var array<array-key, mixed>
      */
     private $headers = [];
 
@@ -35,7 +38,7 @@ class TransferBuilder
     private $method;
 
     /**
-     * @var array|string
+     * @var RequestSubject
      */
     private $body = [];
 
@@ -50,12 +53,12 @@ class TransferBuilder
     private $encode = false;
 
     /**
-     * @var array
+     * @var array<Transfer::AUTH_*, string>
      */
-    private $auth = [Transfer::AUTH_USERNAME => null, Transfer::AUTH_PASSWORD => null];
+    private $auth = [Transfer::AUTH_USERNAME => '', Transfer::AUTH_PASSWORD => ''];
 
     /**
-     * @param array $clientConfig
+     * @param array<string, mixed> $clientConfig
      * @return $this
      */
     public function setClientConfig(array $clientConfig)
@@ -66,7 +69,7 @@ class TransferBuilder
     }
 
     /**
-     * @param array $headers
+     * @param array<array-key, mixed> $headers
      * @return $this
      */
     public function setHeaders(array $headers)
@@ -77,7 +80,7 @@ class TransferBuilder
     }
 
     /**
-     * @param array|string $body
+     * @param RequestSubject $body
      * @return $this
      */
     public function setBody($body)
@@ -91,7 +94,7 @@ class TransferBuilder
      * @param string $username
      * @return $this
      */
-    public function setAuthUsername($username)
+    public function setAuthUsername(string $username)
     {
         $this->auth[Transfer::AUTH_USERNAME] = $username;
 
@@ -102,7 +105,7 @@ class TransferBuilder
      * @param string $password
      * @return $this
      */
-    public function setAuthPassword($password)
+    public function setAuthPassword(string $password)
     {
         $this->auth[Transfer::AUTH_PASSWORD] = $password;
 
@@ -113,7 +116,7 @@ class TransferBuilder
      * @param string $method
      * @return $this
      */
-    public function setMethod($method)
+    public function setMethod(string $method)
     {
         $this->method = $method;
 
@@ -124,7 +127,7 @@ class TransferBuilder
      * @param string $uri
      * @return $this
      */
-    public function setUri($uri)
+    public function setUri(string $uri)
     {
         $this->uri = $uri;
 
@@ -135,7 +138,7 @@ class TransferBuilder
      * @param bool $encode
      * @return $this
      */
-    public function shouldEncode($encode)
+    public function shouldEncode(bool $encode)
     {
         $this->encode = $encode;
 

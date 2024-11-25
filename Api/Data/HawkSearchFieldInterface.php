@@ -457,7 +457,7 @@ interface HawkSearchFieldInterface
     public function getIterations() : array;
 
     /**
-     * @param array $value
+     * @param list<int> $value
      * @return $this
      */
     public function setIterations(array $value);
@@ -468,10 +468,9 @@ interface HawkSearchFieldInterface
     public function getAnalyzerLanguage();
 
     /**
-     * @param mixed $value
      * @return $this
      */
-    public function setAnalyzerLanguage($value);
+    public function setAnalyzerLanguage(string $value);
 
     /**
      * @return mixed
@@ -479,10 +478,9 @@ interface HawkSearchFieldInterface
     public function getPreviewMapping();
 
     /**
-     * @param mixed $value
      * @return $this
      */
-    public function setPreviewMapping($value);
+    public function setPreviewMapping(string $value);
 
     /**
      * @return bool

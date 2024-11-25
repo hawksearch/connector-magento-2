@@ -20,11 +20,13 @@ use HawkSearch\Connector\Gateway\Instruction\ResultInterface;
 /**
  * @api
  * @since 2.11
+ *
+ * @phpstan-import-type HttpResult from ResultInterface
  */
 class ArrayResult implements ResultInterface
 {
     /**
-     * @var array
+     * @var HttpResult
      */
     private $result;
 
@@ -35,7 +37,7 @@ class ArrayResult implements ResultInterface
 
     /**
      * @param HttpResponseReader $httpResponseReader
-     * @param array $result
+     * @param HttpResult $result
      */
     public function __construct(
         HttpResponseReader $httpResponseReader,

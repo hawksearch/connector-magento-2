@@ -15,15 +15,21 @@ declare(strict_types=1);
 
 namespace HawkSearch\Connector\Gateway\Helper;
 
+use HawkSearch\Connector\Gateway\Instruction\ResultInterface;
+
 /**
  * @api
  * @since 2.11
+ *
+ * @phpstan-import-type HttpResult from ResultInterface
  */
 class SubjectReader
 {
     /**
-     * @param array $subject
+     * @param HttpResult $subject
      * @return array
+     * @todo get rid of this method in favour of HttpResultInterface
+     * @see \HawkSearch\Connector\Gateway\Instruction\ResultInterface
      */
     public function readResponse(array $subject)
     {

@@ -20,17 +20,20 @@ use Magento\Framework\ObjectManager\TMapFactory;
 /**
  * @api
  * @since 2.11
+ *
+ * @template TKey of array-key
+ * @template TValue of HandlerInterface
  */
 class HandlerChain implements HandlerInterface
 {
     /**
-     * @var HandlerInterface[] | TMap
+     * @var TMap<TKey, TValue>
      */
     private $handlers;
 
     /**
      * @param TMapFactory $tmapFactory
-     * @param array $handlers
+     * @param array<TKey, class-string<TValue>> $handlers
      */
     public function __construct(
         TMapFactory $tmapFactory,

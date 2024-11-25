@@ -13,6 +13,10 @@
 
 namespace HawkSearch\Connector\Gateway\Http;
 
+/**
+ * @phpstan-import-type RequestSubject from \HawkSearch\Connector\Gateway\InstructionInterface
+ * @todo replace RequestSubject pseudo type by RequestInterface
+ */
 class Transfer implements TransferInterface
 {
     /**
@@ -41,7 +45,7 @@ class Transfer implements TransferInterface
     private $method;
 
     /**
-     * @var array|string
+     * @var RequestSubject
      */
     private $body;
 
@@ -56,15 +60,15 @@ class Transfer implements TransferInterface
     private $encode;
 
     /**
-     * @var array
+     * @var array<self::AUTH_*, string>
      */
     private $auth;
 
     /**
-     * @param array $clientConfig
-     * @param array $headers
-     * @param array|string $body
-     * @param array $auth
+     * @param array<string, mixed> $clientConfig
+     * @param array<array-key, mixed> $headers
+     * @param RequestSubject $body
+     * @param array<self::AUTH_*, string> $auth
      * @param string $method
      * @param string $uri
      * @param bool $encode
@@ -72,11 +76,11 @@ class Transfer implements TransferInterface
     public function __construct(
         array $clientConfig,
         array $headers,
-        $body,
+        array $body,
         array $auth,
-        $method,
-        $uri,
-        $encode
+        string $method,
+        string $uri,
+        bool $encode
     ) {
         $this->clientConfig = $clientConfig;
         $this->headers = $headers;
@@ -104,7 +108,7 @@ class Transfer implements TransferInterface
      */
     public function getMethod()
     {
-        return (string)$this->method;
+        return $this->method;
     }
 
     /**
@@ -117,11 +121,6 @@ class Transfer implements TransferInterface
         return $this->headers;
     }
 
-    /**
-     * Returns request body
-     *
-     * @return array|string
-     */
     public function getBody()
     {
         return $this->body;
@@ -134,7 +133,7 @@ class Transfer implements TransferInterface
      */
     public function getUri()
     {
-        return (string)$this->uri;
+        return $this->uri;
     }
 
     /**
