@@ -15,7 +15,6 @@ declare(strict_types=1);
 namespace HawkSearch\Connector\Gateway\Instruction;
 
 use HawkSearch\Connector\Gateway\InstructionInterface;
-use HawkSearch\Connector\Gateway\InstructionException;
 use Magento\Framework\Exception\NotFoundException;
 
 /**
@@ -54,7 +53,6 @@ class InstructionManager implements InstructionManagerInterface
     /**
      * Retrieves operation
      *
-     * @param string $instructionCode
      * @return InstructionInterface
      * @throws NotFoundException
      * @todo remove unused method

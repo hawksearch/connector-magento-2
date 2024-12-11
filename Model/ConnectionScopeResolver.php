@@ -34,7 +34,6 @@ class ConnectionScopeResolver
     private $storeManager;
 
     /**
-     * ConfigurationStoreViewResolver constructor.
      * @param RequestInterface|Request $request
      * @param StoreManagerInterface $storeManager
      */

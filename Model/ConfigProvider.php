@@ -47,12 +47,7 @@ class ConfigProvider implements ConfigProviderInterface
      * @var string
      */
     private $configRootPath;
-
-    /**
-     * @param ScopeConfigInterface $scopeConfig
-     * @param string|null $configRootPath
-     * @param string|null $configGroup
-     */
+    
     public function __construct(
         ScopeConfigInterface $scopeConfig,
         ?string $configRootPath = null,

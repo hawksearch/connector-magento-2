@@ -64,17 +64,7 @@ class TransferFactory implements TransferFactoryInterface
      * @var ConnectionScopeResolver
      */
     private ConnectionScopeResolver $connectionScopeResolver;
-
-    /**
-     * @param TransferBuilder $transferBuilder
-     * @param ApiConfigInterface $apiConfig
-     * @param RequestInterface $httpRequest
-     * @param UriBuilderFactory $uriBuilderFactory
-     * @param string $path
-     * @param string $method
-     * @param BuilderInterface|null $headersBuilder
-     * @param UriBuilderInterface|null $uriBuilder
-     */
+    
     public function __construct(
         TransferBuilder $transferBuilder,
         ApiConfigInterface $apiConfig,

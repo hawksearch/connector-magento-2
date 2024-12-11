@@ -22,6 +22,7 @@ class DataObjectHelper
 {
     /**
      * Recursively converts associative array's key names from camelCase to snake_case.
+     *
      * @param array<array-key, mixed> $data
      * @return array
      */
@@ -39,11 +40,10 @@ class DataObjectHelper
     }
 
     /**
-     * Convert a CamelCase string read from method into field key in snake_case
-     * @see https://github.com/magento/magento2/issues/35457
+     * Convert a CamelCase string read from method into field key in snake_case*
      *
-     * @param string $value
      * @return string
+     * @see https://github.com/magento/magento2/issues/35457
      */
     public function camelCaseToSnakeCase(string $value)
     {

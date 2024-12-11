@@ -30,11 +30,7 @@ class LoggerConfig implements LoggerConfigInterface
      * @var MonologLoggerLevel
      */
     private $logLevel;
-
-    /**
-     * LoggerConfig constructor.
-     * @param LoggerXmlConfig $loggerXmlConfig
-     */
+    
     public function __construct(
         LoggerXmlConfig $loggerXmlConfig
     ) {

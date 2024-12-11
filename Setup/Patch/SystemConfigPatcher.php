@@ -25,9 +25,6 @@ class SystemConfigPatcher
      */
     private $config;
 
-    /**
-     * @param ConfigResource $config
-     */
     public function __construct(
         ConfigResource $config
     ) {

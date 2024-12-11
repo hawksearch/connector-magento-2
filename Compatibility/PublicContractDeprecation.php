@@ -43,10 +43,6 @@ use Magento\Framework\App\ObjectManager;
 class PublicContractDeprecation
 {
     /**
-     * @param string $contractName
-     * @param string $since
-     * @param string $replacement
-     * @param string $extra
      * @return void
      */
     public static function triggerClassDeprecationMessage(
@@ -67,10 +63,6 @@ class PublicContractDeprecation
     }
 
     /**
-     * @param string $contractName
-     * @param string $since
-     * @param string $replacement
-     * @param string $extra
      * @return void
      */
     public static function triggerInterfaceDeprecationMessage(

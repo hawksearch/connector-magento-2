@@ -17,7 +17,6 @@ namespace HawkSearch\Connector\Gateway\Validator;
 
 use HawkSearch\Connector\Gateway\Helper\HttpResponseReader;
 use HawkSearch\Connector\Gateway\Helper\SubjectReader;
-use HawkSearch\Connector\Gateway\Validator\ResultInterfaceFactory;
 
 class HttpCodeValidator extends AbstractValidator
 {
@@ -31,12 +30,6 @@ class HttpCodeValidator extends AbstractValidator
      */
     private $subjectReader;
 
-    /**
-     * HttpCodeValidator constructor.
-     * @param ResultInterfaceFactory $resultFactory
-     * @param HttpResponseReader $httpResponseReader
-     * @param SubjectReader $subjectReader
-     */
     public function __construct(
         ResultInterfaceFactory $resultFactory,
         HttpResponseReader $httpResponseReader,

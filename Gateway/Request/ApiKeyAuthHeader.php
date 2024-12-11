@@ -28,13 +28,7 @@ class ApiKeyAuthHeader implements BuilderInterface
      * @var ConnectionScopeResolver
      */
     private ConnectionScopeResolver $connectionScopeResolver;
-
-    /**
-     * HawkGetHeaders constructor.
-     *
-     * @param ApiConfigInterface $apiConfig
-     * @param ConnectionScopeResolver $connectionScopeResolver
-     */
+    
     public function __construct(
         ApiConfigInterface $apiConfig,
         ConnectionScopeResolver $connectionScopeResolver

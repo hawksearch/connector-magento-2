@@ -14,10 +14,9 @@ namespace HawkSearch\Connector\Gateway\Validator;
 
 use Magento\Framework\ObjectManager\TMap;
 use Magento\Framework\ObjectManager\TMapFactory;
-use HawkSearch\Connector\Gateway\Validator\ResultInterfaceFactory;
 
 /**
- * Compiles a result using the results of multiple validators
+ * Compiles the results from multiple validators
  *
  * @api
  *

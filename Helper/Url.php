@@ -28,11 +28,7 @@ class Url
      * @var UriFactory
      */
     private $uriFactory;
-
-    /**
-     * Url constructor.
-     * @param UriFactory $uriFactory
-     */
+    
     public function __construct(
         UriFactory $uriFactory
     ) {
@@ -40,8 +36,6 @@ class Url
     }
 
     /**
-     * @param string $url
-     * @param string $path
      * @return UriInterface
      */
     public function getUriWithPath(string $url, string $path)
@@ -125,7 +119,7 @@ class Url
 
     /**
      * Explodes path parts from an uri string
-     * @param string $path
+     *
      * @return array
      */
     protected function explodeUriPath(string $path)
@@ -151,7 +145,6 @@ class Url
     /**
      * Add trailing slash to URI path
      *
-     * @param string $path
      * @return string
      */
     protected function addTrailingSlash(string $path)
@@ -162,7 +155,6 @@ class Url
     /**
      * Check if URI path has a trailing slash
      *
-     * @param string $path
      * @return bool
      */
     protected function isTrailingSlashInPath(string $path)
@@ -172,6 +164,7 @@ class Url
 
     /**
      * Implode path parts into a well-formed uri path
+     *
      * @param string[] $pathParts
      * @return string
      */
@@ -181,7 +174,6 @@ class Url
     }
 
     /**
-     * @param string $uri
      * @return UriInterface
      */
     public function getUriInstance(string $uri)

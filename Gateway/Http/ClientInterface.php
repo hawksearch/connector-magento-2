@@ -28,11 +28,9 @@ interface ClientInterface
     const RESPONSE_MESSAGE = 'message';
     const RESPONSE_DATA = 'response';
     /**#@-*/
-
     /**
      * Places request to gateway. Returns result as ENV array
      *
-     * @param TransferInterface $transferObject
      * @return array
      */
     public function placeRequest(TransferInterface $transferObject);

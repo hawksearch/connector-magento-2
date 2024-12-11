@@ -19,10 +19,6 @@ class ParameterDeprecation
 {
     /**
      * @param string $methodName Fully qualified method name
-     * @param string $parameterName
-     * @param string $since
-     * @param string $replacement
-     * @param string $extra
      * @return void
      */
     public static function triggerDeprecationMessage(

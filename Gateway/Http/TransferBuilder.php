@@ -83,7 +83,7 @@ class TransferBuilder
      * @param RequestSubject $body
      * @return $this
      */
-    public function setBody($body)
+    public function setBody(array $body)
     {
         $this->body = $body;
 
@@ -91,7 +91,6 @@ class TransferBuilder
     }
 
     /**
-     * @param string $username
      * @return $this
      */
     public function setAuthUsername(string $username)
@@ -102,7 +101,6 @@ class TransferBuilder
     }
 
     /**
-     * @param string $password
      * @return $this
      */
     public function setAuthPassword(string $password)
@@ -113,7 +111,6 @@ class TransferBuilder
     }
 
     /**
-     * @param string $method
      * @return $this
      */
     public function setMethod(string $method)
@@ -124,7 +121,6 @@ class TransferBuilder
     }
 
     /**
-     * @param string $uri
      * @return $this
      */
     public function setUri(string $uri)
@@ -135,7 +131,6 @@ class TransferBuilder
     }
 
     /**
-     * @param bool $encode
      * @return $this
      */
     public function shouldEncode(bool $encode)

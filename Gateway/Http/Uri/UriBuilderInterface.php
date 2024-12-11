@@ -24,8 +24,6 @@ interface UriBuilderInterface
     /**
      * Builds API Url
      *
-     * @param string $url
-     * @param string $path
      * @return string
      */
     public function build(string $url, string $path): string;

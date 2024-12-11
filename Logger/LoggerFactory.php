@@ -48,7 +48,6 @@ class LoggerFactory implements LoggerFactoryInterface
      * DebuggerFactory constructor.
      *
      * @param objectManagerInterface $objectManager
-     * @param string $instanceName
      */
     public function __construct(
         ObjectManagerInterface $objectManager,
@@ -91,7 +90,6 @@ class LoggerFactory implements LoggerFactoryInterface
     /**
      * Set minimum logging level to debug handler according to configured level
      *
-     * @param MonologLogger $logger
      * @return void
      */
     protected function adjustHandlersLevel(MonologLogger $logger)

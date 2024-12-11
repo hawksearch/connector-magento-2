@@ -81,7 +81,7 @@ use ReflectionException;
 trait PublicMethodDeprecationTrait
 {
     /**
-     * Triggers a deprecation message for a callable (public or private) method and execute it.
+     * Triggers a deprecation message for a callable(public or private) method and execute it.
      * If method isn't callable it throws a fatal error.
      *
      * @param string $methodName
@@ -106,7 +106,6 @@ trait PublicMethodDeprecationTrait
      * Trigger a deprecation message for a deprecated method.
      * This method can be triggered from a class public methods which are a part of public contracts
      *
-     * @param string $methodName
      * @return void
      */
     private function triggerPublicMethodDeprecationMessage(string $methodName)
@@ -144,7 +143,6 @@ trait PublicMethodDeprecationTrait
      *      return $this->newMethodName();
      * }
      *
-     * @param string $methodName
      * @return void
      */
     private function triggerDerivedMethodDeprecationMessage(string $methodName)
@@ -175,7 +173,6 @@ trait PublicMethodDeprecationTrait
      *       }
      *  }
      *
-     * @param string $methodName
      * @return void
      */
     private function triggerNewMethodPropagationDeprecationMessage(string $methodName)
@@ -194,7 +191,6 @@ trait PublicMethodDeprecationTrait
     /**
      * Build method deprecation message
      *
-     * @param string $methodName
      * @param mixed[] $mainPartArgs
      * @return string
      */
@@ -229,7 +225,6 @@ trait PublicMethodDeprecationTrait
     }
 
     /**
-     * @param string $methodName
      * @return bool
      * @throws ReflectionException
      */

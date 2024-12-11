@@ -20,7 +20,6 @@ use Magento\Framework\DataObject;
 class HawkSearchField extends DataObject implements HawkSearchFieldInterface
 {
     /**
-     * HawkSearchField constructor.
      * @param array<string, mixed> $data
      */
     public function __construct(
@@ -76,7 +75,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
     }
 
     /**
-     * @param string $value
      * @return $this
      */
     public function setFieldId(string $value)
@@ -93,7 +91,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
     }
 
     /**
-     * @param string $value
      * @return $this
      */
     public function setSyncGuid(string $value)
@@ -110,7 +107,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
     }
 
     /**
-     * @param string $value
      * @return $this
      */
     public function setName(string $value)
@@ -127,7 +123,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
     }
 
     /**
-     * @param string $value
      * @return $this
      */
     public function setFieldType(string $value)
@@ -144,7 +139,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
     }
 
     /**
-     * @param string $value
      * @return $this
      */
     public function setLabel(string $value)
@@ -161,7 +155,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
     }
 
     /**
-     * @param string $value
      * @return $this
      */
     public function setType(string $value)
@@ -178,7 +171,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
     }
 
     /**
-     * @param int $value
      * @return $this
      */
     public function setBoost(int $value)
@@ -195,7 +187,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
     }
 
     /**
-     * @param int $value
      * @return $this
      */
     public function setFacetHandler(int $value)
@@ -212,7 +203,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
     }
 
     /**
-     * @param bool $value
      * @return $this
      */
     public function setIsPrimaryKey(bool $value)
@@ -229,7 +219,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
     }
 
     /**
-     * @param bool $value
      * @return $this
      */
     public function setIsOutput(bool $value)
@@ -246,7 +235,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
     }
 
     /**
-     * @param bool $value
      * @return $this
      */
     public function setIsShingle(bool $value)
@@ -263,7 +251,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
     }
 
     /**
-     * @param bool $value
      * @return $this
      */
     public function setIsBestFragment(bool $value)
@@ -280,7 +267,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
     }
 
     /**
-     * @param bool $value
      * @return $this
      */
     public function setIsDictionary(bool $value)
@@ -297,7 +283,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
     }
 
     /**
-     * @param bool $value
      * @return $this
      */
     public function setIsSort(bool $value)
@@ -314,7 +299,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
     }
 
     /**
-     * @param bool $value
      * @return $this
      */
     public function setIsPrefix(bool $value)
@@ -331,7 +315,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
     }
 
     /**
-     * @param bool $value
      * @return $this
      */
     public function setIsHidden(bool $value)
@@ -348,7 +331,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
     }
 
     /**
-     * @param bool $value
      * @return $this
      */
     public function setIsCompare(bool $value)
@@ -365,7 +347,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
     }
 
     /**
-     * @param int $value
      * @return $this
      */
     public function setSortOrder(int $value)
@@ -382,7 +363,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
     }
 
     /**
-     * @param string $value
      * @return $this
      */
     public function setPartialQuery(string $value)
@@ -399,7 +379,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
     }
 
     /**
-     * @param bool $value
      * @return $this
      */
     public function setIsKeywordText(bool $value)
@@ -416,7 +395,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
     }
 
     /**
-     * @param bool $value
      * @return $this
      */
     public function setIsQuery(bool $value)
@@ -433,7 +411,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
     }
 
     /**
-     * @param bool $value
      * @return $this
      */
     public function setIsQueryText(bool $value)
@@ -450,7 +427,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
     }
 
     /**
-     * @param bool $value
      * @return $this
      */
     public function setSkipCustom(bool $value)
@@ -467,7 +443,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
     }
 
     /**
-     * @param bool $value
      * @return $this
      */
     public function setStripHtml(bool $value)
@@ -484,7 +459,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
     }
 
     /**
-     * @param int $value
      * @return $this
      */
     public function setMinNGramAnalyzer(int $value)
@@ -501,7 +475,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
     }
 
     /**
-     * @param int $value
      * @return $this
      */
     public function setMaxNGramAnalyzer(int $value)
@@ -518,7 +491,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
     }
 
     /**
-     * @param int $value
      * @return $this
      */
     public function setCoordinateType(int $value)
@@ -535,7 +507,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
     }
 
     /**
-     * @param bool $value
      * @return $this
      */
     public function setOmitNorms(bool $value)
@@ -552,7 +523,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
     }
 
     /**
-     * @param string $value
      * @return $this
      */
     public function setItemMapping(string $value)
@@ -569,7 +539,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
     }
 
     /**
-     * @param string $value
      * @return $this
      */
     public function setDefaultValue(string $value)
@@ -586,7 +555,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
     }
 
     /**
-     * @param bool $value
      * @return $this
      */
     public function setUseForPrediction(bool $value)
@@ -603,7 +571,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
     }
 
     /**
-     * @param string $value
      * @return $this
      */
     public function setCopyTo(string $value)
@@ -620,7 +587,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
     }
 
     /**
-     * @param string $value
      * @return $this
      */
     public function setAnalyzer(string $value)
@@ -637,7 +603,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
     }
 
     /**
-     * @param bool $value
      * @return $this
      */
     public function setDoNotStore(bool $value)
@@ -654,7 +619,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
     }
 
     /**
-     * @param string $value
      * @return $this
      */
     public function setTags(string $value)
@@ -676,7 +640,7 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getAnalyzerLanguage()
     {
@@ -692,7 +656,7 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getPreviewMapping()
     {
@@ -716,7 +680,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
     }
 
     /**
-     * @param bool $value
      * @return $this
      */
     public function setOmitTfAndPos(bool $value)
@@ -733,7 +696,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
     }
 
     /**
-     * @param string $value
      * @return $this
      */
     public function setCreateDate(string $value)
@@ -750,7 +712,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
     }
 
     /**
-     * @param string $value
      * @return $this
      */
     public function setModifyDate(string $value)

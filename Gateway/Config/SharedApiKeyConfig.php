@@ -24,10 +24,6 @@ class SharedApiKeyConfig implements ApiConfigInterface
      */
     protected $apiSettingsProvider;
 
-    /**
-     * ApiConfigDefault constructor.
-     * @param ApiSettingsProvider $apiSettingsProvider
-     */
     public function __construct(
         ApiSettingsProvider $apiSettingsProvider
     ) {

@@ -39,9 +39,6 @@ class ApiUrlConfigPatch implements DataPatchInterface
      */
     private $patcher;
 
-    /**
-     * @param SystemConfigPatcher $patcher
-     */
     public function __construct(
         SystemConfigPatcher $patcher
     ) {
