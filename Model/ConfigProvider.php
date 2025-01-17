@@ -47,16 +47,11 @@ class ConfigProvider implements ConfigProviderInterface
      * @var string
      */
     private $configRootPath;
-
-    /**
-     * @param ScopeConfigInterface $scopeConfig
-     * @param string|null $configRootPath
-     * @param string|null $configGroup
-     */
+    
     public function __construct(
         ScopeConfigInterface $scopeConfig,
-        $configRootPath = null,
-        $configGroup = null
+        ?string $configRootPath = null,
+        ?string $configGroup = null
     ) {
         $this->scopeConfig = $scopeConfig;
         $this->configRootPath = $configRootPath ?? static::XML_ROOT_PATH;
@@ -69,7 +64,7 @@ class ConfigProvider implements ConfigProviderInterface
      * @param string $path Absolute path
      * @return string
      */
-    public function getPath($path)
+    public function getPath(string $path)
     {
         return $this->configRootPath . '/' . $this->configGroup . '/' . $path;
     }
@@ -77,7 +72,7 @@ class ConfigProvider implements ConfigProviderInterface
     /**
      * @inheritDoc
      */
-    public function getConfig(string $path, $scopeId = null, $scope = ScopeInterface::SCOPE_STORES)
+    public function getConfig(string $path, $scopeId = null, string $scope = ScopeInterface::SCOPE_STORES)
     {
         return $this->scopeConfig->getValue(
             $this->getPath($path),

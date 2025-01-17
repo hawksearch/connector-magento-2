@@ -64,17 +64,7 @@ class TransferFactory implements TransferFactoryInterface
      * @var ConnectionScopeResolver
      */
     private ConnectionScopeResolver $connectionScopeResolver;
-
-    /**
-     * @param TransferBuilder $transferBuilder
-     * @param ApiConfigInterface $apiConfig
-     * @param RequestInterface $httpRequest
-     * @param UriBuilderFactory $uriBuilderFactory
-     * @param string $path
-     * @param string $method
-     * @param BuilderInterface|null $headersBuilder
-     * @param UriBuilderInterface|null $uriBuilder
-     */
+    
     public function __construct(
         TransferBuilder $transferBuilder,
         ApiConfigInterface $apiConfig,
@@ -82,8 +72,8 @@ class TransferFactory implements TransferFactoryInterface
         UriBuilderFactory $uriBuilderFactory,
         BuilderInterfaceFactory $builderInterfaceFactory,
         ConnectionScopeResolver $connectionScopeResolver,
-        $path = '',
-        $method = 'GET',
+        string $path = '',
+        string $method = 'GET',
         BuilderInterface $headersBuilder = null,
         UriBuilderInterface $uriBuilder = null
     ) {
@@ -97,12 +87,6 @@ class TransferFactory implements TransferFactoryInterface
         $this->connectionScopeResolver = $connectionScopeResolver;
     }
 
-    /**
-     * Builds gateway transfer object
-     *
-     * @param array $request
-     * @return TransferInterface
-     */
     public function create(array $request)
     {
         return $this->transferBuilder

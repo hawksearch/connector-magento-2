@@ -22,11 +22,7 @@ class UriBuilder implements UriBuilderInterface
      * @var UrlUtility
      */
     private $urlUtility;
-
-    /**
-     * UriBuilder constructor.
-     * @param UrlUtility $urlUtility
-     */
+    
     public function __construct(
         UrlUtility $urlUtility
     ) {

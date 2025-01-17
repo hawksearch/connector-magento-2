@@ -28,13 +28,7 @@ class ApiKeyAuthHeader implements BuilderInterface
      * @var ConnectionScopeResolver
      */
     private ConnectionScopeResolver $connectionScopeResolver;
-
-    /**
-     * HawkGetHeaders constructor.
-     *
-     * @param ApiConfigInterface $apiConfig
-     * @param ConnectionScopeResolver $connectionScopeResolver
-     */
+    
     public function __construct(
         ApiConfigInterface $apiConfig,
         ConnectionScopeResolver $connectionScopeResolver
@@ -43,10 +37,6 @@ class ApiKeyAuthHeader implements BuilderInterface
         $this->connectionScopeResolver = $connectionScopeResolver;
     }
 
-    /**
-     * @param array $buildSubject
-     * @return array
-     */
     public function build(array $buildSubject)
     {
         return [

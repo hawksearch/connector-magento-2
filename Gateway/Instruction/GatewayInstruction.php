@@ -67,16 +67,6 @@ class GatewayInstruction implements InstructionInterface
      */
     private $resultFactory;
 
-    /**
-     * @param BuilderInterface $requestBuilder
-     * @param TransferFactoryInterface $transferFactory
-     * @param ClientInterface $client
-     * @param ResultInterfaceFactory $resultFactory
-     * @param LoggerInterface $logger
-     * @param HandlerInterface $handler
-     * @param ValidatorInterface $validator
-     * @param ErrorMessageMapperInterface|null $errorMessageMapper
-     */
     public function __construct(
         BuilderInterface $requestBuilder,
         TransferFactoryInterface $transferFactory,
@@ -131,7 +121,6 @@ class GatewayInstruction implements InstructionInterface
      * Tries to map error messages from validation result and logs processed message.
      * Throws an exception with mapped message or default error.
      *
-     * @param ResultInterface $result
      * @throws InstructionException
      */
     private function processErrors(ResultInterface $result)

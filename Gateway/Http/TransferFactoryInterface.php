@@ -15,15 +15,16 @@ declare(strict_types=1);
 namespace HawkSearch\Connector\Gateway\Http;
 
 /**
- * Interface TransferFactoryInterface
  * @api
+ * @phpstan-import-type RequestSubject from \HawkSearch\Connector\Gateway\InstructionInterface
+ * @todo replace RequestSubject pseudo type by RequestInterface
  */
 interface TransferFactoryInterface
 {
     /**
      * Builds gateway transfer object
      *
-     * @param array $request
+     * @param RequestSubject $request
      * @return TransferInterface
      */
     public function create(array $request);

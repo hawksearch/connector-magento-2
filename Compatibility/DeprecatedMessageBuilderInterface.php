@@ -30,28 +30,28 @@ interface DeprecatedMessageBuilderInterface
 
     /**
      * @param string $format
-     * @param array $values
+     * @param string[] $values
      * @return self
      */
     public function setSincePart(string $format, array $values = []): self;
 
     /**
      * @param string $format
-     * @param array $values
+     * @param string[] $values
      * @return self
      */
     public function setMainPart(string $format, array $values = []): self;
 
     /**
      * @param string $format
-     * @param array $values
+     * @param string[] $values
      * @return self
      */
     public function setReplacementPart(string $format, array $values = []): self;
 
     /**
      * @param string $format
-     * @param array $values
+     * @param string[] $values
      * @return self
      */
     public function setExtra(string $format, array $values = []): self;

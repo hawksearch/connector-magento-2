@@ -21,17 +21,21 @@ use Magento\Framework\ObjectManager\TMapFactory;
 /**
  * @api
  * @since 2.11
+ *
+ * @template TKey of string
+ * @template TValue of InstructionManagerInterface
+ * @implements InstructionManagerPoolInterface<TKey, TValue>
  */
 class InstructionManagerPool implements InstructionManagerPoolInterface
 {
     /**
-     * @var InstructionManagerInterface[] | TMap
+     * @var TMap<TKey, TValue>
      */
     private $executors;
 
     /**
      * @param TMapFactory $tmapFactory
-     * @param array $executors
+     * @param array<TKey, class-string<TValue>> $executors
      */
     public function __construct(
         TMapFactory $tmapFactory,
@@ -45,14 +49,7 @@ class InstructionManagerPool implements InstructionManagerPoolInterface
         );
     }
 
-    /**
-     * Returns Instruction executor for defined provider
-     *
-     * @param string $instructionProviderCode
-     * @return InstructionManagerInterface
-     * @throws NotFoundException
-     */
-    public function get($instructionProviderCode)
+    public function get(string $instructionProviderCode)
     {
         if (!isset($this->executors[$instructionProviderCode])) {
             throw new NotFoundException(

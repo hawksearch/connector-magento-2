@@ -17,14 +17,17 @@ namespace HawkSearch\Connector\Gateway\Request;
 /**
  * Interface BuilderInterface
  * @api
+ *
+ * @phpstan-import-type RequestSubject from \HawkSearch\Connector\Gateway\InstructionInterface
+ * @todo replace RequestSubject pseudo type by RequestInterface
  */
 interface BuilderInterface
 {
     /**
      * Builds request
      *
-     * @param array $buildSubject
-     * @return array
+     * @param RequestSubject $buildSubject
+     * @return RequestSubject
      */
     public function build(array $buildSubject);
 }

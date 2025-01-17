@@ -19,16 +19,20 @@ use HawkSearch\Connector\Gateway\InstructionInterface;
 
 /**
  * Interface InstructionPoolInterface
+ *
  * @api
+ *
+ * @template TKey of string
+ * @template TValue of InstructionInterface
  */
 interface InstructionPoolInterface
 {
     /**
      * Retrieves operation
      *
-     * @param string $instructionCode
-     * @return InstructionInterface
+     * @param TKey $instructionCode
+     * @return TValue
      * @throws NotFoundException
      */
-    public function get($instructionCode);
+    public function get(string $instructionCode);
 }

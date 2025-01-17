@@ -22,9 +22,6 @@ class StrictDataBuilder implements BuilderInterface
 {
     /**
      * Build request without data conversion
-     *
-     * @param array $buildSubject
-     * @return array
      */
     public function build(array $buildSubject)
     {

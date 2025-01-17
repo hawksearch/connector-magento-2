@@ -15,11 +15,10 @@ declare(strict_types=1);
 namespace HawkSearch\Connector\Gateway\Http;
 
 use HawkSearch\Connector\Logger\LoggerFactory;
-use Laminas\Http\Exception\RuntimeException;
-use Laminas\Http\Request as HttpRequest;
-use Magento\Framework\Exception\NoSuchEntityException;
 use Laminas\Http\Client as LaminasClient;
 use Laminas\Http\ClientFactory as LaminasClientFactory;
+use Laminas\Http\Exception\RuntimeException;
+use Laminas\Http\Request as HttpRequest;
 use Magento\Framework\Serialize\Serializer\Json;
 use Psr\Log\LoggerInterface;
 
@@ -45,13 +44,6 @@ class Client implements ClientInterface
      */
     private $converter;
 
-    /**
-     * @param LaminasClientFactory $httpClientFactory
-     * @param Json $json
-     * @param ConverterInterface $converter
-     * @param LoggerFactory $loggerFactory
-     * @throws NoSuchEntityException
-     */
     public function __construct(
         LaminasClientFactory $httpClientFactory,
         Json $json,
@@ -65,9 +57,7 @@ class Client implements ClientInterface
     }
 
     /**
-     * @param TransferInterface $transferObject
      * @return array
-     * @throws \Exception
      */
     public function placeRequest(TransferInterface $transferObject)
     {

@@ -39,9 +39,6 @@ class ApiUrlConfigPatch implements DataPatchInterface
      */
     private $patcher;
 
-    /**
-     * @param SystemConfigPatcher $patcher
-     */
     public function __construct(
         SystemConfigPatcher $patcher
     ) {
@@ -71,5 +68,6 @@ class ApiUrlConfigPatch implements DataPatchInterface
     public function apply()
     {
         $this->patcher->renamePath($this->directivesToRename);
+        return $this;
     }
 }

@@ -15,16 +15,19 @@ declare(strict_types=1);
 namespace HawkSearch\Connector\Gateway\Response;
 
 /**
- * Interface HandlerInterface
  * @api
+ *
+ * @phpstan-import-type RequestSubject from \HawkSearch\Connector\Gateway\InstructionInterface
+ * @phpstan-import-type HttpResult from \HawkSearch\Connector\Gateway\Instruction\ResultInterface
+ * @todo replace RequestSubject pseudo type by RequestInterface
  */
 interface HandlerInterface
 {
     /**
      * Handles response
      *
-     * @param array $handlingSubject
-     * @param array $response
+     * @param RequestSubject $handlingSubject
+     * @param HttpResult $response
      * @return array
      */
     public function handle(array $handlingSubject, array $response);

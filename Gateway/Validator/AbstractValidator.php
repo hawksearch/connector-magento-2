@@ -19,6 +19,7 @@ use HawkSearch\Connector\Gateway\Validator\ResultInterfaceFactory;
 
 /**
  * Represents a basic validator that can create a result
+ * @todo Get rid of Abstract class in favour of builder for ResultInterface objects
  */
 abstract class AbstractValidator implements ValidatorInterface
 {
@@ -40,15 +41,15 @@ abstract class AbstractValidator implements ValidatorInterface
      * Factory method
      *
      * @param bool $isValid
-     * @param array $fails
-     * @param array $errorCodes
+     * @param list<string|\Stringable> $fails
+     * @param list<int> $errorCodes
      * @return ResultInterface
      */
-    protected function createResult($isValid, array $fails = [], array $errorCodes = [])
+    protected function createResult(bool $isValid, array $fails = [], array $errorCodes = [])
     {
         return $this->resultInterfaceFactory->create(
             [
-                'isValid' => (bool)$isValid,
+                'isValid' => $isValid,
                 'failsDescription' => $fails,
                 'errorCodes' => $errorCodes
             ]

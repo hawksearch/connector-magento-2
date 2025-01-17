@@ -15,8 +15,10 @@ declare(strict_types=1);
 namespace HawkSearch\Connector\Gateway\Http;
 
 /**
- * Interface TransferInterface
  * @api
+ *
+ * @phpstan-import-type RequestSubject from \HawkSearch\Connector\Gateway\InstructionInterface
+ * @todo replace RequestSubject pseudo type by RequestInterface
  */
 interface TransferInterface
 {
@@ -51,7 +53,7 @@ interface TransferInterface
     /**
      * Returns request body
      *
-     * @return array|string
+     * @return RequestSubject
      */
     public function getBody();
 

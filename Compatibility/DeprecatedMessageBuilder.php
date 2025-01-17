@@ -40,6 +40,7 @@ class DeprecatedMessageBuilder
 
     /**
      * @param DataObjectFactory $dataObjectFactory
+     * @param array<string, mixed> $data
      */
     public function __construct(
         DataObjectFactory $dataObjectFactory,
@@ -116,7 +117,7 @@ class DeprecatedMessageBuilder
 
     /**
      * @param string $format
-     * @param array $values
+     * @param string[] $values
      * @return DataObject
      */
     private function getPartObject(string $format, array $values = []): DataObject

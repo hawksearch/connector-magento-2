@@ -21,6 +21,8 @@ use Magento\Framework\Exception\NotFoundException;
 /**
  * @api
  * @since 2.11
+ *
+ * @phpstan-import-type RequestSubject from InstructionInterface
  */
 interface InstructionManagerInterface
 {
@@ -28,19 +30,19 @@ interface InstructionManagerInterface
      * Executes instruction by code
      *
      * @param string $instructionCode
-     * @param array $arguments
-     * @return ResultInterface|null
+     * @param RequestSubject $arguments
+     * @return ResultInterface
      * @throws NotFoundException
      * @throws InstructionException
      */
-    public function executeByCode($instructionCode, array $arguments = []);
+    public function executeByCode(string $instructionCode, array $arguments = []);
 
     /**
      * Executes instruction
      *
      * @param InstructionInterface $instruction
-     * @param array $arguments
-     * @return ResultInterface|null
+     * @param RequestSubject $arguments
+     * @return ResultInterface
      * @throws InstructionException
      */
     public function execute(InstructionInterface $instruction, array $arguments = []);

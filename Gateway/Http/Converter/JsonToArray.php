@@ -28,10 +28,6 @@ class JsonToArray implements ConverterInterface
      */
     private $json;
 
-    /**
-     * JsonToArray constructor.
-     * @param Json $json
-     */
     public function __construct(
         Json $json
     ) {

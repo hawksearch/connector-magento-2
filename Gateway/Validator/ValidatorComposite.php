@@ -14,30 +14,32 @@ namespace HawkSearch\Connector\Gateway\Validator;
 
 use Magento\Framework\ObjectManager\TMap;
 use Magento\Framework\ObjectManager\TMapFactory;
-use HawkSearch\Connector\Gateway\Validator\ResultInterfaceFactory;
 
 /**
- * Compiles a result using the results of multiple validators
+ * Compiles the results from multiple validators
+ *
  * @api
- * @since
+ *
+ * @template TKey of array-key
+ * @template TValue of ValidatorInterface
  */
 class ValidatorComposite extends AbstractValidator
 {
     /**
-     * @var ValidatorInterface[] | TMap
+     * @var TMap<TKey, TValue>
      */
     private $validators;
 
     /**
-     * @var array
+     * @var array<array-key, TKey>
      */
     private $chainBreakingValidators;
 
     /**
      * @param ResultInterfaceFactory $resultFactory
      * @param TMapFactory $tmapFactory
-     * @param array $validators
-     * @param array $chainBreakingValidators
+     * @param array<TKey, class-string<TValue>> $validators
+     * @param array<array-key, TKey> $chainBreakingValidators
      */
     public function __construct(
         ResultInterfaceFactory $resultFactory,
@@ -55,12 +57,6 @@ class ValidatorComposite extends AbstractValidator
         parent::__construct($resultFactory);
     }
 
-    /**
-     * Performs domain level validation for business object
-     *
-     * @param array $validationSubject
-     * @return ResultInterface
-     */
     public function validate(array $validationSubject): ResultInterface
     {
         $isValid = true;

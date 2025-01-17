@@ -25,9 +25,6 @@ class SystemConfigPatcher
      */
     private $config;
 
-    /**
-     * @param ConfigResource $config
-     */
     public function __construct(
         ConfigResource $config
     ) {
@@ -42,11 +39,11 @@ class SystemConfigPatcher
      *  ...
      * ]
      *
-     * @param array $directives
+     * @param array<string, string> $directives
      * @return void
      * @throws LocalizedException
      */
-    public function renamePath($directives)
+    public function renamePath(array $directives)
     {
         foreach ($directives as $pathFrom => $pathTo) {
             try {

@@ -28,11 +28,7 @@ class Url
      * @var UriFactory
      */
     private $uriFactory;
-
-    /**
-     * Url constructor.
-     * @param UriFactory $uriFactory
-     */
+    
     public function __construct(
         UriFactory $uriFactory
     ) {
@@ -40,8 +36,6 @@ class Url
     }
 
     /**
-     * @param string $url
-     * @param string $path
      * @return UriInterface
      */
     public function getUriWithPath(string $url, string $path)
@@ -57,7 +51,7 @@ class Url
 
     /**
      * @param string $url
-     * @param array $query
+     * @param array<mixed> $query
      * @return UriInterface
      */
     public function getUriWithQuery(string $url, array $query)
@@ -71,11 +65,11 @@ class Url
      * Concatenate extra parts to the start or the end of the URI path
      *
      * @param UriInterface $uri
-     * @param array $addToPath
+     * @param string[] $addToPath
      * @param bool $fromStart
      * @return UriInterface
      */
-    public function addToUriPath(UriInterface $uri, array $addToPath, $fromStart = true)
+    public function addToUriPath(UriInterface $uri, array $addToPath, bool $fromStart = true)
     {
         $isTrailingSlash = $this->isTrailingSlashInPath($uri->getPath());
         $isTrailingSlash = $isTrailingSlash || (!$fromStart && end($addToPath) == '/');
@@ -104,7 +98,7 @@ class Url
 
     /**
      * @param UriInterface $uri
-     * @param array $removeParts
+     * @param string[] $removeParts
      * @return UriInterface
      */
     public function removeFromUriPath(UriInterface $uri, array $removeParts)
@@ -125,7 +119,7 @@ class Url
 
     /**
      * Explodes path parts from an uri string
-     * @param string $path
+     *
      * @return array
      */
     protected function explodeUriPath(string $path)
@@ -138,7 +132,7 @@ class Url
     /**
      * Clean empty parts in the path
      *
-     * @param array $pathParts
+     * @param string[] $pathParts
      * @return array
      */
     protected function filterPathParts(array $pathParts)
@@ -151,7 +145,6 @@ class Url
     /**
      * Add trailing slash to URI path
      *
-     * @param string $path
      * @return string
      */
     protected function addTrailingSlash(string $path)
@@ -162,7 +155,6 @@ class Url
     /**
      * Check if URI path has a trailing slash
      *
-     * @param string $path
      * @return bool
      */
     protected function isTrailingSlashInPath(string $path)
@@ -172,7 +164,8 @@ class Url
 
     /**
      * Implode path parts into a well-formed uri path
-     * @param array $pathParts
+     *
+     * @param string[] $pathParts
      * @return string
      */
     protected function implodeUriPath(array $pathParts)
@@ -181,7 +174,6 @@ class Url
     }
 
     /**
-     * @param string $uri
      * @return UriInterface
      */
     public function getUriInstance(string $uri)
