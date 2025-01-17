@@ -21,6 +21,8 @@
                 type="HawkSearch\Connector\Gateway\Validator\Result"/>
     <preference for="HawkSearch\Connector\Gateway\Http\ClientInterface"
                 type="HawkSearch\Connector\Gateway\Http\Client"/>
+    <preference for="HawkSearch\Connector\Gateway\Instruction\InstructionManagerPoolInterface"
+                type="HawkSearch\Connector\Gateway\Instruction\InstructionManagerPool"/>
     <preference for="HawkSearch\Connector\Logger\LoggerConfigInterface"
                 type="HawkSearch\Connector\Logger\LoggerConfig"/>
     <preference for="HawkSearch\Connector\Logger\LoggerFactoryInterface"
