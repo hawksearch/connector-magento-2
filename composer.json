@@ -12,6 +12,11 @@
         "magento/framework": "^102.0.5|^103.0",
         "magento/magento-composer-installer": "*"
     },
+    "require-dev": {
+        "phpcompatibility/php-compatibility": "^9.3",
+        "bitexpert/phpstan-magento": "*",
+        "phpstan/extension-installer": "*"
+    },
     "autoload": {
         "psr-4": {
             "HawkSearch\\Connector\\": ""
@@ -19,5 +24,10 @@
         "files": [
             "registration.php"
         ]
+    },
+    "config": {
+        "allow-plugins": {
+            "phpstan/extension-installer": true
+        }
     }
 }

@@ -1,0 +1,21 @@
+parameters:
+    level: 7
+    reportUnmatchedIgnoredErrors: false
+    fileExtensions:
+        - php
+        - phtml
+    paths:
+        - Api
+        - Block
+        - Compatibility
+        - Gateway
+        - Helper
+        - Logger
+        - Model
+        - Setup
+#    ignoreErrors:
+#        -
+#            identifier: missingType.parameter
+#            paths:
+#                - Plugin
+#                - Model
