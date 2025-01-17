@@ -1,0 +1,9 @@
+---
+commitizen:
+  name: cz_conventional_commits
+  tag_format: v$version
+  update_changelog_on_bump: true
+  version_provider: composer
+  version_scheme: semver
+  bump_message: "chore: release version $new_version"
+#  allow_abort: false
