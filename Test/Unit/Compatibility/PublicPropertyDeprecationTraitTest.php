@@ -25,7 +25,7 @@ use Magento\Framework\ObjectManagerInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
-#use PHPUnit\Framework\Attributes\RequiresPhp;
+//use PHPUnit\Framework\Attributes\RequiresPhp;
 
 class PublicPropertyDeprecationTraitTest extends TestCase
 {

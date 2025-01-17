@@ -61,7 +61,7 @@ class DeprecatedMessageBuilder
         foreach (self::PARTS_ORDER as $part) {
             /** @var DataObject $partObject */
             $partObject = $this->_get($part);
-            if (!$partObject->getFormat()) {
+            if (!$partObject || !$partObject->getFormat()) {
                 continue;
             }
             $messageTemplateParts[] = sprintf($partObject->getFormat(), ...$partObject->getValues());

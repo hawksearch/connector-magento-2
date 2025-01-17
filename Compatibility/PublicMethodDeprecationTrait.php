@@ -17,14 +17,14 @@ namespace HawkSearch\Connector\Compatibility;
 use ReflectionException;
 
 /**
- * Trait helps to trigger a deprecation error for public methods of classes.
- * Starting PHP 8.1 it also works for deprecating protected methods as well.
+ * Trait helps to trigger a deprecation error for public/protected methods.
  *
  * Usage:
- * - Use this treat for classes which require one or more public methods to be deprecated because of changing method
- *   visibility or removing.
- * - Add deprecated public methods to $deprecatedMethods property.
- * - Set these methods to protected or private. If it is a public method of an interface, don't change method visibility.
+ * - Use this treat for classes which require one or more public/protected methods to be deprecated because of changing
+ *   method visibility or removing.
+ * - Add deprecated public/protected methods to $deprecatedMethods property in your class.
+ * - Change method visibility to protected or private. If it is a public method of an interface, don't change method
+ *   visibility.
  *
  * Removing deprecation:
  * - Remove methods from $deprecatedMethods property
@@ -36,7 +36,7 @@ use ReflectionException;
  * {
  *      use PublicMethodDeprecationTrait;
  *
- *      private $deprecatedMethods = [
+ *      private array $deprecatedMethods = [
  *          'doSomeAction' => [
  *              'since' => '1.1.0',
  *              'replacement' => __CLASS__ . '::doAnotherAction()',
@@ -75,7 +75,7 @@ use ReflectionException;
  *          since: string,
  *          replacement: string,
  *          description: string
- * }> $deprecatedMethods List of deprecated public methods
+ * }> $deprecatedMethods List of deprecated public/protected methods
  * @internal
  */
 trait PublicMethodDeprecationTrait
@@ -147,6 +147,10 @@ trait PublicMethodDeprecationTrait
      */
     private function triggerDerivedMethodDeprecationMessage(string $methodName)
     {
+        if (!$this->isMethodOverwritten($methodName)) {
+            return;
+        }
+        
         $message = $this->buildMethodDeprecationMessage(
             $methodName,
             [
@@ -188,12 +192,6 @@ trait PublicMethodDeprecationTrait
         DeprecationUtility::getMessageTrigger()->execute($message);
     }
 
-    /**
-     * Build method deprecation message
-     *
-     * @param mixed[] $mainPartArgs
-     * @return string
-     */
     private function buildMethodDeprecationMessage(string $methodName, array $mainPartArgs): string
     {
         $messageBuilder = DeprecationUtility::getMessageBuilder();
