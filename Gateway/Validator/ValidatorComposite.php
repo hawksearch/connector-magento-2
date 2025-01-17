@@ -18,6 +18,8 @@ use HawkSearch\Connector\Gateway\Validator\ResultInterfaceFactory;
 
 /**
  * Compiles a result using the results of multiple validators
+ * @api
+ * @since
  */
 class ValidatorComposite extends AbstractValidator
 {

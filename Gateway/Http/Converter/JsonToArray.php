@@ -18,6 +18,8 @@ use Magento\Framework\Serialize\Serializer\Json;
 
 /**
  * Class JsonToArray
+ * @api
+ * @since 2.11
  */
 class JsonToArray implements ConverterInterface
 {

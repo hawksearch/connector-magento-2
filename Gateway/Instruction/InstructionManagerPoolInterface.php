@@ -16,6 +16,10 @@ namespace HawkSearch\Connector\Gateway\Instruction;
 
 use Magento\Framework\Exception\NotFoundException;
 
+/**
+ * @api
+ * @since 2.11
+ */
 interface InstructionManagerPoolInterface
 {
     /**

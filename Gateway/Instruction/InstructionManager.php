@@ -18,6 +18,10 @@ use HawkSearch\Connector\Gateway\InstructionInterface;
 use HawkSearch\Connector\Gateway\InstructionException;
 use Magento\Framework\Exception\NotFoundException;
 
+/**
+ * @api
+ * @since 2.11
+ */
 class InstructionManager implements InstructionManagerInterface
 {
     /**

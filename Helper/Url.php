@@ -18,6 +18,10 @@ namespace HawkSearch\Connector\Helper;
 use GuzzleHttp\Psr7\UriFactory;
 use Psr\Http\Message\UriInterface;
 
+/**
+ * @api
+ * @since 2.11
+ */
 class Url
 {
     /**

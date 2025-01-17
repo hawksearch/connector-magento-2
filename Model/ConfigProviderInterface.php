@@ -18,6 +18,10 @@ namespace HawkSearch\Connector\Model;
 use Magento\Store\Api\Data\StoreInterface;
 use Magento\Store\Model\ScopeInterface;
 
+/**
+ * @api
+ * @since 2.11
+ */
 interface ConfigProviderInterface
 {
     /**

@@ -15,6 +15,10 @@ declare(strict_types=1);
 
 namespace HawkSearch\Connector\Gateway\Config;
 
+/**
+ * @api
+ * @since 2.11
+ */
 interface ApiConfigInterface
 {
     /**

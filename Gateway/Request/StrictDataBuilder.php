@@ -14,6 +14,10 @@ declare(strict_types=1);
 
 namespace HawkSearch\Connector\Gateway\Request;
 
+/**
+ * @api
+ * @since 2.11
+ */
 class StrictDataBuilder implements BuilderInterface
 {
     /**

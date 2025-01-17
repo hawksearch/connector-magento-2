@@ -15,6 +15,10 @@ declare(strict_types=1);
 
 namespace HawkSearch\Connector\Gateway\Http\Uri;
 
+/**
+ * @api
+ * @since 2.11
+ */
 interface UriBuilderInterface
 {
     /**

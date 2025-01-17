@@ -17,6 +17,10 @@ namespace HawkSearch\Connector\Gateway\Response;
 use Magento\Framework\ObjectManager\TMap;
 use Magento\Framework\ObjectManager\TMapFactory;
 
+/**
+ * @api
+ * @since 2.11
+ */
 class HandlerChain implements HandlerInterface
 {
     /**

@@ -16,6 +16,10 @@ namespace HawkSearch\Connector\Block\System\Config\Logger;
 
 use Monolog\Logger;
 
+/**
+ * @api
+ * @since 2.11
+ */
 class LogeLevels  implements \Magento\Framework\Option\ArrayInterface
 {
     /**
