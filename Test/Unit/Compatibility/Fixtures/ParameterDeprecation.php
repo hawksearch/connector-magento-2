@@ -12,25 +12,24 @@
  */
 declare(strict_types=1);
 
-namespace HawkSearch\Connector\Compatibility;
+namespace HawkSearch\Connector\Test\Unit\Compatibility\Fixtures;
 
-use Magento\Framework\App\ObjectManager;
+use HawkSearch\Connector\Compatibility\ParameterDeprecation as ParameterDeprecationModel;
 
-class DeprecationUtility
+/**
+ * @deprecated
+ * @foobar
+ */
+class ParameterDeprecation
 {
-    /**
-     * @return DeprecatedMessageBuilderInterface
-     */
-    public static function getMessageBuilder(): DeprecatedMessageBuilderInterface
+    public function deprecatedMethod(string $parameter): void
     {
-        return ObjectManager::getInstance()->get(DeprecatedMessageBuilderInterface::class);
-    }
-
-    /**
-     * @return DeprecatedMessageTriggerInterface
-     */
-    public static function getMessageTrigger(): DeprecatedMessageTriggerInterface
-    {
-        return ObjectManager::getInstance()->get(DeprecatedMessageTriggerInterface::class);
+        ParameterDeprecationModel::triggerDeprecationMessage(
+            __METHOD__,
+            '$parameter',
+            '0.7.0',
+            'no replacement',
+            'deprecated method parameter'
+        );
     }
 }

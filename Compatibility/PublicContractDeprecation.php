@@ -14,8 +14,6 @@ declare(strict_types=1);
 
 namespace HawkSearch\Connector\Compatibility;
 
-use Magento\Framework\App\ObjectManager;
-
 /**
  * Class helps to trigger a deprecation error for public contracts (interfaces) and classes.
  *
@@ -74,23 +72,6 @@ class PublicContractDeprecation
     {
         $message = DeprecationUtility::getMessageBuilder()
             ->setMainPart(DeprecatedMessageInterface::TEMPLATE_INTERFACE_MAIN_PART, [$contractName])
-            ->setSincePart(DeprecatedMessageInterface::TEMPLATE_SINCE_PART, [$since])
-            ->setReplacementPart(DeprecatedMessageInterface::TEMPLATE_REPLACEMENT_PART, [$replacement])
-            ->setExtra($extra)
-            ->build();
-
-        DeprecationUtility::getMessageTrigger()->execute($message);
-    }
-
-    public static function triggerMethodParameterDeprecationMessage(
-        string $parameterName,
-        string $since = '',
-        string $replacement = '',
-        string $extra = ''
-    )
-    {
-        $message = DeprecationUtility::getMessageBuilder()
-            ->setMainPart(DeprecatedMessageInterface::TEMPLATE_PARAMETER_MAIN_PART, [$parameterName])
             ->setSincePart(DeprecatedMessageInterface::TEMPLATE_SINCE_PART, [$since])
             ->setReplacementPart(DeprecatedMessageInterface::TEMPLATE_REPLACEMENT_PART, [$replacement])
             ->setExtra($extra)
