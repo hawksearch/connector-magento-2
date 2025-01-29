@@ -14,6 +14,9 @@ parameters:
         - Model
         - Setup
         - Test
+    excludePaths:
+        - */Test/Unit/Fixtures/*
+        - */Test/Unit/*/Fixtures/*
     ignoreErrors:
         -
             # Private properties defined in class and used in traits of \HawkSearch\Connector\Compatibility

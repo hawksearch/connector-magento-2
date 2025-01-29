@@ -99,7 +99,8 @@ class PublicMethodDeprecationDerived extends PublicMethodDeprecationBase
 {
     public function callDeprecatedPrivateMethodFromDerivedClass(): string
     {
-        return $this->doSomeDeprecatedActionChangedVisibilityToPrivate(__FUNCTION__);
+        $method = 'doSomeDeprecatedActionChangedVisibilityToPrivate';
+        return $this->$method(__FUNCTION__);
     }
 
     public function callDeprecatedProtectedMethodFromDerivedClass(): string
@@ -109,7 +110,8 @@ class PublicMethodDeprecationDerived extends PublicMethodDeprecationBase
 
     public function doOverwrittenDeprecatedAction(string $arg): string
     {
-        return parent::doOverwrittenDeprecatedAction($arg) . ' in derived class';
+        $method = 'doOverwrittenDeprecatedAction';
+        return parent::$method($arg) . ' in derived class';
     }
 }
 
@@ -120,6 +122,9 @@ class DeprecatedFromDataObject extends DataObject
     private string $something = 'Initial Something';
     private array $deprecatedMethods = [];
 
+    /**
+     * @phpstan-ignore-next-line
+     */
     public function __construct(array $deprecatedMethods)
     {
         $this->deprecatedMethods = $deprecatedMethods;
@@ -152,23 +157,23 @@ class DeprecatedFromDataObject extends DataObject
         return $this->something;
     }
 
-    private function setSomethingPrivate($value)
+    private function setSomethingPrivate(string $value)
     {
         $this->something = $value . ' set';
         return $this;
     }
 
-    private function getSomethingPrivate()
+    private function getSomethingPrivate(): string
     {
         return $this->something . ' get';
     }
 
-    private function hasSomethingPrivate()
+    private function hasSomethingPrivate(): bool
     {
         return isset($this->something);
     }
 
-    private function unsSomethingPrivate()
+    private function unsSomethingPrivate(): self
     {
         unset($this->something);
         return $this;
