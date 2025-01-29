@@ -19,9 +19,6 @@ namespace HawkSearch\Connector\Compatibility;
  */
 interface DeprecatedMessageInterface
 {
-    /**#@+
-     * Deprecated message templates
-     */
     const TEMPLATE_SINCE_PART = 'Since %s:';
     const TEMPLATE_PUBLIC_METHOD_MAIN_PART = 'Method %s has been deprecated and it\'s public/protected usage will be discontinued.';
     const TEMPLATE_DERIVED_METHOD_MAIN_PART = 'Inheritance of %s method is deprecated because of deprecation of the base method.';
@@ -31,6 +28,4 @@ interface DeprecatedMessageInterface
     const TEMPLATE_PARAMETER_MAIN_PART = 'Parameter %s has been deprecated in method %s and will be removed.';
     const TEMPLATE_PUBLIC_PROPERTY_MAIN_PART = 'Property %s has been deprecated and it\'s public/protected usage will be discontinued.';
     const TEMPLATE_REPLACEMENT_PART = 'Use %s instead.';
-    /**#@-*/
-
 }

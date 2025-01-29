@@ -16,13 +16,11 @@ namespace HawkSearch\Connector\Api\Data;
 
 /**
  * Interface HawkSearchFieldInterface
+ *
  * @api
  */
 interface HawkSearchFieldInterface
 {
-    /**#@+
-     * Constants for keys of data array
-     */
     const FIELD_ID = 'FieldId';
     const SYNC_GUID = 'SyncGuid';
     const NAME = 'Name';
@@ -64,12 +62,11 @@ interface HawkSearchFieldInterface
     const OMIT_TF_ADN_POS = 'OmitTfAndPos';
     const CREATE_DATE = 'CreateDate';
     const MODIFY_DATE = 'ModifyDate';
-    /**#@-*/
 
     /**
      * @return int
      */
-    public function getFieldId() : int;
+    public function getFieldId(): int;
 
     /**
      * @return $this
@@ -79,7 +76,7 @@ interface HawkSearchFieldInterface
     /**
      * @return string
      */
-    public function getSyncGuid() : string;
+    public function getSyncGuid(): string;
 
     /**
      * @return $this
@@ -89,7 +86,7 @@ interface HawkSearchFieldInterface
     /**
      * @return string
      */
-    public function getName() : string;
+    public function getName(): string;
 
     /**
      * @return $this
@@ -99,7 +96,7 @@ interface HawkSearchFieldInterface
     /**
      * @return string
      */
-    public function getFieldType() : string;
+    public function getFieldType(): string;
 
     /**
      * @return $this
@@ -109,7 +106,7 @@ interface HawkSearchFieldInterface
     /**
      * @return string
      */
-    public function getLabel() : string;
+    public function getLabel(): string;
 
     /**
      * @return $this
@@ -119,7 +116,7 @@ interface HawkSearchFieldInterface
     /**
      * @return string
      */
-    public function getType() : string;
+    public function getType(): string;
 
     /**
      * @return $this
@@ -129,7 +126,7 @@ interface HawkSearchFieldInterface
     /**
      * @return int
      */
-    public function getBoost() : int;
+    public function getBoost(): int;
 
     /**
      * @return $this
@@ -139,7 +136,7 @@ interface HawkSearchFieldInterface
     /**
      * @return int
      */
-    public function getFacetHandler() : int;
+    public function getFacetHandler(): int;
 
     /**
      * @return $this
@@ -149,7 +146,7 @@ interface HawkSearchFieldInterface
     /**
      * @return bool
      */
-    public function getIsPrimaryKey() : bool;
+    public function getIsPrimaryKey(): bool;
 
     /**
      * @return $this
@@ -159,7 +156,7 @@ interface HawkSearchFieldInterface
     /**
      * @return bool
      */
-    public function getIsOutput() : bool;
+    public function getIsOutput(): bool;
 
     /**
      * @return $this
@@ -169,7 +166,7 @@ interface HawkSearchFieldInterface
     /**
      * @return bool
      */
-    public function getIsShingle() : bool;
+    public function getIsShingle(): bool;
 
     /**
      * @return $this
@@ -179,7 +176,7 @@ interface HawkSearchFieldInterface
     /**
      * @return bool
      */
-    public function getIsBestFragment() : bool;
+    public function getIsBestFragment(): bool;
 
     /**
      * @return $this
@@ -189,7 +186,7 @@ interface HawkSearchFieldInterface
     /**
      * @return bool
      */
-    public function getIsDictionary() : bool;
+    public function getIsDictionary(): bool;
 
     /**
      * @return $this
@@ -199,7 +196,7 @@ interface HawkSearchFieldInterface
     /**
      * @return bool
      */
-    public function getIsSort() : bool;
+    public function getIsSort(): bool;
 
     /**
      * @return $this
@@ -209,7 +206,7 @@ interface HawkSearchFieldInterface
     /**
      * @return bool
      */
-    public function getIsPrefix() : bool;
+    public function getIsPrefix(): bool;
 
     /**
      * @return $this
@@ -219,7 +216,7 @@ interface HawkSearchFieldInterface
     /**
      * @return bool
      */
-    public function getIsHidden() : bool;
+    public function getIsHidden(): bool;
 
     /**
      * @return $this
@@ -229,7 +226,7 @@ interface HawkSearchFieldInterface
     /**
      * @return bool
      */
-    public function getIsCompare() : bool;
+    public function getIsCompare(): bool;
 
     /**
      * @return $this
@@ -249,7 +246,7 @@ interface HawkSearchFieldInterface
     /**
      * @return string
      */
-    public function getPartialQuery() : string;
+    public function getPartialQuery(): string;
 
     /**
      * @return $this
@@ -259,7 +256,7 @@ interface HawkSearchFieldInterface
     /**
      * @return bool
      */
-    public function getIsKeywordText() : bool;
+    public function getIsKeywordText(): bool;
 
     /**
      * @return $this
@@ -269,7 +266,7 @@ interface HawkSearchFieldInterface
     /**
      * @return bool
      */
-    public function getIsQuery() : bool;
+    public function getIsQuery(): bool;
 
     /**
      * @return $this
@@ -279,7 +276,7 @@ interface HawkSearchFieldInterface
     /**
      * @return bool
      */
-    public function getIsQueryText() : bool;
+    public function getIsQueryText(): bool;
 
     /**
      * @return $this
@@ -289,7 +286,7 @@ interface HawkSearchFieldInterface
     /**
      * @return bool
      */
-    public function getSkipCustom() : bool;
+    public function getSkipCustom(): bool;
 
     /**
      * @return $this
@@ -299,7 +296,7 @@ interface HawkSearchFieldInterface
     /**
      * @return bool
      */
-    public function getStripHtml() : bool;
+    public function getStripHtml(): bool;
 
     /**
      * @return $this
@@ -309,7 +306,7 @@ interface HawkSearchFieldInterface
     /**
      * @return int
      */
-    public function getMinNGramAnalyzer() : int;
+    public function getMinNGramAnalyzer(): int;
 
     /**
      * @return $this
@@ -319,7 +316,7 @@ interface HawkSearchFieldInterface
     /**
      * @return int
      */
-    public function getMaxNGramAnalyzer() : int;
+    public function getMaxNGramAnalyzer(): int;
 
     /**
      * @return $this
@@ -329,7 +326,7 @@ interface HawkSearchFieldInterface
     /**
      * @return int
      */
-    public function getCoordinateType() : int;
+    public function getCoordinateType(): int;
 
     /**
      * @return $this
@@ -339,7 +336,7 @@ interface HawkSearchFieldInterface
     /**
      * @return bool
      */
-    public function getOmitNorms() : bool;
+    public function getOmitNorms(): bool;
 
     /**
      * @return $this
@@ -349,7 +346,7 @@ interface HawkSearchFieldInterface
     /**
      * @return string
      */
-    public function getItemMapping() : string;
+    public function getItemMapping(): string;
 
     /**
      * @return $this
@@ -359,7 +356,7 @@ interface HawkSearchFieldInterface
     /**
      * @return string
      */
-    public function getDefaultValue() : string;
+    public function getDefaultValue(): string;
 
     /**
      * @return $this
@@ -369,7 +366,7 @@ interface HawkSearchFieldInterface
     /**
      * @return bool
      */
-    public function getUseForPrediction() : bool;
+    public function getUseForPrediction(): bool;
 
     /**
      * @return $this
@@ -379,7 +376,7 @@ interface HawkSearchFieldInterface
     /**
      * @return string
      */
-    public function getCopyTo() : string;
+    public function getCopyTo(): string;
 
     /**
      * @return $this
@@ -389,7 +386,7 @@ interface HawkSearchFieldInterface
     /**
      * @return string
      */
-    public function getAnalyzer() : string;
+    public function getAnalyzer(): string;
 
     /**
      * @return $this
@@ -399,7 +396,7 @@ interface HawkSearchFieldInterface
     /**
      * @return bool
      */
-    public function getDoNotStore() : bool;
+    public function getDoNotStore(): bool;
 
     /**
      * @return $this
@@ -409,7 +406,7 @@ interface HawkSearchFieldInterface
     /**
      * @return string
      */
-    public function getTags() : string;
+    public function getTags(): string;
 
     /**
      * @return $this
@@ -419,7 +416,7 @@ interface HawkSearchFieldInterface
     /**
      * @return array
      */
-    public function getIterations() : array;
+    public function getIterations(): array;
 
     /**
      * @param list<int> $value
@@ -450,7 +447,7 @@ interface HawkSearchFieldInterface
     /**
      * @return bool
      */
-    public function getOmitTfAndPos() : bool;
+    public function getOmitTfAndPos(): bool;
 
     /**
      * @return $this
@@ -460,7 +457,7 @@ interface HawkSearchFieldInterface
     /**
      * @return string
      */
-    public function getCreateDate() : string;
+    public function getCreateDate(): string;
 
     /**
      * @return $this
@@ -470,7 +467,7 @@ interface HawkSearchFieldInterface
     /**
      * @return string
      */
-    public function getModifyDate() : string;
+    public function getModifyDate(): string;
 
     /**
      * @return $this

@@ -19,14 +19,10 @@ namespace HawkSearch\Connector\Compatibility;
  */
 interface DeprecatedMessageBuilderInterface
 {
-    /**#@+
-     * Deprecated message parts
-     */
     const PART_SINCE = 'since';
     const PART_MAIN = 'main';
     const PART_REPLACEMENT = 'replacement';
     const PART_EXTRA = 'extra';
-    /**#@-*/
 
     /**
      * @param string $format
