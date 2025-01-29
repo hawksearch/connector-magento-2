@@ -13,7 +13,14 @@ parameters:
         - Logger
         - Model
         - Setup
-#    ignoreErrors:
+        - Test
+    ignoreErrors:
+        -
+            # Private properties defined in class and used in traits of \HawkSearch\Connector\Compatibility
+            message: '#Property [a-zA-Z0-9\\_]+::\$(deprecatedMethods|deprecatedPublicProperties) is never read, only written.#'
+        -
+            # Private properties defined in class and used in traits of \HawkSearch\Connector\Compatibility
+            message: '#Property [a-zA-Z0-9\\_]+::\$(deprecatedMethods|deprecatedPublicProperties) type has no value type specified in iterable type array.#'
 #        -
 #            identifier: missingType.parameter
 #            paths:

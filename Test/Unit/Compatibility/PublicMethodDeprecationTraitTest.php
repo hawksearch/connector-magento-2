@@ -21,6 +21,7 @@ use HawkSearch\Connector\Compatibility\DeprecatedMessageTriggerInterface;
 use Magento\Framework\App\ObjectManager;
 use Magento\Framework\DataObject;
 use Magento\Framework\DataObjectFactory;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\ObjectManagerInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -46,6 +47,16 @@ class PublicMethodDeprecationTraitTest extends TestCase
             'since' => '1.1.0',
             'description' => ''
         ],
+    ];
+
+    // @phpstan-ignore-next-line
+    private array $deprecatedMethodsForDataObject = [
+        'setSomethingPrivate' => [],
+        'getSomethingPrivate' => [],
+        'hasSomethingPrivate' => [],
+        'unsSomethingPrivate' => [],
+        'unsUnknown' => [],
+        'doSomethingUsualPrivate' => [],
     ];
     private MockObject|DataObjectFactory $dataObjectFactoryMock;
     private DeprecatedMessageBuilder $messageBuilder;
@@ -102,16 +113,20 @@ class PublicMethodDeprecationTraitTest extends TestCase
         $this->initDataObjectFactory();
 
         $deprecations = [];
-        set_error_handler(function ($type, $msg) use (&$deprecations) {
+        set_error_handler(function (int $type, string $msg) use (&$deprecations): bool {
             $deprecations[] = $msg;
+            return true;
         });
         $e = error_reporting(E_USER_DEPRECATED);
 
         require_once __DIR__ . '/Fixtures/PublicMethodDeprecationFixture.php';
         $baseObject = new Fixtures\PublicMethodDeprecationBase($this->deprecatedMethods);
 
+        // @phpstan-ignore method.private, method.protected
         $this->assertSame('My argument is called', $baseObject->doSomeDeprecatedActionChangedVisibilityToPrivate('My argument'));
+        // @phpstan-ignore method.private, method.protected
         $this->assertSame('My argument is called', $baseObject->doSomeDeprecatedActionChangedVisibilityToProtected('My argument'));
+        // @phpstan-ignore method.private, method.protected
         $this->assertSame('callDeprecatedPrivateFromPublicMethod is called', $baseObject->callDeprecatedPrivateFromPublicMethod());
 
         $baseObject->doRegularPublicAction();
@@ -142,7 +157,7 @@ class PublicMethodDeprecationTraitTest extends TestCase
     }
 
     /**
-     * @dataProvider getExceptionsDataProvider
+     * @dataProvider provideExceptionsData
      */
     public function testExceptions(string $methodName, string $message): void
     {
@@ -156,7 +171,7 @@ class PublicMethodDeprecationTraitTest extends TestCase
         $object->$methodName();
     }
 
-    public function getExceptionsDataProvider(): array
+    public function provideExceptionsData(): array
     {
         return [
             'Call private method' => [
@@ -172,6 +187,153 @@ class PublicMethodDeprecationTraitTest extends TestCase
                 'Call to undefined method HawkSearch\Connector\Test\Unit\Compatibility\Fixtures\PublicMethodDeprecationBase::doUndefinedAction()'
             ]
         ];
+    }
+
+    public function testPublicMethodsInDataObjectExtension(): void
+    {
+        $this->initDataObjectFactory();
+
+        $deprecations = [];
+        set_error_handler(function (int $type, string $msg) use (&$deprecations): bool {
+            $deprecations[] = $msg;
+            return true;
+        });
+        $e = error_reporting(E_USER_DEPRECATED);
+
+        require_once __DIR__ . '/Fixtures/PublicMethodDeprecationFixture.php';
+        $object = new Fixtures\DeprecatedFromDataObject($this->deprecatedMethodsForDataObject);
+
+        $this->assertEquals('Initial Something', $object->doSomethingUsual(), 'Test doSomethingUsual');
+        $this->assertEquals('Initial Something get', $object->getSomething(), 'Test getSomething');
+
+        $object->setSomething('Changed Something');
+        $this->assertEquals('Changed Something set get', $object->getSomething(), 'Test setSomething');
+
+        $this->assertTrue($object->hasSomething(), 'Test hasSomething');
+        $object->unsSomething();
+        $this->assertFalse($object->hasSomething(), 'Test unsSomething');
+
+        error_reporting($e);
+        restore_error_handler();
+
+        $this->assertEmpty($deprecations);
+    }
+
+    public function testPrivateMethodsInDataObjectExtensionNoDeprecations(): void
+    {
+        $this->initDataObjectFactory();
+
+        $deprecations = [];
+        set_error_handler(function (int $type, string $msg) use (&$deprecations): bool {
+            $deprecations[] = $msg;
+            return true;
+        });
+        $e = error_reporting(E_USER_DEPRECATED);
+
+        require_once __DIR__ . '/Fixtures/PublicMethodDeprecationFixture.php';
+        $object = new Fixtures\DeprecatedFromDataObject([]);
+
+        $this->expectException(LocalizedException::class);
+        $this->expectExceptionMessage('Invalid method HawkSearch\Connector\Test\Unit\Compatibility\Fixtures\DeprecatedFromDataObject::doSomethingUsualPrivate');
+        // @phpstan-ignore method.private, method.protected
+        $object->doSomethingUsualPrivate();
+
+        $this->assertNull($object->getSomethingPrivate(), 'Test getSomethingPrivate');
+
+        $object->setSomethingPrivate('Changed Something');
+        $this->assertEquals('Changed Something', $object->getSomethingPrivate(), 'Test setSomethingPrivate');
+
+        $this->assertTrue($object->hasSomethingPrivate(), 'Test hasSomethingPrivate');
+        $object->unsSomethingPrivate();
+        $this->assertFalse($object->hasSomethingPrivate(), 'Test unsSomethingPrivate');
+        $this->assertNull($object->getSomethingPrivate(), 'Test unsSomethingPrivate');
+
+        error_reporting($e);
+        restore_error_handler();
+
+        $this->assertEmpty($deprecations);
+    }
+
+    public function testPrivateMethodsInDataObjectExtensionWithDeprecations(): void
+    {
+        $this->initDataObjectFactory();
+
+        $deprecations = [];
+        set_error_handler(function (int $type, string $msg) use (&$deprecations): bool {
+            $deprecations[] = $msg;
+            return true;
+        });
+        $e = error_reporting(E_USER_DEPRECATED);
+
+        require_once __DIR__ . '/Fixtures/PublicMethodDeprecationFixture.php';
+        $object = new Fixtures\DeprecatedFromDataObject($this->deprecatedMethodsForDataObject);
+
+        // @phpstan-ignore method.private, method.protected
+        $this->assertEquals('Initial Something', $object->doSomethingUsualPrivate(), 'Test doSomethingUsualPrivate');
+
+        $this->assertEquals('Initial Something get', $object->getSomethingPrivate(), 'Test getSomething');
+
+        $object->setSomethingPrivate('Changed Something');
+        $this->assertEquals('Changed Something set get', $object->getSomethingPrivate(), 'Test setSomething');
+
+        $this->assertTrue($object->hasSomethingPrivate(), 'Test hasSomething');
+        $object->unsSomethingPrivate();
+        $this->assertFalse($object->hasSomethingPrivate(), 'Test unsSomething');
+
+        error_reporting($e);
+        restore_error_handler();
+
+        $this->assertSame(
+            [
+                "Method HawkSearch\Connector\Test\Unit\Compatibility\Fixtures\DeprecatedFromDataObject::doSomethingUsualPrivate() has been deprecated and it's public/protected usage will be discontinued.",
+                "Method HawkSearch\Connector\Test\Unit\Compatibility\Fixtures\DeprecatedFromDataObject::getSomethingPrivate() has been deprecated and it's public/protected usage will be discontinued.",
+                "Method HawkSearch\Connector\Test\Unit\Compatibility\Fixtures\DeprecatedFromDataObject::setSomethingPrivate() has been deprecated and it's public/protected usage will be discontinued.",
+                "Method HawkSearch\Connector\Test\Unit\Compatibility\Fixtures\DeprecatedFromDataObject::getSomethingPrivate() has been deprecated and it's public/protected usage will be discontinued.",
+                "Method HawkSearch\Connector\Test\Unit\Compatibility\Fixtures\DeprecatedFromDataObject::hasSomethingPrivate() has been deprecated and it's public/protected usage will be discontinued.",
+                "Method HawkSearch\Connector\Test\Unit\Compatibility\Fixtures\DeprecatedFromDataObject::unsSomethingPrivate() has been deprecated and it's public/protected usage will be discontinued.",
+                "Method HawkSearch\Connector\Test\Unit\Compatibility\Fixtures\DeprecatedFromDataObject::hasSomethingPrivate() has been deprecated and it's public/protected usage will be discontinued.",
+            ],
+            $deprecations
+        );
+    }
+
+    /**
+     * Test data changed through DataObject::__call() magic
+     */
+    public function testUnknownMethodsInDataObjectExtension(): void
+    {
+        $this->initDataObjectFactory();
+
+        $deprecations = [];
+        set_error_handler(function (int $type, string $msg) use (&$deprecations): bool {
+            $deprecations[] = $msg;
+            return true;
+        });
+        $e = error_reporting(E_USER_DEPRECATED);
+
+        require_once __DIR__ . '/Fixtures/PublicMethodDeprecationFixture.php';
+        $object = new Fixtures\DeprecatedFromDataObject($this->deprecatedMethodsForDataObject);
+
+        $this->assertNull($object->getUnknown(), 'Test getUnknown');
+
+        $object->setUnknown('Changed Unknown');
+        $this->assertEquals('Changed Unknown', $object->getUnknown(), 'Test setUnknown');
+
+        $this->assertTrue($object->hasUnknown(), 'Test hasUnknown');
+
+        // unsUnknown is annotated as deprecated
+        $object->unsUnknown();
+        $this->assertFalse($object->hasUnknown(), 'Test unsUnknown');
+        $this->assertNull($object->getUnknown(), 'Test unsUnknown');
+
+        $this->expectException(LocalizedException::class);
+        $this->expectExceptionMessage('Invalid method HawkSearch\Connector\Test\Unit\Compatibility\Fixtures\DeprecatedFromDataObject::doSomethingUnknown');
+        $object->doSomethingUnknown();
+
+        error_reporting($e);
+        restore_error_handler();
+
+        $this->assertEmpty($deprecations);
     }
 
     private function initDataObjectFactory(): void

@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### FIXES
+* fix(Compatibility): support classes derived from DataObject ([#34](https://github.com/hawksearch/connector-magento-2/pull/34)
+
 ### API CHANGES
 #### Interfaces
 The following interfaces in `\HawkSearch\Connector` namespace are defined as `@api`:
@@ -35,10 +38,10 @@ The following classes in `\HawkSearch\Connector` namespace are defined as `@api`
 
 
 ## [2.10.0] - 2024-07-02
-## FEATURES
+### FEATURES
 * feat: add deprecation message utility classes  ([#22](https://github.com/hawksearch/connector-magento-2/pull/22), [#23](https://github.com/hawksearch/connector-magento-2/pull/23))
 
-## FIXES
+### FIXES
 * fix: debug message display order in Http/Client class ([072198d](https://github.com/hawksearch/connector-magento-2/pull/27/commits/072198db7a2cf73560427429e5093b56627c7bf8))
 
 ## [2.9.0] - 2024-05-28
