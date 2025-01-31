@@ -28,7 +28,10 @@ use PHPUnit\Framework\TestCase;
 trait LegacyBaseTrait
 {
     private MockObject|DataObjectFactory $dataObjectFactoryMock;
-    protected array $deprecations;
+    /**
+     * @var list<string>
+     */
+    protected array $deprecations = [];
     private int $errorReporting;
 
     /**
@@ -61,9 +64,11 @@ trait LegacyBaseTrait
             });
 
         $this->deprecations = [];
-        set_error_handler(function ($type, $msg) {
+        set_error_handler(function (int $type, string $msg): bool {
             $this->deprecations[] = $msg;
+            return true;
         });
+        
         $this->errorReporting = error_reporting(E_USER_DEPRECATED);
     }
 
@@ -82,8 +87,7 @@ trait LegacyBaseTrait
         object $model,
         TestCase $testCase,
         array $deprecationsTriggered
-    ): void
-    {
+    ): void {
         $oldValue = $model->getPropertyToTest($property);
 
         $model->setPropertyToTest($property, $newValue);

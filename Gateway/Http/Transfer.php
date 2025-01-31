@@ -28,7 +28,13 @@ class Transfer implements TransferInterface
      */
     const AUTH_PASSWORD = 'password';
 
+    /**
+     * @var array<string, mixed>
+     */
     private array $clientConfig;
+    /**
+     * @var array<array-key, mixed>
+     */
     private array $headers;
     private string $method;
     /**
@@ -41,7 +47,7 @@ class Transfer implements TransferInterface
      * @var array<self::AUTH_*, string>
      */
     private array $auth;
-    
+
     /**
      * @param array<string, mixed> $clientConfig
      * @param array<array-key, mixed> $headers

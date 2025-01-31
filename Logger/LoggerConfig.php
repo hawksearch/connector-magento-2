@@ -22,6 +22,9 @@ use HawkSearch\Connector\Model\Config\Logger as LoggerXmlConfig;
 class LoggerConfig implements LoggerConfigInterface
 {
     private LoggerXmlConfig $loggerXmlConfig;
+    /**
+     * @var MonologLoggerLevel
+     */
     private int $logLevel;
 
     public function __construct(
@@ -35,6 +38,9 @@ class LoggerConfig implements LoggerConfigInterface
         return $this->loggerXmlConfig->isEnabled();
     }
 
+    /**
+     * @return MonologLoggerLevel
+     */
     public function getLogLevel()
     {
         if (!isset($this->logLevel)) {
@@ -44,6 +50,10 @@ class LoggerConfig implements LoggerConfigInterface
         return $this->logLevel;
     }
 
+    /**
+     * @param MonologLoggerLevel $level
+     * @return $this
+     */
     public function setLogLevel(int $level)
     {
         $this->logLevel = $level;
