@@ -45,15 +45,11 @@ class DeprecatedMessageBuilder
     public function __construct(
         DataObjectFactory $dataObjectFactory,
         array $data = []
-    )
-    {
+    ) {
         parent::__construct($data);
         $this->dataObjectFactory = $dataObjectFactory;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function build(): string
     {
         $messageTemplateParts = [];
@@ -71,9 +67,6 @@ class DeprecatedMessageBuilder
         return implode(' ', $messageTemplateParts);
     }
 
-    /**
-     * @inheritDoc
-     */
     public function setSincePart(string $format, array $values = []): DeprecatedMessageBuilderInterface
     {
         return $this->setData(
@@ -82,9 +75,6 @@ class DeprecatedMessageBuilder
         );
     }
 
-    /**
-     * @inheritDoc
-     */
     public function setMainPart(string $format, array $values = []): DeprecatedMessageBuilderInterface
     {
         return $this->setData(
@@ -93,9 +83,6 @@ class DeprecatedMessageBuilder
         );
     }
 
-    /**
-     * @inheritDoc
-     */
     public function setReplacementPart(string $format, array $values = []): DeprecatedMessageBuilderInterface
     {
         return $this->setData(
@@ -104,9 +91,6 @@ class DeprecatedMessageBuilder
         );
     }
 
-    /**
-     * @inheritDoc
-     */
     public function setExtra(string $format, array $values = []): DeprecatedMessageBuilderInterface
     {
         return $this->setData(

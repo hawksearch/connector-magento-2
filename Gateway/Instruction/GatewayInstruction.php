@@ -87,9 +87,6 @@ class GatewayInstruction implements InstructionInterface
         $this->errorMessageMapper = $errorMessageMapper;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function execute(array $requestSubject)
     {
         // @TODO implement exceptions catching

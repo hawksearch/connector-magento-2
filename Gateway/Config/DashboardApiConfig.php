@@ -17,9 +17,6 @@ namespace HawkSearch\Connector\Gateway\Config;
 
 class DashboardApiConfig extends SharedApiKeyConfig
 {
-    /**
-     * @inheritDoc
-     */
     public function getApiUrl($store = null): string
     {
         return $this->apiSettingsProvider->getDashboardApiUrl($store);

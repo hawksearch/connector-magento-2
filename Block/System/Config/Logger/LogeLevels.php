@@ -20,11 +20,8 @@ use Monolog\Logger;
  * @api
  * @since 2.11
  */
-class LogeLevels  implements \Magento\Framework\Option\ArrayInterface
+class LogeLevels implements \Magento\Framework\Option\ArrayInterface
 {
-    /**
-     * @inheritDoc
-     */
     public function toOptionArray()
     {
         return [

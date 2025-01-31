@@ -17,9 +17,6 @@ namespace HawkSearch\Connector\Gateway\Config;
 
 class IndexingApiConfig extends SharedApiKeyConfig
 {
-    /**
-     * @inheritDoc
-     */
     public function getApiUrl($store = null): string
     {
         return $this->apiSettingsProvider->getIndexingApiUrl($store);

@@ -41,9 +41,6 @@ class HttpCodeValidator extends AbstractValidator
         $this->subjectReader = $subjectReader;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function validate(array $validationSubject): ResultInterface
     {
         $response = $this->subjectReader->readResponse($validationSubject);

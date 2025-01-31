@@ -37,17 +37,11 @@ class LoggerConfig implements LoggerConfigInterface
         $this->loggerXmlConfig = $loggerXmlConfig;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function isEnabled()
     {
         return $this->loggerXmlConfig->isEnabled();
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getLogLevel()
     {
         if (!isset($this->logLevel)) {
@@ -57,9 +51,6 @@ class LoggerConfig implements LoggerConfigInterface
         return $this->logLevel;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function setLogLevel(int $level)
     {
         $this->logLevel = $level;
