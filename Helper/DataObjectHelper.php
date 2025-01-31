@@ -16,6 +16,7 @@ namespace HawkSearch\Connector\Helper;
 
 /**
  * Additional service for converting data keys and populating objects
+ *
  * @see \Magento\Framework\Api\DataObjectHelper
  */
 class DataObjectHelper
@@ -43,7 +44,7 @@ class DataObjectHelper
      * Convert a CamelCase string read from method into field key in snake_case*
      *
      * @return string
-     * @see https://github.com/magento/magento2/issues/35457
+     * @link https://github.com/magento/magento2/issues/35457
      */
     public function camelCaseToSnakeCase(string $value)
     {
