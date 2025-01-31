@@ -103,6 +103,11 @@
             <argument name="instanceName" xsi:type="string">HawkSearch\Connector\Logger\Logger</argument>
         </arguments>
     </type>
+    <type name="HawkSearch\Connector\Logger\Handler\Debug">
+        <arguments>
+            <argument name="fileName" xsi:type="string">/var/log/hawksearch_debug.log</argument>
+        </arguments>
+    </type>
     <!-- Types -->
 
     <!-- Instructions infrastructure -->
