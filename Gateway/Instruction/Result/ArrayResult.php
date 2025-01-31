@@ -28,12 +28,8 @@ class ArrayResult implements ResultInterface
     /**
      * @var HttpResult
      */
-    private $result;
-
-    /**
-     * @var HttpResponseReader
-     */
-    private $httpResponseReader;
+    private array $result;
+    private HttpResponseReader $httpResponseReader;
 
     /**
      * @param HttpResponseReader $httpResponseReader
@@ -42,8 +38,7 @@ class ArrayResult implements ResultInterface
     public function __construct(
         HttpResponseReader $httpResponseReader,
         array $result = []
-    )
-    {
+    ) {
         $this->result = $result;
         $this->httpResponseReader = $httpResponseReader;
     }

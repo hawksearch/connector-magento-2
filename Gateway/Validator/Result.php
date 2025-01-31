@@ -10,26 +10,20 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
-namespace HawkSearch\Connector\Gateway\Validator;
 
-use Magento\Framework\Phrase;
+namespace HawkSearch\Connector\Gateway\Validator;
 
 class Result implements ResultInterface
 {
-    /**
-     * @var bool
-     */
-    private $isValid;
-
+    private bool $isValid;
     /**
      * @var list<string|\Stringable>
      */
-    private $failsDescription;
-
+    private array $failsDescription;
     /**
      * @var list<int>
      */
-    private $errorCodes;
+    private array $errorCodes;
 
     /**
      * @param bool $isValid

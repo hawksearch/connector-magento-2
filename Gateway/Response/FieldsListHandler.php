@@ -14,15 +14,15 @@ declare(strict_types=1);
 
 namespace HawkSearch\Connector\Gateway\Response;
 
-use HawkSearch\Connector\Gateway\Http\ClientInterface;
 use HawkSearch\Connector\Api\Data\HawkSearchFieldInterfaceFactory;
+use HawkSearch\Connector\Gateway\Http\ClientInterface;
 
 class FieldsListHandler implements HandlerInterface
 {
     /**
      * @var HawkSearchFieldInterfaceFactory
      */
-    private $fieldFactory;
+    private HawkSearchFieldInterfaceFactory $fieldFactory;
 
     /**
      * @param HawkSearchFieldInterfaceFactory $fieldFactory

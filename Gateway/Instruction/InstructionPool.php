@@ -21,6 +21,7 @@ use Magento\Framework\ObjectManager\TMapFactory;
 
 /**
  * Pool of available Instructions
+ *
  * @api
  *
  * @template TKey of string
@@ -32,11 +33,11 @@ class InstructionPool implements InstructionPoolInterface
     /**
      * @var TMap<TKey, TValue>
      */
-    private $instructions;
+    private TMap $instructions;
 
     /**
      * @param TMapFactory $tmapFactory
-     * @param array<TKey, class-string<TValue>>  $instructions
+     * @param array<TKey, class-string<TValue>> $instructions
      */
     public function __construct(
         TMapFactory $tmapFactory,

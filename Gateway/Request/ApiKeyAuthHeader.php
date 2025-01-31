@@ -19,16 +19,9 @@ use HawkSearch\Connector\Model\ConnectionScopeResolver;
 
 class ApiKeyAuthHeader implements BuilderInterface
 {
-    /**
-     * @var ApiConfigInterface
-     */
-    private $apiConfig;
-
-    /**
-     * @var ConnectionScopeResolver
-     */
+    private ApiConfigInterface $apiConfig;
     private ConnectionScopeResolver $connectionScopeResolver;
-    
+
     public function __construct(
         ApiConfigInterface $apiConfig,
         ConnectionScopeResolver $connectionScopeResolver

@@ -21,16 +21,9 @@ use HawkSearch\Connector\Model\Config\Logger as LoggerXmlConfig;
  */
 class LoggerConfig implements LoggerConfigInterface
 {
-    /**
-     * @var LoggerXmlConfig
-     */
-    private $loggerXmlConfig;
+    private LoggerXmlConfig $loggerXmlConfig;
+    private int $logLevel;
 
-    /**
-     * @var MonologLoggerLevel
-     */
-    private $logLevel;
-    
     public function __construct(
         LoggerXmlConfig $loggerXmlConfig
     ) {

@@ -22,33 +22,16 @@ use Psr\Log\NullLogger;
 
 /**
  * Factory produces logger based on configuration.
+ *
  * @api
  * @since 2.11
  */
 class LoggerFactory implements LoggerFactoryInterface
 {
-    /**
-     * @var ObjectManagerInterface
-     */
-    private $objectManager;
+    private ObjectManagerInterface $objectManager;
+    private LoggerConfigInterface $loggerConfig;
+    private string $instanceName;
 
-    /**
-     * @var LoggerConfigInterface
-     */
-    private $loggerConfig;
-
-    /**
-     * Instance name to create
-     *
-     * @var string
-     */
-    private $instanceName = null;
-
-    /**
-     * DebuggerFactory constructor.
-     *
-     * @param objectManagerInterface $objectManager
-     */
     public function __construct(
         ObjectManagerInterface $objectManager,
         LoggerConfigInterface $loggerConfig,
@@ -93,7 +76,7 @@ class LoggerFactory implements LoggerFactoryInterface
     {
         /** @var AbstractProcessingHandler $handler */
         foreach ($logger->getHandlers() as $handler) {
-            if (! $handler instanceof AbstractProcessingHandler) {
+            if (!$handler instanceof AbstractProcessingHandler) {
                 continue;
             }
 

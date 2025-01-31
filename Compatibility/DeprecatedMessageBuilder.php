@@ -33,9 +33,6 @@ class DeprecatedMessageBuilder
     ];
 
 
-    /**
-     * @var DataObjectFactory
-     */
     private DataObjectFactory $dataObjectFactory;
 
     /**

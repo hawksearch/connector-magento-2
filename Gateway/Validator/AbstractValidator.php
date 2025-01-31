@@ -15,8 +15,6 @@ declare(strict_types=1);
 
 namespace HawkSearch\Connector\Gateway\Validator;
 
-use HawkSearch\Connector\Gateway\Validator\ResultInterfaceFactory;
-
 /**
  * Represents a basic validator that can create a result
  *
@@ -24,10 +22,7 @@ use HawkSearch\Connector\Gateway\Validator\ResultInterfaceFactory;
  */
 abstract class AbstractValidator implements ValidatorInterface
 {
-    /**
-     * @var ResultInterfaceFactory
-     */
-    private $resultInterfaceFactory;
+    private ResultInterfaceFactory $resultInterfaceFactory;
 
     public function __construct(
         ResultInterfaceFactory $resultFactory

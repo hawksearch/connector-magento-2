@@ -26,10 +26,9 @@ class InstructionManager implements InstructionManagerInterface
     /**
      * @var InstructionPoolInterface<string, InstructionInterface>
      */
-    private $instructionPool;
+    private InstructionPoolInterface $instructionPool;
 
     /**
-     * CommandExecutor constructor.
      * @param InstructionPoolInterface<string, InstructionInterface> $instructionPool
      */
     public function __construct(

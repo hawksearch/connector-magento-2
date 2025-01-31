@@ -19,10 +19,7 @@ use HawkSearch\Connector\Model\Config\ApiSettings as ApiSettingsProvider;
 
 class SharedApiKeyConfig implements ApiConfigInterface
 {
-    /**
-     * @var ApiSettingsProvider
-     */
-    protected $apiSettingsProvider;
+    protected ApiSettingsProvider $apiSettingsProvider;
 
     public function __construct(
         ApiSettingsProvider $apiSettingsProvider

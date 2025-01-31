@@ -22,7 +22,7 @@ class FieldDataBuilder implements BuilderInterface
     /**
      * @var HawkSearchFieldInterfaceFactory
      */
-    private $hawkSearchFieldFactory;
+    private HawkSearchFieldInterfaceFactory $hawkSearchFieldFactory;
 
     public function __construct(
         HawkSearchFieldInterfaceFactory $hawkSearchFieldFactory

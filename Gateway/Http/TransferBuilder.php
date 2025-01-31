@@ -14,6 +14,8 @@ declare(strict_types=1);
 
 namespace HawkSearch\Connector\Gateway\Http;
 
+use Laminas\Http\Request as HttpRequest;
+
 /**
  * @api
  *
@@ -25,37 +27,22 @@ class TransferBuilder
     /**
      * @var array<string, mixed>
      */
-    private $clientConfig = [];
-
+    private array $clientConfig = [];
     /**
      * @var array<array-key, mixed>
      */
-    private $headers = [];
-
-    /**
-     * @var string
-     */
-    private $method;
-
+    private array $headers = [];
+    private string $method = HttpRequest::METHOD_GET;
     /**
      * @var RequestSubject
      */
-    private $body = [];
-
-    /**
-     * @var string
-     */
-    private $uri = '';
-
-    /**
-     * @var bool
-     */
-    private $encode = false;
-
+    private array $body = [];
+    private string $uri = '';
+    private bool $encode = false;
     /**
      * @var array<Transfer::AUTH_*, string>
      */
-    private $auth = [Transfer::AUTH_USERNAME => '', Transfer::AUTH_PASSWORD => ''];
+    private array $auth = [Transfer::AUTH_USERNAME => '', Transfer::AUTH_PASSWORD => ''];
 
     /**
      * @param array<string, mixed> $clientConfig

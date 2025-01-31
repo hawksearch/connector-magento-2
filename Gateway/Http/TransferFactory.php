@@ -25,46 +25,15 @@ use Magento\Framework\App\RequestInterface;
 
 class TransferFactory implements TransferFactoryInterface
 {
-    /**
-     * @var TransferBuilder
-     */
-    private $transferBuilder;
-
-    /**
-     * @var ApiConfigInterface
-     */
-    private $apiConfig;
-
-    /**
-     * @var string
-     */
-    private $path;
-
-    /**
-     * @var string
-     */
-    private $method;
-
-    /**
-     * @var BuilderInterface
-     */
-    private $headersBuilder;
-
-    /**
-     * @var UriBuilderInterface
-     */
-    private $uriBuilder;
-
-    /**
-     * @var RequestInterface
-     */
-    private $httpRequest;
-
-    /**
-     * @var ConnectionScopeResolver
-     */
+    private TransferBuilder $transferBuilder;
+    private ApiConfigInterface $apiConfig;
+    private RequestInterface $httpRequest;
     private ConnectionScopeResolver $connectionScopeResolver;
-    
+    private string $path;
+    private string $method;
+    private BuilderInterface $headersBuilder;
+    private UriBuilderInterface $uriBuilder;
+
     public function __construct(
         TransferBuilder $transferBuilder,
         ApiConfigInterface $apiConfig,
@@ -74,17 +43,18 @@ class TransferFactory implements TransferFactoryInterface
         ConnectionScopeResolver $connectionScopeResolver,
         string $path = '',
         string $method = 'GET',
-        BuilderInterface $headersBuilder = null,
-        UriBuilderInterface $uriBuilder = null
-    ) {
+        BuilderInterface $headersBuilder = null, // @todo get rid of $headersBuilder, use $builderInterfaceFactory
+        UriBuilderInterface $uriBuilder = null // @todo get rid of $uriBuilder, use $uriBuilderFactory
+    )
+    {
         $this->transferBuilder = $transferBuilder;
         $this->apiConfig = $apiConfig;
         $this->httpRequest = $httpRequest;
+        $this->connectionScopeResolver = $connectionScopeResolver;
         $this->path = $path;
         $this->method = $method;
         $this->headersBuilder = $headersBuilder ?? $builderInterfaceFactory->create();
         $this->uriBuilder = $uriBuilder ?? $uriBuilderFactory->create();
-        $this->connectionScopeResolver = $connectionScopeResolver;
     }
 
     public function create(array $request)
@@ -113,4 +83,5 @@ class TransferFactory implements TransferFactoryInterface
             $this->path
         );
     }
+
 }

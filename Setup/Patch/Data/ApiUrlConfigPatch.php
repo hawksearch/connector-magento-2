@@ -25,7 +25,7 @@ class ApiUrlConfigPatch implements DataPatchInterface
      * @SuppressWarnings(Generic.Files.LineLength.TooLong)
      */
     // phpcs:disable Generic.Files.LineLength.TooLong
-    protected $directivesToRename = [
+    protected array $directivesToRename = [
         'hawksearch_connector/api_settings/order_tracking_key' => 'hawksearch_connector/api_settings/client_guid',
         'hawksearch_connector/api_settings/mode' => 'hawksearch_connector/api_settings/environment',
         'hawksearch_connector/api_settings/rec_url/develop' => 'hawksearch_connector/api_settings/recommendations_url/develop',
@@ -33,11 +33,7 @@ class ApiUrlConfigPatch implements DataPatchInterface
         'hawksearch_connector/api_settings/rec_url/production' => 'hawksearch_connector/api_settings/recommendations_url/production',
     ];
     // phpcs:enable
-
-    /**
-     * @var SystemConfigPatcher
-     */
-    private $patcher;
+    private SystemConfigPatcher $patcher;
 
     public function __construct(
         SystemConfigPatcher $patcher

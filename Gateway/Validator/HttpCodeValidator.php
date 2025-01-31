@@ -20,22 +20,14 @@ use HawkSearch\Connector\Gateway\Helper\SubjectReader;
 
 class HttpCodeValidator extends AbstractValidator
 {
-    /**
-     * @var HttpResponseReader
-     */
-    private $httpResponseReader;
-
-    /**
-     * @var SubjectReader
-     */
-    private $subjectReader;
+    private HttpResponseReader $httpResponseReader;
+    private SubjectReader $subjectReader;
 
     public function __construct(
         ResultInterfaceFactory $resultFactory,
         HttpResponseReader $httpResponseReader,
         SubjectReader $subjectReader
-    )
-    {
+    ) {
         parent::__construct($resultFactory);
         $this->httpResponseReader = $httpResponseReader;
         $this->subjectReader = $subjectReader;

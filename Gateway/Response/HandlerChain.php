@@ -29,7 +29,7 @@ class HandlerChain implements HandlerInterface
     /**
      * @var TMap<TKey, TValue>
      */
-    private $handlers;
+    private TMap $handlers;
 
     /**
      * @param TMapFactory $tmapFactory
