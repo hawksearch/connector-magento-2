@@ -66,9 +66,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
         parent::__construct($data);
     }
 
-    /**
-     * @return int
-     */
     public function getFieldId(): int
     {
         return (int)$this->getData(static::FIELD_ID);
@@ -82,9 +79,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
         return $this->setData(static::FIELD_ID, $value);
     }
 
-    /**
-     * @return string
-     */
     public function getSyncGuid(): string
     {
         return $this->getData(static::SYNC_GUID);
@@ -98,9 +92,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
         return $this->setData(static::SYNC_GUID, $value);
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->getData(static::NAME);
@@ -114,9 +105,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
         return $this->setData(static::NAME, $value);
     }
 
-    /**
-     * @return string
-     */
     public function getFieldType(): string
     {
         return $this->getData(static::FIELD_TYPE);
@@ -130,9 +118,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
         return $this->setData(static::FIELD_TYPE, $value);
     }
 
-    /**
-     * @return string
-     */
     public function getLabel(): string
     {
         return $this->getData(static::LABEL);
@@ -146,9 +131,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
         return $this->setData(static::LABEL, $value);
     }
 
-    /**
-     * @return string
-     */
     public function getType(): string
     {
         return $this->getData(static::TYPE);
@@ -162,9 +144,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
         return $this->setData(static::TYPE, $value);
     }
 
-    /**
-     * @return int
-     */
     public function getBoost(): int
     {
         return $this->getData(static::BOOST);
@@ -178,9 +157,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
         return $this->setData(static::BOOST, $value);
     }
 
-    /**
-     * @return int
-     */
     public function getFacetHandler(): int
     {
         return $this->getData(static::FACET_HANDLER);
@@ -194,9 +170,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
         return $this->setData(static::FACET_HANDLER, $value);
     }
 
-    /**
-     * @return bool
-     */
     public function getIsPrimaryKey(): bool
     {
         return $this->getData(static::IS_PRIMARY_KEY);
@@ -210,9 +183,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
         return $this->setData(static::IS_PRIMARY_KEY, $value);
     }
 
-    /**
-     * @return bool
-     */
     public function getIsOutput(): bool
     {
         return $this->getData(static::IS_OUTPUT);
@@ -226,9 +196,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
         return $this->setData(static::IS_OUTPUT, $value);
     }
 
-    /**
-     * @return bool
-     */
     public function getIsShingle(): bool
     {
         return $this->getData(static::IS_SHINGLE);
@@ -242,9 +209,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
         return $this->setData(static::IS_SHINGLE, $value);
     }
 
-    /**
-     * @return bool
-     */
     public function getIsBestFragment(): bool
     {
         return $this->getData(static::IS_BEST_FRAGMENT);
@@ -258,9 +222,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
         return $this->setData(static::IS_BEST_FRAGMENT, $value);
     }
 
-    /**
-     * @return bool
-     */
     public function getIsDictionary(): bool
     {
         return $this->getData(static::IS_DICTIONARY);
@@ -274,9 +235,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
         return $this->setData(static::IS_DICTIONARY, $value);
     }
 
-    /**
-     * @return bool
-     */
     public function getIsSort(): bool
     {
         return $this->getData(static::IS_SORT);
@@ -290,9 +248,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
         return $this->setData(static::IS_SORT, $value);
     }
 
-    /**
-     * @return bool
-     */
     public function getIsPrefix(): bool
     {
         return $this->getData(static::IS_PREFIX);
@@ -306,9 +261,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
         return $this->setData(static::IS_PREFIX, $value);
     }
 
-    /**
-     * @return bool
-     */
     public function getIsHidden(): bool
     {
         return $this->getData(static::IS_HIDDEN);
@@ -322,9 +274,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
         return $this->setData(static::IS_HIDDEN, $value);
     }
 
-    /**
-     * @return bool
-     */
     public function getIsCompare(): bool
     {
         return $this->getData(static::IS_COMPARE);
@@ -338,9 +287,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
         return $this->setData(static::IS_COMPARE, $value);
     }
 
-    /**
-     * @return int
-     */
     public function getSortOrder(): int
     {
         return $this->getData(static::SORT_ORDER);
@@ -354,9 +300,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
         return $this->setData(static::SORT_ORDER, $value);
     }
 
-    /**
-     * @return string
-     */
     public function getPartialQuery(): string
     {
         return $this->getData(static::PARTIAL_QUERY);
@@ -370,9 +313,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
         return $this->setData(static::PARTIAL_QUERY, $value);
     }
 
-    /**
-     * @return bool
-     */
     public function getIsKeywordText(): bool
     {
         return $this->getData(static::IS_KEYWORD_TEXT);
@@ -386,9 +326,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
         return $this->setData(static::IS_KEYWORD_TEXT, $value);
     }
 
-    /**
-     * @return bool
-     */
     public function getIsQuery(): bool
     {
         return $this->getData(static::IS_QUERY);
@@ -402,9 +339,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
         return $this->setData(static::IS_QUERY, $value);
     }
 
-    /**
-     * @return bool
-     */
     public function getIsQueryText(): bool
     {
         return $this->getData(static::IS_QUERY_TEXT);
@@ -418,9 +352,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
         return $this->setData(static::IS_QUERY_TEXT, $value);
     }
 
-    /**
-     * @return bool
-     */
     public function getSkipCustom(): bool
     {
         return $this->getData(static::SKIP_CUSTOM);
@@ -434,9 +365,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
         return $this->setData(static::SKIP_CUSTOM, $value);
     }
 
-    /**
-     * @return bool
-     */
     public function getStripHtml(): bool
     {
         return $this->getData(static::STRIP_HTML);
@@ -450,9 +378,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
         return $this->setData(static::STRIP_HTML, $value);
     }
 
-    /**
-     * @return int
-     */
     public function getMinNGramAnalyzer(): int
     {
         return $this->getData(static::MIN_N_GRAM_ANALYZER);
@@ -466,9 +391,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
         return $this->setData(static::MIN_N_GRAM_ANALYZER, $value);
     }
 
-    /**
-     * @return int
-     */
     public function getMaxNGramAnalyzer(): int
     {
         return $this->getData(static::MAX_N_GRAM_ANALYZER);
@@ -482,9 +404,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
         return $this->setData(static::MAX_N_GRAM_ANALYZER, $value);
     }
 
-    /**
-     * @return int
-     */
     public function getCoordinateType(): int
     {
         return $this->getData(static::COORDINATE_TYPE);
@@ -498,9 +417,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
         return $this->setData(static::COORDINATE_TYPE, $value);
     }
 
-    /**
-     * @return bool
-     */
     public function getOmitNorms(): bool
     {
         return $this->getData(static::OMIT_NORMS);
@@ -514,9 +430,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
         return $this->setData(static::OMIT_NORMS, $value);
     }
 
-    /**
-     * @return string
-     */
     public function getItemMapping(): string
     {
         return $this->getData(static::ITEM_MAPPING);
@@ -530,9 +443,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
         return $this->setData(static::ITEM_MAPPING, $value);
     }
 
-    /**
-     * @return string
-     */
     public function getDefaultValue(): string
     {
         return $this->getData(static::DEFAULT_VALUE);
@@ -546,9 +456,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
         return $this->setData(static::DEFAULT_VALUE, $value);
     }
 
-    /**
-     * @return bool
-     */
     public function getUseForPrediction(): bool
     {
         return $this->getData(static::USE_FOR_PREDICTION);
@@ -562,9 +469,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
         return $this->setData(static::USE_FOR_PREDICTION, $value);
     }
 
-    /**
-     * @return string
-     */
     public function getCopyTo(): string
     {
         return $this->getData(static::COPY_TO);
@@ -578,9 +482,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
         return $this->setData(static::COPY_TO, $value);
     }
 
-    /**
-     * @return string
-     */
     public function getAnalyzer(): string
     {
         return $this->getData(static::ANALYZER);
@@ -594,9 +495,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
         return $this->setData(static::ANALYZER, $value);
     }
 
-    /**
-     * @return bool
-     */
     public function getDoNotStore(): bool
     {
         return $this->getData(static::DO_NOT_STORE);
@@ -610,9 +508,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
         return $this->setData(static::DO_NOT_STORE, $value);
     }
 
-    /**
-     * @return string
-     */
     public function getTags(): string
     {
         return $this->getData(static::TAGS);
@@ -626,9 +521,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
         return $this->setData(static::TAGS, $value);
     }
 
-    /**
-     * @return array
-     */
     public function getIterations(): array
     {
         return $this->getData(static::ITERATIONS);
@@ -671,9 +563,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
         return $this->setData(static::PREVIEW_MAPPING, $value);
     }
 
-    /**
-     * @return bool
-     */
     public function getOmitTfAndPos(): bool
     {
         return $this->getData(static::OMIT_TF_ADN_POS);
@@ -687,9 +576,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
         return $this->setData(static::OMIT_TF_ADN_POS, $value);
     }
 
-    /**
-     * @return string
-     */
     public function getCreateDate(): string
     {
         return $this->getData(static::CREATE_DATE);
@@ -703,9 +589,6 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
         return $this->setData(static::CREATE_DATE, $value);
     }
 
-    /**
-     * @return string
-     */
     public function getModifyDate(): string
     {
         return $this->getData(static::MODIFY_DATE);

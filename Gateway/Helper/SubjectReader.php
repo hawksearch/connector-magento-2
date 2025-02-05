@@ -15,21 +15,23 @@ declare(strict_types=1);
 
 namespace HawkSearch\Connector\Gateway\Helper;
 
-use HawkSearch\Connector\Gateway\Instruction\ResultInterface;
+use HawkSearch\Connector\Gateway\Http\ClientInterface;
+use HawkSearch\Connector\Gateway\Validator\ValidatorInterface;
 
 /**
  * @api
  * @since 2.11
  *
- * @phpstan-import-type HttpResult from ResultInterface
+ * @phpstan-import-type HttpResult from ClientInterface
+ * @phpstan-import-type ValidationSubject from ValidatorInterface
  */
 class SubjectReader
 {
     /**
-     * @param HttpResult $subject
-     * @return array
+     * @param ValidationSubject $subject
+     * @return HttpResult
      * @todo get rid of this method in favour of HttpResultInterface
-     * @see \HawkSearch\Connector\Gateway\Instruction\ResultInterface
+     * @see ClientInterface
      */
     public function readResponse(array $subject)
     {

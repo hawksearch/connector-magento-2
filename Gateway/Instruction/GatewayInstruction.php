@@ -56,6 +56,10 @@ class GatewayInstruction implements InstructionInterface
         $this->errorMessageMapper = $errorMessageMapper;
     }
 
+    /**
+     * @return \HawkSearch\Connector\Gateway\Instruction\ResultInterface
+     * @throws InstructionException
+     */
     public function execute(array $requestSubject)
     {
         // @TODO implement exceptions catching
@@ -97,7 +101,7 @@ class GatewayInstruction implements InstructionInterface
             $errorCodeOrMessage = (string)$errorCodeOrMessage;
 
             if (isset($this->errorMessageMapper)) {
-                $mapped = (string)$this->errorMessageMapper->getMessage($errorCodeOrMessage);
+                $mapped = $this->errorMessageMapper->getMessage($errorCodeOrMessage);
                 if (!empty($mapped)) {
                     $messages[] = $mapped;
                     $errorCodeOrMessage = $mapped;

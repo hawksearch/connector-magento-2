@@ -37,6 +37,9 @@ class InstructionManager implements InstructionManagerInterface
         $this->instructionPool = $instructionPool;
     }
 
+    /**
+     * @return ResultInterface
+     */
     public function executeByCode(string $instructionCode, array $arguments = [])
     {
         return $this->instructionPool
@@ -44,6 +47,9 @@ class InstructionManager implements InstructionManagerInterface
             ->execute($arguments);
     }
 
+    /**
+     * @return ResultInterface
+     */
     public function execute(InstructionInterface $instruction, array $arguments = [])
     {
         return $instruction->execute($arguments);

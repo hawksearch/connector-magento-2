@@ -16,16 +16,15 @@ declare(strict_types=1);
 namespace HawkSearch\Connector\Gateway\Helper;
 
 use HawkSearch\Connector\Gateway\Http\ClientInterface;
-use HawkSearch\Connector\Gateway\Instruction\ResultInterface;
 
 /**
  * @api
  * @since 2.11
  *
  * @todo get rid of this class in favour of HttpResultInterface
- * @see \HawkSearch\Connector\Gateway\Instruction\ResultInterface
+ * @see ClientInterface
  *
- * @phpstan-import-type HttpResult from ResultInterface
+ * @phpstan-import-type HttpResult from ClientInterface
  */
 class HttpResponseReader
 {

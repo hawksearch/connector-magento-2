@@ -35,7 +35,6 @@ class ApiSettings extends ConfigProvider
      * Get Api key
      *
      * @param null|int|string $store
-     * @return string
      */
     public function getApiKey($store = null): string
     {
@@ -46,7 +45,6 @@ class ApiSettings extends ConfigProvider
      * Get Engine Name
      *
      * @param null|int|string $store
-     * @return string
      */
     public function getEngineName($store = null): string
     {
@@ -57,7 +55,6 @@ class ApiSettings extends ConfigProvider
      * Get Hawksearch Environment
      *
      * @param null|int|string $store
-     * @return string
      */
     public function getEnvironment($store = null): string
     {
@@ -86,7 +83,6 @@ class ApiSettings extends ConfigProvider
      * Get Client Guid / Tracking Key
      *
      * @param null|int|string $store
-     * @return string
      */
     public function getClientGuid($store = null): string
     {
@@ -97,7 +93,6 @@ class ApiSettings extends ConfigProvider
      * Get Hawksearch Lucene Engine Reference URL
      *
      * @param null|int|string $store
-     * @return string
      */
     public function getHawkUrl($store = null): string
     {
@@ -108,7 +103,6 @@ class ApiSettings extends ConfigProvider
      * Get Hawksearch Tracking URL
      *
      * @param null|int|string $store
-     * @return string
      */
     public function getTrackingUrl($store = null): string
     {
@@ -119,7 +113,6 @@ class ApiSettings extends ConfigProvider
      * Get Hawksearch Recommendations URL
      *
      * @param null|int|string $store
-     * @return string
      */
     public function getRecommendationsUrl($store = null): string
     {
@@ -139,7 +132,6 @@ class ApiSettings extends ConfigProvider
      * Get Hawksearch Dashboard API URL
      *
      * @param null|int|string $store
-     * @return string
      */
     public function getDashboardApiUrl($store = null): string
     {
@@ -150,7 +142,6 @@ class ApiSettings extends ConfigProvider
      * Get Hawksearch Workbench URL
      *
      * @param null|int|string $store
-     * @return string
      */
     public function getHawksearchWorkbenchUrl($store = null): string
     {
@@ -161,7 +152,6 @@ class ApiSettings extends ConfigProvider
      * Get Hawksearch Indexing API URL
      *
      * @param null|int|string $store
-     * @return string
      */
     public function getIndexingApiUrl($store = null): string
     {
@@ -172,7 +162,6 @@ class ApiSettings extends ConfigProvider
      * Get Hawksearch Search API URL
      *
      * @param null|int|string $store
-     * @return string
      */
     public function getSearchApiUrl($store = null): string
     {

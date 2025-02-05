@@ -22,6 +22,9 @@ use Monolog\Logger;
  */
 class LogeLevels implements \Magento\Framework\Option\ArrayInterface
 {
+    /**
+     * @return list<array{label: string, value: int}>
+     */
     public function toOptionArray()
     {
         return [

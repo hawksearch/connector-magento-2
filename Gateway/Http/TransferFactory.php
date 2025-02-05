@@ -57,6 +57,9 @@ class TransferFactory implements TransferFactoryInterface
         $this->uriBuilder = $uriBuilder ?? $uriBuilderFactory->create();
     }
 
+    /**
+     * @return TransferInterface
+     */
     public function create(array $request)
     {
         return $this->transferBuilder

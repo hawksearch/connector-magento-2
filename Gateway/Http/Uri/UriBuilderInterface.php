@@ -21,10 +21,5 @@ namespace HawkSearch\Connector\Gateway\Http\Uri;
  */
 interface UriBuilderInterface
 {
-    /**
-     * Builds API Url
-     *
-     * @return string
-     */
     public function build(string $url, string $path): string;
 }

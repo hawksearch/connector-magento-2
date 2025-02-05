@@ -50,6 +50,9 @@ class ConfigProvider implements ConfigProviderInterface
         return $this->configRootPath . '/' . $this->configGroup . '/' . $path;
     }
 
+    /**
+     * @return mixed
+     */
     public function getConfig(string $path, $scopeId = null, string $scope = ScopeInterface::SCOPE_STORES)
     {
         return $this->scopeConfig->getValue(

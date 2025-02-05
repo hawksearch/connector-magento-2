@@ -49,6 +49,9 @@ class InstructionManagerPool implements InstructionManagerPoolInterface
         );
     }
 
+    /**
+     * @return InstructionManagerInterface
+     */
     public function get(string $instructionProviderCode)
     {
         if (!isset($this->executors[$instructionProviderCode])) {

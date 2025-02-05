@@ -14,10 +14,9 @@ declare(strict_types=1);
 
 namespace HawkSearch\Connector\Gateway\ErrorMapper;
 
-use Magento\Framework\Phrase;
-
 /**
  * Interface to provide customization for API validation errors.
+ *
  * @api
  */
 interface ErrorMessageMapperInterface
@@ -26,7 +25,7 @@ interface ErrorMessageMapperInterface
      * Returns customized error message by provided code.
      * If message not found `null` will be returned.
      *
-     * @return Phrase|null
+     * @return string
      */
     public function getMessage(string $code);
 }

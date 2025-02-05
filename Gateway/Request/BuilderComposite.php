@@ -50,6 +50,9 @@ class BuilderComposite implements BuilderInterface
         );
     }
 
+    /**
+     * @return RequestSubject
+     */
     public function build(array $buildSubject)
     {
         $result = [];

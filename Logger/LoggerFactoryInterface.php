@@ -23,8 +23,6 @@ use Psr\Log\LoggerInterface;
 interface LoggerFactoryInterface
 {
     /**
-     * Create logger instance
-     *
      * @return LoggerInterface
      */
     public function create();
