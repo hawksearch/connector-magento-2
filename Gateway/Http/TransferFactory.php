@@ -76,10 +76,8 @@ class TransferFactory implements TransferFactoryInterface
 
     /**
      * Get Full URL based on relative URL.
-     *
-     * @return string
      */
-    private function buildFullApiUrl()
+    private function buildFullApiUrl(): string
     {
         return $this->uriBuilder->build(
             $this->apiConfig->getApiUrl($this->connectionScopeResolver->resolve()->getId()),

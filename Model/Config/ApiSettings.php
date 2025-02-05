@@ -173,7 +173,6 @@ class ApiSettings extends ConfigProvider
      *
      * @param string $path Config path part
      * @param null|int|string $store
-     * @return string
      */
     private function getEnvironmentConfig(string $path, $store = null): string
     {

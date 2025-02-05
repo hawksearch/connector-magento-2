@@ -27,35 +27,29 @@ interface DeprecatedMessageBuilderInterface
     /**
      * @param string $format
      * @param string[] $values
-     * @return self
      */
     public function setSincePart(string $format, array $values = []): self;
 
     /**
      * @param string $format
      * @param string[] $values
-     * @return self
      */
     public function setMainPart(string $format, array $values = []): self;
 
     /**
      * @param string $format
      * @param string[] $values
-     * @return self
      */
     public function setReplacementPart(string $format, array $values = []): self;
 
     /**
      * @param string $format
      * @param string[] $values
-     * @return self
      */
     public function setExtra(string $format, array $values = []): self;
 
     /**
      * Build a final message string
-     *
-     * @return string
      */
     public function build(): string;
 }

@@ -99,7 +99,6 @@ class DeprecatedMessageBuilder
     /**
      * @param string $format
      * @param string[] $values
-     * @return DataObject
      */
     private function getPartObject(string $format, array $values = []): DataObject
     {

@@ -41,17 +41,24 @@ class ApiUrlConfigPatch implements DataPatchInterface
         $this->patcher = $patcher;
     }
 
+    /**
+     * @return string[]
+     */
     public static function getDependencies()
     {
         return [];
     }
 
+    /**
+     * @return string[]
+     */
     public function getAliases()
     {
         return [];
     }
 
     /**
+     * @return $this
      * @throws LocalizedException
      */
     public function apply()
