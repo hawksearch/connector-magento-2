@@ -18,13 +18,10 @@ namespace HawkSearch\Connector\Gateway\Http;
  * Interface ClientInterface
  * Http client interface
  *
- * @phpstan-type keyCode self::RESPONSE_CODE
- * @phpstan-type keyMessage self::RESPONSE_MESSAGE
- * @phpstan-type keyData self::RESPONSE_DATA
  * @phpstan-type HttpResult array{
- *      keyCode: int,
- *      keyMessage: string,
- *      keyData: mixed,
+ *      code: int,
+ *      message: string,
+ *      response: mixed,
  *  }|array{}
  * @api
  * @todo Remove empty array definition for HttpResult phpstan type

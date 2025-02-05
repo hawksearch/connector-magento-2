@@ -61,12 +61,6 @@ class HttpResponseReader
      */
     public function readResponseMessage(array $subject)
     {
-        if (!isset($subject[ClientInterface::RESPONSE_MESSAGE])
-            || !is_string($subject[ClientInterface::RESPONSE_MESSAGE])
-        ) {
-            throw new \InvalidArgumentException('Response message does not exist');
-        }
-
-        return $subject[ClientInterface::RESPONSE_MESSAGE];
+        return (string)($subject[ClientInterface::RESPONSE_MESSAGE] ?? '');
     }
 }

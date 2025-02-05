@@ -31,7 +31,7 @@ class JsonToArray implements ConverterInterface
     }
 
     /**
-     * @return array
+     * @return mixed[]
      */
     public function convert(string $response)
     {

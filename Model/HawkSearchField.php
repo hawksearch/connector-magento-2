@@ -521,6 +521,9 @@ class HawkSearchField extends DataObject implements HawkSearchFieldInterface
         return $this->setData(static::TAGS, $value);
     }
 
+    /**
+     * @return int[]
+     */
     public function getIterations(): array
     {
         return $this->getData(static::ITERATIONS);

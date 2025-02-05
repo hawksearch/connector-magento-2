@@ -308,6 +308,9 @@ interface HawkSearchFieldInterface
      */
     public function setTags(string $value);
 
+    /**
+     * @return int[]
+     */
     public function getIterations(): array;
 
     /**
