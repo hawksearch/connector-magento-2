@@ -1,0 +1,40 @@
+#!/usr/bin/env php
+<?php
+/**
+ * This file is a wrapper for Symfony's patch-type-declarations script.
+ * It used to autoload ObjectManager
+ */
+
+if ('cli' !== \PHP_SAPI) {
+    throw new Exception('This script must be run from the command line.');
+}
+
+$autoloadPaths = [
+    // run script from MAGENTO_ROOT
+    getcwd() . '/vendor/autoload.php',
+    // script is located in MAGENTO_ROOT/vendor/hawksearch/connector/bin
+    __DIR__ . '/../../../autoload.php',
+    // script is located in MAGENTO_ROOT/app/code/HawkSearch/Connector/bin
+    __DIR__ . '/../../../../../vendor/autoload.php',
+    // script is located in MAGENTO_ROOT/ext/hawksearch/connector/bin
+    __DIR__ . '/../../../../vendor/autoload.php'
+];
+
+$vendorPath = '';
+do {
+    $path = current($autoloadPaths);
+    if (file_exists($path)) {
+        $vendorPath = dirname($path);
+        break;
+    }
+} while (next($autoloadPaths));
+
+if (!$vendorPath) {
+    fwrite(STDERR, 'Cannot locate autoloader; please run "composer install"' . PHP_EOL);
+    exit(1);
+}
+
+require $vendorPath . '/../app/autoload.php';
+$bootstrap = \Magento\Framework\App\Bootstrap::create(BP, $_SERVER);
+
+include $vendorPath . '/symfony/error-handler/Resources/bin/patch-type-declarations';
