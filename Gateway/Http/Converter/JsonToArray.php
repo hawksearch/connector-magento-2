@@ -17,16 +17,12 @@ use HawkSearch\Connector\Gateway\Http\ConverterInterface;
 use Magento\Framework\Serialize\Serializer\Json;
 
 /**
- * Class JsonToArray
  * @api
  * @since 2.11
  */
 class JsonToArray implements ConverterInterface
 {
-    /**
-     * @var Json
-     */
-    private $json;
+    private Json $json;
 
     public function __construct(
         Json $json

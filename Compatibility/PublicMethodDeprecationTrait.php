@@ -87,7 +87,7 @@ trait PublicMethodDeprecationTrait
      * If method isn't callable it throws a fatal error.
      * Method signature is in sync with {@see DataObject::__call}
      */
-    public function __call($methodName, $arguments)
+    public function __call($methodName, $arguments) // @phpstan-ignore-line
     {
         if (method_exists($this, $methodName) && isset($this->deprecatedMethods[$methodName])) {
             $this->triggerPublicMethodDeprecationMessage($methodName);
@@ -98,7 +98,7 @@ trait PublicMethodDeprecationTrait
         $exception = null;
         if ($this instanceof \Magento\Framework\DataObject) {
             try {
-                return parent::__call($methodName, $arguments);
+                return parent::__call($methodName, $arguments); // @phpstan-ignore-line
             } catch (LocalizedException $exception) {
                 $throwUnknownMethodException = true;
             }
@@ -106,6 +106,7 @@ trait PublicMethodDeprecationTrait
             $throwUnknownMethodException = true;
         }
 
+        /** @phpstan-ignore if.alwaysTrue */
         if ($throwUnknownMethodException) {
             if ($exception) {
                 throw $exception;
@@ -203,6 +204,10 @@ trait PublicMethodDeprecationTrait
         DeprecationUtility::getMessageTrigger()->execute($message);
     }
 
+    /**
+     * @param string $methodName
+     * @param string[] $mainPartArgs
+     */
     private function buildMethodDeprecationMessage(string $methodName, array $mainPartArgs): string
     {
         $messageBuilder = DeprecationUtility::getMessageBuilder();

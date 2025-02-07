@@ -24,25 +24,10 @@ use Psr\Log\LoggerInterface;
 
 class Client implements ClientInterface
 {
-    /**
-     * @var LoggerInterface
-     */
-    private $logger;
-
-    /**
-     * @var LaminasClientFactory
-     */
-    private $httpClientFactory;
-
-    /**
-     * @var Json
-     */
-    private $json;
-
-    /**
-     * @var ConverterInterface
-     */
-    private $converter;
+    private LoggerInterface $logger;
+    private LaminasClientFactory $httpClientFactory;
+    private Json $json;
+    private ConverterInterface $converter;
 
     public function __construct(
         LaminasClientFactory $httpClientFactory,
@@ -64,7 +49,7 @@ class Client implements ClientInterface
         $requestBody = $transferObject->getBody();
         $responseData = [
             self::RESPONSE_CODE => 0,
-            self::RESPONSE_MESSAGE => 'API request wasn\'t processed.' ,
+            self::RESPONSE_MESSAGE => 'API request wasn\'t processed.',
             self::RESPONSE_DATA => ''
         ];
 
@@ -100,11 +85,11 @@ class Client implements ClientInterface
 
             $this->logger->info(
                 'Api Client Request:',
-                array(
-                    'method'    => $client->getMethod(),
-                    'uri'       => $client->getUri()->toString(),
-                    'headers'   => $client->getRequest()->getHeaders()->toArray(),
-                )
+                [
+                    'method' => $client->getMethod(),
+                    'uri' => $client->getUri()->toString(),
+                    'headers' => $client->getRequest()->getHeaders()->toArray(),
+                ]
             );
             $this->logger->debug('Request Body:', (array)$requestBody);
 
@@ -116,10 +101,10 @@ class Client implements ClientInterface
 
             $this->logger->info(
                 'Api Client Response:',
-                array(
-                    'status'    => $responseData[self::RESPONSE_CODE],
-                    'message'    => $responseData[self::RESPONSE_MESSAGE],
-                )
+                [
+                    'status' => $responseData[self::RESPONSE_CODE],
+                    'message' => $responseData[self::RESPONSE_MESSAGE],
+                ]
             );
             $this->logger->debug('Response Body:', (array)$responseData[self::RESPONSE_DATA]);
         } catch (RuntimeException $e) {

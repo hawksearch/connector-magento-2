@@ -18,11 +18,8 @@ use HawkSearch\Connector\Helper\Url as UrlUtility;
 
 class UriBuilder implements UriBuilderInterface
 {
-    /**
-     * @var UrlUtility
-     */
-    private $urlUtility;
-    
+    private UrlUtility $urlUtility;
+
     public function __construct(
         UrlUtility $urlUtility
     ) {

@@ -23,15 +23,8 @@ use Magento\Store\Model\StoreManagerInterface;
 
 class ConnectionScopeResolver
 {
-    /**
-     * @var RequestInterface|Request
-     */
-    private $request;
-
-    /**
-     * @var StoreManagerInterface
-     */
-    private $storeManager;
+    private RequestInterface $request;
+    private StoreManagerInterface $storeManager;
 
     /**
      * @param RequestInterface|Request $request

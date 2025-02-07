@@ -27,45 +27,14 @@ use Psr\Log\LoggerInterface;
 
 class GatewayInstruction implements InstructionInterface
 {
-    /**
-     * @var BuilderInterface
-     */
-    private $requestBuilder;
-
-    /**
-     * @var TransferFactoryInterface
-     */
-    private $transferFactory;
-
-    /**
-     * @var ClientInterface
-     */
-    private $client;
-
-    /**
-     * @var HandlerInterface
-     */
-    private $handler;
-
-    /**
-     * @var ValidatorInterface
-     */
-    private $validator;
-
-    /**
-     * @var LoggerInterface
-     */
-    private $logger;
-
-    /**
-     * @var ErrorMessageMapperInterface
-     */
-    private $errorMessageMapper;
-
-    /**
-     * @var ResultInterfaceFactory
-     */
-    private $resultFactory;
+    private BuilderInterface $requestBuilder;
+    private TransferFactoryInterface $transferFactory;
+    private ClientInterface $client;
+    private ResultInterfaceFactory $resultFactory;
+    private LoggerInterface $logger;
+    private ?HandlerInterface $handler;
+    private ?ValidatorInterface $validator;
+    private ?ErrorMessageMapperInterface $errorMessageMapper;
 
     public function __construct(
         BuilderInterface $requestBuilder,
@@ -80,10 +49,10 @@ class GatewayInstruction implements InstructionInterface
         $this->requestBuilder = $requestBuilder;
         $this->transferFactory = $transferFactory;
         $this->client = $client;
+        $this->resultFactory = $resultFactory;
+        $this->logger = $logger;
         $this->handler = $handler;
         $this->validator = $validator;
-        $this->logger = $logger;
-        $this->resultFactory = $resultFactory;
         $this->errorMessageMapper = $errorMessageMapper;
     }
 
@@ -95,7 +64,7 @@ class GatewayInstruction implements InstructionInterface
         );
 
         $response = $this->client->placeRequest($transfer);
-        if ($this->validator !== null) {
+        if (isset($this->validator)) {
             $result = $this->validator->validate(
                 array_merge($requestSubject, ['response' => $response])
             );
@@ -104,7 +73,7 @@ class GatewayInstruction implements InstructionInterface
             }
         }
 
-        if ($this->handler) {
+        if (isset($this->handler)) {
             $response = $this->handler->handle(
                 $requestSubject,
                 $response
@@ -125,10 +94,10 @@ class GatewayInstruction implements InstructionInterface
         $messages = [];
         $errorsSource = array_merge($result->getErrorCodes(), $result->getFailsDescription());
         foreach ($errorsSource as $errorCodeOrMessage) {
-            $errorCodeOrMessage = (string) $errorCodeOrMessage;
+            $errorCodeOrMessage = (string)$errorCodeOrMessage;
 
-            if ($this->errorMessageMapper !== null) {
-                $mapped = (string) $this->errorMessageMapper->getMessage($errorCodeOrMessage);
+            if (isset($this->errorMessageMapper)) {
+                $mapped = (string)$this->errorMessageMapper->getMessage($errorCodeOrMessage);
                 if (!empty($mapped)) {
                     $messages[] = $mapped;
                     $errorCodeOrMessage = $mapped;

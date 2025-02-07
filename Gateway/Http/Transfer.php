@@ -23,46 +23,30 @@ class Transfer implements TransferInterface
      * Name of Auth username field
      */
     const AUTH_USERNAME = 'username';
-
     /**
      * Name of Auth password field
      */
     const AUTH_PASSWORD = 'password';
 
     /**
-     * @var array
+     * @var array<string, mixed>
      */
-    private $clientConfig;
-
+    private array $clientConfig;
     /**
-     * @var array
+     * @var array<array-key, mixed>
      */
-    private $headers;
-
-    /**
-     * @var string
-     */
-    private $method;
-
+    private array $headers;
+    private string $method;
     /**
      * @var RequestSubject
      */
-    private $body;
-
-    /**
-     * @var string
-     */
-    private $uri;
-
-    /**
-     * @var bool
-     */
-    private $encode;
-
+    private array $body;
+    private string $uri;
+    private bool $encode;
     /**
      * @var array<self::AUTH_*, string>
      */
-    private $auth;
+    private array $auth;
 
     /**
      * @param array<string, mixed> $clientConfig

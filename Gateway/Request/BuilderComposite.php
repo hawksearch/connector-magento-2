@@ -32,7 +32,7 @@ class BuilderComposite implements BuilderInterface
     /**
      * @var TMap<TKey, TValue>
      */
-    private $builders;
+    private TMap $builders;
 
     /**
      * @param TMapFactory $tmapFactory

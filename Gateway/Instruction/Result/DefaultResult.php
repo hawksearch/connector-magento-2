@@ -27,7 +27,7 @@ class DefaultResult implements ResultInterface
     /**
      * @var HttpResult
      */
-    private $result;
+    private array $result;
 
     /**
      * @param HttpResult $result

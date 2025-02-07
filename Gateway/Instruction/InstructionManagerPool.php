@@ -31,7 +31,7 @@ class InstructionManagerPool implements InstructionManagerPoolInterface
     /**
      * @var TMap<TKey, TValue>
      */
-    private $executors;
+    private TMap $executors;
 
     /**
      * @param TMapFactory $tmapFactory

@@ -10,6 +10,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 namespace HawkSearch\Connector\Gateway\Validator;
 
 use Magento\Framework\ObjectManager\TMap;
@@ -28,12 +29,12 @@ class ValidatorComposite extends AbstractValidator
     /**
      * @var TMap<TKey, TValue>
      */
-    private $validators;
+    private TMap $validators;
 
     /**
      * @var array<array-key, TKey>
      */
-    private $chainBreakingValidators;
+    private array $chainBreakingValidators;
 
     /**
      * @param ResultInterfaceFactory $resultFactory

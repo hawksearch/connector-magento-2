@@ -24,11 +24,8 @@ use Psr\Http\Message\UriInterface;
  */
 class Url
 {
-    /**
-     * @var UriFactory
-     */
-    private $uriFactory;
-    
+    private UriFactory $uriFactory;
+
     public function __construct(
         UriFactory $uriFactory
     ) {
@@ -44,7 +41,7 @@ class Url
         $isTrailingSlash = $this->isTrailingSlashInPath($path);
 
         $path = $this->implodeUriPath($this->explodeUriPath($path));
-        $path = $isTrailingSlash ? $this->addTrailingSlash($path): $path;
+        $path = $isTrailingSlash ? $this->addTrailingSlash($path) : $path;
 
         return $uri->withPath($path);
     }
@@ -91,7 +88,7 @@ class Url
         }
 
         $path = $this->implodeUriPath($pathParts);
-        $path = $isTrailingSlash ? $this->addTrailingSlash($path): $path;
+        $path = $isTrailingSlash ? $this->addTrailingSlash($path) : $path;
 
         return $uri->withPath($path);
     }
@@ -112,7 +109,7 @@ class Url
         }));
 
         $path = $this->implodeUriPath($pathParts);
-        $path = $isTrailingSlash ? $this->addTrailingSlash($path): $path;
+        $path = $isTrailingSlash ? $this->addTrailingSlash($path) : $path;
 
         return $uri->withPath($path);
     }
@@ -159,7 +156,7 @@ class Url
      */
     protected function isTrailingSlashInPath(string $path)
     {
-        return substr($path, -1)  == '/';
+        return substr($path, -1) == '/';
     }
 
     /**

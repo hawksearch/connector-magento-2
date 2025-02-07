@@ -23,31 +23,13 @@ use Magento\Store\Model\ScopeInterface;
  */
 class ConfigProvider implements ConfigProviderInterface
 {
-    /**
-     * XML configuration root paths
-     */
     const XML_ROOT_PATH = 'hawksearch_connector';
-
-    /**
-     * XML configuration general group
-     */
     const XML_GENERAL_GROUP = 'general';
 
-    /**
-     * @var ScopeConfigInterface
-     */
-    private $scopeConfig;
+    private ScopeConfigInterface $scopeConfig;
+    private string $configRootPath;
+    private string $configGroup;
 
-    /**
-     * @var string
-     */
-    private $configGroup;
-
-    /**
-     * @var string
-     */
-    private $configRootPath;
-    
     public function __construct(
         ScopeConfigInterface $scopeConfig,
         ?string $configRootPath = null,
@@ -61,7 +43,6 @@ class ConfigProvider implements ConfigProviderInterface
     /**
      * Get absolute path for $path parameter
      *
-     * @param string $path Absolute path
      * @return string
      */
     public function getPath(string $path)
