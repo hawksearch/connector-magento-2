@@ -32,7 +32,7 @@ trait LegacyBaseTrait
     private int $errorReporting;
 
     /**
-     * Use it in {@see TestCase::setUp()}
+     * Use it in testing legacy functionality in very beginingn of a test method.
      */
     private function setUpLegacy(TestCase $testCase): void
     {
@@ -68,7 +68,7 @@ trait LegacyBaseTrait
     }
 
     /**
-     * Use it in {@see TestCase::tearDown()}
+     * Use it in testing legacy functionality in very end of a test method.
      */
     private function tearDownLegacy(TestCase $testCase): void
     {

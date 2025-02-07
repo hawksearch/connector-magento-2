@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace HawkSearch\Connector\Test\Unit\Compatibility\Fixtures;
 
 use HawkSearch\Connector\Compatibility\PublicMethodDeprecationTrait;
+use Magento\Framework\DataObject;
 
 class PublicMethodDeprecationBase
 {
@@ -109,5 +110,72 @@ class PublicMethodDeprecationDerived extends PublicMethodDeprecationBase
     public function doOverwrittenDeprecatedAction(string $arg): string
     {
         return parent::doOverwrittenDeprecatedAction($arg) . ' in derived class';
+    }
+}
+
+class DeprecatedFromDataObject extends DataObject
+{
+    use PublicMethodDeprecationTrait;
+
+    private string $something = 'Initial Something';
+    private array $deprecatedMethods = [];
+
+    public function __construct(array $deprecatedMethods)
+    {
+        $this->deprecatedMethods = $deprecatedMethods;
+    }
+
+    public function setSomething(string $value): self
+    {
+        $this->something = $value . ' set';
+        return $this;
+    }
+
+    public function getSomething(): string
+    {
+        return $this->something . ' get';
+    }
+
+    public function hasSomething(): bool
+    {
+        return isset($this->something);
+    }
+
+    public function unsSomething(): self
+    {
+        unset($this->something);
+        return $this;
+    }
+
+    public function doSomethingUsual(): string
+    {
+        return $this->something;
+    }
+
+    private function setSomethingPrivate($value)
+    {
+        $this->something = $value . ' set';
+        return $this;
+    }
+
+    private function getSomethingPrivate()
+    {
+        return $this->something . ' get';
+    }
+
+    private function hasSomethingPrivate()
+    {
+        return isset($this->something);
+    }
+
+    private function unsSomethingPrivate()
+    {
+        unset($this->something);
+        return $this;
+    }
+
+    private function doSomethingUsualPrivate(): string
+    {
+        return $this->something;
     }
 }
