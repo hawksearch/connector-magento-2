@@ -18,6 +18,7 @@ use HawkSearch\Connector\Logger\Handler\Debug as DebugHandler;
 use Magento\Framework\ObjectManagerInterface;
 use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Logger as MonologLogger;
+use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 
 /**
@@ -42,6 +43,9 @@ class LoggerFactory implements LoggerFactoryInterface
         $this->instanceName = $instanceName;
     }
 
+    /**
+     * @return LoggerInterface
+     */
     public function create()
     {
         if (!$this->loggerConfig->isEnabled()) {

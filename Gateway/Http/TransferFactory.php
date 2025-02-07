@@ -27,7 +27,6 @@ class TransferFactory implements TransferFactoryInterface
 {
     private TransferBuilder $transferBuilder;
     private ApiConfigInterface $apiConfig;
-    private RequestInterface $httpRequest;
     private ConnectionScopeResolver $connectionScopeResolver;
     private string $path;
     private string $method;
@@ -37,7 +36,7 @@ class TransferFactory implements TransferFactoryInterface
     public function __construct(
         TransferBuilder $transferBuilder,
         ApiConfigInterface $apiConfig,
-        RequestInterface $httpRequest,
+        RequestInterface $httpRequest, // @todo remove $httpRequest argument
         UriBuilderFactory $uriBuilderFactory,
         BuilderInterfaceFactory $builderInterfaceFactory,
         ConnectionScopeResolver $connectionScopeResolver,
@@ -49,7 +48,6 @@ class TransferFactory implements TransferFactoryInterface
     {
         $this->transferBuilder = $transferBuilder;
         $this->apiConfig = $apiConfig;
-        $this->httpRequest = $httpRequest;
         $this->connectionScopeResolver = $connectionScopeResolver;
         $this->path = $path;
         $this->method = $method;
@@ -57,6 +55,9 @@ class TransferFactory implements TransferFactoryInterface
         $this->uriBuilder = $uriBuilder ?? $uriBuilderFactory->create();
     }
 
+    /**
+     * @return TransferInterface
+     */
     public function create(array $request)
     {
         return $this->transferBuilder
@@ -73,10 +74,8 @@ class TransferFactory implements TransferFactoryInterface
 
     /**
      * Get Full URL based on relative URL.
-     *
-     * @return string
      */
-    private function buildFullApiUrl()
+    private function buildFullApiUrl(): string
     {
         return $this->uriBuilder->build(
             $this->apiConfig->getApiUrl($this->connectionScopeResolver->resolve()->getId()),

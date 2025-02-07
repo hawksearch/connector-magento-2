@@ -14,13 +14,14 @@ declare(strict_types=1);
 
 namespace HawkSearch\Connector\Gateway\Instruction\Result;
 
+use HawkSearch\Connector\Gateway\Http\ClientInterface;
 use HawkSearch\Connector\Gateway\Instruction\ResultInterface;
 
 /**
  * @api
  * @since 2.11
  *
- * @phpstan-import-type HttpResult from ResultInterface
+ * @phpstan-import-type HttpResult from ClientInterface
  */
 class DefaultResult implements ResultInterface
 {
@@ -38,7 +39,7 @@ class DefaultResult implements ResultInterface
     }
 
     /**
-     * @inheriDoc
+     * @return HttpResult
      */
     public function get()
     {

@@ -22,6 +22,8 @@ class StrictDataBuilder implements BuilderInterface
 {
     /**
      * Build request without data conversion
+     *
+     * @return mixed[]
      */
     public function build(array $buildSubject)
     {

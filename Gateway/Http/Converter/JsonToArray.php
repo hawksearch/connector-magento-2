@@ -30,16 +30,11 @@ class JsonToArray implements ConverterInterface
         $this->json = $json;
     }
 
-    public function convert($response)
+    /**
+     * @return mixed[]
+     */
+    public function convert(string $response)
     {
-        if (!is_string($response)) {
-            throw new \InvalidArgumentException(__('The response type is incorrect. Verify the type and try again.')->render());
-        }
-
-        if ($response === '') {
-            $response = '{}';
-        }
-
-        return $this->json->unserialize($response);
+        return (array)$this->json->unserialize($response);
     }
 }

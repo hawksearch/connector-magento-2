@@ -63,9 +63,6 @@ interface HawkSearchFieldInterface
     const CREATE_DATE = 'CreateDate';
     const MODIFY_DATE = 'ModifyDate';
 
-    /**
-     * @return int
-     */
     public function getFieldId(): int;
 
     /**
@@ -73,9 +70,6 @@ interface HawkSearchFieldInterface
      */
     public function setFieldId(string $value);
 
-    /**
-     * @return string
-     */
     public function getSyncGuid(): string;
 
     /**
@@ -83,9 +77,6 @@ interface HawkSearchFieldInterface
      */
     public function setSyncGuid(string $value);
 
-    /**
-     * @return string
-     */
     public function getName(): string;
 
     /**
@@ -93,9 +84,6 @@ interface HawkSearchFieldInterface
      */
     public function setName(string $value);
 
-    /**
-     * @return string
-     */
     public function getFieldType(): string;
 
     /**
@@ -103,9 +91,6 @@ interface HawkSearchFieldInterface
      */
     public function setFieldType(string $value);
 
-    /**
-     * @return string
-     */
     public function getLabel(): string;
 
     /**
@@ -113,9 +98,6 @@ interface HawkSearchFieldInterface
      */
     public function setLabel(string $value);
 
-    /**
-     * @return string
-     */
     public function getType(): string;
 
     /**
@@ -123,9 +105,6 @@ interface HawkSearchFieldInterface
      */
     public function setType(string $value);
 
-    /**
-     * @return int
-     */
     public function getBoost(): int;
 
     /**
@@ -133,9 +112,6 @@ interface HawkSearchFieldInterface
      */
     public function setBoost(int $value);
 
-    /**
-     * @return int
-     */
     public function getFacetHandler(): int;
 
     /**
@@ -143,9 +119,6 @@ interface HawkSearchFieldInterface
      */
     public function setFacetHandler(int $value);
 
-    /**
-     * @return bool
-     */
     public function getIsPrimaryKey(): bool;
 
     /**
@@ -153,9 +126,6 @@ interface HawkSearchFieldInterface
      */
     public function setIsPrimaryKey(bool $value);
 
-    /**
-     * @return bool
-     */
     public function getIsOutput(): bool;
 
     /**
@@ -163,9 +133,6 @@ interface HawkSearchFieldInterface
      */
     public function setIsOutput(bool $value);
 
-    /**
-     * @return bool
-     */
     public function getIsShingle(): bool;
 
     /**
@@ -173,9 +140,6 @@ interface HawkSearchFieldInterface
      */
     public function setIsShingle(bool $value);
 
-    /**
-     * @return bool
-     */
     public function getIsBestFragment(): bool;
 
     /**
@@ -183,9 +147,6 @@ interface HawkSearchFieldInterface
      */
     public function setIsBestFragment(bool $value);
 
-    /**
-     * @return bool
-     */
     public function getIsDictionary(): bool;
 
     /**
@@ -193,9 +154,6 @@ interface HawkSearchFieldInterface
      */
     public function setIsDictionary(bool $value);
 
-    /**
-     * @return bool
-     */
     public function getIsSort(): bool;
 
     /**
@@ -203,9 +161,6 @@ interface HawkSearchFieldInterface
      */
     public function setIsSort(bool $value);
 
-    /**
-     * @return bool
-     */
     public function getIsPrefix(): bool;
 
     /**
@@ -213,9 +168,6 @@ interface HawkSearchFieldInterface
      */
     public function setIsPrefix(bool $value);
 
-    /**
-     * @return bool
-     */
     public function getIsHidden(): bool;
 
     /**
@@ -223,9 +175,6 @@ interface HawkSearchFieldInterface
      */
     public function setIsHidden(bool $value);
 
-    /**
-     * @return bool
-     */
     public function getIsCompare(): bool;
 
     /**
@@ -233,9 +182,6 @@ interface HawkSearchFieldInterface
      */
     public function setIsCompare(bool $value);
 
-    /**
-     * @return int
-     */
     public function getSortOrder(): int;
 
     /**
@@ -243,9 +189,6 @@ interface HawkSearchFieldInterface
      */
     public function setSortOrder(int $value);
 
-    /**
-     * @return string
-     */
     public function getPartialQuery(): string;
 
     /**
@@ -253,9 +196,6 @@ interface HawkSearchFieldInterface
      */
     public function setPartialQuery(string $value);
 
-    /**
-     * @return bool
-     */
     public function getIsKeywordText(): bool;
 
     /**
@@ -263,9 +203,6 @@ interface HawkSearchFieldInterface
      */
     public function setIsKeywordText(bool $value);
 
-    /**
-     * @return bool
-     */
     public function getIsQuery(): bool;
 
     /**
@@ -273,9 +210,6 @@ interface HawkSearchFieldInterface
      */
     public function setIsQuery(bool $value);
 
-    /**
-     * @return bool
-     */
     public function getIsQueryText(): bool;
 
     /**
@@ -283,9 +217,6 @@ interface HawkSearchFieldInterface
      */
     public function setIsQueryText(bool $value);
 
-    /**
-     * @return bool
-     */
     public function getSkipCustom(): bool;
 
     /**
@@ -293,9 +224,6 @@ interface HawkSearchFieldInterface
      */
     public function setSkipCustom(bool $value);
 
-    /**
-     * @return bool
-     */
     public function getStripHtml(): bool;
 
     /**
@@ -303,9 +231,6 @@ interface HawkSearchFieldInterface
      */
     public function setStripHtml(bool $value);
 
-    /**
-     * @return int
-     */
     public function getMinNGramAnalyzer(): int;
 
     /**
@@ -313,9 +238,6 @@ interface HawkSearchFieldInterface
      */
     public function setMinNGramAnalyzer(int $value);
 
-    /**
-     * @return int
-     */
     public function getMaxNGramAnalyzer(): int;
 
     /**
@@ -323,9 +245,6 @@ interface HawkSearchFieldInterface
      */
     public function setMaxNGramAnalyzer(int $value);
 
-    /**
-     * @return int
-     */
     public function getCoordinateType(): int;
 
     /**
@@ -333,9 +252,6 @@ interface HawkSearchFieldInterface
      */
     public function setCoordinateType(int $value);
 
-    /**
-     * @return bool
-     */
     public function getOmitNorms(): bool;
 
     /**
@@ -343,9 +259,6 @@ interface HawkSearchFieldInterface
      */
     public function setOmitNorms(bool $value);
 
-    /**
-     * @return string
-     */
     public function getItemMapping(): string;
 
     /**
@@ -353,9 +266,6 @@ interface HawkSearchFieldInterface
      */
     public function setItemMapping(string $value);
 
-    /**
-     * @return string
-     */
     public function getDefaultValue(): string;
 
     /**
@@ -363,9 +273,6 @@ interface HawkSearchFieldInterface
      */
     public function setDefaultValue(string $value);
 
-    /**
-     * @return bool
-     */
     public function getUseForPrediction(): bool;
 
     /**
@@ -373,9 +280,6 @@ interface HawkSearchFieldInterface
      */
     public function setUseForPrediction(bool $value);
 
-    /**
-     * @return string
-     */
     public function getCopyTo(): string;
 
     /**
@@ -383,9 +287,6 @@ interface HawkSearchFieldInterface
      */
     public function setCopyTo(string $value);
 
-    /**
-     * @return string
-     */
     public function getAnalyzer(): string;
 
     /**
@@ -393,9 +294,6 @@ interface HawkSearchFieldInterface
      */
     public function setAnalyzer(string $value);
 
-    /**
-     * @return bool
-     */
     public function getDoNotStore(): bool;
 
     /**
@@ -403,9 +301,6 @@ interface HawkSearchFieldInterface
      */
     public function setDoNotStore(bool $value);
 
-    /**
-     * @return string
-     */
     public function getTags(): string;
 
     /**
@@ -414,7 +309,7 @@ interface HawkSearchFieldInterface
     public function setTags(string $value);
 
     /**
-     * @return array
+     * @return int[]
      */
     public function getIterations(): array;
 
@@ -444,9 +339,6 @@ interface HawkSearchFieldInterface
      */
     public function setPreviewMapping(string $value);
 
-    /**
-     * @return bool
-     */
     public function getOmitTfAndPos(): bool;
 
     /**
@@ -454,9 +346,6 @@ interface HawkSearchFieldInterface
      */
     public function setOmitTfAndPos(bool $value);
 
-    /**
-     * @return string
-     */
     public function getCreateDate(): string;
 
     /**
@@ -464,9 +353,6 @@ interface HawkSearchFieldInterface
      */
     public function setCreateDate(string $value);
 
-    /**
-     * @return string
-     */
     public function getModifyDate(): string;
 
     /**

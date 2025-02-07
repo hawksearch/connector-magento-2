@@ -10,21 +10,19 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 namespace HawkSearch\Connector\Gateway\Http;
 
 /**
- * Interface ConverterInterface
  * @api
  * @since 2.11
  */
 interface ConverterInterface
 {
     /**
-     * Converts gateway response to ENV structure
+     * Converts gateway response to a desired structure
      *
-     * @param mixed $response
-     * @return array
-     * @throws \InvalidArgumentException
+     * @return mixed
      */
-    public function convert($response);
+    public function convert(string $response);
 }

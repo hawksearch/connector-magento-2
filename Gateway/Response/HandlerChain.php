@@ -47,6 +47,9 @@ class HandlerChain implements HandlerInterface
         );
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function handle(array $handlingSubject, array $response)
     {
         foreach ($this->handlers as $handler) {

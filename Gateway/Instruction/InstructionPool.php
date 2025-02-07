@@ -51,6 +51,9 @@ class InstructionPool implements InstructionPoolInterface
         );
     }
 
+    /**
+     * @return InstructionInterface
+     */
     public function get(string $instructionCode)
     {
         if (!isset($this->instructions[$instructionCode])) {

@@ -42,7 +42,7 @@ class Client implements ClientInterface
     }
 
     /**
-     * @return array
+     * @return array<string, mixed>
      */
     public function placeRequest(TransferInterface $transferObject)
     {
@@ -97,7 +97,7 @@ class Client implements ClientInterface
 
             $responseData[self::RESPONSE_DATA] = $this->converter->convert($response->getBody());
             $responseData[self::RESPONSE_CODE] = $response->getStatusCode();
-            $responseData[self::RESPONSE_MESSAGE] = $response->getReasonPhrase();
+            $responseData[self::RESPONSE_MESSAGE] = (string)$response->getReasonPhrase();
 
             $this->logger->info(
                 'Api Client Response:',
@@ -106,7 +106,7 @@ class Client implements ClientInterface
                     'message' => $responseData[self::RESPONSE_MESSAGE],
                 ]
             );
-            $this->logger->debug('Response Body:', (array)$responseData[self::RESPONSE_DATA]);
+            $this->logger->debug('Response Body:', $responseData[self::RESPONSE_DATA]);
         } catch (RuntimeException $e) {
             $message = $e->getMessage();
             if ($e->getCode()) {

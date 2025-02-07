@@ -33,6 +33,9 @@ class LoggerConfig implements LoggerConfigInterface
         $this->loggerXmlConfig = $loggerXmlConfig;
     }
 
+    /**
+     * @return bool
+     */
     public function isEnabled()
     {
         return $this->loggerXmlConfig->isEnabled();

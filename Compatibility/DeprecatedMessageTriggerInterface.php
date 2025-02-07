@@ -18,6 +18,8 @@ interface DeprecatedMessageTriggerInterface
 {
     /**
      * Trigger deprecation message
+     *
+     * @return void
      */
     public function execute(string $message);
 }

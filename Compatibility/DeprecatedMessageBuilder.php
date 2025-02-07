@@ -52,7 +52,7 @@ class DeprecatedMessageBuilder
         $messageTemplateParts = [];
 
         foreach (self::PARTS_ORDER as $part) {
-            /** @var DataObject $partObject */
+            /** @var ?DataObject $partObject */
             $partObject = $this->_get($part);
             if (!$partObject || !$partObject->getFormat()) {
                 continue;
@@ -99,7 +99,6 @@ class DeprecatedMessageBuilder
     /**
      * @param string $format
      * @param string[] $values
-     * @return DataObject
      */
     private function getPartObject(string $format, array $values = []): DataObject
     {

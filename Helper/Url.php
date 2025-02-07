@@ -117,7 +117,7 @@ class Url
     /**
      * Explodes path parts from an uri string
      *
-     * @return array
+     * @return string[]
      */
     protected function explodeUriPath(string $path)
     {
@@ -130,7 +130,7 @@ class Url
      * Clean empty parts in the path
      *
      * @param string[] $pathParts
-     * @return array
+     * @return string[]
      */
     protected function filterPathParts(array $pathParts)
     {
@@ -156,7 +156,7 @@ class Url
      */
     protected function isTrailingSlashInPath(string $path)
     {
-        return substr($path, -1) == '/';
+        return substr($path, -1) === '/';
     }
 
     /**

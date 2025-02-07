@@ -168,7 +168,6 @@ trait PublicPropertyDeprecationTrait
     /**
      * @param string $propertyName
      * @param mixed[] $mainPartArgs
-     * @return string
      */
     private function buildPropertyDeprecationMessage(string $propertyName, array $mainPartArgs): string
     {

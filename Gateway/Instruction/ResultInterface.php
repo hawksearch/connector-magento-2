@@ -14,18 +14,8 @@ declare(strict_types=1);
 
 namespace HawkSearch\Connector\Gateway\Instruction;
 
-use HawkSearch\Connector\Gateway\Http\ClientInterface;
-
 /**
  * @api
- *
- * @phpstan-type HttpResult array{
- *     'code': int,
- *     'message': string,
- *     'response': mixed
- * }|array{}
- * @todo Remove empty array definition for HttpResult phpstan type
- * @todo Replace HttpResult phpstan iterable type with a new HttpResultInterface type
  */
 interface ResultInterface
 {

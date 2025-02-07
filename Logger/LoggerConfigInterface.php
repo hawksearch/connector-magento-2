@@ -27,6 +27,7 @@ interface LoggerConfigInterface
 
     /**
      * Is logger enabled
+     *
      * @return  bool
      */
     public function isEnabled();
@@ -38,7 +39,7 @@ interface LoggerConfigInterface
 
     /**
      * @param MonologLoggerLevel $level
-     * @return self
+     * @return $this
      */
     public function setLogLevel(int $level);
 }

@@ -18,7 +18,14 @@ namespace HawkSearch\Connector\Gateway\Http;
  * Interface ClientInterface
  * Http client interface
  *
+ * @phpstan-type HttpResult array{
+ *      code: int,
+ *      message: string,
+ *      response: mixed,
+ *  }|array{}
  * @api
+ * @todo Remove empty array definition for HttpResult phpstan type
+ * @todo Replace HttpResult phpstan iterable type with a new HttpResultInterface type
  */
 interface ClientInterface
 {
@@ -29,7 +36,7 @@ interface ClientInterface
     /**
      * Places request to gateway. Returns result as ENV array
      *
-     * @return array
+     * @return HttpResult
      */
     public function placeRequest(TransferInterface $transferObject);
 }

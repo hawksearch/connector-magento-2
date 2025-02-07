@@ -76,9 +76,7 @@ class Transfer implements TransferInterface
     }
 
     /**
-     * Returns gateway client configuration
-     *
-     * @return array
+     * @return array<string, mixed>
      */
     public function getClientConfig()
     {
@@ -86,8 +84,6 @@ class Transfer implements TransferInterface
     }
 
     /**
-     * Returns method used to place request
-     *
      * @return string
      */
     public function getMethod()
@@ -96,23 +92,22 @@ class Transfer implements TransferInterface
     }
 
     /**
-     * Returns headers
-     *
-     * @return array
+     * @return array<array-key, mixed>
      */
     public function getHeaders()
     {
         return $this->headers;
     }
 
+    /**
+     * @return RequestSubject
+     */
     public function getBody()
     {
         return $this->body;
     }
 
     /**
-     * Returns URI
-     *
      * @return string
      */
     public function getUri()
@@ -129,8 +124,6 @@ class Transfer implements TransferInterface
     }
 
     /**
-     * Returns Auth username
-     *
      * @return string
      */
     public function getAuthUsername()
@@ -139,8 +132,6 @@ class Transfer implements TransferInterface
     }
 
     /**
-     * Returns Auth password
-     *
      * @return string
      */
     public function getAuthPassword()
