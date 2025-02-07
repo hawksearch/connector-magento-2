@@ -22,10 +22,7 @@ use Magento\Framework\Data\OptionSourceInterface;
  */
 class Environment implements OptionSourceInterface
 {
-    /**
-     * @inheritDoc
-     */
-    public function toOptionArray() : array
+    public function toOptionArray(): array
     {
         return [
             [

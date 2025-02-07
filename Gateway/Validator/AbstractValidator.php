@@ -19,6 +19,7 @@ use HawkSearch\Connector\Gateway\Validator\ResultInterfaceFactory;
 
 /**
  * Represents a basic validator that can create a result
+ *
  * @todo Get rid of Abstract class in favour of builder for ResultInterface objects
  */
 abstract class AbstractValidator implements ValidatorInterface
@@ -28,9 +29,6 @@ abstract class AbstractValidator implements ValidatorInterface
      */
     private $resultInterfaceFactory;
 
-    /**
-     * @param ResultInterfaceFactory $resultFactory
-     */
     public function __construct(
         ResultInterfaceFactory $resultFactory
     ) {

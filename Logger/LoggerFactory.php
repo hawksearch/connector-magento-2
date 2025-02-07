@@ -59,9 +59,6 @@ class LoggerFactory implements LoggerFactoryInterface
         $this->instanceName = $instanceName;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function create()
     {
         if (!$this->loggerConfig->isEnabled()) {

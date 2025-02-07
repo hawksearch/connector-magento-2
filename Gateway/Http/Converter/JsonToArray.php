@@ -34,9 +34,6 @@ class JsonToArray implements ConverterInterface
         $this->json = $json;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function convert($response)
     {
         if (!is_string($response)) {

@@ -46,25 +46,16 @@ class Result implements ResultInterface
         $this->errorCodes = $errorCodes;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isValid(): bool
     {
         return $this->isValid;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getFailsDescription(): array
     {
         return $this->failsDescription;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getErrorCodes(): array
     {
         return $this->errorCodes;

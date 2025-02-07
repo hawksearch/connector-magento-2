@@ -29,9 +29,6 @@ class UriBuilder implements UriBuilderInterface
         $this->urlUtility = $urlUtility;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function build(string $url, string $path): string
     {
         return $this->urlUtility->getUriWithPath($url, $path)->__toString();

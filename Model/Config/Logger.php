@@ -18,15 +18,12 @@ use HawkSearch\Connector\Model\ConfigProvider;
 
 class Logger extends ConfigProvider
 {
-    /**#@+
-     * Configuration paths
-     */
     const ENABLE_DEBUG = 'enable_debug';
     const LOG_LEVEL = 'log_level';
-    /**#@-*/
 
     /**
      * Check if logging is enabled for selected store
+     *
      * @param null|int|string $store
      * @return bool
      */

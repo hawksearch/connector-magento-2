@@ -30,9 +30,6 @@ class FieldHandler implements HandlerInterface
         $this->fieldFactory = $fieldFactory;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function handle(array $handlingSubject, array $response)
     {
         if (isset($response[ClientInterface::RESPONSE_DATA])) {

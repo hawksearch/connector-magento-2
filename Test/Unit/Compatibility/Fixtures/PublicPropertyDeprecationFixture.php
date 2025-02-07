@@ -61,7 +61,8 @@ class PublicPropertyDeprecationDerived extends PublicPropertyDeprecationBase
 
     public function accessDeprecatedPrivatePropertyFromDerivedClass(): string
     {
-        return $this->propertyDeprecatedChangedToPrivateScope;
+        $property = 'propertyDeprecatedChangedToPrivateScope';
+        return $this->$property;
     }
 
     public function accessDeprecatedProtectedPropertyFromDerivedClassNoDeprecationNotice(): string

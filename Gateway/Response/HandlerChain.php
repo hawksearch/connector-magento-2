@@ -47,9 +47,6 @@ class HandlerChain implements HandlerInterface
         );
     }
 
-    /**
-     * @inheritDoc
-     */
     public function handle(array $handlingSubject, array $response)
     {
         foreach ($this->handlers as $handler) {
