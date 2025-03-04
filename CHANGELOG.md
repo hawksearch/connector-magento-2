@@ -24,7 +24,8 @@ The following classes in `\HawkSearch\Connector` namespace are defined as `@api`
 - Block\System\Config\Logger\LogeLevels
 - Gateway\Helper\HttpResponseReader
 - Gateway\Helper\SubjectReader
-- Gateway\Http\JsonToArray
+- Gateway\Http\Converter\ArrayToJson
+- Gateway\Http\Converter\JsonToArray
 - Gateway\Http\Instruction\InstructionManager
 - Gateway\Http\Instruction\InstructionManagerPool
 - Gateway\Instruction\Result\ArrayResult
@@ -34,6 +35,7 @@ The following classes in `\HawkSearch\Connector` namespace are defined as `@api`
 - Gateway\Response\HandlerChain
 - Gateway\Validator\ValidatorComposite
 - Helper\Url
+- \HawkSearch\Connector\
 
 
 

@@ -20,9 +20,9 @@ namespace HawkSearch\Connector\Gateway\Http;
 interface ConverterInterface
 {
     /**
-     * Converts gateway response to a desired structure
+     * Converts gateway data to a desired structure
      *
      * @return mixed
      */
-    public function convert(string $response);
+    public function convert(mixed $data);
 }
