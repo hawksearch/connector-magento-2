@@ -14,31 +14,34 @@ declare(strict_types=1);
 
 namespace HawkSearch\Connector\Gateway\Http;
 
+use HawkSearch\Connector\Gateway\Http\Converter\ArrayToJson;
 use HawkSearch\Connector\Logger\LoggerFactory;
 use Laminas\Http\Client as LaminasClient;
 use Laminas\Http\ClientFactory as LaminasClientFactory;
 use Laminas\Http\Exception\RuntimeException;
 use Laminas\Http\Request as HttpRequest;
+use Magento\Framework\App\ObjectManager;
 use Magento\Framework\Serialize\Serializer\Json;
 use Psr\Log\LoggerInterface;
 
 class Client implements ClientInterface
 {
-    private LoggerInterface $logger;
     private LaminasClientFactory $httpClientFactory;
-    private Json $json;
-    private ConverterInterface $converter;
+    private ConverterInterface $responseConverter;
+    private LoggerInterface $logger;
+    private ConverterInterface $requestConverter;
 
     public function __construct(
         LaminasClientFactory $httpClientFactory,
         Json $json,
         ConverterInterface $converter,
-        LoggerFactory $loggerFactory
+        LoggerFactory $loggerFactory,
+        ConverterInterface $requestConverter = null,
     ) {
         $this->httpClientFactory = $httpClientFactory;
-        $this->json = $json;
-        $this->converter = $converter;
+        $this->responseConverter = $converter;
         $this->logger = $loggerFactory->create();
+        $this->requestConverter = $requestConverter ?: ObjectManager::getInstance()->get(ArrayToJson::class);
     }
 
     /**
@@ -78,7 +81,7 @@ class Client implements ClientInterface
             if ($transferObject->getMethod() === HttpRequest::METHOD_GET) {
                 $client->setParameterGet($requestBody);
             } else {
-                $requestBody = !empty($requestBody) ? $this->json->serialize($requestBody) : '';
+                $requestBody = !empty($requestBody) ? $this->requestConverter->convert($requestBody) : '';
                 $client->setRawBody($requestBody);
                 $client->setEncType('application/json');
             }
@@ -95,7 +98,7 @@ class Client implements ClientInterface
 
             $response = $client->send();
 
-            $responseData[self::RESPONSE_DATA] = $this->converter->convert($response->getBody());
+            $responseData[self::RESPONSE_DATA] = $this->responseConverter->convert($response->getBody());
             $responseData[self::RESPONSE_CODE] = $response->getStatusCode();
             $responseData[self::RESPONSE_MESSAGE] = (string)$response->getReasonPhrase();
 

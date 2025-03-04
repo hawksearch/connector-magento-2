@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2023 Hawksearch (www.hawksearch.com) - All Rights Reserved
+ * Copyright (c) 2025 Hawksearch (www.hawksearch.com) - All Rights Reserved
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -20,7 +20,7 @@ use Magento\Framework\Serialize\Serializer\Json;
  * @api
  * @since 2.11
  */
-class JsonToArray implements ConverterInterface
+class ArrayToJson implements ConverterInterface
 {
     private Json $json;
 
@@ -31,19 +31,11 @@ class JsonToArray implements ConverterInterface
     }
 
     /**
-     * @param string $data
-     * @return mixed[]
+     * @param array<mixed> $data
+     * @return string
      */
-    public function convert(mixed $data)
+    public function convert(mixed $data): string
     {
-        if (!is_string($data)) {
-            throw new \InvalidArgumentException(__('$data Parameter is not a string.')->render());
-        }
-
-        if ($data === '') {
-            $data = '{}';
-        }
-
-        return (array)$this->json->unserialize($data);
+        return $this->json->serialize($data);
     }
 }
