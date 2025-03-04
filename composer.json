@@ -29,5 +29,8 @@
         "allow-plugins": {
             "phpstan/extension-installer": true
         }
-    }
+    },
+    "bin": [
+        "bin/magento-patch-type-declarations"
+    ]
 }
