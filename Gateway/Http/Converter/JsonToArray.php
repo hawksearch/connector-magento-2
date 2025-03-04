@@ -31,10 +31,19 @@ class JsonToArray implements ConverterInterface
     }
 
     /**
+     * @param string $data
      * @return mixed[]
      */
-    public function convert(string $response)
+    public function convert(mixed $data)
     {
-        return (array)$this->json->unserialize($response);
+        if (!is_string($data)) {
+            throw new \InvalidArgumentException(__('$data Parameter is not a string.')->render());
+        }
+
+        if ($data === '') {
+            $data = '{}';
+        }
+
+        return (array)$this->json->unserialize($data);
     }
 }
