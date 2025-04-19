@@ -30,8 +30,9 @@ class SubjectReader
     /**
      * @param ValidationSubject $subject
      * @return HttpResult
-     * @todo get rid of this method in favour of HttpResultInterface
+     * @throws \InvalidArgumentException if nothing to return
      * @see ClientInterface
+     * @todo get rid of this method in favour of HttpResultInterface
      */
     public function readResponse(array $subject)
     {

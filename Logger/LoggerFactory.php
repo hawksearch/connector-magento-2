@@ -45,6 +45,7 @@ class LoggerFactory implements LoggerFactoryInterface
 
     /**
      * @return LoggerInterface
+     * @throws \InvalidArgumentException if $instanceName has wrong type
      */
     public function create()
     {

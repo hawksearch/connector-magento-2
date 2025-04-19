@@ -31,6 +31,7 @@ class HttpResponseReader
     /**
      * @param HttpResult $subject
      * @return string
+     * @throws \InvalidArgumentException if nothing to return
      */
     public function readResponseCode(array $subject)
     {
@@ -45,6 +46,7 @@ class HttpResponseReader
     /**
      * @param HttpResult $subject
      * @return mixed
+     * @throws \InvalidArgumentException if nothing to return
      */
     public function readResponseData(array $subject)
     {

@@ -86,7 +86,9 @@ trait PublicMethodDeprecationTrait
      * Triggers a deprecation message for a callable(protected or private) method and execute it.
      * If method isn't callable it throws a fatal error.
      * Method signature is in sync with {@see DataObject::__call}
+     *
      * @return mixed
+     * @throws \Error if method is unknown or client accessing restricted scope method
      */
     public function __call($methodName, $arguments) // @phpstan-ignore-line
     {

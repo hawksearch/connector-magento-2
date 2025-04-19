@@ -51,6 +51,7 @@ class InstructionManagerPool implements InstructionManagerPoolInterface
 
     /**
      * @return InstructionManagerInterface
+     * @throws NotFoundException if executor is not found
      */
     public function get(string $instructionProviderCode)
     {

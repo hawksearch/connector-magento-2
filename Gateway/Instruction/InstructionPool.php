@@ -53,12 +53,13 @@ class InstructionPool implements InstructionPoolInterface
 
     /**
      * @return InstructionInterface
+     * @throws NotFoundException if instruction is not found
      */
     public function get(string $instructionCode)
     {
         if (!isset($this->instructions[$instructionCode])) {
             throw new NotFoundException(
-                __('The "%1" request doesn\'t exist. Verify the request and try again.', $instructionCode)
+                __('The "%1" instruction doesn\'t exist.', $instructionCode)
             );
         }
 
