@@ -34,11 +34,12 @@ class JsonToArray implements ConverterInterface
     /**
      * @param string $data
      * @return mixed[]
+     * @throws \InvalidArgumentException if $data is not a string
      */
     public function convert(mixed $data)
     {
         if (!is_string($data)) {
-            throw new \InvalidArgumentException(__('$data Parameter is not a string.')->render());
+            throw new \InvalidArgumentException(__('$data argument is not a string.')->render());
         }
 
         if ($data === '') {

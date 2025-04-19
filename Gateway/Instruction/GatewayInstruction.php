@@ -93,7 +93,7 @@ class GatewayInstruction implements InstructionInterface
      *
      * @throws InstructionException
      */
-    private function processErrors(ResultInterface $result): void
+    private function processErrors(ResultInterface $result): never
     {
         $messages = [];
         $errorsSource = array_merge($result->getErrorCodes(), $result->getFailsDescription());
