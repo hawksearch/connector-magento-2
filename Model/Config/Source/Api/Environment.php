@@ -23,9 +23,9 @@ use Magento\Framework\Data\OptionSourceInterface;
 class Environment implements OptionSourceInterface
 {
     /**
-     * @inheritDoc
+     * @return list<array{label: \Stringable, value: string}>
      */
-    public function toOptionArray() : array
+    public function toOptionArray(): array
     {
         return [
             [

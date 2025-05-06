@@ -23,40 +23,17 @@ use Magento\Store\Model\ScopeInterface;
  */
 class ConfigProvider implements ConfigProviderInterface
 {
-    /**
-     * XML configuration root paths
-     */
     const XML_ROOT_PATH = 'hawksearch_connector';
-
-    /**
-     * XML configuration general group
-     */
     const XML_GENERAL_GROUP = 'general';
 
-    /**
-     * @var ScopeConfigInterface
-     */
-    private $scopeConfig;
+    private ScopeConfigInterface $scopeConfig;
+    private string $configRootPath;
+    private string $configGroup;
 
-    /**
-     * @var string
-     */
-    private $configGroup;
-
-    /**
-     * @var string
-     */
-    private $configRootPath;
-
-    /**
-     * @param ScopeConfigInterface $scopeConfig
-     * @param string|null $configRootPath
-     * @param string|null $configGroup
-     */
     public function __construct(
         ScopeConfigInterface $scopeConfig,
-        $configRootPath = null,
-        $configGroup = null
+        ?string $configRootPath = null,
+        ?string $configGroup = null
     ) {
         $this->scopeConfig = $scopeConfig;
         $this->configRootPath = $configRootPath ?? static::XML_ROOT_PATH;
@@ -66,18 +43,17 @@ class ConfigProvider implements ConfigProviderInterface
     /**
      * Get absolute path for $path parameter
      *
-     * @param string $path Absolute path
      * @return string
      */
-    public function getPath($path)
+    public function getPath(string $path)
     {
         return $this->configRootPath . '/' . $this->configGroup . '/' . $path;
     }
 
     /**
-     * @inheritDoc
+     * @return mixed
      */
-    public function getConfig(string $path, $scopeId = null, $scope = ScopeInterface::SCOPE_STORES)
+    public function getConfig(string $path, $scopeId = null, string $scope = ScopeInterface::SCOPE_STORES)
     {
         return $this->scopeConfig->getValue(
             $this->getPath($path),

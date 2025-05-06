@@ -14,67 +14,45 @@ declare(strict_types=1);
 
 namespace HawkSearch\Connector\Gateway\Http;
 
+use HawkSearch\Connector\Gateway\Http\Converter\ArrayToJson;
 use HawkSearch\Connector\Logger\LoggerFactory;
-use Laminas\Http\Exception\RuntimeException;
-use Laminas\Http\Request as HttpRequest;
-use Magento\Framework\Exception\NoSuchEntityException;
 use Laminas\Http\Client as LaminasClient;
 use Laminas\Http\ClientFactory as LaminasClientFactory;
+use Laminas\Http\Exception\RuntimeException;
+use Laminas\Http\Request as HttpRequest;
+use Magento\Framework\App\ObjectManager;
 use Magento\Framework\Serialize\Serializer\Json;
 use Psr\Log\LoggerInterface;
 
 class Client implements ClientInterface
 {
-    /**
-     * @var LoggerInterface
-     */
-    private $logger;
+    private LaminasClientFactory $httpClientFactory;
+    private ConverterInterface $responseConverter;
+    private LoggerInterface $logger;
+    private ConverterInterface $requestConverter;
 
-    /**
-     * @var LaminasClientFactory
-     */
-    private $httpClientFactory;
-
-    /**
-     * @var Json
-     */
-    private $json;
-
-    /**
-     * @var ConverterInterface
-     */
-    private $converter;
-
-    /**
-     * @param LaminasClientFactory $httpClientFactory
-     * @param Json $json
-     * @param ConverterInterface $converter
-     * @param LoggerFactory $loggerFactory
-     * @throws NoSuchEntityException
-     */
     public function __construct(
         LaminasClientFactory $httpClientFactory,
         Json $json,
         ConverterInterface $converter,
-        LoggerFactory $loggerFactory
+        LoggerFactory $loggerFactory,
+        ConverterInterface $requestConverter = null,
     ) {
         $this->httpClientFactory = $httpClientFactory;
-        $this->json = $json;
-        $this->converter = $converter;
+        $this->responseConverter = $converter;
         $this->logger = $loggerFactory->create();
+        $this->requestConverter = $requestConverter ?: ObjectManager::getInstance()->get(ArrayToJson::class);
     }
 
     /**
-     * @param TransferInterface $transferObject
-     * @return array
-     * @throws \Exception
+     * @return array<string, mixed>
      */
     public function placeRequest(TransferInterface $transferObject)
     {
         $requestBody = $transferObject->getBody();
         $responseData = [
             self::RESPONSE_CODE => 0,
-            self::RESPONSE_MESSAGE => 'API request wasn\'t processed.' ,
+            self::RESPONSE_MESSAGE => 'API request wasn\'t processed.',
             self::RESPONSE_DATA => ''
         ];
 
@@ -103,35 +81,35 @@ class Client implements ClientInterface
             if ($transferObject->getMethod() === HttpRequest::METHOD_GET) {
                 $client->setParameterGet($requestBody);
             } else {
-                $requestBody = !empty($requestBody) ? $this->json->serialize($requestBody) : '';
+                $requestBody = !empty($requestBody) ? $this->requestConverter->convert($requestBody) : '';
                 $client->setRawBody($requestBody);
                 $client->setEncType('application/json');
             }
 
             $this->logger->info(
                 'Api Client Request:',
-                array(
-                    'method'    => $client->getMethod(),
-                    'uri'       => $client->getUri()->toString(),
-                    'headers'   => $client->getRequest()->getHeaders()->toArray(),
-                )
+                [
+                    'method' => $client->getMethod(),
+                    'uri' => $client->getUri()->toString(),
+                    'headers' => $client->getRequest()->getHeaders()->toArray(),
+                ]
             );
             $this->logger->debug('Request Body:', (array)$requestBody);
 
             $response = $client->send();
 
-            $responseData[self::RESPONSE_DATA] = $this->converter->convert($response->getBody());
+            $responseData[self::RESPONSE_DATA] = $this->responseConverter->convert($response->getBody());
             $responseData[self::RESPONSE_CODE] = $response->getStatusCode();
-            $responseData[self::RESPONSE_MESSAGE] = $response->getReasonPhrase();
+            $responseData[self::RESPONSE_MESSAGE] = (string)$response->getReasonPhrase();
 
             $this->logger->info(
                 'Api Client Response:',
-                array(
-                    'status'    => $responseData[self::RESPONSE_CODE],
-                    'message'    => $responseData[self::RESPONSE_MESSAGE],
-                )
+                [
+                    'status' => $responseData[self::RESPONSE_CODE],
+                    'message' => $responseData[self::RESPONSE_MESSAGE],
+                ]
             );
-            $this->logger->debug('Response Body:', (array)$responseData[self::RESPONSE_DATA]);
+            $this->logger->debug('Response Body:', $responseData[self::RESPONSE_DATA]);
         } catch (RuntimeException $e) {
             $message = $e->getMessage();
             if ($e->getCode()) {

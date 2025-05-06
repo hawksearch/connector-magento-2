@@ -15,14 +15,11 @@ declare(strict_types=1);
 
 namespace HawkSearch\Connector\Gateway\Http\Uri;
 
+/**
+ * @api
+ * @since 2.11
+ */
 interface UriBuilderInterface
 {
-    /**
-     * Builds API Url
-     *
-     * @param string $url
-     * @param string $path
-     * @return string
-     */
     public function build(string $url, string $path): string;
 }

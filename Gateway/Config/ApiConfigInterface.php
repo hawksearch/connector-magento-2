@@ -15,13 +15,16 @@ declare(strict_types=1);
 
 namespace HawkSearch\Connector\Gateway\Config;
 
+/**
+ * @api
+ * @since 2.11
+ */
 interface ApiConfigInterface
 {
     /**
      * Returns API url
      *
      * @param null|int|string $store
-     * @return string
      */
     public function getApiUrl($store = null): string;
 
@@ -29,7 +32,6 @@ interface ApiConfigInterface
      * Returns API Bearer connection token
      *
      * @param null|int|string $store
-     * @return string
      */
     public function getApiKey($store = null): string;
 }

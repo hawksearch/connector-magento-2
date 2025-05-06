@@ -14,17 +14,19 @@ declare(strict_types=1);
 
 namespace HawkSearch\Connector\Compatibility;
 
+use Magento\Framework\DataObject;
+use Magento\Framework\Exception\LocalizedException;
 use ReflectionException;
 
 /**
- * Trait helps to trigger a deprecation error for public methods of classes.
- * Starting PHP 8.1 it also works for deprecating protected methods as well.
+ * Trait helps to trigger a deprecation error for public/protected methods.
  *
  * Usage:
- * - Use this treat for classes which require one or more public methods to be deprecated because of changing method
- *   visibility or removing.
- * - Add deprecated public methods to $deprecatedMethods property.
- * - Set these methods to protected or private. If it is a public method of an interface, don't change method visibility.
+ * - Use this treat for classes which require one or more public/protected methods to be deprecated because of changing
+ *   method visibility or removing.
+ * - Add deprecated public/protected methods to $deprecatedMethods property in your class.
+ * - Change method visibility to protected or private. If it is a public method of an interface, don't change method
+ *   visibility.
  *
  * Removing deprecation:
  * - Remove methods from $deprecatedMethods property
@@ -36,7 +38,7 @@ use ReflectionException;
  * {
  *      use PublicMethodDeprecationTrait;
  *
- *      private $deprecatedMethods = [
+ *      private array $deprecatedMethods = [
  *          'doSomeAction' => [
  *              'since' => '1.1.0',
  *              'replacement' => __CLASS__ . '::doAnotherAction()',
@@ -55,7 +57,7 @@ use ReflectionException;
  *       * deprecated 1.1.0 Use doAnotherAction() instead
  *       * see $this::doAnotherAction()
  *       /
- *      private function doSomeAction($arg1, $arg2)
+ *      private function doSomeAction($arg1, $arg2): void
  *      {
  *          //method scope has been changed from public to private
  *      }
@@ -65,47 +67,67 @@ use ReflectionException;
  *        *
  *        * deprecated 1.1.0
  *        /
- *      public function publicMethod()
+ *      public function publicMethod(): void
  *      {
  *          $this->triggerPublicMethodDeprecationMessage(__FUNCTION__);
  *      }
  * }
  *
- * @property array $deprecatedMethods List of deprecated public methods
+ * @property array<string, array{
+ *          since: string,
+ *          replacement: string,
+ *          description: string
+ * }> $deprecatedMethods List of deprecated public/protected methods
  * @internal
  */
 trait PublicMethodDeprecationTrait
 {
     /**
-     * Triggers a deprecation message for a callable (public or private) method and execute it.
+     * Triggers a deprecation message for a callable(protected or private) method and execute it.
      * If method isn't callable it throws a fatal error.
+     * Method signature is in sync with {@see DataObject::__call}
      *
-     * @param string $methodName
-     * @param array $arguments
      * @return mixed
+     * @throws \Error if method is unknown or client accessing restricted scope method
      */
-    public function __call(string $methodName, array $arguments)
+    public function __call($methodName, $arguments) // @phpstan-ignore-line
     {
         if (method_exists($this, $methodName) && isset($this->deprecatedMethods[$methodName])) {
             $this->triggerPublicMethodDeprecationMessage($methodName);
             return $this->$methodName(...$arguments);
         }
 
-        if (method_exists($this, $methodName)) {
-            throw new \Error('Call to protected/private method ' . __CLASS__ . '::' . $methodName . '()');
+        $throwUnknownMethodException = false;
+        $exception = null;
+        if ($this instanceof \Magento\Framework\DataObject) {
+            try {
+                return parent::__call($methodName, $arguments); // @phpstan-ignore-line
+            } catch (LocalizedException $exception) {
+                $throwUnknownMethodException = true;
+            }
+        } else {
+            $throwUnknownMethodException = true;
         }
 
-        throw new \Error('Call to undefined method ' . __CLASS__ . '::' . $methodName . '()');
+        /** @phpstan-ignore if.alwaysTrue */
+        if ($throwUnknownMethodException) {
+            if ($exception) {
+                throw $exception;
+            } else {
+                if (method_exists($this, $methodName)) {
+                    throw new \Error('Call to protected/private method ' . __CLASS__ . '::' . $methodName . '()');
+                }
+
+                throw new \Error('Call to undefined method ' . __CLASS__ . '::' . $methodName . '()');
+            }
+        }
     }
 
     /**
      * Trigger a deprecation message for a deprecated method.
      * This method can be triggered from a class public methods which are a part of public contracts
-     *
-     * @param string $methodName
-     * @return void
      */
-    private function triggerPublicMethodDeprecationMessage(string $methodName)
+    private function triggerPublicMethodDeprecationMessage(string $methodName): void
     {
         $message = $this->buildMethodDeprecationMessage(
             $methodName,
@@ -139,12 +161,13 @@ trait PublicMethodDeprecationTrait
      *      $this->triggerPublicMethodDeprecationMessage(__FUNCTION__);
      *      return $this->newMethodName();
      * }
-     *
-     * @param string $methodName
-     * @return void
      */
-    private function triggerDerivedMethodDeprecationMessage(string $methodName)
+    private function triggerDerivedMethodDeprecationMessage(string $methodName): void
     {
+        if (!$this->isMethodOverwritten($methodName)) {
+            return;
+        }
+
         $message = $this->buildMethodDeprecationMessage(
             $methodName,
             [
@@ -170,11 +193,8 @@ trait PublicMethodDeprecationTrait
      *           $this->triggerNewMethodPropagationDeprecationMessage('newMethodName');
      *       }
      *  }
-     *
-     * @param string $methodName
-     * @return void
      */
-    private function triggerNewMethodPropagationDeprecationMessage(string $methodName)
+    private function triggerNewMethodPropagationDeprecationMessage(string $methodName): void
     {
         $message = $this->buildMethodDeprecationMessage(
             $methodName,
@@ -188,11 +208,8 @@ trait PublicMethodDeprecationTrait
     }
 
     /**
-     * Build method deprecation message
-     *
      * @param string $methodName
-     * @param array $mainPartArgs
-     * @return string
+     * @param string[] $mainPartArgs
      */
     private function buildMethodDeprecationMessage(string $methodName, array $mainPartArgs): string
     {
@@ -225,8 +242,6 @@ trait PublicMethodDeprecationTrait
     }
 
     /**
-     * @param string $methodName
-     * @return bool
      * @throws ReflectionException
      */
     private function isMethodOverwritten(string $methodName): bool

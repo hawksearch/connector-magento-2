@@ -16,10 +16,14 @@ namespace HawkSearch\Connector\Block\System\Config\Logger;
 
 use Monolog\Logger;
 
-class LogeLevels  implements \Magento\Framework\Option\ArrayInterface
+/**
+ * @api
+ * @since 2.11
+ */
+class LogeLevels implements \Magento\Framework\Option\ArrayInterface
 {
     /**
-     * @inheritDoc
+     * @return list<array{label: string, value: int}>
      */
     public function toOptionArray()
     {

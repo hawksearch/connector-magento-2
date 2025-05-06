@@ -16,24 +16,30 @@ namespace HawkSearch\Connector\Logger;
 
 use Monolog\Logger;
 
+/**
+ * @api
+ * @since 2.11
+ * @phpstan-import-type Level from \Monolog\Logger as MonologLoggerLevel
+ */
 interface LoggerConfigInterface
 {
     const DEFAULT_LOG_LEVEL = Logger::DEBUG;
 
     /**
      * Is logger enabled
+     *
      * @return  bool
      */
     public function isEnabled();
 
     /**
-     * @return int
+     * @return MonologLoggerLevel
      */
     public function getLogLevel();
 
     /**
-     * @param int $level
-     * @return self
+     * @param MonologLoggerLevel $level
+     * @return $this
      */
-    public function setLogLevel($level);
+    public function setLogLevel(int $level);
 }

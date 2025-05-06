@@ -5,11 +5,60 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+## [2.11.0] - 2025-05-06
+* feat: declare public API contracts ([#29](https://github.com/hawksearch/connector-magento-2/pull/29))
+* feat: add type hints to method arguments ([#30](https://github.com/hawksearch/connector-magento-2/pull/30))
+* fix: implement InstructionManagerPoolInterface in di ([#31](https://github.com/hawksearch/connector-magento-2/pull/31))
+* ci: static code analysers and commit lint ([#32](https://github.com/hawksearch/connector-magento-2/pull/32))
+* feat(Compatibility): add PublicPropertyDeprecationTrait ([#33](https://github.com/hawksearch/connector-magento-2/pull/33))
+* fix(Compatibility): support classes derived from DataObject ([#34](https://github.com/hawksearch/connector-magento-2/pull/34))
+* chore: update PhpDoc annotations ([#35](https://github.com/hawksearch/connector-magento-2/pull/35))
+* feat: add types to private/final/internal/not API properties ([#36](https://github.com/hawksearch/connector-magento-2/pull/36))
+* fix(Logger): init fileName via constructor injection ([#37](https://github.com/hawksearch/connector-magento-2/pull/37))
+* feat: add return types on internal/final/private methods and annotations on public ([#38](https://github.com/hawksearch/connector-magento-2/pull/38))
+* docs: add github pull request template ([#41](https://github.com/hawksearch/connector-magento-2/pull/41))
+* feat: add support for PHP 8.3 ([#40](https://github.com/hawksearch/connector-magento-2/pull/40))
+* feat: drop min required version to PHP 8.1, Magento 2.4.4 ([#42](https://github.com/hawksearch/connector-magento-2/pull/42))
+* feat: add ArrayToJson converter for Http client ([#44](https://github.com/hawksearch/connector-magento-2/pull/44))
+* refactor: add missing strict types declaration ([#45](https://github.com/hawksearch/connector-magento-2/pull/45))
+* fix: exception: each method must have a doc block ([#46](https://github.com/hawksearch/connector-magento-2/pull/46))
+* chore: add phpDoc for methods throwing exceptions explicitly ([#47](https://github.com/hawksearch/connector-magento-2/pull/47))
+* feat: add wrapper for symfony `patch-type-declarations script` ([#43](https://github.com/hawksearch/connector-magento-2/pull/43))
+
+### API CHANGES
+#### Interfaces
+The following interfaces in `\HawkSearch\Connector` namespace are defined as `@api`:
+- Gateway\Config\ApiConfigInterface
+- Gateway\Http\ConverterInterface
+- Gateway\Http\Uri\UriBuilderInterface
+- Gateway\Http\Instruction\InstructionManagerInterface
+- Gateway\Http\Instruction\InstructionManagerPoolInterface
+
+#### Classes
+The following classes in `\HawkSearch\Connector` namespace are defined as `@api`:
+- Block\System\Config\Logger\LogeLevels
+- Gateway\Helper\HttpResponseReader
+- Gateway\Helper\SubjectReader
+- Gateway\Http\Converter\ArrayToJson
+- Gateway\Http\Converter\JsonToArray
+- Gateway\Http\Instruction\InstructionManager
+- Gateway\Http\Instruction\InstructionManagerPool
+- Gateway\Instruction\Result\ArrayResult
+- Gateway\Instruction\Result\DefaultResult
+- Gateway\Request\BuilderComposite
+- Gateway\Request\StrictDataBuilder
+- Gateway\Response\HandlerChain
+- Gateway\Validator\ValidatorComposite
+- Helper\Url
+
+
 ## [2.10.0] - 2024-07-02
-## FEATURES
+### FEATURES
 * feat: add deprecation message utility classes  ([#22](https://github.com/hawksearch/connector-magento-2/pull/22), [#23](https://github.com/hawksearch/connector-magento-2/pull/23))
 
-## FIXES
+### FIXES
 * fix: debug message display order in Http/Client class ([072198d](https://github.com/hawksearch/connector-magento-2/pull/27/commits/072198db7a2cf73560427429e5093b56627c7bf8))
 
 ## [2.9.0] - 2024-05-28
@@ -82,6 +131,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 [Unreleased]: https://github.com/hawksearch/connector-magento-2/compare/v2.10.0...develop
+[2.11.0]: https://github.com/hawksearch/connector-magento-2/compare/v2.10.0...v2.11.0
 [2.10.0]: https://github.com/hawksearch/connector-magento-2/compare/v2.9.0...v2.10.0
 [2.9.0]: https://github.com/hawksearch/connector-magento-2/compare/v2.8.0...v2.9.0
 [2.8.0]: https://github.com/hawksearch/connector-magento-2/compare/v2.7.0...v2.8.0

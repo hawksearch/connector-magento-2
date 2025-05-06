@@ -10,61 +10,50 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+declare(strict_types=1);
 
 namespace HawkSearch\Connector\Gateway\Http;
 
+/**
+ * @phpstan-import-type RequestSubject from \HawkSearch\Connector\Gateway\InstructionInterface
+ * @todo replace RequestSubject pseudo type by RequestInterface
+ */
 class Transfer implements TransferInterface
 {
     /**
      * Name of Auth username field
      */
     const AUTH_USERNAME = 'username';
-
     /**
      * Name of Auth password field
      */
     const AUTH_PASSWORD = 'password';
 
     /**
-     * @var array
+     * @var array<string, mixed>
      */
-    private $clientConfig;
+    private array $clientConfig;
+    /**
+     * @var array<array-key, mixed>
+     */
+    private array $headers;
+    private string $method;
+    /**
+     * @var RequestSubject
+     */
+    private array $body;
+    private string $uri;
+    private bool $encode;
+    /**
+     * @var array<self::AUTH_*, string>
+     */
+    private array $auth;
 
     /**
-     * @var array
-     */
-    private $headers;
-
-    /**
-     * @var string
-     */
-    private $method;
-
-    /**
-     * @var array|string
-     */
-    private $body;
-
-    /**
-     * @var string
-     */
-    private $uri;
-
-    /**
-     * @var bool
-     */
-    private $encode;
-
-    /**
-     * @var array
-     */
-    private $auth;
-
-    /**
-     * @param array $clientConfig
-     * @param array $headers
-     * @param array|string $body
-     * @param array $auth
+     * @param array<string, mixed> $clientConfig
+     * @param array<array-key, mixed> $headers
+     * @param RequestSubject $body
+     * @param array<self::AUTH_*, string> $auth
      * @param string $method
      * @param string $uri
      * @param bool $encode
@@ -72,11 +61,11 @@ class Transfer implements TransferInterface
     public function __construct(
         array $clientConfig,
         array $headers,
-        $body,
+        array $body,
         array $auth,
-        $method,
-        $uri,
-        $encode
+        string $method,
+        string $uri,
+        bool $encode
     ) {
         $this->clientConfig = $clientConfig;
         $this->headers = $headers;
@@ -88,9 +77,7 @@ class Transfer implements TransferInterface
     }
 
     /**
-     * Returns gateway client configuration
-     *
-     * @return array
+     * @return array<string, mixed>
      */
     public function getClientConfig()
     {
@@ -98,19 +85,15 @@ class Transfer implements TransferInterface
     }
 
     /**
-     * Returns method used to place request
-     *
      * @return string
      */
     public function getMethod()
     {
-        return (string)$this->method;
+        return $this->method;
     }
 
     /**
-     * Returns headers
-     *
-     * @return array
+     * @return array<array-key, mixed>
      */
     public function getHeaders()
     {
@@ -118,9 +101,7 @@ class Transfer implements TransferInterface
     }
 
     /**
-     * Returns request body
-     *
-     * @return array|string
+     * @return RequestSubject
      */
     public function getBody()
     {
@@ -128,13 +109,11 @@ class Transfer implements TransferInterface
     }
 
     /**
-     * Returns URI
-     *
      * @return string
      */
     public function getUri()
     {
-        return (string)$this->uri;
+        return $this->uri;
     }
 
     /**
@@ -146,8 +125,6 @@ class Transfer implements TransferInterface
     }
 
     /**
-     * Returns Auth username
-     *
      * @return string
      */
     public function getAuthUsername()
@@ -156,8 +133,6 @@ class Transfer implements TransferInterface
     }
 
     /**
-     * Returns Auth password
-     *
      * @return string
      */
     public function getAuthPassword()

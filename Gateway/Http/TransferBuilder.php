@@ -14,48 +14,38 @@ declare(strict_types=1);
 
 namespace HawkSearch\Connector\Gateway\Http;
 
+use Laminas\Http\Request as HttpRequest;
+
 /**
  * @api
+ *
+ * @phpstan-import-type RequestSubject from \HawkSearch\Connector\Gateway\InstructionInterface
+ * @todo replace RequestSubject pseudo type by RequestInterface
  */
 class TransferBuilder
 {
     /**
-     * @var array
+     * @var array<string, mixed>
      */
-    private $clientConfig = [];
+    private array $clientConfig = [];
+    /**
+     * @var array<array-key, mixed>
+     */
+    private array $headers = [];
+    private string $method = HttpRequest::METHOD_GET;
+    /**
+     * @var RequestSubject
+     */
+    private array $body = [];
+    private string $uri = '';
+    private bool $encode = false;
+    /**
+     * @var array<Transfer::AUTH_*, string>
+     */
+    private array $auth = [Transfer::AUTH_USERNAME => '', Transfer::AUTH_PASSWORD => ''];
 
     /**
-     * @var array
-     */
-    private $headers = [];
-
-    /**
-     * @var string
-     */
-    private $method;
-
-    /**
-     * @var array|string
-     */
-    private $body = [];
-
-    /**
-     * @var string
-     */
-    private $uri = '';
-
-    /**
-     * @var bool
-     */
-    private $encode = false;
-
-    /**
-     * @var array
-     */
-    private $auth = [Transfer::AUTH_USERNAME => null, Transfer::AUTH_PASSWORD => null];
-
-    /**
-     * @param array $clientConfig
+     * @param array<string, mixed> $clientConfig
      * @return $this
      */
     public function setClientConfig(array $clientConfig)
@@ -66,7 +56,7 @@ class TransferBuilder
     }
 
     /**
-     * @param array $headers
+     * @param array<array-key, mixed> $headers
      * @return $this
      */
     public function setHeaders(array $headers)
@@ -77,10 +67,10 @@ class TransferBuilder
     }
 
     /**
-     * @param array|string $body
+     * @param RequestSubject $body
      * @return $this
      */
-    public function setBody($body)
+    public function setBody(array $body)
     {
         $this->body = $body;
 
@@ -88,10 +78,9 @@ class TransferBuilder
     }
 
     /**
-     * @param string $username
      * @return $this
      */
-    public function setAuthUsername($username)
+    public function setAuthUsername(string $username)
     {
         $this->auth[Transfer::AUTH_USERNAME] = $username;
 
@@ -99,10 +88,9 @@ class TransferBuilder
     }
 
     /**
-     * @param string $password
      * @return $this
      */
-    public function setAuthPassword($password)
+    public function setAuthPassword(string $password)
     {
         $this->auth[Transfer::AUTH_PASSWORD] = $password;
 
@@ -110,10 +98,9 @@ class TransferBuilder
     }
 
     /**
-     * @param string $method
      * @return $this
      */
-    public function setMethod($method)
+    public function setMethod(string $method)
     {
         $this->method = $method;
 
@@ -121,10 +108,9 @@ class TransferBuilder
     }
 
     /**
-     * @param string $uri
      * @return $this
      */
-    public function setUri($uri)
+    public function setUri(string $uri)
     {
         $this->uri = $uri;
 
@@ -132,10 +118,9 @@ class TransferBuilder
     }
 
     /**
-     * @param bool $encode
      * @return $this
      */
-    public function shouldEncode($encode)
+    public function shouldEncode(bool $encode)
     {
         $this->encode = $encode;
 

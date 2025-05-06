@@ -33,34 +33,28 @@ class DeprecatedMessageBuilder
     ];
 
 
-    /**
-     * @var DataObjectFactory
-     */
     private DataObjectFactory $dataObjectFactory;
 
     /**
      * @param DataObjectFactory $dataObjectFactory
+     * @param array<string, mixed> $data
      */
     public function __construct(
         DataObjectFactory $dataObjectFactory,
         array $data = []
-    )
-    {
+    ) {
         parent::__construct($data);
         $this->dataObjectFactory = $dataObjectFactory;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function build(): string
     {
         $messageTemplateParts = [];
 
         foreach (self::PARTS_ORDER as $part) {
-            /** @var DataObject $partObject */
+            /** @var ?DataObject $partObject */
             $partObject = $this->_get($part);
-            if (!$partObject->getFormat()) {
+            if (!$partObject || !$partObject->getFormat()) {
                 continue;
             }
             $messageTemplateParts[] = sprintf($partObject->getFormat(), ...$partObject->getValues());
@@ -70,9 +64,6 @@ class DeprecatedMessageBuilder
         return implode(' ', $messageTemplateParts);
     }
 
-    /**
-     * @inheritDoc
-     */
     public function setSincePart(string $format, array $values = []): DeprecatedMessageBuilderInterface
     {
         return $this->setData(
@@ -81,9 +72,6 @@ class DeprecatedMessageBuilder
         );
     }
 
-    /**
-     * @inheritDoc
-     */
     public function setMainPart(string $format, array $values = []): DeprecatedMessageBuilderInterface
     {
         return $this->setData(
@@ -92,9 +80,6 @@ class DeprecatedMessageBuilder
         );
     }
 
-    /**
-     * @inheritDoc
-     */
     public function setReplacementPart(string $format, array $values = []): DeprecatedMessageBuilderInterface
     {
         return $this->setData(
@@ -103,9 +88,6 @@ class DeprecatedMessageBuilder
         );
     }
 
-    /**
-     * @inheritDoc
-     */
     public function setExtra(string $format, array $values = []): DeprecatedMessageBuilderInterface
     {
         return $this->setData(
@@ -116,8 +98,7 @@ class DeprecatedMessageBuilder
 
     /**
      * @param string $format
-     * @param array $values
-     * @return DataObject
+     * @param string[] $values
      */
     private function getPartObject(string $format, array $values = []): DataObject
     {

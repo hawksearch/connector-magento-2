@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace HawkSearch\Connector\Model;
 
+use Magento\Framework\App\Request\Http as Request;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Store\Api\Data\StoreInterface;
@@ -22,19 +23,11 @@ use Magento\Store\Model\StoreManagerInterface;
 
 class ConnectionScopeResolver
 {
-    /**
-     * @var RequestInterface
-     */
-    private $request;
+    private RequestInterface $request;
+    private StoreManagerInterface $storeManager;
 
     /**
-     * @var StoreManagerInterface
-     */
-    private $storeManager;
-
-    /**
-     * ConfigurationStoreViewResolver constructor.
-     * @param RequestInterface $request
+     * @param RequestInterface|Request $request
      * @param StoreManagerInterface $storeManager
      */
     public function __construct(

@@ -15,29 +15,31 @@ declare(strict_types=1);
 namespace HawkSearch\Connector\Gateway\Instruction\Result;
 
 use HawkSearch\Connector\Gateway\Helper\HttpResponseReader;
+use HawkSearch\Connector\Gateway\Http\ClientInterface;
 use HawkSearch\Connector\Gateway\Instruction\ResultInterface;
 
+/**
+ * @api
+ * @since 2.11
+ *
+ * @phpstan-import-type HttpResult from ClientInterface
+ */
 class ArrayResult implements ResultInterface
 {
     /**
-     * @var array
+     * @var HttpResult
      */
-    private $result;
-
-    /**
-     * @var HttpResponseReader
-     */
-    private $httpResponseReader;
+    private array $result;
+    private HttpResponseReader $httpResponseReader;
 
     /**
      * @param HttpResponseReader $httpResponseReader
-     * @param array $result
+     * @param HttpResult $result
      */
     public function __construct(
         HttpResponseReader $httpResponseReader,
         array $result = []
-    )
-    {
+    ) {
         $this->result = $result;
         $this->httpResponseReader = $httpResponseReader;
     }
@@ -45,7 +47,7 @@ class ArrayResult implements ResultInterface
     /**
      * Returns result interpretation
      *
-     * @return array
+     * @return array<mixed>
      */
     public function get()
     {

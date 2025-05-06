@@ -20,20 +20,24 @@ use Magento\Framework\ObjectManager\TMap;
 use Magento\Framework\ObjectManager\TMapFactory;
 
 /**
- * Class InstructionPool
  * Pool of available Instructions
+ *
  * @api
+ *
+ * @template TKey of string
+ * @template TValue of InstructionInterface
+ * @implements InstructionPoolInterface<TKey, TValue>
  */
 class InstructionPool implements InstructionPoolInterface
 {
     /**
-     * @var InstructionInterface[] | TMap
+     * @var TMap<TKey, TValue>
      */
-    private $instructions;
+    private TMap $instructions;
 
     /**
      * @param TMapFactory $tmapFactory
-     * @param array $instructions
+     * @param array<TKey, class-string<TValue>> $instructions
      */
     public function __construct(
         TMapFactory $tmapFactory,
@@ -48,15 +52,14 @@ class InstructionPool implements InstructionPoolInterface
     }
 
     /**
-     * @param string $instructionCode
-     * @return InstructionInterface|mixed
-     * @throws NotFoundException
+     * @return InstructionInterface
+     * @throws NotFoundException if instruction is not found
      */
-    public function get($instructionCode)
+    public function get(string $instructionCode)
     {
         if (!isset($this->instructions[$instructionCode])) {
             throw new NotFoundException(
-                __('The "%1" request doesn\'t exist. Verify the request and try again.', $instructionCode)
+                __('The "%1" instruction doesn\'t exist.', $instructionCode)
             );
         }
 

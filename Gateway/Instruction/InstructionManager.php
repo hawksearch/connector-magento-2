@@ -15,19 +15,21 @@ declare(strict_types=1);
 namespace HawkSearch\Connector\Gateway\Instruction;
 
 use HawkSearch\Connector\Gateway\InstructionInterface;
-use HawkSearch\Connector\Gateway\InstructionException;
 use Magento\Framework\Exception\NotFoundException;
 
+/**
+ * @api
+ * @since 2.11
+ */
 class InstructionManager implements InstructionManagerInterface
 {
     /**
-     * @var InstructionPoolInterface
+     * @var InstructionPoolInterface<string, InstructionInterface>
      */
-    private $instructionPool;
+    private InstructionPoolInterface $instructionPool;
 
     /**
-     * CommandExecutor constructor.
-     * @param InstructionPoolInterface $instructionPool
+     * @param InstructionPoolInterface<string, InstructionInterface> $instructionPool
      */
     public function __construct(
         InstructionPoolInterface $instructionPool
@@ -36,16 +38,9 @@ class InstructionManager implements InstructionManagerInterface
     }
 
     /**
-     * Executes instruction by code
-     *
-     * @param string $instructionCode
-     * @param array $arguments
-     * @return ResultInterface|null
-     * @throws NotFoundException
-     * @throws InstructionException
-     * @since 100.1.0
+     * @return ResultInterface
      */
-    public function executeByCode($instructionCode, array $arguments = [])
+    public function executeByCode(string $instructionCode, array $arguments = [])
     {
         return $this->instructionPool
             ->get($instructionCode)
@@ -53,13 +48,7 @@ class InstructionManager implements InstructionManagerInterface
     }
 
     /**
-     * Executes command
-     *
-     * @param InstructionInterface $instruction
-     * @param array $arguments
-     * @return ResultInterface|null
-     * @throws InstructionException
-     * @since 100.1.0
+     * @return ResultInterface
      */
     public function execute(InstructionInterface $instruction, array $arguments = [])
     {
@@ -69,12 +58,11 @@ class InstructionManager implements InstructionManagerInterface
     /**
      * Retrieves operation
      *
-     * @param string $instructionCode
      * @return InstructionInterface
      * @throws NotFoundException
-     * @since 100.1.0
+     * @todo remove unused method
      */
-    public function get($instructionCode)
+    public function get(string $instructionCode)
     {
         return $this->instructionPool->get($instructionCode);
     }

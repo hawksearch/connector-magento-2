@@ -18,17 +18,13 @@ use HawkSearch\Connector\Model\ConfigProvider;
 
 class Logger extends ConfigProvider
 {
-    /**#@+
-     * Configuration paths
-     */
     const ENABLE_DEBUG = 'enable_debug';
     const LOG_LEVEL = 'log_level';
-    /**#@-*/
 
     /**
      * Check if logging is enabled for selected store
+     *
      * @param null|int|string $store
-     * @return bool
      */
     public function isEnabled($store = null): bool
     {
@@ -39,7 +35,6 @@ class Logger extends ConfigProvider
      * Get log level
      *
      * @param null|int|string $store
-     * @return int
      */
     public function getLogLevel($store = null): int
     {

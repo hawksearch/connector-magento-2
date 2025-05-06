@@ -25,7 +25,7 @@ class ApiUrlConfigPatch implements DataPatchInterface
      * @SuppressWarnings(Generic.Files.LineLength.TooLong)
      */
     // phpcs:disable Generic.Files.LineLength.TooLong
-    protected $directivesToRename = [
+    protected array $directivesToRename = [
         'hawksearch_connector/api_settings/order_tracking_key' => 'hawksearch_connector/api_settings/client_guid',
         'hawksearch_connector/api_settings/mode' => 'hawksearch_connector/api_settings/environment',
         'hawksearch_connector/api_settings/rec_url/develop' => 'hawksearch_connector/api_settings/recommendations_url/develop',
@@ -33,15 +33,8 @@ class ApiUrlConfigPatch implements DataPatchInterface
         'hawksearch_connector/api_settings/rec_url/production' => 'hawksearch_connector/api_settings/recommendations_url/production',
     ];
     // phpcs:enable
+    private SystemConfigPatcher $patcher;
 
-    /**
-     * @var SystemConfigPatcher
-     */
-    private $patcher;
-
-    /**
-     * @param SystemConfigPatcher $patcher
-     */
     public function __construct(
         SystemConfigPatcher $patcher
     ) {
@@ -49,7 +42,7 @@ class ApiUrlConfigPatch implements DataPatchInterface
     }
 
     /**
-     * @inheritDoc
+     * @return string[]
      */
     public static function getDependencies()
     {
@@ -57,7 +50,7 @@ class ApiUrlConfigPatch implements DataPatchInterface
     }
 
     /**
-     * @inheritDoc
+     * @return string[]
      */
     public function getAliases()
     {
@@ -65,11 +58,12 @@ class ApiUrlConfigPatch implements DataPatchInterface
     }
 
     /**
-     * @inheritDoc
+     * @return $this
      * @throws LocalizedException
      */
     public function apply()
     {
         $this->patcher->renamePath($this->directivesToRename);
+        return $this;
     }
 }

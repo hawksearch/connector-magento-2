@@ -15,7 +15,6 @@ declare(strict_types=1);
 namespace HawkSearch\Connector\Gateway\Instruction;
 
 /**
- * Interface ResultInterface
  * @api
  */
 interface ResultInterface

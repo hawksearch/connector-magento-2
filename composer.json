@@ -2,15 +2,20 @@
     "name": "hawksearch/connector",
     "type": "magento2-module",
     "description": "Hawksearch Connector module for Magento 2",
-    "version": "2.10.0",
+    "version": "2.11.0",
     "license": [
         "OSL-3.0",
         "AFL-3.0"
     ],
     "require": {
-        "php": "^7.2|~8.0.0|~8.1.0|~8.2.0",
-        "magento/framework": "^102.0.5|^103.0",
+        "php": "~8.1.0|~8.2.0|~8.3.0",
+        "magento/framework": "^103.0.4",
         "magento/magento-composer-installer": "*"
+    },
+    "require-dev": {
+        "phpcompatibility/php-compatibility": "^9.3",
+        "bitexpert/phpstan-magento": "*",
+        "phpstan/extension-installer": "*"
     },
     "autoload": {
         "psr-4": {
@@ -19,5 +24,13 @@
         "files": [
             "registration.php"
         ]
-    }
+    },
+    "config": {
+        "allow-plugins": {
+            "phpstan/extension-installer": true
+        }
+    },
+    "bin": [
+        "bin/magento-patch-type-declarations"
+    ]
 }

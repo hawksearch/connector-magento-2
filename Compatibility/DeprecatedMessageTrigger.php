@@ -17,7 +17,7 @@ namespace HawkSearch\Connector\Compatibility;
 class DeprecatedMessageTrigger implements DeprecatedMessageTriggerInterface
 {
     /**
-     * @inheritDoc
+     * @return void
      */
     public function execute(string $message)
     {

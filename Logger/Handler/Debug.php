@@ -16,8 +16,4 @@ namespace HawkSearch\Connector\Logger\Handler;
 
 class Debug extends \Magento\Framework\Logger\Handler\Debug
 {
-    /**
-     * @var string
-     */
-    protected $fileName = '/var/log/hawksearch_debug.log';
 }

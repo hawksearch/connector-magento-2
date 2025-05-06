@@ -27,56 +27,15 @@ use Psr\Log\LoggerInterface;
 
 class GatewayInstruction implements InstructionInterface
 {
-    /**
-     * @var BuilderInterface
-     */
-    private $requestBuilder;
+    private BuilderInterface $requestBuilder;
+    private TransferFactoryInterface $transferFactory;
+    private ClientInterface $client;
+    private ResultInterfaceFactory $resultFactory;
+    private LoggerInterface $logger;
+    private ?HandlerInterface $handler;
+    private ?ValidatorInterface $validator;
+    private ?ErrorMessageMapperInterface $errorMessageMapper;
 
-    /**
-     * @var TransferFactoryInterface
-     */
-    private $transferFactory;
-
-    /**
-     * @var ClientInterface
-     */
-    private $client;
-
-    /**
-     * @var HandlerInterface
-     */
-    private $handler;
-
-    /**
-     * @var ValidatorInterface
-     */
-    private $validator;
-
-    /**
-     * @var LoggerInterface
-     */
-    private $logger;
-
-    /**
-     * @var ErrorMessageMapperInterface
-     */
-    private $errorMessageMapper;
-
-    /**
-     * @var ResultInterfaceFactory
-     */
-    private $resultFactory;
-
-    /**
-     * @param BuilderInterface $requestBuilder
-     * @param TransferFactoryInterface $transferFactory
-     * @param ClientInterface $client
-     * @param ResultInterfaceFactory $resultFactory
-     * @param LoggerInterface $logger
-     * @param HandlerInterface $handler
-     * @param ValidatorInterface $validator
-     * @param ErrorMessageMapperInterface|null $errorMessageMapper
-     */
     public function __construct(
         BuilderInterface $requestBuilder,
         TransferFactoryInterface $transferFactory,
@@ -90,15 +49,16 @@ class GatewayInstruction implements InstructionInterface
         $this->requestBuilder = $requestBuilder;
         $this->transferFactory = $transferFactory;
         $this->client = $client;
+        $this->resultFactory = $resultFactory;
+        $this->logger = $logger;
         $this->handler = $handler;
         $this->validator = $validator;
-        $this->logger = $logger;
-        $this->resultFactory = $resultFactory;
         $this->errorMessageMapper = $errorMessageMapper;
     }
 
     /**
-     * @inheritDoc
+     * @return \HawkSearch\Connector\Gateway\Instruction\ResultInterface
+     * @throws InstructionException
      */
     public function execute(array $requestSubject)
     {
@@ -108,7 +68,7 @@ class GatewayInstruction implements InstructionInterface
         );
 
         $response = $this->client->placeRequest($transfer);
-        if ($this->validator !== null) {
+        if (isset($this->validator)) {
             $result = $this->validator->validate(
                 array_merge($requestSubject, ['response' => $response])
             );
@@ -117,7 +77,7 @@ class GatewayInstruction implements InstructionInterface
             }
         }
 
-        if ($this->handler) {
+        if (isset($this->handler)) {
             $response = $this->handler->handle(
                 $requestSubject,
                 $response
@@ -131,18 +91,17 @@ class GatewayInstruction implements InstructionInterface
      * Tries to map error messages from validation result and logs processed message.
      * Throws an exception with mapped message or default error.
      *
-     * @param ResultInterface $result
      * @throws InstructionException
      */
-    private function processErrors(ResultInterface $result)
+    private function processErrors(ResultInterface $result): never
     {
         $messages = [];
         $errorsSource = array_merge($result->getErrorCodes(), $result->getFailsDescription());
         foreach ($errorsSource as $errorCodeOrMessage) {
-            $errorCodeOrMessage = (string) $errorCodeOrMessage;
+            $errorCodeOrMessage = (string)$errorCodeOrMessage;
 
-            if ($this->errorMessageMapper !== null) {
-                $mapped = (string) $this->errorMessageMapper->getMessage($errorCodeOrMessage);
+            if (isset($this->errorMessageMapper)) {
+                $mapped = $this->errorMessageMapper->getMessage($errorCodeOrMessage);
                 if (!empty($mapped)) {
                     $messages[] = $mapped;
                     $errorCodeOrMessage = $mapped;

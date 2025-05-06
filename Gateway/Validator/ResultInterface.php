@@ -32,14 +32,14 @@ interface ResultInterface
     /**
      * Returns list of fails description
      *
-     * @return Phrase[]
+     * @return list<string|\Stringable>
      */
     public function getFailsDescription();
 
     /**
      * Returns list of error codes.
      *
-     * @return string[]
+     * @return list<int>
      */
     public function getErrorCodes();
 }

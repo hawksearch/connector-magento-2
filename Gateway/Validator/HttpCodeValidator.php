@@ -17,40 +17,22 @@ namespace HawkSearch\Connector\Gateway\Validator;
 
 use HawkSearch\Connector\Gateway\Helper\HttpResponseReader;
 use HawkSearch\Connector\Gateway\Helper\SubjectReader;
-use HawkSearch\Connector\Gateway\Validator\ResultInterfaceFactory;
 
 class HttpCodeValidator extends AbstractValidator
 {
-    /**
-     * @var HttpResponseReader
-     */
-    private $httpResponseReader;
+    private HttpResponseReader $httpResponseReader;
+    private SubjectReader $subjectReader;
 
-    /**
-     * @var SubjectReader
-     */
-    private $subjectReader;
-
-    /**
-     * HttpCodeValidator constructor.
-     * @param ResultInterfaceFactory $resultFactory
-     * @param HttpResponseReader $httpResponseReader
-     * @param SubjectReader $subjectReader
-     */
     public function __construct(
         ResultInterfaceFactory $resultFactory,
         HttpResponseReader $httpResponseReader,
         SubjectReader $subjectReader
-    )
-    {
+    ) {
         parent::__construct($resultFactory);
         $this->httpResponseReader = $httpResponseReader;
         $this->subjectReader = $subjectReader;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function validate(array $validationSubject): ResultInterface
     {
         $response = $this->subjectReader->readResponse($validationSubject);

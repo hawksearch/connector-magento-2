@@ -19,32 +19,19 @@ use HawkSearch\Connector\Model\Config\ApiSettings as ApiSettingsProvider;
 
 class SharedApiKeyConfig implements ApiConfigInterface
 {
-    /**
-     * @var ApiSettingsProvider
-     */
-    protected $apiSettingsProvider;
+    protected ApiSettingsProvider $apiSettingsProvider;
 
-    /**
-     * ApiConfigDefault constructor.
-     * @param ApiSettingsProvider $apiSettingsProvider
-     */
     public function __construct(
         ApiSettingsProvider $apiSettingsProvider
     ) {
         $this->apiSettingsProvider = $apiSettingsProvider;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function getApiUrl($store = null): string
     {
         return '';
     }
 
-    /**
-     * @inheritDoc
-     */
     public function getApiKey($store = null): string
     {
         return $this->apiSettingsProvider->getApiKey($store);

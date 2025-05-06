@@ -17,11 +17,21 @@ namespace HawkSearch\Connector\Gateway\Helper;
 
 use HawkSearch\Connector\Gateway\Http\ClientInterface;
 
+/**
+ * @api
+ * @since 2.11
+ *
+ * @todo get rid of this class in favour of HttpResultInterface
+ * @see ClientInterface
+ *
+ * @phpstan-import-type HttpResult from ClientInterface
+ */
 class HttpResponseReader
 {
     /**
-     * @param array $subject
+     * @param HttpResult $subject
      * @return string
+     * @throws \InvalidArgumentException if nothing to return
      */
     public function readResponseCode(array $subject)
     {
@@ -29,12 +39,14 @@ class HttpResponseReader
             throw new \InvalidArgumentException('Response code does not exist');
         }
 
+        // @phpstan-ignore-next-line return type
         return $subject[ClientInterface::RESPONSE_CODE];
     }
 
     /**
-     * @param array $subject
+     * @param HttpResult $subject
      * @return mixed
+     * @throws \InvalidArgumentException if nothing to return
      */
     public function readResponseData(array $subject)
     {
@@ -46,17 +58,11 @@ class HttpResponseReader
     }
 
     /**
-     * @param array $subject
+     * @param HttpResult $subject
      * @return string
      */
     public function readResponseMessage(array $subject)
     {
-        if (!isset($subject[ClientInterface::RESPONSE_MESSAGE])
-            || !is_string($subject[ClientInterface::RESPONSE_MESSAGE])
-        ) {
-            throw new \InvalidArgumentException('Response message does not exist');
-        }
-
-        return $subject[ClientInterface::RESPONSE_MESSAGE];
+        return (string)($subject[ClientInterface::RESPONSE_MESSAGE] ?? '');
     }
 }

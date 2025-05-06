@@ -14,15 +14,15 @@ declare(strict_types=1);
 
 namespace HawkSearch\Connector\Gateway\Response;
 
-use HawkSearch\Connector\Gateway\Http\ClientInterface;
 use HawkSearch\Connector\Api\Data\HawkSearchFieldInterfaceFactory;
+use HawkSearch\Connector\Gateway\Http\ClientInterface;
 
 class FieldHandler implements HandlerInterface
 {
     /**
      * @var HawkSearchFieldInterfaceFactory
      */
-    private $fieldFactory;
+    private HawkSearchFieldInterfaceFactory $fieldFactory;
 
     public function __construct(
         HawkSearchFieldInterfaceFactory $fieldFactory
@@ -31,7 +31,7 @@ class FieldHandler implements HandlerInterface
     }
 
     /**
-     * @inheritdoc
+     * @return array<string, mixed>
      */
     public function handle(array $handlingSubject, array $response)
     {

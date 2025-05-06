@@ -14,17 +14,24 @@ declare(strict_types=1);
 
 namespace HawkSearch\Connector\Gateway\Instruction\Result;
 
+use HawkSearch\Connector\Gateway\Http\ClientInterface;
 use HawkSearch\Connector\Gateway\Instruction\ResultInterface;
 
+/**
+ * @api
+ * @since 2.11
+ *
+ * @phpstan-import-type HttpResult from ClientInterface
+ */
 class DefaultResult implements ResultInterface
 {
     /**
-     * @var mixed
+     * @var HttpResult
      */
-    private $result;
+    private array $result;
 
     /**
-     * @param mixed $result
+     * @param HttpResult $result
      */
     public function __construct(array $result = [])
     {
@@ -32,9 +39,7 @@ class DefaultResult implements ResultInterface
     }
 
     /**
-     * Returns result interpretation
-     *
-     * @return array
+     * @return HttpResult
      */
     public function get()
     {

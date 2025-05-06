@@ -16,22 +16,17 @@ namespace HawkSearch\Connector\Logger;
 
 use HawkSearch\Connector\Model\Config\Logger as LoggerXmlConfig;
 
+/**
+ * @phpstan-import-type Level from \Monolog\Logger as MonologLoggerLevel
+ */
 class LoggerConfig implements LoggerConfigInterface
 {
+    private LoggerXmlConfig $loggerXmlConfig;
     /**
-     * @var LoggerXmlConfig
+     * @var MonologLoggerLevel
      */
-    private $loggerXmlConfig;
+    private int $logLevel;
 
-    /**
-     * @var string
-     */
-    private $logLevel;
-
-    /**
-     * LoggerConfig constructor.
-     * @param LoggerXmlConfig $loggerXmlConfig
-     */
     public function __construct(
         LoggerXmlConfig $loggerXmlConfig
     ) {
@@ -39,7 +34,7 @@ class LoggerConfig implements LoggerConfigInterface
     }
 
     /**
-     * @inheritdoc
+     * @return bool
      */
     public function isEnabled()
     {
@@ -47,7 +42,7 @@ class LoggerConfig implements LoggerConfigInterface
     }
 
     /**
-     * @inheritdoc
+     * @return MonologLoggerLevel
      */
     public function getLogLevel()
     {
@@ -59,9 +54,10 @@ class LoggerConfig implements LoggerConfigInterface
     }
 
     /**
-     * @inheritdoc
+     * @param MonologLoggerLevel $level
+     * @return $this
      */
-    public function setLogLevel($level)
+    public function setLogLevel(int $level)
     {
         $this->logLevel = $level;
         return $this;

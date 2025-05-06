@@ -15,29 +15,27 @@ declare(strict_types=1);
 namespace HawkSearch\Connector\Gateway\Http;
 
 /**
- * Interface TransferInterface
  * @api
+ *
+ * @phpstan-import-type RequestSubject from \HawkSearch\Connector\Gateway\InstructionInterface
+ * @todo replace RequestSubject pseudo type by RequestInterface
  */
 interface TransferInterface
 {
     /**
-     * Returns gateway client configuration
-     *
-     * @return array
+     * @return array<string, mixed>
      */
     public function getClientConfig();
 
     /**
-     * Returns method used to place request
+     * Returns HTTP method used to place request
      *
-     * @return string|int
+     * @return string
      */
     public function getMethod();
 
     /**
-     * Returns headers
-     *
-     * @return array
+     * @return array<array-key, mixed>
      */
     public function getHeaders();
 
@@ -49,29 +47,21 @@ interface TransferInterface
     public function shouldEncode();
 
     /**
-     * Returns request body
-     *
-     * @return array|string
+     * @return RequestSubject
      */
     public function getBody();
 
     /**
-     * Returns URI
-     *
      * @return string
      */
     public function getUri();
 
     /**
-     * Returns Auth username
-     *
      * @return string
      */
     public function getAuthUsername();
 
     /**
-     * Returns Auth password
-     *
      * @return string
      */
     public function getAuthPassword();

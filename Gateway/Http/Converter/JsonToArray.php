@@ -10,6 +10,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+declare(strict_types=1);
 
 namespace HawkSearch\Connector\Gateway\Http\Converter;
 
@@ -17,19 +18,13 @@ use HawkSearch\Connector\Gateway\Http\ConverterInterface;
 use Magento\Framework\Serialize\Serializer\Json;
 
 /**
- * Class JsonToArray
+ * @api
+ * @since 2.11
  */
 class JsonToArray implements ConverterInterface
 {
-    /**
-     * @var Json
-     */
-    private $json;
+    private Json $json;
 
-    /**
-     * JsonToArray constructor.
-     * @param Json $json
-     */
     public function __construct(
         Json $json
     ) {
@@ -37,18 +32,20 @@ class JsonToArray implements ConverterInterface
     }
 
     /**
-     * @inheritDoc
+     * @param string $data
+     * @return mixed[]
+     * @throws \InvalidArgumentException if $data is not a string
      */
-    public function convert($response)
+    public function convert(mixed $data)
     {
-        if (!is_string($response)) {
-            throw new \InvalidArgumentException(__('The response type is incorrect. Verify the type and try again.')->render());
+        if (!is_string($data)) {
+            throw new \InvalidArgumentException(__('$data argument is not a string.')->render());
         }
 
-        if ($response === '') {
-            $response = '{}';
+        if ($data === '') {
+            $data = '{}';
         }
 
-        return $this->json->unserialize($response);
+        return (array)$this->json->unserialize($data);
     }
 }

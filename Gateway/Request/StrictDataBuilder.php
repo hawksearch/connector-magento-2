@@ -14,13 +14,16 @@ declare(strict_types=1);
 
 namespace HawkSearch\Connector\Gateway\Request;
 
+/**
+ * @api
+ * @since 2.11
+ */
 class StrictDataBuilder implements BuilderInterface
 {
     /**
      * Build request without data conversion
      *
-     * @param array $buildSubject
-     * @return array
+     * @return mixed[]
      */
     public function build(array $buildSubject)
     {

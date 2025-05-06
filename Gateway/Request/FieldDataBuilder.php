@@ -22,7 +22,7 @@ class FieldDataBuilder implements BuilderInterface
     /**
      * @var HawkSearchFieldInterfaceFactory
      */
-    private $hawkSearchFieldFactory;
+    private HawkSearchFieldInterfaceFactory $hawkSearchFieldFactory;
 
     public function __construct(
         HawkSearchFieldInterfaceFactory $hawkSearchFieldFactory
@@ -31,10 +31,7 @@ class FieldDataBuilder implements BuilderInterface
     }
 
     /**
-     * Builds ENV request
-     *
-     * @param array $buildSubject
-     * @return array
+     * @return mixed[]
      */
     public function build(array $buildSubject)
     {
@@ -42,6 +39,7 @@ class FieldDataBuilder implements BuilderInterface
         $hawkSearchField = $this->hawkSearchFieldFactory->create();
         $hawkSearchField->addData($buildSubject);
 
+        /** @var mixed[] */
         return $hawkSearchField->getData();
     }
 }

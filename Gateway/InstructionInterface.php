@@ -16,15 +16,19 @@ namespace HawkSearch\Connector\Gateway;
 
 /**
  * Interface InstructionInterface
+ *
  * @api
+ *
+ * @phpstan-type RequestSubject array<array-key, mixed>
+ * @todo replace RequestSubject pseudo type by RequestInterface
  */
 interface InstructionInterface
 {
     /**
      * Executes request basing on business object
      *
-     * @param array $requestSubject
-     * @return null|Instruction\ResultInterface
+     * @param RequestSubject $requestSubject
+     * @return Instruction\ResultInterface
      * @throws InstructionException
      */
     public function execute(array $requestSubject);

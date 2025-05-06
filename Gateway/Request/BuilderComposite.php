@@ -17,16 +17,26 @@ namespace HawkSearch\Connector\Gateway\Request;
 use Magento\Framework\ObjectManager\TMap;
 use Magento\Framework\ObjectManager\TMapFactory;
 
+/**
+ * @api
+ * @since 2.11
+ *
+ * @phpstan-import-type RequestSubject from \HawkSearch\Connector\Gateway\InstructionInterface
+ * @todo replace RequestSubject pseudo type by RequestInterface
+ *
+ * @template TKey of array-key
+ * @template TValue of BuilderInterface
+ */
 class BuilderComposite implements BuilderInterface
 {
     /**
-     * @var BuilderInterface[] | TMap
+     * @var TMap<TKey, TValue>
      */
-    private $builders;
+    private TMap $builders;
 
     /**
      * @param TMapFactory $tmapFactory
-     * @param array $builders
+     * @param array<TKey, class-string<TValue>> $builders
      */
     public function __construct(
         TMapFactory $tmapFactory,
@@ -41,10 +51,7 @@ class BuilderComposite implements BuilderInterface
     }
 
     /**
-     * Builds ENV request
-     *
-     * @param array $buildSubject
-     * @return array
+     * @return RequestSubject
      */
     public function build(array $buildSubject)
     {
@@ -60,9 +67,9 @@ class BuilderComposite implements BuilderInterface
     /**
      * Merge function for builders
      *
-     * @param array $result
-     * @param array $builder
-     * @return array
+     * @param RequestSubject $result
+     * @param RequestSubject $builder
+     * @return RequestSubject
      */
     protected function merge(array $result, array $builder)
     {

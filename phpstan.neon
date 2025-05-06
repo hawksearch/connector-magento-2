@@ -1,0 +1,31 @@
+parameters:
+    level: 7
+    reportUnmatchedIgnoredErrors: false
+    fileExtensions:
+        - php
+        - phtml
+    paths:
+        - Api
+        - Block
+        - Compatibility
+        - Gateway
+        - Helper
+        - Logger
+        - Model
+        - Setup
+        - Test
+    excludePaths:
+        - */Test/Unit/Fixtures/*
+        - */Test/Unit/*/Fixtures/*
+    ignoreErrors:
+        -
+            # Private properties defined in class and used in traits of \HawkSearch\Connector\Compatibility
+            message: '#Property [a-zA-Z0-9\\_]+::\$(deprecatedMethods|deprecatedPublicProperties) is never read, only written.#'
+        -
+            # Private properties defined in class and used in traits of \HawkSearch\Connector\Compatibility
+            message: '#Property [a-zA-Z0-9\\_]+::\$(deprecatedMethods|deprecatedPublicProperties) type has no value type specified in iterable type array.#'
+#        -
+#            identifier: missingType.parameter
+#            paths:
+#                - Plugin
+#                - Model

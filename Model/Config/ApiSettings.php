@@ -19,9 +19,6 @@ use HawkSearch\Connector\Model\ConfigProvider;
 
 class ApiSettings extends ConfigProvider
 {
-    /**#@+
-     * Configuration paths
-     */
     public const API_KEY = 'api_key';
     public const ENGINE_NAME = 'engine_name';
     public const CLIENT_GUID = 'client_guid';
@@ -33,15 +30,13 @@ class ApiSettings extends ConfigProvider
     public const HAWKSEARCH_WORKBENCH_URL = 'hawksearch_workbench_url';
     public const INDEXING_API_URL = 'indexing_api_url';
     public const SEARCH_API_URL = 'search_api_url';
-    /**#@-*/
 
     /**
      * Get Api key
      *
      * @param null|int|string $store
-     * @return string
      */
-    public function getApiKey($store = null) : string
+    public function getApiKey($store = null): string
     {
         return (string)$this->getConfig(self::API_KEY, $store);
     }
@@ -50,9 +45,8 @@ class ApiSettings extends ConfigProvider
      * Get Engine Name
      *
      * @param null|int|string $store
-     * @return string
      */
-    public function getEngineName($store = null) : string
+    public function getEngineName($store = null): string
     {
         return (string)$this->getConfig(self::ENGINE_NAME, $store);
     }
@@ -61,9 +55,8 @@ class ApiSettings extends ConfigProvider
      * Get Hawksearch Environment
      *
      * @param null|int|string $store
-     * @return string
      */
-    public function getEnvironment($store = null) : string
+    public function getEnvironment($store = null): string
     {
         return (string)$this->getConfig(self::ENVIRONMENT, $store);
     }
@@ -72,7 +65,7 @@ class ApiSettings extends ConfigProvider
      * @deprecated 2.5.1
      * @see \HawkSearch\Connector\Model\Config\ApiSettings::getClientGuid
      */
-    public function getOrderTrackingKey($store = null) : string
+    public function getOrderTrackingKey($store = null): string
     {
         return $this->getClientGuid($store);
     }
@@ -81,7 +74,7 @@ class ApiSettings extends ConfigProvider
      * @deprecated 2.6.0
      * @see \HawkSearch\Connector\Model\Config\ApiSettings::getClientGuid
      */
-    public function getTrackingKey($store = null) : string
+    public function getTrackingKey($store = null): string
     {
         return $this->getClientGuid($store);
     }
@@ -90,9 +83,8 @@ class ApiSettings extends ConfigProvider
      * Get Client Guid / Tracking Key
      *
      * @param null|int|string $store
-     * @return string
      */
-    public function getClientGuid($store = null) : string
+    public function getClientGuid($store = null): string
     {
         return (string)$this->getConfig(self::CLIENT_GUID, $store);
     }
@@ -101,9 +93,8 @@ class ApiSettings extends ConfigProvider
      * Get Hawksearch Lucene Engine Reference URL
      *
      * @param null|int|string $store
-     * @return string
      */
-    public function getHawkUrl($store = null) : string
+    public function getHawkUrl($store = null): string
     {
         return $this->getEnvironmentConfig(self::HAWK_URL, $store);
     }
@@ -112,9 +103,8 @@ class ApiSettings extends ConfigProvider
      * Get Hawksearch Tracking URL
      *
      * @param null|int|string $store
-     * @return string
      */
-    public function getTrackingUrl($store = null) : string
+    public function getTrackingUrl($store = null): string
     {
         return $this->getEnvironmentConfig(self::TRACKING_URL, $store);
     }
@@ -123,9 +113,8 @@ class ApiSettings extends ConfigProvider
      * Get Hawksearch Recommendations URL
      *
      * @param null|int|string $store
-     * @return string
      */
-    public function getRecommendationsUrl($store = null) : string
+    public function getRecommendationsUrl($store = null): string
     {
         return $this->getEnvironmentConfig(self::RECOMMENDATIONS_URL, $store);
     }
@@ -134,7 +123,7 @@ class ApiSettings extends ConfigProvider
      * @deprecated 2.6.0
      * @see \HawkSearch\Connector\Model\Config\ApiSettings::getDashboardApiUrl()
      */
-    public function getApiUrl($store = null) : string
+    public function getApiUrl($store = null): string
     {
         return $this->getDashboardApiUrl($store);
     }
@@ -143,9 +132,8 @@ class ApiSettings extends ConfigProvider
      * Get Hawksearch Dashboard API URL
      *
      * @param null|int|string $store
-     * @return string
      */
-    public function getDashboardApiUrl($store = null) : string
+    public function getDashboardApiUrl($store = null): string
     {
         return $this->getEnvironmentConfig(self::DASHBOARD_API_URL, $store);
     }
@@ -154,9 +142,8 @@ class ApiSettings extends ConfigProvider
      * Get Hawksearch Workbench URL
      *
      * @param null|int|string $store
-     * @return string
      */
-    public function getHawksearchWorkbenchUrl($store = null) : string
+    public function getHawksearchWorkbenchUrl($store = null): string
     {
         return $this->getEnvironmentConfig(self::HAWKSEARCH_WORKBENCH_URL, $store);
     }
@@ -165,9 +152,8 @@ class ApiSettings extends ConfigProvider
      * Get Hawksearch Indexing API URL
      *
      * @param null|int|string $store
-     * @return string
      */
-    public function getIndexingApiUrl($store = null) : string
+    public function getIndexingApiUrl($store = null): string
     {
         return $this->getEnvironmentConfig(self::INDEXING_API_URL, $store);
     }
@@ -176,9 +162,8 @@ class ApiSettings extends ConfigProvider
      * Get Hawksearch Search API URL
      *
      * @param null|int|string $store
-     * @return string
      */
-    public function getSearchApiUrl($store = null) : string
+    public function getSearchApiUrl($store = null): string
     {
         return $this->getEnvironmentConfig(self::SEARCH_API_URL, $store);
     }
@@ -188,9 +173,8 @@ class ApiSettings extends ConfigProvider
      *
      * @param string $path Config path part
      * @param null|int|string $store
-     * @return string
      */
-    private function getEnvironmentConfig(string $path, $store = null) : string
+    private function getEnvironmentConfig(string $path, $store = null): string
     {
         return (string)$this->getConfig($path . '/' . $this->getEnvironment(), $store);
     }

@@ -16,14 +16,16 @@ namespace HawkSearch\Connector\Helper;
 
 /**
  * Additional service for converting data keys and populating objects
+ *
  * @see \Magento\Framework\Api\DataObjectHelper
  */
 class DataObjectHelper
 {
     /**
      * Recursively converts associative array's key names from camelCase to snake_case.
-     * @param array $data
-     * @return array
+     *
+     * @param array<array-key, mixed> $data
+     * @return array<array-key, mixed>
      */
     public function convertArrayToSnakeCase(array $data)
     {
@@ -39,11 +41,10 @@ class DataObjectHelper
     }
 
     /**
-     * Convert a CamelCase string read from method into field key in snake_case
-     * @see https://github.com/magento/magento2/issues/35457
+     * Convert a CamelCase string read from method into field key in snake_case*
      *
-     * @param string $value
      * @return string
+     * @link https://github.com/magento/magento2/issues/35457
      */
     public function camelCaseToSnakeCase(string $value)
     {
@@ -55,7 +56,7 @@ class DataObjectHelper
     }
 
     /**
-     * @return string[][]
+     * @return list<list<string>>
      */
     protected function getPatternAndReplacement(): array
     {

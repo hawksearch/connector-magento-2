@@ -18,17 +18,14 @@ namespace HawkSearch\Connector\Helper;
 use GuzzleHttp\Psr7\UriFactory;
 use Psr\Http\Message\UriInterface;
 
+/**
+ * @api
+ * @since 2.11
+ */
 class Url
 {
-    /**
-     * @var UriFactory
-     */
-    private $uriFactory;
+    private UriFactory $uriFactory;
 
-    /**
-     * Url constructor.
-     * @param UriFactory $uriFactory
-     */
     public function __construct(
         UriFactory $uriFactory
     ) {
@@ -36,8 +33,6 @@ class Url
     }
 
     /**
-     * @param string $url
-     * @param string $path
      * @return UriInterface
      */
     public function getUriWithPath(string $url, string $path)
@@ -46,14 +41,14 @@ class Url
         $isTrailingSlash = $this->isTrailingSlashInPath($path);
 
         $path = $this->implodeUriPath($this->explodeUriPath($path));
-        $path = $isTrailingSlash ? $this->addTrailingSlash($path): $path;
+        $path = $isTrailingSlash ? $this->addTrailingSlash($path) : $path;
 
         return $uri->withPath($path);
     }
 
     /**
      * @param string $url
-     * @param array $query
+     * @param array<mixed> $query
      * @return UriInterface
      */
     public function getUriWithQuery(string $url, array $query)
@@ -67,11 +62,11 @@ class Url
      * Concatenate extra parts to the start or the end of the URI path
      *
      * @param UriInterface $uri
-     * @param array $addToPath
+     * @param string[] $addToPath
      * @param bool $fromStart
      * @return UriInterface
      */
-    public function addToUriPath(UriInterface $uri, array $addToPath, $fromStart = true)
+    public function addToUriPath(UriInterface $uri, array $addToPath, bool $fromStart = true)
     {
         $isTrailingSlash = $this->isTrailingSlashInPath($uri->getPath());
         $isTrailingSlash = $isTrailingSlash || (!$fromStart && end($addToPath) == '/');
@@ -93,14 +88,14 @@ class Url
         }
 
         $path = $this->implodeUriPath($pathParts);
-        $path = $isTrailingSlash ? $this->addTrailingSlash($path): $path;
+        $path = $isTrailingSlash ? $this->addTrailingSlash($path) : $path;
 
         return $uri->withPath($path);
     }
 
     /**
      * @param UriInterface $uri
-     * @param array $removeParts
+     * @param string[] $removeParts
      * @return UriInterface
      */
     public function removeFromUriPath(UriInterface $uri, array $removeParts)
@@ -114,15 +109,15 @@ class Url
         }));
 
         $path = $this->implodeUriPath($pathParts);
-        $path = $isTrailingSlash ? $this->addTrailingSlash($path): $path;
+        $path = $isTrailingSlash ? $this->addTrailingSlash($path) : $path;
 
         return $uri->withPath($path);
     }
 
     /**
      * Explodes path parts from an uri string
-     * @param string $path
-     * @return array
+     *
+     * @return string[]
      */
     protected function explodeUriPath(string $path)
     {
@@ -134,8 +129,8 @@ class Url
     /**
      * Clean empty parts in the path
      *
-     * @param array $pathParts
-     * @return array
+     * @param string[] $pathParts
+     * @return string[]
      */
     protected function filterPathParts(array $pathParts)
     {
@@ -147,7 +142,6 @@ class Url
     /**
      * Add trailing slash to URI path
      *
-     * @param string $path
      * @return string
      */
     protected function addTrailingSlash(string $path)
@@ -158,17 +152,17 @@ class Url
     /**
      * Check if URI path has a trailing slash
      *
-     * @param string $path
      * @return bool
      */
     protected function isTrailingSlashInPath(string $path)
     {
-        return substr($path, -1)  == '/';
+        return substr($path, -1) === '/';
     }
 
     /**
      * Implode path parts into a well-formed uri path
-     * @param array $pathParts
+     *
+     * @param string[] $pathParts
      * @return string
      */
     protected function implodeUriPath(array $pathParts)
@@ -177,7 +171,6 @@ class Url
     }
 
     /**
-     * @param string $uri
      * @return UriInterface
      */
     public function getUriInstance(string $uri)

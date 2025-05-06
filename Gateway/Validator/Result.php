@@ -10,61 +10,47 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
-namespace HawkSearch\Connector\Gateway\Validator;
+declare(strict_types=1);
 
-use Magento\Framework\Phrase;
+namespace HawkSearch\Connector\Gateway\Validator;
 
 class Result implements ResultInterface
 {
+    private bool $isValid;
     /**
-     * @var bool
+     * @var list<string|\Stringable>
      */
-    private $isValid;
-
+    private array $failsDescription;
     /**
-     * @var Phrase[]
+     * @var list<int>
      */
-    private $failsDescription;
-
-    /**
-     * @var string[]
-     */
-    private $errorCodes;
+    private array $errorCodes;
 
     /**
      * @param bool $isValid
-     * @param array $failsDescription
-     * @param array $errorCodes
+     * @param list<string|\Stringable> $failsDescription
+     * @param list<int> $errorCodes
      */
     public function __construct(
-        $isValid,
+        bool $isValid,
         array $failsDescription = [],
         array $errorCodes = []
     ) {
-        $this->isValid = (bool)$isValid;
+        $this->isValid = $isValid;
         $this->failsDescription = $failsDescription;
         $this->errorCodes = $errorCodes;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isValid(): bool
     {
         return $this->isValid;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getFailsDescription(): array
     {
         return $this->failsDescription;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getErrorCodes(): array
     {
         return $this->errorCodes;

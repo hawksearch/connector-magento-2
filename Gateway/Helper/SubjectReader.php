@@ -15,11 +15,24 @@ declare(strict_types=1);
 
 namespace HawkSearch\Connector\Gateway\Helper;
 
+use HawkSearch\Connector\Gateway\Http\ClientInterface;
+use HawkSearch\Connector\Gateway\Validator\ValidatorInterface;
+
+/**
+ * @api
+ * @since 2.11
+ *
+ * @phpstan-import-type HttpResult from ClientInterface
+ * @phpstan-import-type ValidationSubject from ValidatorInterface
+ */
 class SubjectReader
 {
     /**
-     * @param array $subject
-     * @return array
+     * @param ValidationSubject $subject
+     * @return HttpResult
+     * @throws \InvalidArgumentException if nothing to return
+     * @see ClientInterface
+     * @todo get rid of this method in favour of HttpResultInterface
      */
     public function readResponse(array $subject)
     {

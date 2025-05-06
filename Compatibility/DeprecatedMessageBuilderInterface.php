@@ -19,47 +19,37 @@ namespace HawkSearch\Connector\Compatibility;
  */
 interface DeprecatedMessageBuilderInterface
 {
-    /**#@+
-     * Deprecated message parts
-     */
     const PART_SINCE = 'since';
     const PART_MAIN = 'main';
     const PART_REPLACEMENT = 'replacement';
     const PART_EXTRA = 'extra';
-    /**#@-*/
 
     /**
      * @param string $format
-     * @param array $values
-     * @return self
+     * @param string[] $values
      */
     public function setSincePart(string $format, array $values = []): self;
 
     /**
      * @param string $format
-     * @param array $values
-     * @return self
+     * @param string[] $values
      */
     public function setMainPart(string $format, array $values = []): self;
 
     /**
      * @param string $format
-     * @param array $values
-     * @return self
+     * @param string[] $values
      */
     public function setReplacementPart(string $format, array $values = []): self;
 
     /**
      * @param string $format
-     * @param array $values
-     * @return self
+     * @param string[] $values
      */
     public function setExtra(string $format, array $values = []): self;
 
     /**
      * Build a final message string
-     *
-     * @return string
      */
     public function build(): string;
 }

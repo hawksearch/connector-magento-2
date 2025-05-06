@@ -16,15 +16,21 @@ namespace HawkSearch\Connector\Gateway\Instruction;
 
 use Magento\Framework\Exception\NotFoundException;
 
+/**
+ * @api
+ * @since 2.11
+ *
+ * @template TKey of string
+ * @template TValue of InstructionManagerInterface
+ */
 interface InstructionManagerPoolInterface
 {
     /**
      * Returns Instruction executor for defined provider
      *
-     * @param string $instructionProviderCode
-     * @return InstructionManagerInterface
+     * @param TKey $instructionProviderCode
+     * @return TValue
      * @throws NotFoundException
-     * @since 100.1.0
      */
-    public function get($instructionProviderCode);
+    public function get(string $instructionProviderCode);
 }

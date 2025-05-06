@@ -25,82 +25,37 @@ use Magento\Framework\App\RequestInterface;
 
 class TransferFactory implements TransferFactoryInterface
 {
-    /**
-     * @var TransferBuilder
-     */
-    private $transferBuilder;
-
-    /**
-     * @var ApiConfigInterface
-     */
-    private $apiConfig;
-
-    /**
-     * @var string
-     */
-    private $path;
-
-    /**
-     * @var string
-     */
-    private $method;
-
-    /**
-     * @var BuilderInterface
-     */
-    private $headersBuilder;
-
-    /**
-     * @var UriBuilderInterface
-     */
-    private $uriBuilder;
-
-    /**
-     * @var RequestInterface
-     */
-    private $httpRequest;
-
-    /**
-     * @var ConnectionScopeResolver
-     */
+    private TransferBuilder $transferBuilder;
+    private ApiConfigInterface $apiConfig;
     private ConnectionScopeResolver $connectionScopeResolver;
+    private string $path;
+    private string $method;
+    private BuilderInterface $headersBuilder;
+    private UriBuilderInterface $uriBuilder;
 
-    /**
-     * @param TransferBuilder $transferBuilder
-     * @param ApiConfigInterface $apiConfig
-     * @param RequestInterface $httpRequest
-     * @param UriBuilderFactory $uriBuilderFactory
-     * @param string $path
-     * @param string $method
-     * @param BuilderInterface|null $headersBuilder
-     * @param UriBuilderInterface|null $uriBuilder
-     */
     public function __construct(
         TransferBuilder $transferBuilder,
         ApiConfigInterface $apiConfig,
-        RequestInterface $httpRequest,
+        RequestInterface $httpRequest, // @todo remove $httpRequest argument
         UriBuilderFactory $uriBuilderFactory,
         BuilderInterfaceFactory $builderInterfaceFactory,
         ConnectionScopeResolver $connectionScopeResolver,
-        $path = '',
-        $method = 'GET',
-        BuilderInterface $headersBuilder = null,
-        UriBuilderInterface $uriBuilder = null
-    ) {
+        string $path = '',
+        string $method = 'GET',
+        BuilderInterface $headersBuilder = null, // @todo get rid of $headersBuilder, use $builderInterfaceFactory
+        UriBuilderInterface $uriBuilder = null // @todo get rid of $uriBuilder, use $uriBuilderFactory
+    )
+    {
         $this->transferBuilder = $transferBuilder;
         $this->apiConfig = $apiConfig;
-        $this->httpRequest = $httpRequest;
+        $this->connectionScopeResolver = $connectionScopeResolver;
         $this->path = $path;
         $this->method = $method;
         $this->headersBuilder = $headersBuilder ?? $builderInterfaceFactory->create();
         $this->uriBuilder = $uriBuilder ?? $uriBuilderFactory->create();
-        $this->connectionScopeResolver = $connectionScopeResolver;
     }
 
     /**
-     * Builds gateway transfer object
-     *
-     * @param array $request
      * @return TransferInterface
      */
     public function create(array $request)
@@ -119,14 +74,13 @@ class TransferFactory implements TransferFactoryInterface
 
     /**
      * Get Full URL based on relative URL.
-     *
-     * @return string
      */
-    private function buildFullApiUrl()
+    private function buildFullApiUrl(): string
     {
         return $this->uriBuilder->build(
             $this->apiConfig->getApiUrl($this->connectionScopeResolver->resolve()->getId()),
             $this->path
         );
     }
+
 }

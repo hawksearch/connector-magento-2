@@ -18,24 +18,14 @@ use HawkSearch\Connector\Helper\Url as UrlUtility;
 
 class UriBuilder implements UriBuilderInterface
 {
-    /**
-     * @var UrlUtility
-     */
-    private $urlUtility;
+    private UrlUtility $urlUtility;
 
-    /**
-     * UriBuilder constructor.
-     * @param UrlUtility $urlUtility
-     */
     public function __construct(
         UrlUtility $urlUtility
     ) {
         $this->urlUtility = $urlUtility;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function build(string $url, string $path): string
     {
         return $this->urlUtility->getUriWithPath($url, $path)->__toString();
