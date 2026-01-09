@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.11.1] - 2025-12-23
+* fix: implicitly nullable parameter deprecation in [(#50)](https://github.com/hawksearch/connector-magento-2/pull/50)
+* fix: add php 8.4 compatibility in [(#52)](https://github.com/hawksearch/connector-magento-2/pull/52)
+
 ## [2.11.0] - 2025-05-06
 * feat: declare public API contracts ([#29](https://github.com/hawksearch/connector-magento-2/pull/29))
 * feat: add type hints to method arguments ([#30](https://github.com/hawksearch/connector-magento-2/pull/30))
@@ -77,7 +81,7 @@ The following classes in `\HawkSearch\Connector` namespace are defined as `@api`
 ### FIXES
 * __fix: add missing ACL for Connection Settings section__ ([#19](https://github.com/hawksearch/connector-magento-2/pull/19))
 
-  Refs: HC-1357 
+  Refs: HC-1357
 
 ## [2.7.0] - 2023-07-07
 ### FEATURES
@@ -92,24 +96,24 @@ The following classes in `\HawkSearch\Connector` namespace are defined as `@api`
 ## [2.6.2] - 2023-06-16
 ### FEATURES
 - feat: improve log handling ([8e58fa1](https://github.com/hawksearch/connector/commit/8e58fa1ecc69773dd7b74d7d4c64f10d5a52ec0a))
-  - Combine all Hawksearch log records into single file
+    - Combine all Hawksearch log records into single file
     /var/log/hawksearch_debug.log
-  - Add Log Level configuration setting to control an amount of data
-    is written to log files
-  - Use StreamHandler to avoid memory limit issues
-  - cherry-pick commit ([33dd922](https://github.com/hawksearch/connector/commit/33dd9227f90097e8c6e5a0f09dbd99cdadce8fed))
-  - Refs: [#HC-1437](https://bridgeline.atlassian.net/browse/HC-1437)
+    - Add Log Level configuration setting to control an amount of data
+      is written to log files
+    - Use StreamHandler to avoid memory limit issues
+    - cherry-pick commit ([33dd922](https://github.com/hawksearch/connector/commit/33dd9227f90097e8c6e5a0f09dbd99cdadce8fed))
+    - Refs: [#HC-1437](https://bridgeline.atlassian.net/browse/HC-1437)
 
 ### FIXES
 - fix: type error when logging response ([d35e67b](https://github.com/hawksearch/connector/commit/d35e67b93ac52dad93516914386289926c1f93d5))
-  - cherry-pick commit ([1ed363a](https://github.com/hawksearch/connector/commit/1ed363aa39d401bee301c9e420cea4a53f121bf8))
-  - Refs:[#HC-1437](https://bridgeline.atlassian.net/browse/HC-1437)
+    - cherry-pick commit ([1ed363a](https://github.com/hawksearch/connector/commit/1ed363aa39d401bee301c9e420cea4a53f121bf8))
+    - Refs:[#HC-1437](https://bridgeline.atlassian.net/browse/HC-1437)
 
 ## [2.6.1] - 2023-05-05
 ### ADDED
 - Add ConnectionScopeResolver interface to resolver current configuration scope on admin system configuration pages ([#8](https://github.com/hawksearch/connector-magento-2/pull/8))
   Refs: [#HC-1363](https://bridgeline.atlassian.net/browse/HC-1363)
-- 
+
 ### UPDATED
 - Update DataObjectHelper::camelCaseToSnakeCase method visibility from protected to public ([#9](https://github.com/hawksearch/connector-magento-2/pull/9))
   Refs: [#HC-1213](https://bridgeline.atlassian.net/browse/HC-1213)
@@ -130,7 +134,8 @@ The following classes in `\HawkSearch\Connector` namespace are defined as `@api`
 - Fix traling slash issue in builcding API urls (#HC-1279)
 
 
-[Unreleased]: https://github.com/hawksearch/connector-magento-2/compare/v2.10.0...develop
+[Unreleased]: https://github.com/hawksearch/connector-magento-2/compare/v2.11.1...2.12
+[2.11.1]: https://github.com/hawksearch/connector-magento-2/compare/v2.11.0...v2.11.1
 [2.11.0]: https://github.com/hawksearch/connector-magento-2/compare/v2.10.0...v2.11.0
 [2.10.0]: https://github.com/hawksearch/connector-magento-2/compare/v2.9.0...v2.10.0
 [2.9.0]: https://github.com/hawksearch/connector-magento-2/compare/v2.8.0...v2.9.0

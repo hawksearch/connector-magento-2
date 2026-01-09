@@ -41,18 +41,15 @@ class TransferFactory implements TransferFactoryInterface
         BuilderInterfaceFactory $builderInterfaceFactory,
         ConnectionScopeResolver $connectionScopeResolver,
         string $path = '',
-        string $method = 'GET',
-        BuilderInterface $headersBuilder = null, // @todo get rid of $headersBuilder, use $builderInterfaceFactory
-        UriBuilderInterface $uriBuilder = null // @todo get rid of $uriBuilder, use $uriBuilderFactory
-    )
-    {
+        string $method = 'GET'
+    ) {
         $this->transferBuilder = $transferBuilder;
         $this->apiConfig = $apiConfig;
         $this->connectionScopeResolver = $connectionScopeResolver;
         $this->path = $path;
         $this->method = $method;
-        $this->headersBuilder = $headersBuilder ?? $builderInterfaceFactory->create();
-        $this->uriBuilder = $uriBuilder ?? $uriBuilderFactory->create();
+        $this->headersBuilder = $builderInterfaceFactory->create();
+        $this->uriBuilder = $uriBuilderFactory->create();
     }
 
     /**

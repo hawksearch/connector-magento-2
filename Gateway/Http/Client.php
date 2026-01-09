@@ -36,7 +36,7 @@ class Client implements ClientInterface
         Json $json,
         ConverterInterface $converter,
         LoggerFactory $loggerFactory,
-        ConverterInterface $requestConverter = null,
+        ?ConverterInterface $requestConverter = null,
     ) {
         $this->httpClientFactory = $httpClientFactory;
         $this->responseConverter = $converter;

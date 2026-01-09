@@ -42,9 +42,9 @@ class GatewayInstruction implements InstructionInterface
         ClientInterface $client,
         ResultInterfaceFactory $resultFactory,
         LoggerInterface $logger,
-        HandlerInterface $handler = null,
-        ValidatorInterface $validator = null,
-        ErrorMessageMapperInterface $errorMessageMapper = null
+        ?HandlerInterface $handler = null,
+        ?ValidatorInterface $validator = null,
+        ?ErrorMessageMapperInterface $errorMessageMapper = null
     ) {
         $this->requestBuilder = $requestBuilder;
         $this->transferFactory = $transferFactory;

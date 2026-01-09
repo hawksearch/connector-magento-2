@@ -1,6 +1,6 @@
 | Q             | A
 |---------------| ---
-| Branch?       | 2.11 for features/bugs / master for hot fixes <!-- see below -->
+| Branch?       | 2.12 for features/bugs / master for hot fixes <!-- see below -->
 | Bug fix?      | yes/no <!-- please update CHANGELOG-*.md file -->
 | New feature?  | yes/no <!-- please update CHANGELOG-*.md file -->
 | Deprecations? | yes/no <!-- please update UPGRADE-*.md and CHANGELOG-*.md files -->
