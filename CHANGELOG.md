@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.11.2] - 2026-01-15
+* fix(gateway): prevent access denied API error because of missed headers ([#53](https://github.com/hawksearch/connector-magento-2/pull/53))
+
 ## [2.11.1] - 2025-12-23
 * fix: implicitly nullable parameter deprecation in [(#50)](https://github.com/hawksearch/connector-magento-2/pull/50)
 * fix: add php 8.4 compatibility in [(#52)](https://github.com/hawksearch/connector-magento-2/pull/52)
@@ -29,7 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * refactor: add missing strict types declaration ([#45](https://github.com/hawksearch/connector-magento-2/pull/45))
 * fix: exception: each method must have a doc block ([#46](https://github.com/hawksearch/connector-magento-2/pull/46))
 * chore: add phpDoc for methods throwing exceptions explicitly ([#47](https://github.com/hawksearch/connector-magento-2/pull/47))
-* feat: add wrapper for symfony `patch-type-declarations script` ([#43](https://github.com/hawksearch/connector-magento-2/pull/43))
+* feat: add wrapper for symfony `patch-type-declarations` script ([#43](https://github.com/hawksearch/connector-magento-2/pull/43))
 
 ### API CHANGES
 #### Interfaces
@@ -134,7 +137,8 @@ The following classes in `\HawkSearch\Connector` namespace are defined as `@api`
 - Fix traling slash issue in builcding API urls (#HC-1279)
 
 
-[Unreleased]: https://github.com/hawksearch/connector-magento-2/compare/v2.11.1...2.12
+[Unreleased]: https://github.com/hawksearch/connector-magento-2/compare/v2.11.2...2.12
+[2.11.2]: https://github.com/hawksearch/connector-magento-2/compare/v2.11.1...v2.11.2
 [2.11.1]: https://github.com/hawksearch/connector-magento-2/compare/v2.11.0...v2.11.1
 [2.11.0]: https://github.com/hawksearch/connector-magento-2/compare/v2.10.0...v2.11.0
 [2.10.0]: https://github.com/hawksearch/connector-magento-2/compare/v2.9.0...v2.10.0
