@@ -31,6 +31,8 @@
                 type="HawkSearch\Connector\Compatibility\DeprecatedMessageBuilder"/>
     <preference for="HawkSearch\Connector\Compatibility\DeprecatedMessageTriggerInterface"
                 type="HawkSearch\Connector\Compatibility\DeprecatedMessageTrigger"/>
+    <preference for="HawkSearch\Connector\Model\RemoteAddressResolverInterface"
+                type="HawkSearch\Connector\Model\RemoteAddressResolver"/>
 
 
     <!-- Configs -->
@@ -203,6 +205,9 @@
         <arguments>
             <argument name="builders" xsi:type="array">
                 <item name="auth_headers" xsi:type="string">HawkSearch\Connector\Gateway\Request\ApiKeyAuthHeader</item>
+                <item name="client_guid_header" xsi:type="string">HawkSearch\Connector\Gateway\Request\Headers\ClientGuidHeader</item>
+                <item name="remote_address_header" xsi:type="string">HawkSearch\Connector\Gateway\Request\Headers\RemoteAddressHeader</item>
+                <item name="user_agent_header" xsi:type="string">HawkSearch\Connector\Gateway\Request\Headers\UserAgentHeader</item>
             </argument>
         </arguments>
     </virtualType>
