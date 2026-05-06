@@ -37,7 +37,7 @@ class TransferFactory implements TransferFactoryInterface
         TransferBuilder $transferBuilder,
         ApiConfigInterface $apiConfig,
         RequestInterface $httpRequest, // @todo remove $httpRequest argument
-        UriBuilderFactory $uriBuilderFactory,
+        UriBuilderFactory $uriBuilderFactory, //@todo change to UriBuilderInterfaceFactory
         BuilderInterfaceFactory $builderInterfaceFactory,
         ConnectionScopeResolver $connectionScopeResolver,
         string $path = '',
