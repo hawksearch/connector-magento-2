@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+* feat(gateway): add headers to all API calls
 
 ## [2.11.2] - 2026-01-15
 * fix(gateway): prevent access denied API error because of missed headers ([#53](https://github.com/hawksearch/connector-magento-2/pull/53))
